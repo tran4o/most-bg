@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--+
+    | This configuration contains only settings that differ from the default
+    | and should be customized on installation.
+    | Put all installation relevant configuration here instead to the
+    | core xconf-files, because they may be overwritten on update.
+    | 
+    | Date:    $LastChangedDate: 2009-02-20 14:50:57 +0100 (Fr, 20 Feb 2009) $
+    | Version: $LastChangedRevision: 6213 $
+    +-->
+<tasks>    
+    <task name="setCoreProperties">
+      
+      <param name="engine" value="5"/>
+      
+        <param name="tomcat.port.http" type="integer">8585</param>    
+        <param name="tomcat.port.https" type="integer">8448</param>    
+        <param name="tomcat.port.shutdown" type="integer">8010</param>
+        
+          <param name="tomcat.max.threads" type="integer">100</param>    
+          <param name="tomcat.min.threads" type="integer">10</param>
+    
+        <param name="db.postgresql.backup_command">C:\Plan-Vision\PostgreSQL\9.4\bin\pg_dump.exe</param>
+        
+        <param name="web.pool.maximum_active_threads">50</param>
+        <param name="db.disable_access" type="bool">false</param>
+        
+        <param name="db.engine">postgresql_9.4</param>
+        <param name="db.prefix">pv</param>
+        <param name="db.name">VISIONR</param>
+
+        <param name="core.service.memory">2048</param>
+        
+        <param name="jdbc.root.username">VISIONR</param>
+        <param name="jdbc.root.password">plan4vision</param>
+        <param name="jdbc.pool.username">VISIONR</param>
+        <param name="jdbc.pool.password">plan4vision</param>
+        <!-- DISABLED -->
+        <param name="db.insert.schemas" type="multiple">
+            <value type="multiple">
+                <value name="id" type="integer">100</value>         
+                <value name="code" type="string">VISIONRG</value>
+                <value name="is_readonly" type="integer">0</value>          
+                <value name="db_link" type="string"></value>            
+                <value name="db_engine" type="string">postgresql_9.4</value>            
+                <value name="uri" type="string">jdbc:postgresql://localhost/VISIONRG_5_MOST</value>            
+                <value name="minimum_idle_connections" type="integer">5</value>         
+                <value name="maximum_idle_connections" type="integer">10</value>            
+                <value name="maximum_active_connections" type="integer">15</value>      
+                <value name="maximum_idle_statements" type="integer">1000</value>           
+            </value>
+        </param>
+         
+        <param name="jdbc.pool.minimum_idle_connections" type="integer">5</param>
+        <param name="jdbc.pool.maximum_idle_connections" type="integer">10</param>
+        <param name="jdbc.pool.maximum_active_connections" type="integer">15</param>
+        <param name="jdbc.pool.maximum_idle_statements" type="integer">1000</param>
+        
+        <param name="jdbc.pool.swap.minimum_idle_connections" type="integer">1</param>
+        <param name="jdbc.pool.swap.maximum_idle_connections" type="integer">4</param>
+        <param name="jdbc.pool.swap.maximum_active_connections" type="integer">6</param>
+        <param name="jdbc.pool.swap.maximum_idle_statements" type="integer">1000</param>                
+             
+        <param name="jdbc.pool.uri.postgresql_9.4">jdbc:postgresql://localhost/VISIONR_5_MOST</param>
+        
+        <param name="logging.configuration.file">etc/core/conf/logging/full-daily-roller.xconf</param>
+        <param name="logging.logger.root.level">INFO</param>
+        
+        <param name="email.smtp.host">smtp.gmail.com</param>
+        <param name="email.smtp.port" type="integer">465</param>
+        <param name="email.smtp.auth" type="boolean">true</param>
+        <param name="email.smtp.account">VisionR Message | CLOUD FM &lt;visionr@plan-vision.com&gt;</param>
+        <param name="email.smtp.username">visionr@plan-vision.com</param>
+        <param name="email.smtp.password">plan4vision123</param>
+        <param name="email.smtp.secure" type="boolean">true</param>
+        
+        <param name="core.vscript.precompile" type="boolean">false</param>
+
+        <!-- DEBUG:BEGIN -->   
+        <param name="core.vscript.src.debug" type="boolean">true</param>
+        <param name="core.vscript.debugger.enable" type="boolean">true</param>
+        <param name="web.context.test.allow" type="boolean">true</param> 
+        <!-- DEBUG:END -->
+        
+        <!-- PRELOAD:BEGIN
+        <param name="db.cache.preload.definitions" type="multiple" />
+        PRELOAD:END -->
+        
+        <!-- GRAPHICS -->
+        <param name="module.geoserver.activate" type="boolean">true</param>
+        <param name="graphics.teigha_file_converter.path" type="string">C:/Plan-Vision/TeighaFileConverter4.01.0/TeighaFileConverter.exe</param>
+        <param name="graphics.gdal.ogr2ogr.path" type="string">D:\Apps\GDAL\ogr2ogr.exe</param>
+
+        <!-- HTTPS -->
+        <param name="web.security.enable_https" type="boolean">false</param>
+        
+        <!-- OPEN OFFICE -->
+        <param name="openoffice.installation.path">D:/Program Files (x86)/LibreOffice 4</param>
+        
+        <!-- SERVER ADDRESS -->
+        <param name="web.server.href.external">http://localhost:8586</param>
+        
+        <!-- REGISTRATION -->
+        <param name="web.registration.allow" type="boolean">true</param>
+        
+    </task>
+</tasks>

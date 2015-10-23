@@ -1,0 +1,61 @@
+java.log.warn("Generating report dates..");
+var TO = 2016; 
+var d = java.date.today();
+while (d.year <= TO) 
+{
+	var key = ""+d.year;
+	var c = db.most.category_date.INSTANCES[key]; 
+	if (c == null) 
+	{
+		c = new db.most.category_date();
+		c.code=key;
+		c.commit();			
+	}
+	//abbreviation
+	for (var e : db.library.month.SELECT("order by sort_id")) 
+	{
+		var key = e.sort_id;
+		if (key < 10)
+			key="0"+key;
+		else 
+			key=""+key;
+		key=key+"."+d.year;
+		if (db.most.category_date.INSTANCES[key] == null) {
+			var c1 = new db.most.category_date();
+			c1.code=key;
+			c1.parent=c;
+			core.misc.update_value_join_i18n(c1,c1.name.PROPERTY,[e.abbreviation," "+d.year]); 
+			c1.commit();
+		}
+	}
+	d=d.addYears(1);	
+}
+d = java.date.today();
+while (d.year <= TO) 
+{
+	var key = java.date.format( "dd.MM.yyyy", d );
+	if (db.most.protocol_date.INSTANCES[key] == null) {
+		var c = new db.most.protocol_date();
+		c.code=key;
+		c.date=d;
+		var mm = d.month+1;
+		if (mm < 10)
+			mm="0"+mm;
+		else
+			mm=""+mm;
+		var key = mm+"."+d.year;					
+		c.category=db.most.category_date.INSTANCES[key];
+		  
+	
+		var day = d.weekday;
+	    if (day == 0)
+	        day=6;
+	    else
+			day--;
+	    day = db.library.weekday.SELECT("ORDER BY sort_id")[day];
+	    core.misc.update_value_join_i18n(c,c.name.PROPERTY,[day.abbreviation," "+d.day+" ",db.library.month.SELECT("order by sort_id")[d.month].abbreviation," "+d.year]); 
+		c.commit();			
+	}
+	d=d.addDays(1);	
+}
+java.log.warn("FINISHED!");

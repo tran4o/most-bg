@@ -1,0 +1,2435 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<import revision="$LastChangedRevision: 17147 $" 
+        xmlns:xi="http://www.w3.org/2001/XInclude" 
+        xmlns:vsl="http://www.plan-vision.com/VSL/1.0"
+        module="user_interface">
+<objects>
+
+<!-- GRAPHICS -->
+<object code="graphics.drawing:DEFAULT" objectdef="mobile_mask" module="user_interface">
+   <target_objectdef>
+      <value><object mode="update" code="drawing" objectdef="objectdef" module="core" cond="module.code='graphics'"/></value>
+   </target_objectdef>
+   <is_order_by_ascending>
+      <value>true</value>
+   </is_order_by_ascending>
+   <sort_id>
+      <value>101</value>
+   </sort_id>
+   <is_archived>
+      <value>false</value>
+   </is_archived>
+   <access_owner>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_owner>
+   <access_read>
+      <value><object mode="update" code="everyone" objectdef="user_role" module="core" /></value>
+   </access_read>
+   <access_update>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_update>
+   <access_delete>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_delete>
+   <access_archive>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_archive>
+   <access_copy>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_copy>
+</object>
+
+<!-- CONTACTS -->
+<object code="contacts.person:DEFAULT" objectdef="mobile_mask" module="user_interface">
+   <target_objectdef>
+      <value><object mode="update" code="person" objectdef="objectdef" module="core" cond="module.code='contacts'"/></value>
+   </target_objectdef>
+   <is_order_by_ascending>
+      <value>true</value>
+   </is_order_by_ascending>
+   <sort_id>
+      <value>201</value>
+   </sort_id>
+   <is_archived>
+      <value>false</value>
+   </is_archived>
+   <access_owner>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_owner>
+   <access_read>
+      <value><object mode="update" code="everyone" objectdef="user_role" module="core" /></value>
+   </access_read>
+   <access_update>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_update>
+   <access_delete>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_delete>
+   <access_archive>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_archive>
+   <access_copy>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_copy>
+</object>
+
+<object code="contacts.company:DEFAULT" objectdef="mobile_mask" module="user_interface">
+   <target_objectdef>
+      <value><object mode="update" code="company" objectdef="objectdef" module="core" cond="module.code='contacts'"/></value>
+   </target_objectdef>
+   <is_order_by_ascending>
+      <value>true</value>
+   </is_order_by_ascending>
+   <sort_id>
+      <value>202</value>
+   </sort_id>
+   <is_archived>
+      <value>false</value>
+   </is_archived>
+   <access_owner>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_owner>
+   <access_read>
+      <value><object mode="update" code="everyone" objectdef="user_role" module="core" /></value>
+   </access_read>
+   <access_update>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_update>
+   <access_delete>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_delete>
+   <access_archive>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_archive>
+   <access_copy>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_copy>
+</object>
+
+<object code="contacts.department:DEFAULT" objectdef="mobile_mask" module="user_interface">
+   <target_objectdef>
+      <value><object mode="update" code="department" objectdef="objectdef" module="core" cond="module.code='contacts'"/></value>
+   </target_objectdef>
+   <is_order_by_ascending>
+      <value>true</value>
+   </is_order_by_ascending>
+   <sort_id>
+      <value>203</value>
+   </sort_id>
+   <is_archived>
+      <value>false</value>
+   </is_archived>
+   <access_owner>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_owner>
+   <access_read>
+      <value><object mode="update" code="everyone" objectdef="user_role" module="core" /></value>
+   </access_read>
+   <access_update>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_update>
+   <access_delete>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_delete>
+   <access_archive>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_archive>
+   <access_copy>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_copy>
+</object>
+
+<object code="contacts.team:DEFAULT" objectdef="mobile_mask" module="user_interface">
+   <target_objectdef>
+      <value><object mode="update" code="team" objectdef="objectdef" module="core" cond="module.code='contacts'"/></value>
+   </target_objectdef>
+   <is_order_by_ascending>
+      <value>true</value>
+   </is_order_by_ascending>
+   <sort_id>
+      <value>204</value>
+   </sort_id>
+   <is_archived>
+      <value>false</value>
+   </is_archived>
+   <access_owner>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_owner>
+   <access_read>
+      <value><object mode="update" code="everyone" objectdef="user_role" module="core" /></value>
+   </access_read>
+   <access_update>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_update>
+   <access_delete>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_delete>
+   <access_archive>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_archive>
+   <access_copy>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_copy>
+</object>
+
+<!-- SPACES -->
+<object code="spaces.workplace:DEFAULT" objectdef="mobile_mask" module="user_interface">
+   <target_objectdef>
+      <value><object mode="update" code="workplace" objectdef="objectdef" module="core" cond="module.code='spaces'"/></value>
+   </target_objectdef>
+   <is_order_by_ascending>
+      <value>true</value>
+   </is_order_by_ascending>
+   <sort_id>
+      <value>1201</value>
+   </sort_id>
+   <is_archived>
+      <value>false</value>
+   </is_archived>
+   <access_owner>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_owner>
+   <access_read>
+      <value><object mode="update" code="everyone" objectdef="user_role" module="core" /></value>
+   </access_read>
+   <access_update>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_update>
+   <access_delete>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_delete>
+   <access_archive>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_archive>
+   <access_copy>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_copy>
+</object>
+
+<object code="spaces.space:DEFAULT" objectdef="mobile_mask" module="user_interface">
+   <target_objectdef>
+      <value><object mode="update" code="space" objectdef="objectdef" module="core" cond="module.code='spaces'"/></value>
+   </target_objectdef>
+   <is_order_by_ascending>
+      <value>true</value>
+   </is_order_by_ascending>
+   <sort_id>
+      <value>1202</value>
+   </sort_id>
+   <is_archived>
+      <value>false</value>
+   </is_archived>
+   <access_owner>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_owner>
+   <access_read>
+      <value><object mode="update" code="everyone" objectdef="user_role" module="core" /></value>
+   </access_read>
+   <access_update>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_update>
+   <access_delete>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_delete>
+   <access_archive>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_archive>
+   <access_copy>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_copy>
+</object>
+
+<object code="spaces.floor:DEFAULT" objectdef="mobile_mask" module="user_interface">
+   <target_objectdef>
+      <value><object mode="update" code="floor" objectdef="objectdef" module="core" cond="module.code='spaces'"/></value>
+   </target_objectdef>
+   <is_order_by_ascending>
+      <value>true</value>
+   </is_order_by_ascending>
+   <sort_id>
+      <value>1203</value>
+   </sort_id>
+   <is_archived>
+      <value>false</value>
+   </is_archived>
+   <access_owner>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_owner>
+   <access_read>
+      <value><object mode="update" code="everyone" objectdef="user_role" module="core" /></value>
+   </access_read>
+   <access_update>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_update>
+   <access_delete>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_delete>
+   <access_archive>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_archive>
+   <access_copy>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_copy>
+</object>
+
+<object code="spaces.building:DEFAULT" objectdef="mobile_mask" module="user_interface">
+   <target_objectdef>
+      <value><object mode="update" code="building" objectdef="objectdef" module="core" cond="module.code='spaces'"/></value>
+   </target_objectdef>
+   <is_order_by_ascending>
+      <value>true</value>
+   </is_order_by_ascending>
+   <sort_id>
+      <value>1204</value>
+   </sort_id>
+   <is_archived>
+      <value>false</value>
+   </is_archived>
+   <access_owner>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_owner>
+   <access_read>
+      <value><object mode="update" code="everyone" objectdef="user_role" module="core" /></value>
+   </access_read>
+   <access_update>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_update>
+   <access_delete>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_delete>
+   <access_archive>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_archive>
+   <access_copy>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_copy>
+</object>
+
+<object code="spaces.property:DEFAULT" objectdef="mobile_mask" module="user_interface">
+   <target_objectdef>
+      <value><object mode="update" code="property" objectdef="objectdef" module="core" cond="module.code='spaces'"/></value>
+   </target_objectdef>
+   <is_order_by_ascending>
+      <value>true</value>
+   </is_order_by_ascending>
+   <sort_id>
+      <value>1205</value>
+   </sort_id>
+   <is_archived>
+      <value>false</value>
+   </is_archived>
+   <access_owner>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_owner>
+   <access_read>
+      <value><object mode="update" code="everyone" objectdef="user_role" module="core" /></value>
+   </access_read>
+   <access_update>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_update>
+   <access_delete>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_delete>
+   <access_archive>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_archive>
+   <access_copy>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_copy>
+</object>
+
+<object code="spaces.area:DEFAULT" objectdef="mobile_mask" module="user_interface">
+   <target_objectdef>
+      <value><object mode="update" code="area" objectdef="objectdef" module="core" cond="module.code='spaces'"/></value>
+   </target_objectdef>
+   <is_order_by_ascending>
+      <value>true</value>
+   </is_order_by_ascending>
+   <sort_id>
+      <value>1206</value>
+   </sort_id>
+   <is_archived>
+      <value>false</value>
+   </is_archived>
+   <access_owner>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_owner>
+   <access_read>
+      <value><object mode="update" code="everyone" objectdef="user_role" module="core" /></value>
+   </access_read>
+   <access_update>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_update>
+   <access_delete>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_delete>
+   <access_archive>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_archive>
+   <access_copy>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_copy>
+</object>
+
+<object code="spaces.area_net:DEFAULT" objectdef="mobile_mask" module="user_interface">
+   <target_objectdef>
+      <value><object mode="update" code="area_net" objectdef="objectdef" module="core" cond="module.code='spaces'"/></value>
+   </target_objectdef>
+   <is_order_by_ascending>
+      <value>true</value>
+   </is_order_by_ascending>
+   <sort_id>
+      <value>1207</value>
+   </sort_id>
+   <is_archived>
+      <value>false</value>
+   </is_archived>
+   <access_owner>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_owner>
+   <access_read>
+      <value><object mode="update" code="everyone" objectdef="user_role" module="core" /></value>
+   </access_read>
+   <access_update>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_update>
+   <access_delete>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_delete>
+   <access_archive>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_archive>
+   <access_copy>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_copy>
+</object>
+
+<object code="spaces.component:DEFAULT" objectdef="mobile_mask" module="user_interface">
+   <target_objectdef>
+      <value><object mode="update" code="component" objectdef="objectdef" module="core" cond="module.code='spaces'"/></value>
+   </target_objectdef>
+   <is_order_by_ascending>
+      <value>true</value>
+   </is_order_by_ascending>
+   <sort_id>
+      <value>1208</value>
+   </sort_id>
+   <is_archived>
+      <value>false</value>
+   </is_archived>
+   <access_owner>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_owner>
+   <access_read>
+      <value><object mode="update" code="everyone" objectdef="user_role" module="core" /></value>
+   </access_read>
+   <access_update>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_update>
+   <access_delete>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_delete>
+   <access_archive>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_archive>
+   <access_copy>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_copy>
+</object>
+
+<object code="spaces.accounting_year_object:DEFAULT" objectdef="mobile_mask" module="user_interface">
+   <target_objectdef>
+      <value><object mode="update" code="accounting_year_object" objectdef="objectdef" module="core" cond="module.code='spaces'"/></value>
+   </target_objectdef>
+   <is_order_by_ascending>
+      <value>true</value>
+   </is_order_by_ascending>
+   <sort_id>
+      <value>1209</value>
+   </sort_id>
+   <is_archived>
+      <value>false</value>
+   </is_archived>
+   <access_owner>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_owner>
+   <access_read>
+      <value><object mode="update" code="everyone" objectdef="user_role" module="core" /></value>
+   </access_read>
+   <access_update>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_update>
+   <access_delete>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_delete>
+   <access_archive>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_archive>
+   <access_copy>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_copy>
+</object>
+
+<!-- INVENTORIES -->
+<object code="inventories.item:DEFAULT" objectdef="mobile_mask" module="user_interface">
+   <target_objectdef>
+      <value><object mode="update" code="item" objectdef="objectdef" module="core" cond="module.code='inventories'"/></value>
+   </target_objectdef>
+   <is_order_by_ascending>
+      <value>true</value>
+   </is_order_by_ascending>
+   <sort_id>
+      <value>1301</value>
+   </sort_id>
+   <is_archived>
+      <value>false</value>
+   </is_archived>
+   <access_owner>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_owner>
+   <access_read>
+      <value><object mode="update" code="everyone" objectdef="user_role" module="core" /></value>
+   </access_read>
+   <access_update>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_update>
+   <access_delete>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_delete>
+   <access_archive>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_archive>
+   <access_copy>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_copy>
+</object>
+
+<object code="inventories.article:DEFAULT" objectdef="mobile_mask" module="user_interface">
+   <target_objectdef>
+      <value><object mode="update" code="article" objectdef="objectdef" module="core" cond="module.code='inventories'"/></value>
+   </target_objectdef>
+   <is_order_by_ascending>
+      <value>true</value>
+   </is_order_by_ascending>
+   <sort_id>
+      <value>1302</value>
+   </sort_id>
+   <is_archived>
+      <value>false</value>
+   </is_archived>
+   <access_owner>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_owner>
+   <access_read>
+      <value><object mode="update" code="everyone" objectdef="user_role" module="core" /></value>
+   </access_read>
+   <access_update>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_update>
+   <access_delete>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_delete>
+   <access_archive>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_archive>
+   <access_copy>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_copy>
+</object>
+
+<!-- ACCOUNTING -->
+<object code="accounting.payment:DEFAULT" objectdef="mobile_mask" module="user_interface">
+   <target_objectdef>
+      <value><object code="payment" cond="module.code='accounting'" objectdef="objectdef" module="core" mode="update"/></value>
+   </target_objectdef>
+   <is_order_by_ascending>
+      <value>true</value>
+   </is_order_by_ascending>
+   <sort_id>
+      <value>1351</value>
+   </sort_id>
+   <is_archived>
+      <value>false</value>
+   </is_archived>
+   <access_owner>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_owner>
+   <access_read>
+      <value><object mode="update" code="everyone" objectdef="user_role" module="core" /></value>
+   </access_read>
+   <access_update>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_update>
+   <access_delete>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_delete>
+   <access_archive>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_archive>
+   <access_copy>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_copy>
+</object>
+
+<object code="accounting.payment_transaction:DEFAULT" objectdef="mobile_mask" module="user_interface">
+   <target_objectdef>
+      <value><object code="payment_transaction" cond="module.code='accounting'" objectdef="objectdef" module="core" mode="update"/></value>
+   </target_objectdef>
+   <is_order_by_ascending>
+      <value>true</value>
+   </is_order_by_ascending>
+   <sort_id>
+      <value>1352</value>
+   </sort_id>
+   <is_archived>
+      <value>false</value>
+   </is_archived>
+   <access_owner>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_owner>
+   <access_read>
+      <value><object mode="update" code="everyone" objectdef="user_role" module="core" /></value>
+   </access_read>
+   <access_update>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_update>
+   <access_delete>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_delete>
+   <access_archive>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_archive>
+   <access_copy>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_copy>
+</object>
+
+<object code="accounting.mandate_reference:DEFAULT" objectdef="mobile_mask" module="user_interface">
+   <target_objectdef>
+      <value><object code="mandate_reference" cond="module.code='accounting'" objectdef="objectdef" module="core" mode="update"/></value>
+   </target_objectdef>
+   <is_order_by_ascending>
+      <value>true</value>
+   </is_order_by_ascending>
+   <sort_id>
+      <value>1353</value>
+   </sort_id>
+   <is_archived>
+      <value>false</value>
+   </is_archived>
+   <access_owner>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_owner>
+   <access_read>
+      <value><object mode="update" code="everyone" objectdef="user_role" module="core" /></value>
+   </access_read>
+   <access_update>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_update>
+   <access_delete>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_delete>
+   <access_archive>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_archive>
+   <access_copy>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_copy>
+</object>
+
+<object code="accounting.bank_account:DEFAULT" objectdef="mobile_mask" module="user_interface">
+   <target_objectdef>
+      <value><object code="bank_account" cond="module.code='accounting'" objectdef="objectdef" module="core" mode="update"/></value>
+   </target_objectdef>
+   <is_order_by_ascending>
+      <value>true</value>
+   </is_order_by_ascending>
+   <sort_id>
+      <value>1354</value>
+   </sort_id>
+   <is_archived>
+      <value>false</value>
+   </is_archived>
+   <access_owner>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_owner>
+   <access_read>
+      <value><object mode="update" code="everyone" objectdef="user_role" module="core" /></value>
+   </access_read>
+   <access_update>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_update>
+   <access_delete>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_delete>
+   <access_archive>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_archive>
+   <access_copy>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_copy>
+</object>
+
+<object code="accounting.accounting_year_object:DEFAULT" objectdef="mobile_mask" module="user_interface">
+   <target_objectdef>
+      <value><object code="accounting_year_object" cond="module.code='accounting'" objectdef="objectdef" module="core" mode="update"/></value>
+   </target_objectdef>
+   <is_order_by_ascending>
+      <value>true</value>
+   </is_order_by_ascending>
+   <sort_id>
+      <value>1355</value>
+   </sort_id>
+   <is_archived>
+      <value>false</value>
+   </is_archived>
+   <access_owner>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_owner>
+   <access_read>
+      <value><object mode="update" code="everyone" objectdef="user_role" module="core" /></value>
+   </access_read>
+   <access_update>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_update>
+   <access_delete>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_delete>
+   <access_archive>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_archive>
+   <access_copy>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_copy>
+</object>
+
+<object code="accounting.expense_type:DEFAULT" objectdef="mobile_mask" module="user_interface">
+   <target_objectdef>
+      <value><object code="expense_type" cond="module.code='accounting'" objectdef="objectdef" module="core" mode="update"/></value>
+   </target_objectdef>
+   <is_order_by_ascending>
+      <value>true</value>
+   </is_order_by_ascending>
+   <sort_id>
+      <value>1356</value>
+   </sort_id>
+   <is_archived>
+      <value>false</value>
+   </is_archived>
+   <access_owner>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_owner>
+   <access_read>
+      <value><object mode="update" code="everyone" objectdef="user_role" module="core" /></value>
+   </access_read>
+   <access_update>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_update>
+   <access_delete>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_delete>
+   <access_archive>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_archive>
+   <access_copy>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_copy>
+</object>
+
+<!-- COSTS -->
+<object code="costs.cost_center:DEFAULT" objectdef="mobile_mask" module="user_interface">
+   <target_objectdef>
+      <value><object code="cost_center" cond="module.code='costs'" objectdef="objectdef" module="core" mode="update"/></value>
+   </target_objectdef>
+   <is_order_by_ascending>
+      <value>true</value>
+   </is_order_by_ascending>
+   <sort_id>
+      <value>1371</value>
+   </sort_id>
+   <is_archived>
+      <value>false</value>
+   </is_archived>
+   <access_owner>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_owner>
+   <access_read>
+      <value><object mode="update" code="everyone" objectdef="user_role" module="core" /></value>
+   </access_read>
+   <access_update>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_update>
+   <access_delete>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_delete>
+   <access_archive>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_archive>
+   <access_copy>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_copy>
+</object>
+
+<object code="costs.accounting_area:DEFAULT" objectdef="mobile_mask" module="user_interface">
+   <target_objectdef>
+      <value><object code="accounting_area" cond="module.code='costs'" objectdef="objectdef" module="core" mode="update"/></value>
+   </target_objectdef>
+   <is_order_by_ascending>
+      <value>true</value>
+   </is_order_by_ascending>
+   <sort_id>
+      <value>1372</value>
+   </sort_id>
+   <is_archived>
+      <value>false</value>
+   </is_archived>
+   <access_owner>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_owner>
+   <access_read>
+      <value><object mode="update" code="everyone" objectdef="user_role" module="core" /></value>
+   </access_read>
+   <access_update>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_update>
+   <access_delete>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_delete>
+   <access_archive>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_archive>
+   <access_copy>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_copy>
+</object>
+
+<object code="costs.controlling_area:DEFAULT" objectdef="mobile_mask" module="user_interface">
+   <target_objectdef>
+      <value><object code="controlling_area" cond="module.code='costs'" objectdef="objectdef" module="core" mode="update"/></value>
+   </target_objectdef>
+   <is_order_by_ascending>
+      <value>true</value>
+   </is_order_by_ascending>
+   <sort_id>
+      <value>1373</value>
+   </sort_id>
+   <is_archived>
+      <value>false</value>
+   </is_archived>
+   <access_owner>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_owner>
+   <access_read>
+      <value><object mode="update" code="everyone" objectdef="user_role" module="core" /></value>
+   </access_read>
+   <access_update>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_update>
+   <access_delete>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_delete>
+   <access_archive>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_archive>
+   <access_copy>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_copy>
+</object>
+
+<object code="costs.business_entity:DEFAULT" objectdef="mobile_mask" module="user_interface">
+   <target_objectdef>
+      <value><object code="business_entity" cond="module.code='costs'" objectdef="objectdef" module="core" mode="update"/></value>
+   </target_objectdef>
+   <is_order_by_ascending>
+      <value>true</value>
+   </is_order_by_ascending>
+   <sort_id>
+      <value>1374</value>
+   </sort_id>
+   <is_archived>
+      <value>false</value>
+   </is_archived>
+   <access_owner>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_owner>
+   <access_read>
+      <value><object mode="update" code="everyone" objectdef="user_role" module="core" /></value>
+   </access_read>
+   <access_update>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_update>
+   <access_delete>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_delete>
+   <access_archive>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_archive>
+   <access_copy>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_copy>
+</object>
+
+<object code="costs.expense:DEFAULT" objectdef="mobile_mask" module="user_interface">
+   <target_objectdef>
+      <value><object code="expense" cond="module.code='costs'" objectdef="objectdef" module="core" mode="update"/></value>
+   </target_objectdef>
+   <is_order_by_ascending>
+      <value>true</value>
+   </is_order_by_ascending>
+   <sort_id>
+      <value>1375</value>
+   </sort_id>
+   <is_archived>
+      <value>false</value>
+   </is_archived>
+   <access_owner>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_owner>
+   <access_read>
+      <value><object mode="update" code="everyone" objectdef="user_role" module="core" /></value>
+   </access_read>
+   <access_update>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_update>
+   <access_delete>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_delete>
+   <access_archive>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_archive>
+   <access_copy>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_copy>
+</object>
+
+<object code="costs.budget:DEFAULT" objectdef="mobile_mask" module="user_interface">
+   <target_objectdef>
+      <value><object code="budget" cond="module.code='costs'" objectdef="objectdef" module="core" mode="update"/></value>
+   </target_objectdef>
+   <is_order_by_ascending>
+      <value>true</value>
+   </is_order_by_ascending>
+   <sort_id>
+      <value>1376</value>
+   </sort_id>
+   <is_archived>
+      <value>false</value>
+   </is_archived>
+   <access_owner>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_owner>
+   <access_read>
+      <value><object mode="update" code="everyone" objectdef="user_role" module="core" /></value>
+   </access_read>
+   <access_update>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_update>
+   <access_delete>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_delete>
+   <access_archive>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_archive>
+   <access_copy>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_copy>
+</object>
+
+<!-- CONTRACTS -->
+<object code="contracts.contract:DEFAULT" objectdef="mobile_mask" module="user_interface">
+   <target_objectdef>
+      <value><object mode="update" code="contract" objectdef="objectdef" module="core" cond="module.code='contracts'"/></value>
+   </target_objectdef>
+   <is_order_by_ascending>
+      <value>true</value>
+   </is_order_by_ascending>
+   <sort_id>
+      <value>1401</value>
+   </sort_id>
+   <is_archived>
+      <value>false</value>
+   </is_archived>
+   <access_owner>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_owner>
+   <access_read>
+      <value><object mode="update" code="everyone" objectdef="user_role" module="core" /></value>
+   </access_read>
+   <access_update>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_update>
+   <access_delete>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_delete>
+   <access_archive>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_archive>
+   <access_copy>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_copy>
+</object>
+
+<object code="contracts.acticity:DEFAULT" objectdef="mobile_mask" module="user_interface">
+   <target_objectdef>
+      <value><object mode="update" code="activity" objectdef="objectdef" module="core" cond="module.code='contracts'"/></value>
+   </target_objectdef>
+   <is_order_by_ascending>
+      <value>true</value>
+   </is_order_by_ascending>
+   <sort_id>
+      <value>1402</value>
+   </sort_id>
+   <is_archived>
+      <value>false</value>
+   </is_archived>
+   <access_owner>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_owner>
+   <access_read>
+      <value><object mode="update" code="everyone" objectdef="user_role" module="core" /></value>
+   </access_read>
+   <access_update>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_update>
+   <access_delete>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_delete>
+   <access_archive>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_archive>
+   <access_copy>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_copy>
+</object>
+
+<object code="contracts.activity_order:DEFAULT" objectdef="mobile_mask" module="user_interface">
+   <target_objectdef>
+      <value><object mode="update" code="activity_order" objectdef="objectdef" module="core" cond="module.code='contracts'"/></value>
+   </target_objectdef>
+   <is_order_by_ascending>
+      <value>true</value>
+   </is_order_by_ascending>
+   <sort_id>
+      <value>1403</value>
+   </sort_id>
+   <is_archived>
+      <value>false</value>
+   </is_archived>
+   <access_owner>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_owner>
+   <access_read>
+      <value><object mode="update" code="everyone" objectdef="user_role" module="core" /></value>
+   </access_read>
+   <access_update>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_update>
+   <access_delete>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_delete>
+   <access_archive>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_archive>
+   <access_copy>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_copy>
+</object>
+
+<object code="contracts.payment_contract:DEFAULT" objectdef="mobile_mask" module="user_interface">
+   <target_objectdef>
+      <value><object mode="update" code="payment_contract" objectdef="objectdef" module="core" cond="module.code='contracts'"/></value>
+   </target_objectdef>
+   <is_order_by_ascending>
+      <value>true</value>
+   </is_order_by_ascending>
+   <sort_id>
+      <value>1404</value>
+   </sort_id>
+   <is_archived>
+      <value>false</value>
+   </is_archived>
+   <access_owner>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_owner>
+   <access_read>
+      <value><object mode="update" code="everyone" objectdef="user_role" module="core" /></value>
+   </access_read>
+   <access_update>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_update>
+   <access_delete>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_delete>
+   <access_archive>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_archive>
+   <access_copy>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_copy>
+</object>
+
+<!-- APPOINTMENTS -->
+<object code="appointments.appointment:DEFAULT" objectdef="mobile_mask" module="user_interface">
+   <target_objectdef>
+      <value><object mode="update" code="appointment" objectdef="objectdef" module="core" cond="module.code='appointments'"/></value>
+   </target_objectdef>
+   <is_order_by_ascending>
+      <value>true</value>
+   </is_order_by_ascending>
+   <sort_id>
+      <value>1501</value>
+   </sort_id>
+   <is_archived>
+      <value>false</value>
+   </is_archived>
+   <access_owner>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_owner>
+   <access_read>
+      <value><object mode="update" code="everyone" objectdef="user_role" module="core" /></value>
+   </access_read>
+   <access_update>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_update>
+   <access_delete>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_delete>
+   <access_archive>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_archive>
+   <access_copy>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_copy>
+</object>
+
+<object code="appointments.reminder:DEFAULT" objectdef="mobile_mask" module="user_interface">
+   <target_objectdef>
+      <value><object mode="update" code="reminder" objectdef="objectdef" module="core" cond="module.code='appointments'"/></value>
+   </target_objectdef>
+   <is_order_by_ascending>
+      <value>true</value>
+   </is_order_by_ascending>
+   <sort_id>
+      <value>1502</value>
+   </sort_id>
+   <is_archived>
+      <value>false</value>
+   </is_archived>
+   <access_owner>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_owner>
+   <access_read>
+      <value><object mode="update" code="everyone" objectdef="user_role" module="core" /></value>
+   </access_read>
+   <access_update>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_update>
+   <access_delete>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_delete>
+   <access_archive>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_archive>
+   <access_copy>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_copy>
+</object>
+
+<!-- RESERVATIONS -->
+<object code="reservations.reservation:DEFAULT" objectdef="mobile_mask" module="user_interface">
+   <target_objectdef>
+      <value><object mode="update" code="reservation" objectdef="objectdef" module="core" cond="module.code='reservations'"/></value>
+   </target_objectdef>
+   <is_order_by_ascending>
+      <value>true</value>
+   </is_order_by_ascending>
+   <sort_id>
+      <value>1701</value>
+   </sort_id>
+   <is_archived>
+      <value>false</value>
+   </is_archived>
+   <access_owner>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_owner>
+   <access_read>
+      <value><object mode="update" code="everyone" objectdef="user_role" module="core" /></value>
+   </access_read>
+   <access_update>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_update>
+   <access_delete>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_delete>
+   <access_archive>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_archive>
+   <access_copy>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_copy>
+</object>
+
+<object code="reservations.unit:DEFAULT" objectdef="mobile_mask" module="user_interface">
+   <target_objectdef>
+      <value><object mode="update" code="unit" objectdef="objectdef" module="core" cond="module.code='reservations'"/></value>
+   </target_objectdef>
+   <is_order_by_ascending>
+      <value>true</value>
+   </is_order_by_ascending>
+   <sort_id>
+      <value>1702</value>
+   </sort_id>
+   <is_archived>
+      <value>false</value>
+   </is_archived>
+   <access_owner>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_owner>
+   <access_read>
+      <value><object mode="update" code="everyone" objectdef="user_role" module="core" /></value>
+   </access_read>
+   <access_update>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_update>
+   <access_delete>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_delete>
+   <access_archive>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_archive>
+   <access_copy>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_copy>
+</object>
+
+<!-- MAINTENANCE -->
+<object code="maintenance.item:DEFAULT" objectdef="mobile_mask" module="user_interface">
+   <target_objectdef>
+      <value><object mode="update" code="item" objectdef="objectdef" module="core" cond="module.code='maintenance'"/></value>
+   </target_objectdef>
+   <is_order_by_ascending>
+      <value>true</value>
+   </is_order_by_ascending>
+   <sort_id>
+      <value>1801</value>
+   </sort_id>
+   <is_archived>
+      <value>false</value>
+   </is_archived>
+   <access_owner>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_owner>
+   <access_read>
+      <value><object mode="update" code="everyone" objectdef="user_role" module="core" /></value>
+   </access_read>
+   <access_update>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_update>
+   <access_delete>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_delete>
+   <access_archive>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_archive>
+   <access_copy>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_copy>
+</object>
+
+<object code="maintenance.contract:DEFAULT" objectdef="mobile_mask" module="user_interface">
+   <target_objectdef>
+      <value><object mode="update" code="contract" objectdef="objectdef" module="core" cond="module.code='maintenance'"/></value>
+   </target_objectdef>
+   <is_order_by_ascending>
+      <value>true</value>
+   </is_order_by_ascending>
+   <sort_id>
+      <value>1802</value>
+   </sort_id>
+   <is_archived>
+      <value>false</value>
+   </is_archived>
+   <access_owner>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_owner>
+   <access_read>
+      <value><object mode="update" code="everyone" objectdef="user_role" module="core" /></value>
+   </access_read>
+   <access_update>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_update>
+   <access_delete>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_delete>
+   <access_archive>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_archive>
+   <access_copy>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_copy>
+</object>
+
+<object code="maintenance.activity:DEFAULT" objectdef="mobile_mask" module="user_interface">
+   <target_objectdef>
+      <value><object mode="update" code="activity" objectdef="objectdef" module="core" cond="module.code='maintenance'"/></value>
+   </target_objectdef>
+   <is_order_by_ascending>
+      <value>true</value>
+   </is_order_by_ascending>
+   <sort_id>
+      <value>1803</value>
+   </sort_id>
+   <is_archived>
+      <value>false</value>
+   </is_archived>
+   <access_owner>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_owner>
+   <access_read>
+      <value><object mode="update" code="everyone" objectdef="user_role" module="core" /></value>
+   </access_read>
+   <access_update>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_update>
+   <access_delete>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_delete>
+   <access_archive>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_archive>
+   <access_copy>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_copy>
+</object>
+
+<object code="maintenance.activity_order:DEFAULT" objectdef="mobile_mask" module="user_interface">
+   <target_objectdef>
+      <value><object mode="update" code="activity_order" objectdef="objectdef" module="core" cond="module.code='maintenance'"/></value>
+   </target_objectdef>
+   <is_order_by_ascending>
+      <value>true</value>
+   </is_order_by_ascending>
+   <sort_id>
+      <value>1804</value>
+   </sort_id>
+   <is_archived>
+      <value>false</value>
+   </is_archived>
+   <access_owner>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_owner>
+   <access_read>
+      <value><object mode="update" code="everyone" objectdef="user_role" module="core" /></value>
+   </access_read>
+   <access_update>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_update>
+   <access_delete>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_delete>
+   <access_archive>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_archive>
+   <access_copy>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_copy>
+</object>
+
+<!-- PROJECTS -->
+<object code="projects.project:DEFAULT" objectdef="mobile_mask" module="user_interface">
+   <target_objectdef>
+      <value><object cond="module.code='projects'" code="project" objectdef="objectdef" module="core" mode="update"/></value>
+   </target_objectdef>
+   <is_order_by_ascending>
+      <value>true</value>
+   </is_order_by_ascending>
+   <sort_id>
+      <value>1901</value>
+   </sort_id>
+   <is_archived>
+      <value>false</value>
+   </is_archived>
+   <access_owner>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_owner>
+   <access_read>
+      <value><object mode="update" code="everyone" objectdef="user_role" module="core" /></value>
+   </access_read>
+   <access_update>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_update>
+   <access_delete>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_delete>
+   <access_archive>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_archive>
+   <access_copy>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_copy>
+</object>
+
+<object code="projects.task:DEFAULT" objectdef="mobile_mask" module="user_interface">
+   <target_objectdef>
+      <value><object cond="module.code='projects'" code="task" objectdef="objectdef" module="core" mode="update"/></value>
+   </target_objectdef>
+   <is_order_by_ascending>
+      <value>true</value>
+   </is_order_by_ascending>
+   <sort_id>
+      <value>1902</value>
+   </sort_id>
+   <is_archived>
+      <value>false</value>
+   </is_archived>
+   <access_owner>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_owner>
+   <access_read>
+      <value><object mode="update" code="everyone" objectdef="user_role" module="core" /></value>
+   </access_read>
+   <access_update>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_update>
+   <access_delete>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_delete>
+   <access_archive>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_archive>
+   <access_copy>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_copy>
+</object>
+
+<object code="projects.planned_activity:DEFAULT" objectdef="mobile_mask" module="user_interface">
+   <target_objectdef>
+      <value><object cond="module.code='projects'" code="planned_activity" objectdef="objectdef" module="core" mode="update"/></value>
+   </target_objectdef>
+   <is_order_by_ascending>
+      <value>true</value>
+   </is_order_by_ascending>
+   <sort_id>
+      <value>1903</value>
+   </sort_id>
+   <is_archived>
+      <value>false</value>
+   </is_archived>
+   <access_owner>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_owner>
+   <access_read>
+      <value><object mode="update" code="everyone" objectdef="user_role" module="core" /></value>
+   </access_read>
+   <access_update>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_update>
+   <access_delete>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_delete>
+   <access_archive>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_archive>
+   <access_copy>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_copy>
+</object>
+
+<object code="projects.milestone:DEFAULT" objectdef="mobile_mask" module="user_interface">
+   <target_objectdef>
+      <value><object cond="module.code='projects'" code="milestone" objectdef="objectdef" module="core" mode="update"/></value>
+   </target_objectdef>
+   <is_order_by_ascending>
+      <value>true</value>
+   </is_order_by_ascending>
+   <sort_id>
+      <value>1904</value>
+   </sort_id>
+   <is_archived>
+      <value>false</value>
+   </is_archived>
+   <access_owner>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_owner>
+   <access_read>
+      <value><object mode="update" code="everyone" objectdef="user_role" module="core" /></value>
+   </access_read>
+   <access_update>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_update>
+   <access_delete>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_delete>
+   <access_archive>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_archive>
+   <access_copy>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_copy>
+</object>
+
+<!-- MOVES -->
+<object code="moves.project:DEFAULT" objectdef="mobile_mask" module="user_interface">
+   <target_objectdef>
+      <value><object cond="module.code='moves'" code="project" objectdef="objectdef" module="core" mode="update"/></value>
+   </target_objectdef>
+   <is_order_by_ascending>
+      <value>true</value>
+   </is_order_by_ascending>
+   <sort_id>
+      <value>2001</value>
+   </sort_id>
+   <is_archived>
+      <value>false</value>
+   </is_archived>
+   <access_owner>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_owner>
+   <access_read>
+      <value><object mode="update" code="everyone" objectdef="user_role" module="core" /></value>
+   </access_read>
+   <access_update>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_update>
+   <access_delete>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_delete>
+   <access_archive>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_archive>
+   <access_copy>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_copy>
+</object>
+
+<object code="moves.task:DEFAULT" objectdef="mobile_mask" module="user_interface">
+   <target_objectdef>
+      <value><object cond="module.code='moves'" code="task" objectdef="objectdef" module="core" mode="update"/></value>
+   </target_objectdef>
+   <is_order_by_ascending>
+      <value>true</value>
+   </is_order_by_ascending>
+   <sort_id>
+      <value>2002</value>
+   </sort_id>
+   <is_archived>
+      <value>false</value>
+   </is_archived>
+   <access_owner>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_owner>
+   <access_read>
+      <value><object mode="update" code="everyone" objectdef="user_role" module="core" /></value>
+   </access_read>
+   <access_update>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_update>
+   <access_delete>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_delete>
+   <access_archive>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_archive>
+   <access_copy>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_copy>
+</object>
+
+<!-- KEYS -->
+<object code="keys.key:DEFAULT" objectdef="mobile_mask" module="user_interface">
+   <target_objectdef>
+      <value><object cond="module.code='keys'" code="key" objectdef="objectdef" module="core" mode="update"/></value>
+   </target_objectdef>
+   <is_order_by_ascending>
+      <value>true</value>
+   </is_order_by_ascending>
+   <sort_id>
+      <value>2101</value>
+   </sort_id>
+   <is_archived>
+      <value>false</value>
+   </is_archived>
+   <access_owner>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_owner>
+   <access_read>
+      <value><object mode="update" code="everyone" objectdef="user_role" module="core" /></value>
+   </access_read>
+   <access_update>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_update>
+   <access_delete>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_delete>
+   <access_archive>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_archive>
+   <access_copy>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_copy>
+</object>
+
+<object code="keys.lock:DEFAULT" objectdef="mobile_mask" module="user_interface">
+   <target_objectdef>
+      <value><object cond="module.code='keys'" code="lock" objectdef="objectdef" module="core" mode="update"/></value>
+   </target_objectdef>
+   <is_order_by_ascending>
+      <value>true</value>
+   </is_order_by_ascending>
+   <sort_id>
+      <value>2102</value>
+   </sort_id>
+   <is_archived>
+      <value>false</value>
+   </is_archived>
+   <access_owner>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_owner>
+   <access_read>
+      <value><object mode="update" code="everyone" objectdef="user_role" module="core" /></value>
+   </access_read>
+   <access_update>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_update>
+   <access_delete>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_delete>
+   <access_archive>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_archive>
+   <access_copy>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_copy>
+</object>
+
+<object code="keys.lock_system:DEFAULT" objectdef="mobile_mask" module="user_interface">
+   <target_objectdef>
+      <value><object cond="module.code='keys'" code="lock_system" objectdef="objectdef" module="core" mode="update"/></value>
+   </target_objectdef>
+   <is_order_by_ascending>
+      <value>true</value>
+   </is_order_by_ascending>
+   <sort_id>
+      <value>2103</value>
+   </sort_id>
+   <is_archived>
+      <value>false</value>
+   </is_archived>
+   <access_owner>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_owner>
+   <access_read>
+      <value><object mode="update" code="everyone" objectdef="user_role" module="core" /></value>
+   </access_read>
+   <access_update>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_update>
+   <access_delete>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_delete>
+   <access_archive>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_archive>
+   <access_copy>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_copy>
+</object>
+
+<!-- INVOICES -->
+<object code="invoices.invoice_outgoing:DEFAULT" objectdef="mobile_mask" module="user_interface">
+   <target_objectdef>
+      <value><object cond="module.code='invoices'" code="invoice_outgoing" objectdef="objectdef" module="core" mode="update"/></value>
+   </target_objectdef>
+   <is_order_by_ascending>
+      <value>true</value>
+   </is_order_by_ascending>
+   <sort_id>
+      <value>2201</value>
+   </sort_id>
+   <is_archived>
+      <value>false</value>
+   </is_archived>
+   <access_owner>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_owner>
+   <access_read>
+      <value><object mode="update" code="everyone" objectdef="user_role" module="core" /></value>
+   </access_read>
+   <access_update>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_update>
+   <access_delete>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_delete>
+   <access_archive>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_archive>
+   <access_copy>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_copy>
+</object>
+
+<object code="invoices.invoice_incoming:DEFAULT" objectdef="mobile_mask" module="user_interface">
+   <target_objectdef>
+      <value><object cond="module.code='invoices'" code="invoice_incoming" objectdef="objectdef" module="core" mode="update"/></value>
+   </target_objectdef>
+   <is_order_by_ascending>
+      <value>true</value>
+   </is_order_by_ascending>
+   <sort_id>
+      <value>2202</value>
+   </sort_id>
+   <is_archived>
+      <value>false</value>
+   </is_archived>
+   <access_owner>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_owner>
+   <access_read>
+      <value><object mode="update" code="everyone" objectdef="user_role" module="core" /></value>
+   </access_read>
+   <access_update>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_update>
+   <access_delete>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_delete>
+   <access_archive>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_archive>
+   <access_copy>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_copy>
+</object>
+
+<object code="invoices.payment:DEFAULT" objectdef="mobile_mask" module="user_interface">
+   <target_objectdef>
+      <value><object cond="module.code='invoices'" code="payment" objectdef="objectdef" module="core" mode="update"/></value>
+   </target_objectdef>
+   <is_order_by_ascending>
+      <value>true</value>
+   </is_order_by_ascending>
+   <sort_id>
+      <value>2203</value>
+   </sort_id>
+   <is_archived>
+      <value>false</value>
+   </is_archived>
+   <access_owner>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_owner>
+   <access_read>
+      <value><object mode="update" code="everyone" objectdef="user_role" module="core" /></value>
+   </access_read>
+   <access_update>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_update>
+   <access_delete>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_delete>
+   <access_archive>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_archive>
+   <access_copy>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_copy>
+</object>
+
+<object code="invoices.reminder:DEFAULT" objectdef="mobile_mask" module="user_interface">
+   <target_objectdef>
+      <value><object cond="module.code='invoices'" code="reminder" objectdef="objectdef" module="core" mode="update"/></value>
+   </target_objectdef>
+   <is_order_by_ascending>
+      <value>true</value>
+   </is_order_by_ascending>
+   <sort_id>
+      <value>2204</value>
+   </sort_id>
+   <is_archived>
+      <value>false</value>
+   </is_archived>
+   <access_owner>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_owner>
+   <access_read>
+      <value><object mode="update" code="everyone" objectdef="user_role" module="core" /></value>
+   </access_read>
+   <access_update>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_update>
+   <access_delete>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_delete>
+   <access_archive>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_archive>
+   <access_copy>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_copy>
+</object>
+
+<!-- REANTALS -->
+<object code="rentals.unit:DEFAULT" objectdef="mobile_mask" module="user_interface">
+   <target_objectdef>
+      <value><object cond="module.code='rentals'" code="unit" objectdef="objectdef" module="core" mode="update"/></value>
+   </target_objectdef>
+   <is_order_by_ascending>
+      <value>true</value>
+   </is_order_by_ascending>
+   <sort_id>
+      <value>2301</value>
+   </sort_id>
+   <is_archived>
+      <value>false</value>
+   </is_archived>
+   <access_owner>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_owner>
+   <access_read>
+      <value><object mode="update" code="everyone" objectdef="user_role" module="core" /></value>
+   </access_read>
+   <access_update>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_update>
+   <access_delete>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_delete>
+   <access_archive>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_archive>
+   <access_copy>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_copy>
+</object>
+
+<object code="rentals.area:DEFAULT" objectdef="mobile_mask" module="user_interface">
+   <target_objectdef>
+      <value><object cond="module.code='rentals'" code="area" objectdef="objectdef" module="core" mode="update"/></value>
+   </target_objectdef>
+   <is_order_by_ascending>
+      <value>true</value>
+   </is_order_by_ascending>
+   <sort_id>
+      <value>2302</value>
+   </sort_id>
+   <is_archived>
+      <value>false</value>
+   </is_archived>
+   <access_owner>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_owner>
+   <access_read>
+      <value><object mode="update" code="everyone" objectdef="user_role" module="core" /></value>
+   </access_read>
+   <access_update>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_update>
+   <access_delete>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_delete>
+   <access_archive>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_archive>
+   <access_copy>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_copy>
+</object>
+
+<object code="rentals.contract:DEFAULT" objectdef="mobile_mask" module="user_interface">
+   <target_objectdef>
+      <value><object cond="module.code='rentals'" code="contract" objectdef="objectdef" module="core" mode="update"/></value>
+   </target_objectdef>
+   <is_order_by_ascending>
+      <value>true</value>
+   </is_order_by_ascending>
+   <sort_id>
+      <value>2303</value>
+   </sort_id>
+   <is_archived>
+      <value>false</value>
+   </is_archived>
+   <access_owner>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_owner>
+   <access_read>
+      <value><object mode="update" code="everyone" objectdef="user_role" module="core" /></value>
+   </access_read>
+   <access_update>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_update>
+   <access_delete>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_delete>
+   <access_archive>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_archive>
+   <access_copy>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_copy>
+</object>
+
+<object code="rentals.payment:DEFAULT" objectdef="mobile_mask" module="user_interface">
+   <target_objectdef>
+      <value><object cond="module.code='rentals'" code="payment" objectdef="objectdef" module="core" mode="update"/></value>
+   </target_objectdef>
+   <is_order_by_ascending>
+      <value>true</value>
+   </is_order_by_ascending>
+   <sort_id>
+      <value>2304</value>
+   </sort_id>
+   <is_archived>
+      <value>false</value>
+   </is_archived>
+   <access_owner>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_owner>
+   <access_read>
+      <value><object mode="update" code="everyone" objectdef="user_role" module="core" /></value>
+   </access_read>
+   <access_update>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_update>
+   <access_delete>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_delete>
+   <access_archive>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_archive>
+   <access_copy>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_copy>
+</object>
+
+<object code="rentals.account_tenant:DEFAULT" objectdef="mobile_mask" module="user_interface">
+   <target_objectdef>
+      <value><object cond="module.code='rentals'" code="account_tenant" objectdef="objectdef" module="core" mode="update"/></value>
+   </target_objectdef>
+   <is_order_by_ascending>
+      <value>true</value>
+   </is_order_by_ascending>
+   <sort_id>
+      <value>2305</value>
+   </sort_id>
+   <is_archived>
+      <value>false</value>
+   </is_archived>
+   <access_owner>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_owner>
+   <access_read>
+      <value><object mode="update" code="everyone" objectdef="user_role" module="core" /></value>
+   </access_read>
+   <access_update>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_update>
+   <access_delete>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_delete>
+   <access_archive>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_archive>
+   <access_copy>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_copy>
+</object>
+
+<object code="rentals.index_official:DEFAULT" objectdef="mobile_mask" module="user_interface">
+   <target_objectdef>
+      <value><object cond="module.code='rentals'" code="index_official" objectdef="objectdef" module="core" mode="update"/></value>
+   </target_objectdef>
+   <is_order_by_ascending>
+      <value>true</value>
+   </is_order_by_ascending>
+   <sort_id>
+      <value>2306</value>
+   </sort_id>
+   <is_archived>
+      <value>false</value>
+   </is_archived>
+   <access_owner>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_owner>
+   <access_read>
+      <value><object mode="update" code="everyone" objectdef="user_role" module="core" /></value>
+   </access_read>
+   <access_update>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_update>
+   <access_delete>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_delete>
+   <access_archive>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_archive>
+   <access_copy>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_copy>
+</object>
+
+<object code="rentals.payment_transaction:DEFAULT" objectdef="mobile_mask" module="user_interface">
+   <target_objectdef>
+      <value><object cond="module.code='rentals'" code="payment_transaction" objectdef="objectdef" module="core" mode="update"/></value>
+   </target_objectdef>
+   <is_order_by_ascending>
+      <value>true</value>
+   </is_order_by_ascending>
+   <sort_id>
+      <value>2307</value>
+   </sort_id>
+   <is_archived>
+      <value>false</value>
+   </is_archived>
+   <access_owner>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_owner>
+   <access_read>
+      <value><object mode="update" code="everyone" objectdef="user_role" module="core" /></value>
+   </access_read>
+   <access_update>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_update>
+   <access_delete>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_delete>
+   <access_archive>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_archive>
+   <access_copy>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_copy>
+</object>
+
+<!-- OPERATING COSTS -->
+<object code="operating_costs.rental_unit_expense:DEFAULT" objectdef="mobile_mask" module="user_interface">
+   <target_objectdef>
+      <value><object cond="module.code='operating_costs'" code="rental_unit_expense" objectdef="objectdef" module="core" mode="update"/></value>
+   </target_objectdef>
+   <is_order_by_ascending>
+      <value>true</value>
+   </is_order_by_ascending>
+   <sort_id>
+      <value>2401</value>
+   </sort_id>
+   <is_archived>
+      <value>false</value>
+   </is_archived>
+   <access_owner>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_owner>
+   <access_read>
+      <value><object mode="update" code="everyone" objectdef="user_role" module="core" /></value>
+   </access_read>
+   <access_update>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_update>
+   <access_delete>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_delete>
+   <access_archive>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_archive>
+   <access_copy>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_copy>
+</object>
+
+<object code="operating_costs.allocation_key:DEFAULT" objectdef="mobile_mask" module="user_interface">
+   <target_objectdef>
+      <value><object cond="module.code='operating_costs'" code="allocation_key" objectdef="objectdef" module="core" mode="update"/></value>
+   </target_objectdef>
+   <is_order_by_ascending>
+      <value>true</value>
+   </is_order_by_ascending>
+   <sort_id>
+      <value>2402</value>
+   </sort_id>
+   <is_archived>
+      <value>false</value>
+   </is_archived>
+   <access_owner>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_owner>
+   <access_read>
+      <value><object mode="update" code="everyone" objectdef="user_role" module="core" /></value>
+   </access_read>
+   <access_update>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_update>
+   <access_delete>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_delete>
+   <access_archive>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_archive>
+   <access_copy>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_copy>
+</object>
+
+<object code="operating_costs.costs_share:DEFAULT" objectdef="mobile_mask" module="user_interface">
+   <target_objectdef>
+      <value><object cond="module.code='operating_costs'" code="costs_share" objectdef="objectdef" module="core" mode="update"/></value>
+   </target_objectdef>
+   <is_order_by_ascending>
+      <value>true</value>
+   </is_order_by_ascending>
+   <sort_id>
+      <value>2403</value>
+   </sort_id>
+   <is_archived>
+      <value>false</value>
+   </is_archived>
+   <access_owner>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_owner>
+   <access_read>
+      <value><object mode="update" code="everyone" objectdef="user_role" module="core" /></value>
+   </access_read>
+   <access_update>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_update>
+   <access_delete>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_delete>
+   <access_archive>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_archive>
+   <access_copy>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_copy>
+</object>
+
+<object code="operating_costs.rental_unit_amount:DEFAULT" objectdef="mobile_mask" module="user_interface">
+   <target_objectdef>
+      <value><object cond="module.code='operating_costs'" code="rental_unit_amount" objectdef="objectdef" module="core" mode="update"/></value>
+   </target_objectdef>
+   <is_order_by_ascending>
+      <value>true</value>
+   </is_order_by_ascending>
+   <sort_id>
+      <value>2404</value>
+   </sort_id>
+   <is_archived>
+      <value>false</value>
+   </is_archived>
+   <access_owner>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_owner>
+   <access_read>
+      <value><object mode="update" code="everyone" objectdef="user_role" module="core" /></value>
+   </access_read>
+   <access_update>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_update>
+   <access_delete>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_delete>
+   <access_archive>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_archive>
+   <access_copy>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_copy>
+</object>
+
+<object code="operating_costs.expense_type:DEFAULT" objectdef="mobile_mask" module="user_interface">
+   <target_objectdef>
+      <value><object cond="module.code='operating_costs'" code="expense_type" objectdef="objectdef" module="core" mode="update"/></value>
+   </target_objectdef>
+   <is_order_by_ascending>
+      <value>true</value>
+   </is_order_by_ascending>
+   <sort_id>
+      <value>2405</value>
+   </sort_id>
+   <is_archived>
+      <value>false</value>
+   </is_archived>
+   <access_owner>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_owner>
+   <access_read>
+      <value><object mode="update" code="everyone" objectdef="user_role" module="core" /></value>
+   </access_read>
+   <access_update>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_update>
+   <access_delete>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_delete>
+   <access_archive>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_archive>
+   <access_copy>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_copy>
+</object>
+
+<!-- HELPDESK -->
+<object code="helpdesk.notice:DEFAULT" objectdef="mobile_mask" module="user_interface">
+   <target_objectdef>
+      <value><object cond="module.code='helpdesk'" code="notice" objectdef="objectdef" module="core" mode="update"/></value>
+   </target_objectdef>
+   <is_order_by_ascending>
+      <value>true</value>
+   </is_order_by_ascending>
+   <sort_id>
+      <value>2501</value>
+   </sort_id>
+   <is_archived>
+      <value>false</value>
+   </is_archived>
+   <access_owner>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_owner>
+   <access_read>
+      <value><object mode="update" code="everyone" objectdef="user_role" module="core" /></value>
+   </access_read>
+   <access_update>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_update>
+   <access_delete>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_delete>
+   <access_archive>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_archive>
+   <access_copy>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_copy>
+</object>
+
+<object code="helpdesk.notice_general:DEFAULT" objectdef="mobile_mask" module="user_interface">
+   <target_objectdef>
+      <value><object cond="module.code='helpdesk'" code="notice_general" objectdef="objectdef" module="core" mode="update"/></value>
+   </target_objectdef>
+   <is_order_by_ascending>
+      <value>true</value>
+   </is_order_by_ascending>
+   <sort_id>
+      <value>2502</value>
+   </sort_id>
+   <is_archived>
+      <value>false</value>
+   </is_archived>
+   <access_owner>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_owner>
+   <access_read>
+      <value><object mode="update" code="everyone" objectdef="user_role" module="core" /></value>
+   </access_read>
+   <access_update>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_update>
+   <access_delete>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_delete>
+   <access_archive>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_archive>
+   <access_copy>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_copy>
+</object>
+
+<object code="helpdesk.notice_item_malfunction:DEFAULT" objectdef="mobile_mask" module="user_interface">
+   <target_objectdef>
+      <value><object cond="module.code='helpdesk'" code="notice_item_malfunction" objectdef="objectdef" module="core" mode="update"/></value>
+   </target_objectdef>
+   <is_order_by_ascending>
+      <value>true</value>
+   </is_order_by_ascending>
+   <sort_id>
+      <value>2503</value>
+   </sort_id>
+   <is_archived>
+      <value>false</value>
+   </is_archived>
+   <access_owner>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_owner>
+   <access_read>
+      <value><object mode="update" code="everyone" objectdef="user_role" module="core" /></value>
+   </access_read>
+   <access_update>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_update>
+   <access_delete>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_delete>
+   <access_archive>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_archive>
+   <access_copy>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_copy>
+</object>
+
+<object code="helpdesk.notice_item_check:DEFAULT" objectdef="mobile_mask" module="user_interface">
+   <target_objectdef>
+      <value><object cond="module.code='helpdesk'" code="notice_item_check" objectdef="objectdef" module="core" mode="update"/></value>
+   </target_objectdef>
+   <is_order_by_ascending>
+      <value>true</value>
+   </is_order_by_ascending>
+   <sort_id>
+      <value>2504</value>
+   </sort_id>
+   <is_archived>
+      <value>false</value>
+   </is_archived>
+   <access_owner>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_owner>
+   <access_read>
+      <value><object mode="update" code="everyone" objectdef="user_role" module="core" /></value>
+   </access_read>
+   <access_update>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_update>
+   <access_delete>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_delete>
+   <access_archive>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_archive>
+   <access_copy>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_copy>
+</object>
+
+<object code="helpdesk.notice_change_space:DEFAULT" objectdef="mobile_mask" module="user_interface">
+   <target_objectdef>
+      <value><object cond="module.code='helpdesk'" code="notice_change_space" objectdef="objectdef" module="core" mode="update"/></value>
+   </target_objectdef>
+   <is_order_by_ascending>
+      <value>true</value>
+   </is_order_by_ascending>
+   <sort_id>
+      <value>2505</value>
+   </sort_id>
+   <is_archived>
+      <value>false</value>
+   </is_archived>
+   <access_owner>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_owner>
+   <access_read>
+      <value><object mode="update" code="everyone" objectdef="user_role" module="core" /></value>
+   </access_read>
+   <access_update>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_update>
+   <access_delete>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_delete>
+   <access_archive>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_archive>
+   <access_copy>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_copy>
+</object>
+
+<object code="helpdesk.notice_change_person:DEFAULT" objectdef="mobile_mask" module="user_interface">
+   <target_objectdef>
+      <value><object cond="module.code='helpdesk'" code="notice_change_person" objectdef="objectdef" module="core" mode="update"/></value>
+   </target_objectdef>
+   <is_order_by_ascending>
+      <value>true</value>
+   </is_order_by_ascending>
+   <sort_id>
+      <value>2506</value>
+   </sort_id>
+   <is_archived>
+      <value>false</value>
+   </is_archived>
+   <access_owner>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_owner>
+   <access_read>
+      <value><object mode="update" code="everyone" objectdef="user_role" module="core" /></value>
+   </access_read>
+   <access_update>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_update>
+   <access_delete>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_delete>
+   <access_archive>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_archive>
+   <access_copy>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_copy>
+</object>
+
+<object code="helpdesk.order_activity:DEFAULT" objectdef="mobile_mask" module="user_interface">
+   <target_objectdef>
+      <value><object cond="module.code='helpdesk'" code="order_activity" objectdef="objectdef" module="core" mode="update"/></value>
+   </target_objectdef>
+   <is_order_by_ascending>
+      <value>true</value>
+   </is_order_by_ascending>
+   <sort_id>
+      <value>2507</value>
+   </sort_id>
+   <is_archived>
+      <value>false</value>
+   </is_archived>
+   <access_owner>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_owner>
+   <access_read>
+      <value><object mode="update" code="everyone" objectdef="user_role" module="core" /></value>
+   </access_read>
+   <access_update>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_update>
+   <access_delete>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_delete>
+   <access_archive>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_archive>
+   <access_copy>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_copy>
+</object>
+
+<object code="helpdesk.order_material:DEFAULT" objectdef="mobile_mask" module="user_interface">
+   <target_objectdef>
+      <value><object cond="module.code='helpdesk'" code="order_material" objectdef="objectdef" module="core" mode="update"/></value>
+   </target_objectdef>
+   <is_order_by_ascending>
+      <value>true</value>
+   </is_order_by_ascending>
+   <sort_id>
+      <value>2508</value>
+   </sort_id>
+   <is_archived>
+      <value>false</value>
+   </is_archived>
+   <access_owner>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_owner>
+   <access_read>
+      <value><object mode="update" code="everyone" objectdef="user_role" module="core" /></value>
+   </access_read>
+   <access_update>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_update>
+   <access_delete>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_delete>
+   <access_archive>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_archive>
+   <access_copy>
+      <value><object mode="update" code="administrators" objectdef="user_role" module="core" /></value>
+   </access_copy>
+</object>
+
+</objects>
+</import>

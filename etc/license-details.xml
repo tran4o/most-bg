@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?><license>
+<company>Facility Management Demo</company>
+<version>5</version>
+<expires>2016-01-01</expires>
+<date>2013-01-01</date>
+<admin_count>100</admin_count>
+<modules>
+
+	 <module code="most">
+        <license_group code="most:admins" is_concurrent="true">
+            <order count="100" date="2013-01-01" expires="2016-01-01"/>
+            <support date="2013-01-01" expires="2013-01-01"/>
+        </license_group>
+        <license_group code="most:guests" is_concurrent="true">
+            <order count="100" date="2013-01-01" expires="2016-01-01"/>
+            <support date="2013-01-01" expires="2013-01-01"/>
+        </license_group>
+    </module>
+
+    <module code="documents">
+        <license_group code="documents:admins" is_concurrent="true">
+            <order count="100" date="2013-01-01" expires="2016-01-01"/>
+            <support date="2013-01-01" expires="2013-01-01"/>
+        </license_group>
+        <license_group code="documents:guests" is_concurrent="true">
+            <order count="100" date="2013-01-01" expires="2016-01-01"/>
+            <support date="2013-01-01" expires="2013-01-01"/>
+        </license_group>
+    </module>
+  
+
+</modules>
+</license>

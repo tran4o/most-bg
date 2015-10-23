@@ -1,0 +1,41 @@
+var mod = "most";
+
+/* history */
+db.stopSchemaSynchronization();
+var od = db.core.objectdef.selectWhere("module.code='" + mod + "' AND code LIKE 'history%'");
+for(var i=0;i<od.size;i++){
+	od[i].access_owner = db.core.user_role.INSTANCES["administrators"];
+	od[i].access_read = db.core.user_role.INSTANCES["customer:admin"];
+	od[i].access_insert = db.core.user_role.INSTANCES["administrators"];
+	od[i].access_update = db.core.user_role.INSTANCES["administrators"];
+	od[i].access_delete = db.core.user_role.INSTANCES["administrators"];
+	od[i].access_archive = db.core.user_role.INSTANCES["administrators"];
+	od[i].access_copy = db.core.user_role.INSTANCES["administrators"];
+	od[i].commit();
+}
+
+/* status_change */
+var od = db.core.objectdef.selectWhere("module.code='" + mod + "' AND code LIKE 'status_change%'");
+for(var i=0;i<od.size;i++){
+	od[i].access_owner = db.core.user_role.INSTANCES["administrators"];
+	od[i].access_read = db.core.user_role.INSTANCES[mod + ":write"];
+	od[i].access_insert = db.core.user_role.INSTANCES[mod + ":write"];
+	od[i].access_update = db.core.user_role.INSTANCES[mod + ":write"];
+	od[i].access_delete = db.core.user_role.INSTANCES[mod + ":admin"];
+	od[i].access_archive = db.core.user_role.INSTANCES[mod + ":admin"];
+	od[i].access_copy = db.core.user_role.INSTANCES["administrators"];
+	od[i].commit();
+}
+
+/* module objectdefs */
+var od = db.core.objectdef.selectWhere("module.code='" + mod + "' AND NOT code LIKE 'history%' AND NOT code LIKE 'status_change%'");
+for(var i=0;i<od.size;i++){
+	od[i].access_owner = db.core.user_role.INSTANCES[mod + ":admin"];
+	od[i].access_read = db.core.user_role.INSTANCES[mod + ":read"];
+	od[i].access_insert = db.core.user_role.INSTANCES[mod + ":write"];
+	od[i].access_update = db.core.user_role.INSTANCES[mod + ":write"];
+	od[i].access_delete = db.core.user_role.INSTANCES[mod + ":write"];
+	od[i].access_archive = db.core.user_role.INSTANCES[mod + ":write"];
+	od[i].access_copy = db.core.user_role.INSTANCES[mod + ":write"];
+	od[i].commit();
+}

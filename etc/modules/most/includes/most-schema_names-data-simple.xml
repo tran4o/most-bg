@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<import revision="$LastChangedRevision: 12404 $">
+
+<objects>
+<!-- MODULE names -->
+	<object code="most" module="core" objectdef="module" mode="update">
+		<name>
+			<value><en-US>Most BG</en-US></value>
+		</name>		
+	</object>
+	
+<!-- OBJECTDEF names -->
+	<object cond="module.code='most' AND code='protocol_date'"
+            module="core" 
+            objectdef="objectdef" 
+            mode="update">
+        <name>
+            <value><en-US>Date (protocol)</en-US></value>
+            <value><de-DE>Datum (Protokoll)</de-DE></value>
+            <value><bg-BG>Дата (Протокол)</bg-BG></value>
+        </name>     
+       <display_type>
+           <value>
+               <object code="most.protocol_date" objectdef="display_type_objectdef" module="core"/>
+           </value>
+       </display_type>  
+
+    </object>
+
+	<object cond="module.code='most' AND code='invoice'"
+            module="core" 
+            objectdef="objectdef" 
+            mode="update">
+        <name>
+            <value><en-US>Invoice</en-US></value>
+            <value><de-DE>Rechnung</de-DE></value>
+            <value><bg-BG>Фактура</bg-BG></value>
+        </name>           
+    </object>
+
+
+	<object cond="module.code='most' AND code='article'"
+            module="core" 
+            objectdef="objectdef" 
+            mode="update">
+        <name>
+            <value><en-US>Article</en-US></value>
+            <value><de-DE>Artikel</de-DE></value>
+            <value><bg-BG>Артикул</bg-BG></value>
+        </name>     
+       <display_type>
+           <value>
+               <object code="most.protocol_date" objectdef="display_type_objectdef" module="core"/>
+           </value>
+       </display_type>  
+
+    </object>
+
+	<object cond="module.code='most' AND code='category_date'"
+            module="core" 
+            objectdef="objectdef" 
+            mode="update">
+        <name>
+            <value><en-US>Category (date)</en-US></value>
+            <value><de-DE>Kategorie (Datum)</de-DE></value>
+            <value><bg-BG>Категория (дата)</bg-BG></value>
+        </name>     
+     
+    </object>
+
+	<object cond="module.code='most' AND code='opg'"
+            module="core" 
+            objectdef="objectdef" 
+            mode="update">
+        <name>
+            <value><en-US>OPG</en-US></value>
+        </name>     
+    </object>
+
+	<object cond="module.code='most' AND code='opg_entry'"
+            module="core" 
+            objectdef="objectdef" 
+            mode="update">
+        <name>
+            <value><en-US>OPG entry</en-US></value>
+            <value><de-DE>OPG Eintrag</de-DE></value>
+            <value><bg-BG>OPG запис</bg-BG></value>
+        </name>     
+    </object>
+    
+    
+    <object cond="module.code='most' AND code='opg_entry_fixed'"
+            module="core" 
+            objectdef="objectdef" 
+            mode="update">
+        <name>
+            <value><en-US>Fixed entry</en-US></value>
+            <value><de-DE>Fester Eintrag</de-DE></value>
+            <value><bg-BG>Фиксиран запис</bg-BG></value>
+        </name>     
+    </object>
+
+
+    <object cond="module.code='most' AND code='opg_entry_percental'"
+            module="core" 
+            objectdef="objectdef" 
+            mode="update">
+        <name>
+            <value><en-US>Percentual entry</en-US></value>
+            <value><de-DE>Prozentualer Eintrag</de-DE></value>
+            <value><bg-BG>Процентен запис</bg-BG></value>
+        </name>     
+    </object>
+    
+
+  	<object cond="module.code='most' AND code='protocol'"
+            module="core" 
+            objectdef="objectdef" 
+            mode="update">
+        <name>
+            <value><en-US>Protocol</en-US></value>
+            <value><de-DE>Protokoll</de-DE></value>
+            <value><bg-BG>Протокол</bg-BG></value>
+        </name>     
+       <display_type>
+           <value>
+               <object code="most.protocol" objectdef="display_type_objectdef" module="core"/>
+           </value>
+       </display_type>  
+    </object>
+    
+    <object cond="module.code='most' AND code='protocol_sale'"
+            module="core" 
+            objectdef="objectdef" 
+            mode="update">
+        <name>
+            <value><en-US>Sale</en-US></value>
+            <value><de-DE>Verkauf</de-DE></value>
+            <value><bg-BG>Продажба</bg-BG></value>
+        </name>     
+    </object>
+    
+     <object cond="module.code='most' AND code='protocol_stock'"
+            module="core" 
+            objectdef="objectdef" 
+            mode="update">
+        <name>
+            <value><en-US>Stock</en-US></value>
+            <value><de-DE>Belieferung</de-DE></value>
+            <value><bg-BG>Зареждане</bg-BG></value>
+        </name>     
+    </object>
+
+<!-- HISTORY -->
+    <object cond="module.code='most' AND code='history'"
+            module="core" 
+            objectdef="objectdef" 
+            mode="update">
+        <name>
+            <value><en-US>Change protocol (most)</en-US></value>
+            <value><de-DE>Änderungsprotokoll (most)</de-DE></value>
+        </name>     
+    </object>
+    <object cond="module.code='most' AND code='history_integer'"
+            module="core" 
+            objectdef="objectdef" 
+            mode="update">
+        <name>
+            <value><en-US>Integer</en-US></value>
+            <value><de-DE>Zahl</de-DE></value>
+        </name>     
+    </object>
+    <object cond="module.code='most' AND code='history_double'"
+            module="core" 
+            objectdef="objectdef" 
+            mode="update">
+        <name>
+            <value><en-US>Double</en-US></value>
+            <value><de-DE>Nachkommazahl</de-DE></value>
+        </name>     
+    </object>
+    <object cond="module.code='most' AND code='history_varchar'"
+            module="core" 
+            objectdef="objectdef" 
+            mode="update">
+        <name>
+            <value><en-US>Varchar</en-US></value>
+            <value><de-DE>Text</de-DE></value>
+        </name>     
+    </object>
+    <object cond="module.code='most' AND code='history_text'"
+            module="core" 
+            objectdef="objectdef" 
+            mode="update">
+        <name>
+            <value><en-US>Text</en-US></value>
+            <value><de-DE>Langtext</de-DE></value>
+        </name>     
+    </object>
+    <object cond="module.code='most' AND code='history_datetime'"
+            module="core" 
+            objectdef="objectdef" 
+            mode="update">
+        <name>
+            <value><en-US>Datetime</en-US></value>
+            <value><de-DE>Datum/Uhrzeit</de-DE></value>
+        </name>     
+    </object>
+    <object cond="module.code='most' AND code='history_option'"
+            module="core" 
+            objectdef="objectdef" 
+            mode="update">
+        <name>
+            <value><en-US>Option</en-US></value>
+            <value><de-DE>Option</de-DE></value>
+        </name>     
+    </object>
+    <object cond="module.code='most' AND code='history_relation'"
+            module="core" 
+            objectdef="objectdef" 
+            mode="update">
+        <name>
+            <value><en-US>Relation</en-US></value>
+            <value><de-DE>Referenz</de-DE></value>
+        </name>     
+    </object>	
+	
+</objects>
+</import>

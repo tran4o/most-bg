@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<import revision="$LastChangedRevision: 7778 $"
+        xmlns:xi="http://www.w3.org/2001/XInclude"
+        xmlns:vsl="http://www.plan-vision.com/VSL/1.0">
+<xi:include href="most-hierarchies-data-simple.xml" xpointer="element(/1)">
+    <xi:fallback>
+        <message type="error">No OBJECTDEF hierarchies in this module.</message>
+    </xi:fallback>
+</xi:include>
+
+<!-- DATA -->
+<objects>
+
+    <object code="most.protocol_date" module="core" objectdef="display_type_objectdef">
+        <hierarchies>
+            <value>
+                <object mode="lookup" module="core" objectdef="hierarchy_mixed">
+                    <code>
+                        <value>most.protocol_date:category_date.protocol_dates</value>
+                    </code>
+                </object>
+            </value>          
+        </hierarchies>
+        <is_object_select_from_hierarchy>
+            <value>true</value>
+        </is_object_select_from_hierarchy>     
+    </object>  
+    
+    
+    
+    <object code="most.protocol" module="core" objectdef="display_type_objectdef">
+        <hierarchies>               
+ 			<value>
+                <object mode="lookup" module="core" objectdef="hierarchy_mixed">
+                    <code>
+                        <value>most.protocol:category_date.protocol_dates.real_protocols</value>
+                    </code>
+                </object>
+            </value>  
+			<value>	
+                <object mode="lookup" module="core" objectdef="hierarchy_mixed">
+                    <code>
+                        <value>most.protocol:category_date.protocol_dates.official_protocols</value>
+                    </code>
+                </object>
+            </value>                 
+        </hierarchies>
+        <is_object_select_from_hierarchy>
+            <value>true</value>
+        </is_object_select_from_hierarchy>     
+    </object>  
+
+
+	<!--  PROPERTY -->
+
+    <object code="property:most.protocol.quantity" module="core" objectdef="display_type_property_input" proj="all">
+        <get_is_readonly_in_context>
+            <value>
+                <object code="core.display_type.get_is_property_readonly:most.protocol.quantity" objectdef="vscript" module="core">
+                        <params>
+                            <value>
+                                <object code="obj" module="core" objectdef="script_param" proj="all" />
+                            </value>
+                        </params>
+                        <script_code>
+                            <value><![CDATA[
+return (obj.official_date != null && (obj.OBJECTDEF.PROPERTIES["stock"] == null || obj.stock != null));                                 
+                            ]]></value>
+                        </script_code>
+                    </object>
+            </value>
+        </get_is_readonly_in_context>
+    </object>
+
+   <object code="property:most.protocol.article" module="core" objectdef="display_type_property_relation_single" proj="all">
+        <get_is_readonly_in_context>
+            <value>
+                <object code="core.display_type.get_is_property_readonly:most.protocol.article" objectdef="vscript" module="core">
+                        <params>
+                            <value>
+                                <object code="obj" module="core" objectdef="script_param" proj="all" />
+                            </value>
+                        </params>
+                        <script_code>
+                            <value><![CDATA[
+return (obj.official_date != null && (obj.OBJECTDEF.PROPERTIES["stock"] == null || obj.stock != null));                                 
+                            ]]></value>
+                        </script_code>
+                    </object>
+            </value>
+        </get_is_readonly_in_context>
+    </object>
+    
+      <object code="property:most.protocol.official_date" module="core" objectdef="display_type_property_input" proj="all">
+        <get_is_readonly_in_context>
+            <value>
+                <object code="core.display_type.get_is_property_readonly:most.protocol.official_date" objectdef="vscript" module="core">
+                        <params>
+                            <value>
+                                <object code="obj" module="core" objectdef="script_param" proj="all" />
+                            </value>
+                        </params>
+                        <script_code>
+                            <value><![CDATA[
+return (obj.OBJECTDEF.PROPERTIES["stock"] == null || obj.stock != null);                                 
+                            ]]></value>
+                        </script_code>
+                    </object>
+            </value>
+        </get_is_readonly_in_context>
+    </object>
+    
+    <object code="property:most.protocol_sale.opg" module="core" objectdef="display_type_property_relation_single" proj="all">
+        <get_is_readonly_in_context>
+            <value>
+                <object code="core.display_type.get_is_property_readonly:most.protocol_sale.opg" objectdef="vscript" module="core">
+                        <params>
+                            <value>
+                                <object code="obj" module="core" objectdef="script_param" proj="all" />
+                            </value>
+                        </params>
+                        <script_code>
+                            <value><![CDATA[
+return (obj.official_date == null || obj.stock == null);                                 
+                            ]]></value>
+                        </script_code>
+                    </object>
+            </value>
+        </get_is_readonly_in_context>
+    </object>
+    
+</objects>
+
+</import>

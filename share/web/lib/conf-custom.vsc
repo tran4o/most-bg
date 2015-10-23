@@ -1,0 +1,9 @@
+// Custom configuraiton
+//--------------------------------------------------------------------
+vsp.conf.default_lang    = "de-DE";
+vsp.conf.default_proj    = "all";
+vsp.conf.default_layout  = "visionr_layout";
+vsp.conf.default_mask    = "ui_application";
+
+// Users that have access to the admin mask
+//admin_users.push("admin");

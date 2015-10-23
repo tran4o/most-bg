@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<import revision="$LastChangedRevision: 11495 $">
+    <objects>
+        <object code="most:admin" module="core" objectdef="user_role">
+            <category><value>predefined.modules.admin</value></category>
+            <name>
+                <value>
+                    <en-US>Most (administrators)</en-US>
+                </value>
+                <value>
+                    <de-DE>Most (Administratoren)</de-DE>
+                </value>
+                <value>
+                    <bg-BG>Most (администратори)</bg-BG>
+                </value>
+            </name>
+            <access_read mode="delete"/>
+            <access_owner><value>ROOT</value></access_owner>
+            <access_update><value>ROOT</value></access_update>
+            <access_delete><value>ROOT</value></access_delete>
+            <access_archive><value>ROOT</value></access_archive>
+            <parent_groups>
+                <value>
+                    <!-- (most:admin).parent_groups << (most:write)-->
+                    <object code="most:write" module="core" objectdef="user_role">
+                        <category><value>predefined.modules.write</value></category>
+                        <name>
+                            <value>
+                                <en-US>Most (write)</en-US>
+                            </value>
+                            <value>
+                                <de-DE>Most (schreiben)</de-DE>
+                            </value>
+                            <value>
+                                <bg-BG>Most (писане)</bg-BG>
+                            </value>
+                        </name>
+                        <access_read mode="delete"/>
+			            <access_owner><value>ROOT</value></access_owner>
+			            <access_update><value>ROOT</value></access_update>
+			            <access_delete><value>ROOT</value></access_delete>
+			            <access_archive><value>ROOT</value></access_archive>
+                        <parent_groups>
+                            <value>
+                                <!-- (most:write).parent_groups << (most:read)-->
+                                <object code="most:read" module="core" objectdef="user_role">
+                                    <category><value>predefined.modules.read</value></category>
+                                    <name>
+                                        <value>
+                                            <en-US>Most (read only)</en-US>
+                                        </value>
+                                        <value>
+                                            <de-DE>Most  (nur lesen)</de-DE>
+                                        </value>
+                                        <value>
+                                            <bg-BG>Most  (само за четене)</bg-BG>
+                                        </value>
+                                    </name>
+                                    <access_read mode="delete"/>
+						            <access_owner><value>ROOT</value></access_owner>
+						            <access_update><value>ROOT</value></access_update>
+						            <access_delete><value>ROOT</value></access_delete>
+						            <access_archive><value>ROOT</value></access_archive>
+                                    <parent_groups>
+                                        <value>
+                                            <!-- (most:write).parent_groups << (most:read)-->
+                                            <object code="most:open" module="core" objectdef="user_role">
+                                                <category><value>predefined.modules.open</value></category>
+                                                <name>
+                                                    <value>
+                                                        <en-US>Most (open mask)</en-US>
+                                                    </value>
+                                                    <value>
+                                                        <de-DE>Most (Maske öffnen)</de-DE>
+                                                    </value>
+                                                    <value>
+                                                        <bg-BG>Most (достъп до изглед)</bg-BG>
+                                                    </value>
+                                                </name>
+                                                <access_read mode="delete"/>
+									            <access_owner><value>ROOT</value></access_owner>
+									            <access_update><value>ROOT</value></access_update>
+									            <access_delete><value>ROOT</value></access_delete>
+									            <access_archive><value>ROOT</value></access_archive>
+                                            </object>
+                                        </value>
+                                    </parent_groups>
+                                </object>
+                            </value>
+                        </parent_groups>
+                    </object>
+                </value>
+            </parent_groups>
+        </object>
+    </objects>
+</import>
+
+

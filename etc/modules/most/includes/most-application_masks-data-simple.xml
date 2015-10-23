@@ -1,0 +1,426 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<import revision="$LastChangedRevision: 7778 $" xmlns:xi="http://www.w3.org/2001/XInclude">
+    <objects>
+        <object code="most_app" module="user_interface" objectdef="application_mask" proj="all">
+            <sort_id><value>1050</value></sort_id>
+           <icon>
+                <value>
+                    <object objectdef="icon" module="documents" code="/visionr/modules/icons/color/128/products.png"/>
+                </value>    
+            </icon>
+            <is_public>
+                <value>true</value>
+            </is_public>
+            <module>
+                <value>
+                    <object code="most" mode="update" module="core" objectdef="module"></object>
+                </value>
+            </module>
+            <name>
+                <value>
+                    <en-US>MOST</en-US>
+                </value>
+            </name>
+            <widgets mode="replace">            
+                <value>
+                    <object code="most_app:contact" module="user_interface" objectdef="application_mask_objectdef_button">
+                        <sort_id><value>5000</value></sort_id>
+                        <name>
+                            <value>
+                                <en-US>Contacts</en-US>
+                            </value>
+                            <value>
+                                <de-DE>Kontakte</de-DE>
+                            </value>
+                            <value>
+                                <bg-BG>Контакти</bg-BG>
+                            </value>
+                        </name>
+                        <target_objectdef>
+                            <value>
+                                <object code="contact" cond="module.code='most'" mode="update" module="core" objectdef="objectdef"></object>
+                            </value>
+                        </target_objectdef>
+                        <mask_code>
+                            <value>parameterised-objectdef-instances-mask-tree</value>
+                        </mask_code>
+                        <appearance_class>
+                            <value>app-button-fat</value>
+                        </appearance_class>
+                        <icon_url>
+                            <value><![CDATA[/tmp/documents/_visionr_objectdefs_icons_color_128_contacts-contact.png.uuid.png?operation=resizeImage&width=32&height=32]]></value>
+                        </icon_url>
+                        <icon16_url>
+                            <value><![CDATA[/tmp/documents/_visionr_objectdefs_icons_color_128_contacts-contact.png.uuid.png?operation=resizeImage&width=16&height=16]]></value>
+                        </icon16_url>
+                        <height>
+                            <value>40</value>
+                        </height>
+                        <icon_width>
+                            <value>32</value>
+                        </icon_width>
+                        <icon_height>
+                            <value>32</value>
+                        </icon_height>
+                        <get_name>
+                            <value>
+                                <object code="ui_app_mask_button.contacts_app:contact.get_name" module="core" objectdef="vscript">
+                                    <script_code>
+                                        <value><![CDATA[
+var res = "<p style='line-height:16px;cursor:pointer;'>"+this.name+
+          "<br/><b style='color:#D8D8D8;'>"+
+            db.contacts.contact.INSTANCES.approx_size_formated+" "+MSG("OVERVIEW_LABEL_OBJECTS")+
+          "</b></p>";
+return res;
+                                        ]]></value>
+                                    </script_code>
+                                </object>
+                            </value>
+                        </get_name>
+                    </object>
+                </value>
+
+                <value>
+                    <object code="most_app:invoice" module="user_interface" objectdef="application_mask_objectdef_button" proj="all">
+						<sort_id><value>5010</value></sort_id>
+                        <name>
+                            <value>
+			                    <en-US>Invoice</en-US>
+			                </value>
+			                <value>
+			                    <de-DE>Rechnung</de-DE>
+			                </value>
+			                <value>
+			                    <bg-BG>Фактури</bg-BG>
+			                </value>
+                        </name>
+                        <target_objectdef>
+                            <value>
+                                <object code="invoice" cond="module.code='most' AND code='invoice'" mode="update" module="core" objectdef="objectdef"></object>
+                            </value>
+                        </target_objectdef>
+                        <mask_code>
+                            <value>parameterised-objectdef-instances-mask</value>
+                        </mask_code>
+                        <appearance_class>
+                            <value>app-button-fat</value>
+                        </appearance_class>
+                        <icon_url>
+                            <value><![CDATA[/tmp/documents/_visionr_objectdefs_icons_color_128_invoices-invoice.png.uuid.png?operation=resizeImage&width=32&height=32]]></value>
+                        </icon_url>
+                        <icon16_url>
+                            <value><![CDATA[/tmp/documents/_visionr_objectdefs_icons_color_128_invoices-invoice.png.uuid.png?operation=resizeImage&width=16&height=16]]></value>
+                        </icon16_url>
+                        <height>
+                            <value>40</value>
+                        </height>
+                        <icon_width>
+                            <value>32</value>
+                        </icon_width>
+                        <icon_height>
+                            <value>32</value>
+                        </icon_height>
+                        <get_name>
+                            <value>
+                                <object code="ui_app_mask_button.most_app:article.get_name" module="core" objectdef="vscript">
+                                    <script_code>
+                                        <value><![CDATA[
+var res = "<p style='line-height:16px;cursor:pointer;'>"+this.name+
+          "<br/><b style='color:#D8D8D8;'>"+
+            db.most.invoice.INSTANCES.approx_size_formated+" "+MSG("OVERVIEW_LABEL_OBJECTS")+
+          "</b></p>";
+return res;
+		                                ]]></value>
+                                    </script_code>
+                                </object>
+                            </value>
+                        </get_name>
+                    </object>
+                </value>
+
+                <value>
+                    <object code="most_app:article" module="user_interface" objectdef="application_mask_objectdef_button" proj="all">
+                        <name>
+                            <value>
+			                    <en-US>Article</en-US>
+			                </value>
+			                <value>
+			                    <de-DE>Artikel</de-DE>
+			                </value>
+			                <value>
+			                    <bg-BG>Артикул</bg-BG>
+			                </value>
+                        </name>
+                        <target_objectdef>
+                            <value>
+                                <object code="article" cond="module.code='most' AND code='article'" mode="update" module="core" objectdef="objectdef"></object>
+                            </value>
+                        </target_objectdef>
+                        <mask_code>
+                            <value>parameterised-objectdef-instances-mask</value>
+                        </mask_code>
+                        <appearance_class>
+                            <value>app-button-fat</value>
+                        </appearance_class>
+                        <icon_url>
+                            <value><![CDATA[/tmp/documents/_visionr_modules_icons_color_128_products.uuid.png?operation=resizeImage&width=32&height=32]]></value>
+                        </icon_url>
+                        <icon16_url>
+                            <value><![CDATA[/tmp/documents/_visionr_modules_icons_color_128_products.uuid.png?operation=resizeImage&width=16&height=16]]></value>
+                        </icon16_url>
+                        <height>
+                            <value>40</value>
+                        </height>
+                        <icon_width>
+                            <value>32</value>
+                        </icon_width>
+                        <icon_height>
+                            <value>32</value>
+                        </icon_height>
+                        <get_name>
+                            <value>
+                                <object code="ui_app_mask_button.most_app:article.get_name" module="core" objectdef="vscript">
+                                    <script_code>
+                                        <value><![CDATA[
+var res = "<p style='line-height:16px;cursor:pointer;'>"+this.name+
+          "<br/><b style='color:#D8D8D8;'>"+
+            db.most.article.INSTANCES.approx_size_formated+" "+MSG("OVERVIEW_LABEL_OBJECTS")+
+          "</b></p>";
+return res;
+		                                ]]></value>
+                                    </script_code>
+                                </object>
+                            </value>
+                        </get_name>
+                    </object>
+                </value>
+                
+                
+                
+                <value>
+                    <object code="most_app:protocol_stock" module="user_interface" objectdef="application_mask_objectdef_button" proj="all">
+                        <name>
+                            <value>
+			                    <en-US>Stock</en-US>
+			                </value>
+			                <value>
+			                    <de-DE>Belieferung</de-DE>
+			                </value>
+			                <value>
+			                    <bg-BG>Зареждане</bg-BG>
+			                </value>
+                        </name>
+                        <target_objectdef>
+                            <value>
+                                <object code="protocol_stock" cond="module.code='most' AND code='protocol_stock'" mode="update" module="core" objectdef="objectdef"></object>
+                            </value>
+                        </target_objectdef>
+                        <mask_code>
+                            <value>parameterised-objectdef-instances-mask-tree</value>
+                        </mask_code>
+                        <appearance_class>
+                            <value>app-button-fat</value>
+                        </appearance_class>
+                        <icon_url>
+                            <value><![CDATA[/tmp/documents/_visionr_modules_icons_color_128_biddings.uuid.png?operation=resizeImage&width=32&height=32]]></value>
+                        </icon_url>
+                        <icon16_url>
+                            <value><![CDATA[/tmp/documents/_visionr_modules_icons_color_128_biddings.uuid.png?operation=resizeImage&width=16&height=16]]></value>
+                        </icon16_url>
+                        <height>
+                            <value>40</value>
+                        </height>
+                        <icon_width>
+                            <value>32</value>
+                        </icon_width>
+                        <icon_height>
+                            <value>32</value>
+                        </icon_height>
+                        <get_name>
+                            <value>
+                                <object code="ui_app_mask_button.most_app:protocol_stock.get_name" module="core" objectdef="vscript">
+                                    <script_code>
+                                        <value><![CDATA[
+var res = "<p style='line-height:16px;cursor:pointer;'>"+this.name+
+          "<br/><b style='color:#D8D8D8;'>"+
+            db.most.protocol_stock.INSTANCES.approx_size_formated+" "+MSG("OVERVIEW_LABEL_OBJECTS")+
+          "</b></p>";
+return res;
+		                                ]]></value>
+                                    </script_code>
+                                </object>
+                            </value>
+                        </get_name>
+                    </object>
+                </value>
+                
+                <value>
+                    <object code="most_app:protocol_sale" module="user_interface" objectdef="application_mask_objectdef_button" proj="all">
+                        <name>
+                            <value>
+			                    <en-US>Sale</en-US>
+			                </value>
+			                <value>
+			                    <de-DE>Verkauf</de-DE>
+			                </value>
+			                <value>
+			                    <bg-BG>Продажба</bg-BG>
+			                </value>
+                        </name>
+                        <target_objectdef>
+                            <value>
+                                <object code="protocol_sale" cond="module.code='most' AND code='protocol_sale'" mode="update" module="core" objectdef="objectdef"></object>
+                            </value>
+                        </target_objectdef>
+                        <mask_code>
+                            <value>parameterised-objectdef-instances-mask-tree</value>
+                        </mask_code>
+                        <appearance_class>
+                            <value>app-button-fat</value>
+                        </appearance_class>
+                        <icon_url>
+                            <value><![CDATA[/tmp/documents/_visionr_modules_icons_color_128_biddings.uuid.png?operation=resizeImage&width=32&height=32]]></value>
+                        </icon_url>
+                        <icon16_url>
+                            <value><![CDATA[/tmp/documents/_visionr_modules_icons_color_128_biddings.uuid.png?operation=resizeImage&width=16&height=16]]></value>
+                        </icon16_url>
+                        <height>
+                            <value>40</value>
+                        </height>
+                        <icon_width>
+                            <value>32</value>
+                        </icon_width>
+                        <icon_height>
+                            <value>32</value>
+                        </icon_height>
+                        <get_name>
+                            <value>
+                                <object code="ui_app_mask_button.most_app:protocol_sale.get_name" module="core" objectdef="vscript">
+                                    <script_code>
+                                        <value><![CDATA[
+var res = "<p style='line-height:16px;cursor:pointer;'>"+this.name+
+          "<br/><b style='color:#D8D8D8;'>"+
+            db.most.protocol_sale.INSTANCES.approx_size_formated+" "+MSG("OVERVIEW_LABEL_OBJECTS")+
+          "</b></p>";
+return res;
+		                                ]]></value>
+                                    </script_code>
+                                </object>
+                            </value>
+                        </get_name>
+                    </object>
+                </value>
+                
+                <value>
+                    <object code="most_app:opg" module="user_interface" objectdef="application_mask_objectdef_button" proj="all">
+                        <name>
+                            <value>
+			                    <en-US>OPG</en-US>
+			                </value>
+                        </name>
+                        <target_objectdef>
+                            <value>
+                                <object code="opg" cond="module.code='most' AND code='opg'" mode="update" module="core" objectdef="objectdef"></object>
+                            </value>
+                        </target_objectdef>
+                        <mask_code>
+                            <value>parameterised-objectdef-instances-mask</value>
+                        </mask_code>
+                        <appearance_class>
+                            <value>app-button-fat</value>
+                        </appearance_class>
+                        <icon_url>
+                            <value><![CDATA[/tmp/documents/_visionr_modules_icons_color_128_sales.uuid.png?operation=resizeImage&width=32&height=32]]></value>
+                        </icon_url>
+                        <icon16_url>
+                            <value><![CDATA[/tmp/documents/_visionr_modules_icons_color_128_sales.uuid.png?operation=resizeImage&width=16&height=16]]></value>
+                        </icon16_url>
+                        <height>
+                            <value>40</value>
+                        </height>
+                        <icon_width>
+                            <value>32</value>
+                        </icon_width>
+                        <icon_height>
+                            <value>32</value>
+                        </icon_height>
+                        <get_name>
+                            <value>
+                                <object code="ui_app_mask_button.most_app:opg.get_name" module="core" objectdef="vscript">
+                                    <script_code>
+                                        <value><![CDATA[
+var res = "<p style='line-height:16px;cursor:pointer;'>"+this.name+
+          "<br/><b style='color:#D8D8D8;'>"+
+            db.most.opg.INSTANCES.approx_size_formated+" "+MSG("OVERVIEW_LABEL_OBJECTS")+
+          "</b></p>";
+return res;
+		                                ]]></value>
+                                    </script_code>
+                                </object>
+                            </value>
+                        </get_name>
+                    </object>
+                </value>
+                
+                <value>
+                    <object code="most_app:protocol_date" module="user_interface" objectdef="application_mask_objectdef_button" proj="all">
+                        <name>
+                            <value>
+			                    <en-US>Dates</en-US>
+			                    <de-DE>Daten</de-DE>
+			                    <bg-BG>Дати</bg-BG>
+			                </value>
+                        </name>
+                        <target_objectdef>
+                            <value>
+                                <object code="protocol_date" cond="module.code='most' AND code='protocol_date'" mode="update" module="core" objectdef="objectdef"></object>
+                            </value>
+                        </target_objectdef>
+                        <mask_code>
+                            <value>parameterised-objectdef-instances-mask-tree</value>
+                        </mask_code>
+                        <appearance_class>
+                            <value>app-button-fat</value>
+                        </appearance_class>
+                        <icon_url>
+                            <value><![CDATA[/tmp/documents/_visionr_modules_icons_color_128_appointments.uuid.png?operation=resizeImage&width=32&height=32]]></value>
+                        </icon_url>
+                        <icon16_url>
+                            <value><![CDATA[/tmp/documents/_visionr_modules_icons_color_128_appointments.uuid.png?operation=resizeImage&width=16&height=16]]></value>
+                        </icon16_url>
+                        <height>
+                            <value>40</value>
+                        </height>
+                        <icon_width>
+                            <value>32</value>
+                        </icon_width>
+                        <icon_height>
+                            <value>32</value>
+                        </icon_height>
+                        <get_name>
+                            <value>
+                                <object code="ui_app_mask_button.most_app:protocol_date.get_name" module="core" objectdef="vscript">
+                                    <script_code>
+                                        <value><![CDATA[
+var res = "<p style='line-height:16px;cursor:pointer;'>"+this.name+
+          "<br/><b style='color:#D8D8D8;'>"+
+            db.most.protocol_date.INSTANCES.approx_size_formated+" "+MSG("OVERVIEW_LABEL_OBJECTS")+
+          "</b></p>";
+return res;
+		                                ]]></value>
+                                    </script_code>
+                                </object>
+                            </value>
+                        </get_name>
+                    </object>
+                </value>
+                
+                
+               
+            </widgets>
+        </object>
+    </objects>
+</import>
+
+

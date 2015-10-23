@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+
+<project default="deploy" basedir="." name="Most-BG Build">
+	<import file="../../visionr/ant/custom-build.xml" />
+</project>
+

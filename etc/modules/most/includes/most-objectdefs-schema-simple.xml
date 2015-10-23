@@ -1,0 +1,1414 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--+
+    | Main import file for the module test.
+    |
+    | Date:    $LastChangedDate: 2012-02-22 11:49:00 +0100 (Mi, 22 Feb 2012) $ 
+    | Version: $LastChangedRevision: 12142 $
+    +-->
+
+<import revision="$LastChangedRevision: 12142 $" xmlns:xi="http://www.w3.org/2001/XInclude">
+
+<objectdefs>
+
+	<most module_alias="m" use_prefix="true">
+		
+		<bill_date mode="delete"/>
+		<hold_in mode="delete"/>
+		<hold_out mode="delete"/>
+		<report_date mode="delete"/>				
+
+		<opg_entry tbl="ope" copy_from="core.template_normal_transaction" is_abstract="true">
+			<code is_keep_settings="true">
+				<is_unique>true</is_unique>
+			</code>
+			<expires_on mode="delete"/>
+			<article>
+				<category>main.basic</category>
+                <sort_id>101</sort_id>
+                <data_source>relation</data_source>
+			 	<related_objectdef>most.article</related_objectdef>
+			 	<is_obligatory>true</is_obligatory>			 	
+                <is_inmaintbl>true</is_inmaintbl>
+                <index_code>a</index_code>
+  				<name>
+                    <en-US>Article</en-US>
+                </name>
+                <name>
+                    <de-DE>Artikel</de-DE>
+                </name>
+                <name>
+                    <bg-BG>Артикул</bg-BG>
+                </name>                
+			</article>
+			<value>	
+				<category>main.basic</category>
+                <sort_id>110</sort_id>
+                <data_source>input</data_source>
+                <data_type>double</data_type>
+                <min_value_double>0</min_value_double>
+			 	<is_obligatory>true</is_obligatory>			 	
+                <is_inmaintbl>true</is_inmaintbl>
+                <default_value>0</default_value>
+  				<name>
+                    <en-US>Value</en-US>
+                </name>
+                <name>
+                    <de-DE>Wert</de-DE>
+                </name>
+                <name>
+                    <bg-BG>Стойност</bg-BG>
+                </name>                
+			</value>	
+	
+			<max_quantity col="maxc">	
+				<category>main.basic</category>
+                <sort_id>111</sort_id>
+                <data_source>input</data_source>
+                <data_type>integer</data_type>
+                <min_value_integer>1</min_value_integer>
+                <is_inmaintbl>true</is_inmaintbl>
+  				<name>
+                    <en-US>Max quantity</en-US>
+                </name>
+                <name>
+                    <de-DE>Maximale Quantität</de-DE>
+                </name>
+                <name>
+                    <bg-BG>Максимално количество</bg-BG>
+                </name>                
+			</max_quantity>	
+					
+			<opg>
+                <category>main.basic</category>
+                <sort_id>2000</sort_id>
+                <is_inmaintbl>true</is_inmaintbl>
+                <is_readonly>true</is_readonly>
+                <is_obligatory>true</is_obligatory>
+                <data_source>relation</data_source>
+                <related_objectdef>most.opg</related_objectdef>
+                <name>
+                    <en-US>OPG</en-US>
+                </name>
+                <index_code>og</index_code>
+			</opg>
+		</opg_entry>
+		
+		<opg tbl="opg" copy_from="core.template_normal_transaction">
+			<code is_keep_settings="true">
+				<is_unique>true</is_unique>
+			</code>
+			
+			<entries>
+				<category>main.basic</category>
+				<sort_id>1000</sort_id>
+				<is_inmaintbl>false</is_inmaintbl>
+				<data_source>relation</data_source>
+				<relation_parent>most.opg_entry.opg</relation_parent>
+				<name>
+				    <en-US>Entries</en-US>
+				</name>
+				<name>
+				    <de-DE>Einträge</de-DE>
+				</name>
+				<name>
+				    <bg-BG>Записи</bg-BG>
+				</name>
+				<display_type>property.relation.multiple.add.new</display_type>
+				<relation_filter>core_property_default_relation_filter_simple_bidirectional_relation</relation_filter>
+            </entries>
+            
+            <valid_from>
+				<category>main.basic</category>
+                <sort_id>110</sort_id>
+                <data_source>input</data_source>
+                <data_type>datetime</data_type>
+                <is_inmaintbl>true</is_inmaintbl>
+                <input_format>default_input_format_date</input_format>
+                <output_format>default_output_format_date</output_format>
+                <index_code>vf</index_code>
+				<name>
+                    <en-US>Valid from</en-US>
+                </name>
+                <name>
+                    <de-DE>Valid von</de-DE>
+                </name>
+                <name>
+                    <bg-BG>Валиден от</bg-BG>
+                </name>                       
+			</valid_from>	
+						
+			<expires_on>
+				<category>main.basic</category>
+                <sort_id>110</sort_id>
+                <data_source>input</data_source>
+                <data_type>datetime</data_type>
+                <is_inmaintbl>true</is_inmaintbl>
+                <input_format>default_input_format_date</input_format>
+                <output_format>default_output_format_date</output_format>
+                <index_code>eo</index_code>
+				<name>
+                    <en-US>Expires on</en-US>
+                </name>
+                <name>
+                    <de-DE>Läuft ab an</de-DE>
+                </name>
+                <name>
+                    <bg-BG>Изтича на</bg-BG>
+                </name>                       
+			</expires_on>			
+						
+		</opg>
+
+		
+		<opg_entry_fixed parent_objectdef="most.opg_entry">
+		</opg_entry_fixed>
+
+		<opg_entry_percental parent_objectdef="most.opg_entry">
+		</opg_entry_percental>
+
+		<protocol tbl="prt" copy_from="core.template_normal_transaction" is_abstract="true">
+
+			<code is_keep_settings="true">
+				<is_unique>true</is_unique>
+			</code>
+			 
+			 <date mode="delete"/>
+			 <bill_date mode="delete"/>
+			 <report_date mode="delete"/>
+			 
+			 <quantity>
+				<category>main.basic</category>
+				<display_type>property:most.protocol.quantity</display_type>
+                <sort_id>100</sort_id>
+			 	<data_source>input</data_source>
+			 	<data_type>integer</data_type>
+			 	<is_obligatory>true</is_obligatory>
+				<min_value_integer>1</min_value_integer>			 	
+                <is_inmaintbl>true</is_inmaintbl>
+				<name>
+                    <en-US>Quantity</en-US>
+                </name>
+                <name>
+                    <de-DE>Quantität</de-DE>
+                </name>
+                <name>
+                    <bg-BG>Количесто</bg-BG>
+                </name>      
+                <on_update_value>
+                    <object code="most.protocol:recalc_total" module="core" objectdef="vscript">                       
+                        <script_code>
+                            <value><![CDATA[
+if (this.quantity != null && (this.price != null || this.price_discount != null))
+	this.total = this.quantity * (this.price_discount != null : this.price_discount ? this.price);
+else
+	this.total=0;
+                        ]]></value>
+                        </script_code>
+                    </object>
+                </on_update_value>
+			 </quantity>
+			
+			 <article>
+				<category>main.basic</category>
+				<display_type>property:most.protocol_sale.article</display_type>
+                <sort_id>101</sort_id>
+                <data_source>relation</data_source>
+			 	<related_objectdef>most.article</related_objectdef>
+			 	<is_obligatory>true</is_obligatory>			 	
+                <is_inmaintbl>true</is_inmaintbl>
+                <index_code>a</index_code>
+  				<name>
+                    <en-US>Article</en-US>
+                </name>
+                <name>
+                    <de-DE>Artikel</de-DE>
+                </name>
+                <name>
+                    <bg-BG>Артикул</bg-BG>
+                </name>                
+			 </article>
+
+			 <price col="prc">
+				<category>main.basic</category>
+                <sort_id>100</sort_id>
+			 	<data_source>input</data_source>
+			 	<data_type>double</data_type>
+				<min_value_double>0</min_value_double>			 	
+                <is_inmaintbl>true</is_inmaintbl>
+                <is_readonly>true</is_readonly>
+				<name>
+                    <en-US>Price</en-US>
+                </name>
+                <name>
+                    <de-DE>Preis</de-DE>
+                </name>
+                <name>
+                    <bg-BG>Цена</bg-BG>
+                </name>      
+                <on_update_value>
+                    <object code="most.protocol:recalc_total" module="core" objectdef="vscript"/>                                          
+                </on_update_value>
+  				<on_insert_value>
+                    <object code="most.protocol:recalc_total" module="core" objectdef="vscript"/>                       
+                </on_insert_value>                
+			 </price>
+			 
+			 <price_discount col="prd">
+				<category>main.basic</category>
+                <sort_id>100</sort_id>
+			 	<data_source>input</data_source>
+			 	<data_type>double</data_type>
+				<min_value_double>0</min_value_double>			 	
+                <is_inmaintbl>true</is_inmaintbl>
+				<name>
+                    <en-US>Discount price</en-US>
+                </name>
+                <name>
+                    <de-DE>Promopreis</de-DE>
+                </name>
+                <name>
+                    <bg-BG>Цена с отстъпка</bg-BG>
+                </name>      
+                <on_update_value>
+                    <object code="most.protocol:recalc_total" module="core" objectdef="vscript"/>                                          
+                </on_update_value>
+  				<on_insert_value>
+                    <object code="most.protocol:recalc_total" module="core" objectdef="vscript"/>                       
+                </on_insert_value>                
+			 </price_discount>					 
+			
+			 <total>
+				<category>main.basic</category>
+                <sort_id>102</sort_id>
+                <data_source>input</data_source>
+                <data_type>double</data_type>
+                <is_readonly>true</is_readonly>
+                <is_inmaintbl>true</is_inmaintbl>
+  				<name>
+                    <en-US>Total</en-US>
+                </name>
+                <name>
+                    <de-DE>Total</de-DE>
+                </name>
+                <name>
+                    <bg-BG>Общо</bg-BG>
+                </name> 
+                <default_value>0</default_value>  
+			 </total>
+
+			 <opg>
+                <category>main.basic</category>
+                <sort_id>9000</sort_id>
+                <is_inmaintbl>true</is_inmaintbl>
+                <data_source>relation</data_source>
+                <related_objectdef>most.opg</related_objectdef>
+                <name>
+                    <en-US>OPG</en-US>
+                </name>
+                <index_code>og</index_code>               
+			 </opg>            
+			 
+			 <real_date>
+                <category>main.settings</category>
+                <sort_id>150</sort_id>
+                <is_inmaintbl>true</is_inmaintbl>
+                <data_source>relation</data_source>
+                <related_objectdef>most.protocol_date</related_objectdef>
+                <name>
+                    <en-US>Real date</en-US>
+                </name>
+                <name>
+                    <de-DE>Reales datum</de-DE>
+                </name>
+                <name>
+                    <bg-BG>Реална дата</bg-BG>
+                </name>
+                <is_obligatory>true</is_obligatory>
+                <default_value_calculation>
+                    <object code="most.proctol.real_date:default_value_calculation" module="core" objectdef="vscript">
+                        <params>
+                            <value>
+                                <object code="id" module="core" objectdef="script_param" proj="all"></object>
+                            </value>
+                        </params>
+                        <script_code>
+                            <value><![CDATA[
+var x = db.most.protocol_date.selectWhere("is_active = 1");
+if (x.size == 1)
+	return x[0];
+return null;                            
+                            ]]></value>
+                        </script_code>
+                    </object>
+                </default_value_calculation>
+                <index_code>isd</index_code>
+             </real_date>
+			 
+     		 <official_date>
+				<display_type>property:most.protocol.official_date</display_type>
+                <category>main.settings</category>
+                <sort_id>150</sort_id>
+                <is_inmaintbl>true</is_inmaintbl>
+                <data_source>relation</data_source>
+                <related_objectdef>most.protocol_date</related_objectdef>
+                <name>
+                    <en-US>Official date</en-US>
+                </name>
+                <name>
+                    <de-DE>Offizieles Datum</de-DE>
+                </name>
+                <name>
+                    <bg-BG>Официална дата</bg-BG>
+                </name>                             
+                <index_code>pd</index_code>
+                <on_update_value>
+                    <object code="most.protocol.official_date:on_update_value" module="core" objectdef="vscript">                       
+                        <script_code>
+                            <value><![CDATA[
+                             
+                        ]]></value>
+                        </script_code>
+                    </object>
+                </on_update_value>
+                <on_insert_value>
+                    <object code="most.protocol.official_date:on_update_value" module="core" objectdef="vscript"/>                       
+                </on_insert_value>
+                <on_delete_value>
+                    <object code="most.protocol.official_date:on_update_value" module="core" objectdef="vscript"/>                       
+                </on_delete_value>
+        	</official_date>	
+        </protocol>
+		
+		<protocol_stock parent_objectdef="most.protocol">	
+			<opg is_keep_settings="true">
+ 				<relation_filter>
+                     <object code="most.protocol_stock.opg" module="core" objectdef="relation_filter">
+                        <get_related_objectdef_condition>
+                            <value>
+                                <object code="relation_filter:most.protocoL_sale.opg:get_related_objectdef_condition" module="core" objectdef="vscript">
+                                    <params>
+                                        <value>
+                                            <object code="object" module="core" objectdef="script_param"></object>
+                                        </value>
+                                        <value>
+                                            <object code="property" module="core" objectdef="script_param"></object>
+                                        </value>
+                                    </params>
+                                    <script_code>
+                                        <value><![CDATA[
+if (object.stock == null || object.article == null || object.official_date == null)
+	return "0=1";
+var rest = object.quantity;
+var params = new M();
+var sel = db.most.opg.SELECT("valid_from <= :OFCD AND expires_on >= :OFCD AND entries.article.id = :PRID");
+sel["OFCD"]=object.official_date.date;
+sel["PRID"]=object.article.id;
+var arr=[];
+for (var e : sel.VALUE) 
+{
+	arr.push(e.id);
+}
+if (arr.is_empty)
+	return "0=1";
+return "id IN ("+arr.join(",")+")";	
+                                    ]]></value>
+                                    </script_code>
+                                </object>
+                            </value>
+                        </get_related_objectdef_condition>
+                   </object>
+               </relation_filter>  			
+			</opg>
+			
+			<serial_ids>
+				<data_type>varchar</data_type>
+				<data_source>input</data_source>
+                <category>main.settings</category>
+                <sort_id>200</sort_id>
+                <is_multiple>true</is_multiple>
+				<value_table>$(DB_PREFIX)_m_var_srls</value_table>
+  				<name>
+                    <en-US>Serial IDs</en-US>
+                </name>
+                <name>
+                    <de-DE>Seriennummern</de-DE>
+                </name>
+                <name>
+                    <bg-BG>Серийни номера</bg-BG>
+                </name>                
+			</serial_ids>
+			
+			<invoice>
+                <category>main.settings</category>
+                <sort_id>160</sort_id>
+                <is_inmaintbl>true</is_inmaintbl>
+                <data_source>relation</data_source>
+                <is_obligatory>false</is_obligatory>
+                <related_objectdef>most.invoice</related_objectdef>
+                <name>
+                    <en-US>Invoice</en-US>
+                </name>
+                <name>
+                    <de-DE>Rechnung</de-DE>
+                </name>
+                <name>
+                    <bg-BG>Фактура</bg-BG>
+                </name>
+			</invoice>
+			
+		</protocol_stock>
+
+		<protocol_sale parent_objectdef="most.protocol">
+
+		     <opg is_keep_settings="true">
+			   <on_delete_value>
+                    <object code="most.protocol_sale.opg:on_change" module="core" objectdef="vscript"/>
+               </on_delete_value>                    
+               <on_insert_value>
+                    <object code="most.protocol_sale.opg:on_change" module="core" objectdef="vscript"/>
+               </on_insert_value>                    
+               <on_update_value>
+                    <object code="most.protocol_sale.opg:on_change" module="core" objectdef="vscript">                       
+                        <script_code>
+                            <value><![CDATA[
+this.recalculate_price();	
+                        ]]></value>
+                        </script_code>
+                    </object>
+                </on_update_value>                        
+ 				<relation_filter>
+                     <object code="most.protocol_sale.opg" module="core" objectdef="relation_filter">
+                        <get_related_objectdef_condition>
+                            <value>
+                                <object code="relation_filter:most.protocoL_sale.opg:get_related_objectdef_condition" module="core" objectdef="vscript">
+                                    <params>
+                                        <value>
+                                            <object code="object" module="core" objectdef="script_param"></object>
+                                        </value>
+                                        <value>
+                                            <object code="property" module="core" objectdef="script_param"></object>
+                                        </value>
+                                    </params>
+                                    <script_code>
+                                        <value><![CDATA[
+if (object.stock == null || object.article == null || object.official_date == null)
+	return "0=1";
+var rest = object.quantity;
+var params = new M();
+var sel = db.most.opg.SELECT("valid_from <= :OFCD AND expires_on >= :OFCD AND entries.article.id = :PRID");
+sel["OFCD"]=object.official_date.date;
+sel["PRID"]=object.article.id;
+var arr=[];
+var ok=false;
+for (var e : sel.VALUE) 
+{
+	if (e == this.opg)
+		continue;
+	for (var a : e.entries) 
+	{
+		if (a.article == object.article) 
+		{
+			if (a.max_quantity == null) 
+			{
+				arr.push(e.id);
+				break;
+			} else {
+				var q = a.max_quantity;
+			 	var params = new M();
+			 	params["ID"]=e.id;
+			 	var sl = db.most.protocol_sale.VSQL_QUERY_SUM("SELECT quantity AS VAL WHERE opg = :ID",params);
+				var used = 0;
+				if (sl.next()) {
+			        used=sl.getInt("RES");
+			        if (used == null)
+			        	used=0;
+			    }
+			    q-=used;
+			    if (q < 0) {
+					java.log.error("Inconsistent quantity state2 : "+a.toString());					    
+			    } else if (rest <= q) {
+					arr.push(e.id);
+					break;
+				} 	
+			}
+		}
+	}
+}
+if (arr.is_empty)
+	return "0=1";
+return "id IN ("+arr.join(",")+")";	
+                                    ]]></value>
+                                    </script_code>
+                                </object>
+                            </value>
+                        </get_related_objectdef_condition>
+                   </object>
+               </relation_filter>  			
+			</opg>
+			
+			 <price is_keep_settings="true">
+			 	<is_readonly>true</is_readonly>
+			 	<is_obligatory>false</is_obligatory>
+			 </price>
+			        		 
+       		 <customer>
+                <category>main.basic</category>
+                <sort_id>200</sort_id>
+                <data_source>relation</data_source>
+                <related_objectdef>contacts.contact</related_objectdef>
+                <name>
+                    <en-US>Customer</en-US>
+                </name>
+                <name>
+                    <de-DE>Kunde</de-DE>
+                </name>
+                <name>
+                    <bg-BG>Клиент</bg-BG>
+                </name>
+                <is_obligatory>true</is_obligatory>
+                <is_inmaintbl>true</is_inmaintbl>
+                <index_code>cr</index_code>
+             </customer>
+             
+             <stock>
+                <category>main.basic</category>
+                <sort_id>199</sort_id>
+                <data_source>relation</data_source>
+                <related_objectdef>most.protocol_stock</related_objectdef>
+                <name>
+                    <en-US>Stock</en-US>
+                </name>
+                <name>
+                    <de-DE>Belieferung</de-DE>
+                </name>
+                <name>
+                    <bg-BG>Зареждане</bg-BG>
+                </name>
+                <is_obligatory>false</is_obligatory>
+                <is_inmaintbl>true</is_inmaintbl>
+                <relation_filter>
+                    <object code="most.protocol_stock.stock" module="core" objectdef="relation_filter">
+                        <get_related_objectdef_condition>
+                            <value>
+                                <object code="relation_filter:most.protocoL_sale.stock:get_related_objectdef_condition" module="core" objectdef="vscript">
+                                    <params>
+                                        <value>
+                                            <object code="object" module="core" objectdef="script_param"></object>
+                                        </value>
+                                        <value>
+                                            <object code="property" module="core" objectdef="script_param"></object>
+                                        </value>
+                                    </params>
+                                    <script_code>
+                                        <value><![CDATA[
+if (object.official_date == null || object.article == null || object.quantity == null || object.quantity <= 0)
+	return "0=1";
+var rest = object.quantity;
+var params = new M();
+var sel = db.most.protocol_stock.SELECT("official_date=:OFCD AND article = :PRID ORDER BY sort_id,id");
+sel["OFCD"]=object.official_date.id;
+sel["PRID"]=object.article.id;
+var arr=[];
+for (var e : sel.VALUE) 
+{
+	if (e == this.stock)
+		continue;
+	if (e.price == null || e.price <= 0)
+		continue;	
+	var q = e.quantity;
+ 	var params = new M();
+ 	params["ID"]=e.id;
+ 	var sl = db.most.protocol_sale.VSQL_QUERY_SUM("SELECT quantity AS VAL WHERE stock = :ID",params);
+	var sold = 0;
+	if (sl.next()) {
+        sold=sl.getInt("RES");
+        if (sold == null)
+        	sold=0;
+    }
+    //java.log.error("PRODUCT "+e.name+" | SOLD="+sold+" Q="+q+" | MORE = "+(q-sold)+" | REST="+rest);
+    q-=sold;
+	if (q >= rest) 
+	{
+		arr.push(e.id);
+		continue;
+	} 	
+	if (q < 0) {
+		java.log.error("Inconsistent quantity state : "+e.toString());
+	} 
+}
+if (arr.is_empty)
+	return "0=1";
+return "id IN ("+arr.join(",")+")";	
+                                    ]]></value>
+                                    </script_code>
+                                </object>
+                            </value>
+                        </get_related_objectdef_condition>
+                   </object>
+               </relation_filter>           
+               <on_delete_value>
+                    <object code="most.protocol_sale.stock:on_change" module="core" objectdef="vscript"/>
+               </on_delete_value>                    
+               <on_insert_value>
+                    <object code="most.protocol_sale.stock:on_change" module="core" objectdef="vscript"/>
+               </on_insert_value>                    
+               <on_update_value>
+                    <object code="most.protocol_sale.stock:on_change" module="core" objectdef="vscript">                       
+                        <script_code>
+                            <value><![CDATA[
+if (this.opg != null)
+	this.opg=null;
+this.recalculate_price();	
+                        ]]></value>
+                        </script_code>
+                    </object>
+                </on_update_value>
+             </stock>
+             
+            <recalculate_price>
+                <is_constant>true</is_constant>
+                <data_source>relation</data_source>
+                <related_objectdef>core.vscript</related_objectdef>
+                <is_hidden>true</is_hidden>
+                <default_value>
+                    <object code="most.protocol_sale.recalculate_price" objectdef="vscript" module="core" >
+                        <script_code>
+                            <value><![CDATA[
+this.price=0;
+if (this.stock == null || this.article == null)
+	return;
+this.price=this.stock.price_discount != null ? this.stock.price_discount : this.stock.price;
+if (this.opg != null) 
+{
+	var ok=false;
+	for (var a : this.opg.entries) 
+	{
+		if (a.article == this.article) 
+		{
+			if (a.value == null || a.value < 0)
+				continue;
+			if (a instanceof db.most.opg_entry_percental) {
+				this.price=this.price * a.value / 100.0;
+				ok=true;
+				break;
+			} else {
+				this.price=a.value;
+				ok=true;
+				break;
+			}						
+		}
+	}
+	if (!ok) {
+		java.log.error("PROTOCOL_SALE : INCONSISTENT OPG "+opg.toString());
+	}
+}
+                                ]]></value>
+                        </script_code>
+                    </object>               
+                </default_value>
+            </recalculate_price>
+			 
+		</protocol_sale>
+
+		<protocol_date tbl="ptd" copy_from="core.template_normal_transaction" is_abstract="true">
+
+			  <code is_keep_settings="true">
+				<is_unique>true</is_unique>
+	 		  </code>
+
+     		  <total_in mode="delete"/>
+      		  <total_out mode="delete"/>
+      		  <stocks mode="delete"/>
+      		  <total_stock_offical mode="delete"/>
+      		  <total_sales_offical mode="delete"/>
+     		  
+     		  <stock_real>
+                 <category>most.protocol_date.real.stock</category>
+                 <sort_id>1000</sort_id>
+                 <is_inmaintbl>false</is_inmaintbl>
+                 <is_multiple>true</is_multiple>
+                 <data_source>relation</data_source>
+                 <related_objectdef>most.protocol</related_objectdef>
+                 <is_readonly>true</is_readonly>
+                 <name>
+                     <en-US>Real stock</en-US>
+                 </name>
+                 <name>
+                     <de-DE>Reale Belieferung</de-DE>
+                 </name>
+                 <name>
+                     <bg-BG>Реално зарежданe</bg-BG>
+                 </name>
+                 <is_dynamic>true</is_dynamic>
+                 <calculation>
+                     <object code="most.protocol_date.stock_real:calculation_relation_path" module="core" objectdef="calculation_relation_path">
+                         <property_code_path>
+                             <value>real_protocols</value>
+                         </property_code_path>
+                         <where_statement>
+                             <value>real_protocols.objectdef.code = 'protocol_stock'</value>
+                         </where_statement>
+                     </object>
+                 </calculation>
+             </stock_real>
+             
+             <stock_official>
+                 <category>most.protocol_date.official.stock</category>
+                 <sort_id>1001</sort_id>
+                 <is_inmaintbl>false</is_inmaintbl>
+                 <is_multiple>true</is_multiple>
+                 <data_source>relation</data_source>
+                 <related_objectdef>most.protocol</related_objectdef>
+                 <name>
+                     <en-US>Official stock</en-US>
+                 </name>
+                 <name>
+                     <de-DE>Offiziele Belieferung</de-DE>
+                 </name>
+                 <name>
+                     <bg-BG>Официално зарежданe</bg-BG>
+                 </name>
+                 <is_dynamic>true</is_dynamic>
+                 <calculation>
+                     <object code="most.protocol_date.stock_official:calculation_relation_path" module="core" objectdef="calculation_relation_path">
+                         <property_code_path>
+                             <value>official_protocols</value>
+                         </property_code_path>
+                         <where_statement>
+                             <value>official_protocols.objectdef.code = 'protocol_stock'</value>
+                         </where_statement>
+                     </object>
+                 </calculation>
+             </stock_official>
+              
+     		 <total_stock_real>
+                 <category>most.protocol_date.real.stock</category>
+                 <sort_id>1002</sort_id>
+                 <is_inmaintbl>false</is_inmaintbl>
+                 <is_multiple>false</is_multiple>
+                 <data_source>input</data_source>
+                 <data_type>double</data_type>
+                 <is_readonly>true</is_readonly>
+                 <name>
+                     <en-US>Real stock total</en-US>
+                 </name>
+                 <name>
+                     <de-DE>Reale Belieferung Total</de-DE>
+                 </name>
+                 <name>
+                     <bg-BG>Реално зареждане общо</bg-BG>
+                 </name>
+                 <is_dynamic>true</is_dynamic>
+                 <calculation>
+                     <object code="most.protocol_date.total_stock_real:sum_calculation_relation_path" module="core" objectdef="calculation_relation_path_sum">
+                         <property_code_path>
+                             <value>real_protocols.total</value>
+                         </property_code_path>
+                         <where_statement>
+                             <value>real_protocols.objectdef.code = 'protocol_stock'</value>
+                         </where_statement>
+                     </object>
+                 </calculation>
+             </total_stock_real>
+             
+             <total_stock_official>
+                 <category>most.protocol_date.official.stock</category>
+                 <sort_id>1003</sort_id>
+                 <is_inmaintbl>false</is_inmaintbl>
+                 <is_multiple>false</is_multiple>
+                 <data_source>input</data_source>
+                 <data_type>double</data_type>
+                 <is_readonly>true</is_readonly>
+                 <name>
+                     <en-US>Official stock total</en-US>
+                 </name>
+                 <name>
+                     <de-DE>Offizielle Belieferung Total</de-DE>
+                 </name>
+                 <name>
+                     <bg-BG>Официално зареждане общо</bg-BG>
+                 </name>
+                 <is_dynamic>true</is_dynamic>
+                 <calculation>
+                     <object code="most.protocol_date.total_stock_official:sum_calculation_relation_path" module="core" objectdef="calculation_relation_path_sum">
+                         <property_code_path>
+                             <value>official_protocols.total</value>
+                         </property_code_path>
+                         <where_statement>
+                             <value>official_protocols.objectdef.code = 'protocol_stock'</value>
+                         </where_statement>
+                     </object>
+                 </calculation>
+             </total_stock_official>           
+            
+             <sales_real>
+                 <category>most.protocol_date.real.sale</category>
+                 <sort_id>1004</sort_id>
+                 <is_inmaintbl>false</is_inmaintbl>
+                 <is_multiple>true</is_multiple>
+                 <data_source>relation</data_source>
+                 <related_objectdef>most.protocol</related_objectdef>
+                 <is_readonly>true</is_readonly>
+                 <name>
+                     <en-US>Real sales</en-US>
+                 </name>
+                 <name>
+                     <de-DE>Reale Verkäufe</de-DE>
+                 </name>
+                 <name>
+                     <bg-BG>Реални продажби</bg-BG>
+                 </name>
+                 <is_dynamic>true</is_dynamic>
+                 <calculation>
+                     <object code="most.protocol_date.sales_real:calculation_relation_path" module="core" objectdef="calculation_relation_path">
+                         <property_code_path>
+                             <value>real_protocols</value>
+                         </property_code_path>
+                         <where_statement>
+                             <value>real_protocols.objectdef.code = 'protocol_sale'</value>
+                         </where_statement>
+                     </object>
+                 </calculation>
+             </sales_real>
+             
+             <sales_official>
+                 <category>most.protocol_date.official.sale</category>
+                 <sort_id>1005</sort_id>
+                 <is_inmaintbl>false</is_inmaintbl>
+                 <is_multiple>true</is_multiple>
+                 <data_source>relation</data_source>
+                 <related_objectdef>most.protocol</related_objectdef>
+                 <is_readonly>true</is_readonly>
+                 <name>
+                     <en-US>Official sales</en-US>
+                 </name>
+                 <name>
+                     <de-DE>Offiziele Verkäufe</de-DE>
+                 </name>
+                 <name>
+                     <bg-BG>Официални продажби</bg-BG>
+                 </name>
+                 <is_dynamic>true</is_dynamic>
+                 <calculation>
+                     <object code="most.protocol_date.sales_official:calculation_relation_path" module="core" objectdef="calculation_relation_path">
+                         <property_code_path>
+                             <value>official_protocols</value>
+                         </property_code_path>
+                         <where_statement>
+                             <value>official_protocols.objectdef.code = 'protocol_sale'</value>
+                         </where_statement>
+                     </object>
+                 </calculation>
+             </sales_official> 
+             
+             <total_sales_real>
+                 <category>most.protocol_date.real.sale</category>
+                 <sort_id>1006</sort_id>
+                 <is_inmaintbl>false</is_inmaintbl>
+                 <is_multiple>false</is_multiple>
+                 <data_source>input</data_source>
+                 <data_type>double</data_type>
+                 <is_readonly>true</is_readonly>
+                 <name>
+                     <en-US>Sales real total</en-US>
+                 </name>
+                 <name>
+                     <de-DE>Reale Verkäufe Total</de-DE>
+                 </name>
+                 <name>
+                     <bg-BG>Реални продажби общо</bg-BG>
+                 </name>
+                 <is_dynamic>true</is_dynamic>
+                 <calculation>
+                     <object code="most.protocol_date.total_sales_real:sum_calculation_relation_path" module="core" objectdef="calculation_relation_path_sum">
+                         <property_code_path>
+                             <value>real_protocols.total</value>
+                         </property_code_path>
+                         <where_statement>
+                             <value>real_protocols.objectdef.code = 'protocol_sale'</value>
+                         </where_statement>
+                     </object>
+                 </calculation>
+             </total_sales_real>
+             
+             <total_sales_official>
+                 <category>most.protocol_date.official.sale</category>
+                 <sort_id>1007</sort_id>
+                 <is_inmaintbl>false</is_inmaintbl>
+                 <is_multiple>false</is_multiple>
+                 <data_source>input</data_source>
+                 <data_type>double</data_type>
+                 <is_readonly>true</is_readonly>
+                 <name>
+                     <en-US>Official sales total</en-US>
+                 </name>
+                 <name>
+                     <de-DE>Offizielle Verkäufe Total</de-DE>
+                 </name>
+                 <name>
+                     <bg-BG>Официални продажби общо</bg-BG>
+                 </name>
+                 <is_dynamic>true</is_dynamic>
+                 <calculation>
+                     <object code="most.protocol_date.sales_official:sum_calculation_relation_path" module="core" objectdef="calculation_relation_path_sum">
+                         <property_code_path>
+                             <value>official_protocols.total</value>
+                         </property_code_path>
+                         <where_statement>
+                             <value>official_protocols.objectdef.code = 'protocol_sale'</value>
+                         </where_statement>
+                     </object>
+                 </calculation>
+             </total_sales_official>
+             
+     		 <official_protocols>
+                <category>main.basic</category>
+                <data_source>relation</data_source>
+                <relation_parent>most.protocol.official_date</relation_parent>
+                <name>
+                    <en-US>Official protocols</en-US>
+                </name>
+                <name>
+                    <de-DE>Offiziele Protokolle</de-DE>
+                </name>
+                <name>
+                    <bg-BG>Официални протоколи</bg-BG>
+                </name>
+				<display_type>property.relation.multiple.add.new</display_type>
+				<relation_filter>core_property_default_relation_filter_simple_bidirectional_relation</relation_filter>
+				<is_hidden>true</is_hidden>
+				<sort_id>500</sort_id>
+             </official_protocols>
+             
+             <real_protocols>
+                <category>main.basic</category>
+                <data_source>relation</data_source>
+                <relation_parent>most.protocol.real_date</relation_parent>
+                <name>
+                    <en-US>Real protocols</en-US>
+                </name>
+                <name>
+                    <de-DE>Reale Protokolle</de-DE>
+                </name>
+                <name>
+                    <bg-BG>Реални протоколи</bg-BG>
+                </name>
+				<display_type>property.relation.multiple.add.new</display_type>
+				<relation_filter>core_property_default_relation_filter_simple_bidirectional_relation</relation_filter>
+				<is_hidden>true</is_hidden>
+				<sort_id>501</sort_id>
+             </real_protocols>
+
+     		 <date>
+                <category>main.basic</category>
+                <sort_id>150</sort_id>
+                <is_inmaintbl>true</is_inmaintbl>
+                <data_source>input</data_source>
+                <data_type>datetime</data_type>
+                <name>
+                    <en-US>Date</en-US>
+                </name>
+                <name>
+                    <de-DE>Datum</de-DE>
+                </name>
+                <name>
+                    <bg-BG>Дата</bg-BG>
+                </name>
+                <input_format>default_input_format_date</input_format>
+                <output_format>default_output_format_date</output_format>
+                <is_obligatory>true</is_obligatory>
+                <default_value_calculation>
+                    <object code="most.proctol.date:default_value_calculation" module="core" objectdef="vscript">
+                        <params>
+                            <value>
+                                <object code="id" module="core" objectdef="script_param" proj="all"></object>
+                            </value>
+                        </params>
+                        <script_code>
+                            <value><![CDATA[return java.date.now(); /* TODO!!! */ ]]></value>
+                        </script_code>
+                    </object>
+                </default_value_calculation>
+                <index_code>d</index_code>
+             </date>
+             
+             <is_active>
+             	<category>main.settings</category>
+                <sort_id>151</sort_id>
+                <is_inmaintbl>true</is_inmaintbl>
+                <is_obligatory>true</is_obligatory>
+                <data_source>option</data_source>
+                <option_set>boolean</option_set>
+                <name>
+                    <en-US>Active?</en-US>
+                </name>
+                <name>
+                    <de-DE>Aktiv?</de-DE>
+                </name>
+                <name>
+                    <bg-BG>Активна?</bg-BG>
+                </name>	
+                <default_value>false</default_value>
+                <on_update_value>
+                    <object code="most.protocol_date.is_active:on_change" module="core" objectdef="vscript">                       
+                        <script_code>
+                            <value><![CDATA[
+if (this.is_active) 
+{
+	for (var e : db.most.protocol_date.selectWhere("is_active = 1 AND id <> "+this.id)) 
+		e.is_active=false;
+}
+                        ]]></value>
+                        </script_code>
+                    </object>
+                </on_update_value>
+             </is_active>		
+
+             <category>
+                 <category>main.basic</category>
+                 <sort_id>6000</sort_id>
+                 <is_inmaintbl>true</is_inmaintbl>
+                 <data_source>relation</data_source>
+                 <related_objectdef>most.category_date</related_objectdef>
+                 <name>
+                     <en-US>Category</en-US>
+                 </name>
+                 <name>
+                     <de-DE>Kategorie</de-DE>
+                 </name>
+                 <name>
+                     <bg-BG>Категория</bg-BG>
+                 </name>
+                 <index_code>cat</index_code>
+                 <is_obligatory>true</is_obligatory>                     
+             </category>
+
+		</protocol_date>
+
+		<category_date copy_from="core.template_transaction_access" db="VISIONR" is_id_check="true" tbl="catdrw">
+
+			<code is_keep_settings="true">
+				<is_unique>true</is_unique>
+			</code>
+
+            <!-- DELETE -->
+            <is_archived mode="delete"/>
+            
+            <!-- main.basic -->
+            <name is_keep_settings="true">
+                <value_table>$(DB_PREFIX)_m_var_catdrnam</value_table>
+            </name>
+            <description is_keep_settings="true">
+                <value_table>$(DB_PREFIX)_m_txt_catdrdsc</value_table>
+            </description>
+            
+            <!-- main.settings -->
+            <parent>
+                <category>main.settings</category>
+                <sort_id>1001</sort_id>
+                <is_inmaintbl>true</is_inmaintbl>
+                <data_source>relation</data_source>
+                <related_objectdef>most.category_date</related_objectdef>
+                <is_selfreference>true</is_selfreference>
+                <name>
+                    <en-US>Parent</en-US>
+                </name>
+                <name>
+                    <de-DE>Gehört zu</de-DE>
+                </name>
+                <name>
+                    <bg-BG>Се съдържа в</bg-BG>
+                </name>
+                <index_code>par</index_code>
+                <is_hidden>false</is_hidden>
+            </parent>
+            <children>
+                <category>main.settings</category>
+                <sort_id>1002</sort_id>
+                <data_source>relation</data_source>
+                <relation_parent>most.category_date.parent</relation_parent>
+                <name>
+                    <en-US>Children</en-US>
+                </name>
+                <name>
+                    <de-DE>Enthält</de-DE>
+                </name>
+                <name>
+                    <bg-BG>Съдържа</bg-BG>
+                </name>
+                <is_hidden>false</is_hidden>
+            </children>
+            
+            <protocol_dates>
+                <category>main.settings</category>
+                <sort_id>1003</sort_id>
+                <data_source>relation</data_source>
+                <relation_parent>most.protocol_date.category</relation_parent>
+                <name>
+                    <en-US>Dates</en-US>
+                </name>
+                <name>
+                    <de-DE>Daten</de-DE>
+                </name>
+                <name>
+                    <bg-BG>Дати</bg-BG>
+                </name>
+            </protocol_dates>
+
+        </category_date>
+
+        <article copy_from="core.template_normal_transaction" is_abstract="false" tbl="art">
+
+			<code is_keep_settings="true">
+				<is_unique>true</is_unique>
+			</code>
+
+			<vendor>
+                <category>main.settings</category>
+                <sort_id>450</sort_id>
+                <data_source>relation</data_source>
+                <related_objectdef>contacts.vendor</related_objectdef>
+                <name>
+                    <en-US>Vendor</en-US>
+                </name>
+                <name>
+                    <de-DE>Lieferant</de-DE>
+                </name>
+                <name>
+                    <bg-BG>Доставчик</bg-BG>
+                </name>
+                <is_hidden>false</is_hidden>
+                <is_obligatory>true</is_obligatory>
+                <is_inmaintbl>true</is_inmaintbl>
+                <display_type mode="delete"/>
+            </vendor>        
+
+        	<product_line>
+				<data_source>input</data_source>
+				<data_type>varchar</data_type>
+				<is_inmaintbl>true</is_inmaintbl>
+				<is_obligatory>true</is_obligatory>
+				<index_code>pl</index_code>
+				<sort_id>500</sort_id>
+	  			<name>
+	            	<en-US>Product line</en-US>
+	            	<de-DE>Produktlinie</de-DE>
+	            	<bg-BG>Продуктова линия</bg-BG>
+	            </name>
+			</product_line>
+			        
+        	<protocols>	
+        		<is_hidden>true</is_hidden>
+				<category>main.basic</category>
+                <sort_id>999</sort_id>
+                <data_source>relation</data_source>
+			 	<relation_parent>most.protocol.article</relation_parent>
+  				<name>
+                    <en-US>Protocols</en-US>
+                </name>
+                <name>
+                    <de-DE>Protokole</de-DE>
+                </name>
+                <name>
+                    <bg-BG>Протоколи</bg-BG>
+                </name>                
+        	</protocols>
+
+        	<opg_entries>	
+        		<is_hidden>true</is_hidden>
+				<category>most.article.related.additional</category>
+                <sort_id>1000</sort_id>
+                <data_source>relation</data_source>
+			 	<relation_parent>most.opg_entry.article</relation_parent>
+  				<name>
+                    <en-US>OPG entries</en-US>
+                </name>
+                <name>
+                    <de-DE>OPG-Einträge</de-DE>
+                </name>
+                <name>
+                    <bg-BG>OPG записи</bg-BG>
+                </name>                
+        	</opg_entries>
+
+        	<stocks>	
+				<category>most.article.related.protocols</category>
+                <sort_id>1001</sort_id>
+                <data_source>relation</data_source>
+			 	<related_objectdef>most.protocol</related_objectdef>
+			 	<is_multiple>true</is_multiple>
+  				<name>
+                    <en-US>Stocks</en-US>
+                </name>
+                <name>
+                    <de-DE>Belieferungen</de-DE>
+                </name>
+                <name>
+                    <bg-BG>Зареждания</bg-BG>
+                </name>                
+                 <is_dynamic>true</is_dynamic>
+                 <calculation>
+                     <object code="most.article.stocks:calculation_relation_path" module="core" objectdef="calculation_relation_path">
+                         <property_code_path>
+                             <value>protocols</value>
+                         </property_code_path>
+                         <where_statement>
+                             <value>protocols.objectdef.code = 'protocol_stock'</value>
+                         </where_statement>
+                     </object>
+                 </calculation>
+        	</stocks>
+
+        	<sales>	
+				<category>most.article.related.protocols</category>
+                <sort_id>1001</sort_id>
+                <data_source>relation</data_source>
+			 	<related_objectdef>most.protocol</related_objectdef>
+			 	<is_multiple>true</is_multiple>
+  				<name>
+                    <en-US>Sales</en-US>
+                </name>
+                <name>
+                    <de-DE>Verkäufe</de-DE>
+                </name>
+                <name>
+                    <bg-BG>Продажби</bg-BG>
+                </name>                
+                <calculation>
+                     <object code="most.article.sales:calculation_relation_path" module="core" objectdef="calculation_relation_path">
+                         <property_code_path>
+                             <value>protocols</value>
+                         </property_code_path>
+                         <where_statement>
+                             <value>protocols.objectdef.code = 'protocol_sale'</value>
+                         </where_statement>
+                     </object>
+                 </calculation>
+        	</sales>
+        	
+        	<opgs>
+				<category>most.article.related.additional</category>
+                <sort_id>1002</sort_id>
+                <data_source>relation</data_source>
+			 	<related_objectdef>most.opg</related_objectdef>
+			 	<is_multiple>true</is_multiple>
+  				<name>
+                    <en-US>OPGs</en-US>
+                </name>
+                <name>
+                    <de-DE>OPG</de-DE>
+                </name>
+                <name>
+                    <bg-BG>OPG-та</bg-BG>
+                </name>                
+                <calculation>
+                     <object code="most.article.opgs:calculation_relation_path" module="core" objectdef="calculation_relation_path">
+                         <property_code_path>
+                             <value>opg_entries.opg</value>
+                         </property_code_path>
+                     </object>
+                 </calculation>
+        	</opgs>
+        </article>
+        
+		<invoice copy_from="core.template_normal_transaction" is_abstract="false" tbl="inv">
+
+			<code is_keep_settings="true">
+				<is_unique>true</is_unique>
+			</code>
+			
+			<contract>
+				<category>main.basic</category>
+                <sort_id>110</sort_id>
+                <data_source>input</data_source>
+                <data_type>varchar</data_type>
+                <is_inmaintbl>true</is_inmaintbl>
+  				<name>
+                    <en-US>Contract</en-US>
+                </name>
+                <name>
+                    <de-DE>Vertrag</de-DE>
+                </name>
+                <name>
+                    <bg-BG>Договор</bg-BG>
+                </name>                
+			</contract>
+			
+			<company>
+				<data_source>relation</data_source>
+   				<category>main.basic</category>
+                <sort_id>120</sort_id>
+                <data_source>relation</data_source>
+                <related_objectdef>contacts.vendor</related_objectdef>
+                <name>
+                    <en-US>Company</en-US>
+                </name>
+                <name>
+                    <de-DE>Firma</de-DE>
+                </name>
+                <name>
+                    <bg-BG>Компания</bg-BG>
+                </name>
+                <is_hidden>false</is_hidden>
+                <is_obligatory>true</is_obligatory>
+                <is_inmaintbl>true</is_inmaintbl>
+                <display_type mode="delete"/>
+           </company>
+			
+           <invoice_date>
+               <category>main.basic</category>
+               <sort_id>130</sort_id>
+               <is_inmaintbl>true</is_inmaintbl>
+               <data_type>datetime</data_type>
+               <name>
+                   <en-US>Date invoice</en-US>
+               </name>
+               <name>
+                   <de-DE>Rechnungsdatum</de-DE>
+               </name>
+               <name>
+                   <bg-BG>Дата Фактура</bg-BG>
+               </name>
+               <is_obligatory>true</is_obligatory>
+               <input_format>default_input_format_date</input_format>
+               <output_format>default_output_format_date</output_format>
+			</invoice_date>
+			
+			<purchase_order>
+				<category>main.basic</category>
+                <sort_id>140</sort_id>
+                <data_source>input</data_source>
+                <data_type>varchar</data_type>
+                <is_inmaintbl>true</is_inmaintbl>
+  				<name>
+                    <en-US>Purchase order</en-US>
+                </name>
+                <name>
+                    <de-DE>Auftrag</de-DE>
+                </name>
+                <name>
+                    <bg-BG>Заявка</bg-BG>
+                </name>                
+			</purchase_order>
+			
+			<stocks>
+                <category>main.basic</category>
+                <sort_id>160</sort_id>
+                <data_source>relation</data_source>
+                <relation_parent>most.protocol_stock.invoice</relation_parent>
+                <name>
+                    <en-US>Stocks</en-US>
+                </name>
+                <name>
+                    <de-DE>Belieferungen</de-DE>
+                </name>
+                <name>
+                    <bg-BG>Зареждания</bg-BG>
+                </name>
+			</stocks>
+			
+        </invoice>
+        
+	</most>
+</objectdefs>
+</import>

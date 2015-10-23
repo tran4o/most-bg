@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--+
+    | Data import file for the module most.
+    |
+    | Date:    $LastChangedDate: 2012-08-20 16:47:17 +0200 (Mo, 20 Aug 2012) $ 
+    | Version: $LastChangedRevision: 13495 $
+    +-->
+<import revision="$LastChangedRevision: 17639 $"
+        xmlns:vsl="http://www.plan-vision.com/VSL/1.0"  
+        xmlns:xi="http://www.w3.org/2001/XInclude">
+    <xi:include href="includes/most-application_masks-data-simple.xml" xpointer="element(/1)"/>
+    
+<!-- SCHEMA NAMES AT THE END -->
+    <xi:include href="includes/most-schema_names-data-simple.xml" xpointer="element(/1)"/>
+
+    <vsl:script timeout="360" type="text/vsc">
+        <xi:include href="includes/most-access-schema.vsc" parse="text"></xi:include>
+    </vsl:script>
+       
+    <xi:include href="most-custom-data-simple.xml" xpointer="element(/1)">
+        <xi:fallback><message type="info">No custom file: most-custom-data-simple.xml.</message></xi:fallback> 
+    </xi:include>      
+
+    <!-- LICENSE GROUPS -->
+    <vsl:script timeout="360" type="text/vsc">
+        <xi:include href="includes/most-defaults.vsc" parse="text"></xi:include>
+    </vsl:script>
+
+</import>

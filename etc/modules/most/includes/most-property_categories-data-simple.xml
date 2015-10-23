@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<import revision="$LastChangedRevision: 12368 $">
+    <!-- CATEGORIES -->
+    <objects>
+        <object code="most.protocol_date.official" module="core" objectdef="category">
+            <is_hidden>
+                <value>false</value>
+            </is_hidden>
+            <sort_id>
+                <value>105</value>
+            </sort_id>
+            <name>
+                <value>
+                    <en-US>Official</en-US>
+                </value>
+                <value>
+                    <de-DE>Offiziel</de-DE>
+                </value>
+                <value>
+                    <bg-BG>Официално</bg-BG>
+                </value>
+            </name>
+            <child_categories mode="update">
+			  <value>
+			        <object code="most.protocol_date.official.stock" module="core" objectdef="category">
+			            <is_hidden>
+			                <value>false</value>
+			            </is_hidden>
+			            <sort_id>
+			                <value>100</value>
+			            </sort_id>
+			            <name>
+			                <value>
+			                    <en-US>Stock</en-US>
+			                </value>
+			                <value>
+			                    <de-DE>Belieferung</de-DE>
+			                </value>
+			                <value>
+			                    <bg-BG>Зареждане</bg-BG>
+			                </value>
+			            </name>			                  	
+			        </object>
+             	</value>            
+                <value>
+			        <object code="most.protocol_date.official.sale" module="core" objectdef="category">
+			            <is_hidden>
+			                <value>false</value>
+			            </is_hidden>
+			            <sort_id>
+			                <value>100</value>
+			            </sort_id>
+			            <name>
+			                <value>
+			                    <en-US>Sale</en-US>
+			                </value>
+			                <value>
+			                    <de-DE>Verkauf</de-DE>
+			                </value>
+			                <value>
+			                    <bg-BG>Продажба</bg-BG>
+			                </value>
+			            </name>
+			        </object>
+             	</value>
+			</child_categories>             	
+        </object>
+
+        <object code="most.protocol_date.real" module="core" objectdef="category">
+            <is_hidden>
+                <value>false</value>
+            </is_hidden>
+            <sort_id>
+                <value>110</value>
+            </sort_id>
+             <name>
+                <value>
+                    <en-US>Real</en-US>
+                </value>
+                <value>
+                    <de-DE>Real</de-DE>
+                </value>
+                <value>
+                    <bg-BG>Реално</bg-BG>
+                </value>
+            </name>
+ 			<child_categories mode="update">
+			  <value>
+			        <object code="most.protocol_date.real.stock" module="core" objectdef="category">
+			            <is_hidden>
+			                <value>false</value>
+			            </is_hidden>
+			            <sort_id>
+			                <value>100</value>
+			            </sort_id>
+			            <name>
+			                <value>
+			                    <en-US>Stock</en-US>
+			                </value>
+			                <value>
+			                    <de-DE>Belieferung</de-DE>
+			                </value>
+			                <value>
+			                    <bg-BG>Зареждане</bg-BG>
+			                </value>
+			            </name>			                     	
+			        </object>
+             	</value>            
+                <value>
+			        <object code="most.protocol_date.real.sale" module="core" objectdef="category">
+			            <is_hidden>
+			                <value>false</value>
+			            </is_hidden>
+			            <sort_id>
+			                <value>100</value>
+			            </sort_id>
+			            <name>
+			                <value>
+			                    <en-US>Sale</en-US>
+			                </value>
+			                <value>
+			                    <de-DE>Verkauf</de-DE>
+			                </value>
+			                <value>
+			                    <bg-BG>Продажба</bg-BG>
+			                </value>
+			            </name>		            	
+			        </object>
+             	</value>
+			</child_categories>
+	    </object>
+	    
+	  
+       <object code="most.article.related" module="core" objectdef="category">
+            <is_hidden>
+                <value>false</value>
+            </is_hidden>
+            <sort_id>
+                <value>105</value>
+            </sort_id>
+            <name>
+                <value>
+                    <en-US>Related</en-US>
+                </value>
+                <value>
+                    <de-DE>Verwand</de-DE>
+                </value>
+                <value>
+                    <bg-BG>Отнасящи се</bg-BG>
+                </value>
+            </name>
+ 			<child_categories mode="update">
+			  <value>
+			        <object code="most.article.related.protocols" module="core" objectdef="category">
+			            <is_hidden>
+			                <value>false</value>
+			            </is_hidden>
+			            <sort_id>
+			                <value>100</value>
+			            </sort_id>
+			            <name>
+			                <value>
+			                    <en-US>Protocols</en-US>
+			                </value>
+			                <value>
+			                    <de-DE>Protokole</de-DE>
+			                </value>
+			                <value>
+			                    <bg-BG>Протоколи</bg-BG>
+			                </value>
+			            </name>			                  	
+			        </object>
+             	</value>            
+                <value>
+			        <object code="most.article.related.additional" module="core" objectdef="category">
+			            <is_hidden>
+			                <value>false</value>
+			            </is_hidden>
+			            <sort_id>
+			                <value>101</value>
+			            </sort_id>
+			            <name>
+			                <value>
+			                    <en-US>Additional</en-US>
+			                </value>
+			                <value>
+			                    <de-DE>Zusätzlich</de-DE>
+			                </value>
+			                <value>
+			                    <bg-BG>Допълнителни</bg-BG>
+			                </value>
+			            </name>
+			        </object>
+             	</value>
+			</child_categories>                  
+        </object>
+	    
+    </objects>
+</import>
