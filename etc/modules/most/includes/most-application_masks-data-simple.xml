@@ -78,6 +78,9 @@ return res;
                                 </object>
                             </value>
                         </get_name>
+                        <hierarchy_code>
+                        	<value>contacts.contact:contacts.contact_type.children*.contacts</value>
+                        </hierarchy_code>
                     </object>
                 </value>
 

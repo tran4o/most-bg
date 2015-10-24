@@ -186,15 +186,13 @@
 		</opg_entry_percental>
 
 		<protocol tbl="prt" copy_from="core.template_normal_transaction" is_abstract="true">
-
-			<code is_keep_settings="true">
-				<is_unique>true</is_unique>
-			</code>
-			 
 			 <date mode="delete"/>
 			 <bill_date mode="delete"/>
 			 <report_date mode="delete"/>
-			 
+			 <price_discount mode="delete"/>
+	 		 <code is_keep_settings="true">
+				<is_unique>true</is_unique>
+			 </code>
 			 <quantity>
 				<category>main.basic</category>
 				<display_type>property:most.protocol.quantity</display_type>
@@ -217,8 +215,8 @@
                     <object code="most.protocol:recalc_total" module="core" objectdef="vscript">                       
                         <script_code>
                             <value><![CDATA[
-if (this.quantity != null && (this.price != null || this.price_discount != null))
-	this.total = this.quantity * (this.price_discount != null ? this.price_discount : this.price);
+if (this.quantity != null && (this.price != null || this["price_discount"] != null))
+	this.total = this.quantity * (this["price_discount"] != null ? this.price_discount : this.price);
 else
 	this.total=0;
                         ]]></value>
@@ -230,7 +228,7 @@ else
 			 <article>
 				<category>main.basic</category>
 				<display_type>property:most.protocol_sale.article</display_type>
-                <sort_id>101</sort_id>
+                <sort_id>100</sort_id>
                 <data_source>relation</data_source>
 			 	<related_objectdef>most.article</related_objectdef>
 			 	<is_obligatory>true</is_obligatory>			 	
@@ -249,7 +247,7 @@ else
 
 			 <price col="prc">
 				<category>main.basic</category>
-                <sort_id>100</sort_id>
+                <sort_id>101</sort_id>
 			 	<data_source>input</data_source>
 			 	<data_type>double</data_type>
 				<min_value_double>0</min_value_double>			 	
@@ -271,31 +269,7 @@ else
                     <object code="most.protocol:recalc_total" module="core" objectdef="vscript"/>                       
                 </on_insert_value>                
 			 </price>
-			 
-			 <price_discount col="prd">
-				<category>main.basic</category>
-                <sort_id>100</sort_id>
-			 	<data_source>input</data_source>
-			 	<data_type>double</data_type>
-				<min_value_double>0</min_value_double>			 	
-                <is_inmaintbl>true</is_inmaintbl>
-				<name>
-                    <en-US>Discount price</en-US>
-                </name>
-                <name>
-                    <de-DE>Promopreis</de-DE>
-                </name>
-                <name>
-                    <bg-BG>Цена с отстъпка</bg-BG>
-                </name>      
-                <on_update_value>
-                    <object code="most.protocol:recalc_total" module="core" objectdef="vscript"/>                                          
-                </on_update_value>
-  				<on_insert_value>
-                    <object code="most.protocol:recalc_total" module="core" objectdef="vscript"/>                       
-                </on_insert_value>                
-			 </price_discount>					 
-			
+			 			
 			 <total>
 				<category>main.basic</category>
                 <sort_id>102</sort_id>
@@ -399,6 +373,31 @@ return null;
         </protocol>
 		
 		<protocol_stock parent_objectdef="most.protocol">	
+
+			<price_discount col="prd">
+				<category>main.basic</category>
+                <sort_id>100</sort_id>
+			 	<data_source>input</data_source>
+			 	<data_type>double</data_type>
+				<min_value_double>0</min_value_double>			 	
+                <is_inmaintbl>true</is_inmaintbl>
+				<name>
+                    <en-US>Discount price</en-US>
+                </name>
+                <name>
+                    <de-DE>Promopreis</de-DE>
+                </name>
+                <name>
+                    <bg-BG>Цена с отстъпка</bg-BG>
+                </name>      
+                <on_update_value>
+                    <object code="most.protocol:recalc_total" module="core" objectdef="vscript"/>                                          
+                </on_update_value>
+  				<on_insert_value>
+                    <object code="most.protocol:recalc_total" module="core" objectdef="vscript"/>                       
+                </on_insert_value>                
+			 </price_discount>					 
+			
 			<opg is_keep_settings="true">
  				<relation_filter>
                      <object code="most.protocol_stock.opg" module="core" objectdef="relation_filter">
@@ -735,6 +734,7 @@ if (this.opg != null)
 				<is_unique>true</is_unique>
 	 		  </code>
 
+			  <protocols mode="delete"></protocols>
      		  <total_in mode="delete"/>
       		  <total_out mode="delete"/>
       		  <stocks mode="delete"/>
