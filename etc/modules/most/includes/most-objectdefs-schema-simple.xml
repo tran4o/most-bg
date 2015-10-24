@@ -90,13 +90,32 @@
                     <en-US>OPG</en-US>
                 </name>
                 <index_code>og</index_code>
-			</opg>
+			</opg>			
 		</opg_entry>
 		
 		<opg tbl="opg" copy_from="core.template_normal_transaction">
 			<code is_keep_settings="true">
 				<is_unique>true</is_unique>
 			</code>
+			
+			<discount_mode>
+				<category>main.basic</category>
+				<sort_id>999</sort_id>
+				<is_inmaintbl>true</is_inmaintbl>
+				<data_source>option</data_source>
+				<option_set>discount_mode</option_set>
+				<is_obligatory>true</is_obligatory>				
+                <name>
+                    <en-US>Discount mode</en-US>
+                </name>
+                <name>
+                    <de-DE>Rapattmodus</de-DE>
+                </name>
+                <name>
+                    <en-US>Вид отстъпка</en-US>
+                </name>
+			</discount_mode>
+			
 			
 			<entries>
 				<category>main.basic</category>
@@ -396,11 +415,11 @@ return null;
                                     </params>
                                     <script_code>
                                         <value><![CDATA[
-if (object.stock == null || object.article == null || object.official_date == null)
+if (object.article == null || object.official_date == null)
 	return "0=1";
 var rest = object.quantity;
 var params = new M();
-var sel = db.most.opg.SELECT("valid_from <= :OFCD AND expires_on >= :OFCD AND entries.article.id = :PRID");
+var sel = db.most.opg.SELECT("discount_mode.code = 'U' AND valid_from <= :OFCD AND expires_on >= :OFCD AND entries.article.id = :PRID");
 sel["OFCD"]=object.official_date.date;
 sel["PRID"]=object.article.id;
 var arr=[];
@@ -495,14 +514,14 @@ if (object.stock == null || object.article == null || object.official_date == nu
 	return "0=1";
 var rest = object.quantity;
 var params = new M();
-var sel = db.most.opg.SELECT("valid_from <= :OFCD AND expires_on >= :OFCD AND entries.article.id = :PRID");
+var sel = db.most.opg.SELECT("discount_mode.code = 'M' AND valid_from <= :OFCD AND expires_on >= :OFCD AND entries.article.id = :PRID");
 sel["OFCD"]=object.official_date.date;
 sel["PRID"]=object.article.id;
 var arr=[];
 var ok=false;
 for (var e : sel.VALUE) 
 {
-	if (e == this.opg)
+	if (e == object.opg)
 		continue;
 	for (var a : e.entries) 
 	{
@@ -611,7 +630,7 @@ sel["PRID"]=object.article.id;
 var arr=[];
 for (var e : sel.VALUE) 
 {
-	if (e == this.stock)
+	if (e == object.stock)
 		continue;
 	if (e.price == null || e.price <= 0)
 		continue;	

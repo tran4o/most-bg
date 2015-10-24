@@ -28,18 +28,18 @@
                         <sort_id><value>5000</value></sort_id>
                         <name>
                             <value>
-                                <en-US>Contacts</en-US>
+                                <en-US>Companies</en-US>
                             </value>
                             <value>
-                                <de-DE>Kontakte</de-DE>
+                                <de-DE>Unternehmen</de-DE>
                             </value>
                             <value>
-                                <bg-BG>Контакти</bg-BG>
+                                <bg-BG>Компании</bg-BG>
                             </value>
                         </name>
                         <target_objectdef>
                             <value>
-                                <object code="contact" cond="module.code='most'" mode="update" module="core" objectdef="objectdef"></object>
+                                <object code="company" cond="module.code='contacts'" mode="update" module="core" objectdef="objectdef"></object>
                             </value>
                         </target_objectdef>
                         <mask_code>
@@ -70,7 +70,7 @@
                                         <value><![CDATA[
 var res = "<p style='line-height:16px;cursor:pointer;'>"+this.name+
           "<br/><b style='color:#D8D8D8;'>"+
-            db.contacts.contact.INSTANCES.approx_size_formated+" "+MSG("OVERVIEW_LABEL_OBJECTS")+
+            db.contacts.company.INSTANCES.approx_size_formated+" "+MSG("OVERVIEW_LABEL_OBJECTS")+
           "</b></p>";
 return res;
                                         ]]></value>
