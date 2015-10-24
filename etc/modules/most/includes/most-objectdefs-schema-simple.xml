@@ -199,7 +199,7 @@
                         <script_code>
                             <value><![CDATA[
 if (this.quantity != null && (this.price != null || this.price_discount != null))
-	this.total = this.quantity * (this.price_discount != null : this.price_discount ? this.price);
+	this.total = this.quantity * (this.price_discount != null ? this.price_discount : this.price);
 else
 	this.total=0;
                         ]]></value>
@@ -235,7 +235,7 @@ else
 			 	<data_type>double</data_type>
 				<min_value_double>0</min_value_double>			 	
                 <is_inmaintbl>true</is_inmaintbl>
-                <is_readonly>true</is_readonly>
+                <is_readonly>false</is_readonly>
 				<name>
                     <en-US>Price</en-US>
                 </name>
@@ -385,7 +385,7 @@ return null;
                      <object code="most.protocol_stock.opg" module="core" objectdef="relation_filter">
                         <get_related_objectdef_condition>
                             <value>
-                                <object code="relation_filter:most.protocoL_sale.opg:get_related_objectdef_condition" module="core" objectdef="vscript">
+                                <object code="relation_filter:most.protocoL_stock.opg:get_related_objectdef_condition" module="core" objectdef="vscript">
                                     <params>
                                         <value>
                                             <object code="object" module="core" objectdef="script_param"></object>
