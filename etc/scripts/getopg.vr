@@ -1,0 +1,180 @@
+vscript
+
+var INITIAL = true;
+var DEBUG = false;
+
+function prod_find_or_create(code, name, product_line, description, vendor) {
+    //trim code
+    if ( code.indexOf("#") > 0 ) {
+        code = code.substring(0, code.indexOf("#"));
+    }
+
+    var artobj = db.most.article.INSTANCES[code];
+
+    if (artobj != null) {
+        if (DEBUG) console.log("product " + code + " found.");
+    } else {
+        if (DEBUG) console.log("product " + code + " not found. new instance.");
+        artobj = new db.most.article();
+    }
+
+    artobj.code = code;
+    artobj.name["en-US"] = name;
+    artobj.product_line = product_line;
+    artobj.description["en-US"] = description;
+
+    // new invoices should have vendor
+    vendor = db.contacts.vendor.INSTANCES[vendor];
+
+    // in case we have an empty record => deduce its old invoice
+    if ( vendor == null ) {
+        vendor = db.contacts.vendor.INSTANCES["HPOLD"];
+    }
+
+    artobj.vendor = vendor;
+
+    artobj.commit();
+
+    return artobj;
+}
+
+// ------------------------------------------------------------
+
+function connect_source_db() {
+    var map = new M();
+
+    map["user"] = db.prefs["most.import.sql.user"];
+    map["password"] = db.prefs["most.import.sql.pass"];
+    var con = new java.db.Connection(
+        "mssql_2008",
+        "jdbc:sqlserver://" + db.prefs["most.import.sql.host"] + ";database=" + db.prefs["most.import.sql.dbname"],
+        map);
+
+    return con;
+}
+
+// main // -----------------------------------------------------------
+
+var con = connect_source_db();
+
+
+var lastmod;
+
+if ( INITIAL ) {
+    lastmod = "2014-01-01";
+} else {
+    var params = new M();
+    var sl = db.most.opg.VSQL_QUERY_MAX("SELECT import_time AS VAL", params);
+    var mt = null;
+
+    if (sl.next()) {
+        mt = sl.getDate("RES");
+        lastmod = java.date.format("yyyy-MM-dd", mt);
+    }
+}
+
+var res = con.select("select DealID as name, 'OPG' + RIGHT('0000000000' + DealID, 10) as code, DealDescription as description, SelloutStartDate as valid_from, SelloutStartDate as valid_to, DiscountMode as discount_mode, Version as version, LastModifiedDate as update_time from dbo.opg where LastModifiedDate > '" + lastmod + "' or DealID in ( 90507106, 91547996, 90508563, 91547996 ) ");
+
+var opglst = [];
+var cnt = 0; var cntnew = 0;
+
+while (res.next()) {
+    var oc = res.getString("code");
+    var opg = db.most.opg.INSTANCES[oc];
+    var p;
+
+    if (opg != null) {
+        if (DEBUG) console.log("update opg. code " + oc);
+    } else {
+        if (DEBUG) console.log("create opg. code " + oc + " / " + res.getString("discount_mode"));
+        opg = new db.most.opg();
+        opg.code = oc;
+        cntnew++;
+    }
+
+    if (res.getString("discount_mode") == "2") continue;
+
+    opg.code = res.getString("code");
+    opg.discount_mode = res.getString("discount_mode");
+    opg.description["en-US"] = res.getString("description");
+    opg.name["en-US"] = res.getString("name");
+    opg.valid_from = res.getDate("valid_from");
+    opg.valid_to = res.getDate("valid_to");
+    opg.update_time = res.getDate("update_time");
+
+    opg["version"] = res.getInt("version");
+
+    opglst.push(opg);
+    opg.commit();
+
+    if ( cnt++ % 128 == 0 ) {
+        console.log("processed " + cnt + " OPG(s) and counting...");
+        db.commit();
+        java.util.commitDBConnection();
+    }
+}
+
+console.log("processed a total of " + cnt + " OPG(s), and " + cntnew + " of them are new. good work !");
+console.log("---------------------");
+console.log("fetching new OPG details...");
+
+cnt = 0; cntnew = 0;
+
+for (var nopg: opglst) {
+    var res = con.select([
+        "select DealID as opg_code,",
+        "'OPG' + RIGHT('0000000000' + DealID, 10) + 'DET' + cast (ItemNo as varchar) as code,",
+        "dbo.ven2clean(VendorPartNo) as article_code,",
+        "ProductLine as product_line, MaximumQuantity as max_quantity,",
+        "BundleNumber as bundle_number,",
+        "(select top 1 short_desc from NancyProducts where product_base_no = dbo.ven2clean(VendorPartNo) order by UpdatedDateTimeStamp desc) as article_name, ",
+        "(select top 1 long_desc from NancyProducts where product_base_no = dbo.ven2clean(VendorPartNo) order by UpdatedDateTimeStamp desc) as article_description, ",
+        "(select top 1 CompanyIdentifier from NancyProducts where product_base_no = dbo.ven2clean(VendorPartNo) order by UpdatedDateTimeStamp desc) as article_vendor, ",
+        "NetPrice as price",
+        "from opgdet ",
+        "where DealID = '" + nopg.name + "'"].join(" "));
+
+    while(res.next()) {
+        var opgdetcode = res.getString("code");
+        var opgdet = db.most.opg_entry_fixed.INSTANCES[res.getString("code")];
+
+        if (opgdet != null) {
+            if (DEBUG) console.log("found opg " + res.getString("opg_code") + " detail. code: " + opgdetcode);
+        } else {
+            opgdet = new db.most.opg_entry_fixed();
+            if (DEBUG) console.log("create opg " + res.getString("opg_code") + " detail. code: " + opgdetcode);
+            cntnew++;
+        }
+
+        opgdet.code = opgdetcode;
+        opgdet.max_quantity = res.getInt("max_quantity");
+        opgdet.bundle_number = res.getString("bundle_number");
+        opgdet.value = res.getInt("price");
+
+        // set article, meanwhile creating it
+        var artobj = prod_find_or_create(
+            res.getString("article_code"),
+            res.getString("article_name"),
+            res.getString("product_line"),
+            res.getString("article_description"),
+            res.getString("article_vendor")
+        );
+
+        opgdet.article = artobj;
+        opgdet.commit();
+
+        // add opg entry to opg
+        nopg.entries << opgdet;
+
+        if ( cnt++ % 512 == 0 ) {
+            console.log("processed " + cnt + " OPG positions and counting...");
+            db.commit();
+            java.util.commitDBConnection();
+        }
+    }
+
+    nopg.commit();
+}
+
+console.log("processed a total of " + cnt + " OPG positions, and " + cntnew + " of them are new. good work !");
+

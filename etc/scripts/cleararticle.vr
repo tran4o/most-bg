@@ -1,0 +1,12 @@
+vscript
+
+var cnt = 1;
+
+for (var s: db.most.article.SELECT() ) {
+    s.delete();
+    s.commit();
+    if ( ( cnt++ %128 ) == 0) {
+        console.log("deleted " + cnt + " records...");
+        db.commit();
+    }
+}
