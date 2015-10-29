@@ -24,7 +24,12 @@
                <object code="most.protocol_date" objectdef="display_type_objectdef" module="core"/>
            </value>
        </display_type>  
-
+       <icon>
+           <value>
+             <object code="/images/objectdefs/icons/color/128/appointments-appointment.png" module="documents" objectdef="icon"></object>
+           </value>
+       </icon>
+       <rel_display_string_order><value>is_active DESC,"date"</value></rel_display_string_order>
     </object>
 
 	<object cond="module.code='most' AND code='invoice'"
@@ -38,6 +43,41 @@
         </name>           
     </object>
 
+
+<object cond="module.code='most' AND code='customer'"
+            module="core" 
+            objectdef="objectdef" 
+            mode="update">
+        <name>
+            <value><en-US>MOST Customer</en-US></value>
+            <value><de-DE>MOST Kunde</de-DE></value>
+            <value><bg-BG>MOST Клиент</bg-BG></value>
+        </name>           
+    </object>
+
+
+<object cond="module.code='most' AND code='odit'"
+            module="core" 
+            objectdef="objectdef" 
+            mode="update">
+        <name>
+            <value><en-US>Odit</en-US></value>
+            <value><de-DE>Odit</de-DE></value>
+            <value><bg-BG>Ревизия</bg-BG></value>
+        </name>           
+    </object>
+    
+    
+<object cond="module.code='most' AND code='odit_entry'"
+            module="core" 
+            objectdef="objectdef" 
+            mode="update">
+        <name>
+            <value><en-US>Odit entry</en-US></value>
+            <value><de-DE>Odit-Eintrag</de-DE></value>
+            <value><bg-BG>Запис ревизия</bg-BG></value>
+        </name>           
+    </object>
 
 	<object cond="module.code='most' AND code='article'"
             module="core" 
@@ -53,7 +93,11 @@
                <object code="most.protocol_date" objectdef="display_type_objectdef" module="core"/>
            </value>
        </display_type>  
-
+	   <icon>
+           <value>
+             <object code="/visionr/modules/icons/color/128/products.png" module="documents" objectdef="icon"></object>
+           </value>
+	   </icon>
     </object>
 
 	<object cond="module.code='most' AND code='category_date'"
@@ -137,7 +181,12 @@
             <value><en-US>Sale</en-US></value>
             <value><de-DE>Verkauf</de-DE></value>
             <value><bg-BG>Продажба</bg-BG></value>
-        </name>     
+        </name>  
+		<icon>
+           <value>
+             <object code="/images/objectdefs/icons/color/128/invoices-payment_invoice_incoming.png" module="documents" objectdef="icon"></object>
+           </value>
+       </icon>
     </object>
     
      <object cond="module.code='most' AND code='protocol_stock'"
@@ -149,6 +198,12 @@
             <value><de-DE>Belieferung</de-DE></value>
             <value><bg-BG>Зареждане</bg-BG></value>
         </name>     
+       <icon>
+           <value>
+             <object code="/images/objectdefs/icons/color/128/invoices-payment_invoice_outgoing.png" module="documents" objectdef="icon"></object>
+           </value>
+       </icon>
+
     </object>
 
 <!-- HISTORY -->

@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<import revision="$LastChangedRevision: 9299 $">		
+<!-- DEFAULT SCRIPTS -->
+<objects>
+    <object code="most.import_companies.xls.filter-script" objectdef="vscript" module="core" >
+    				<package mode="delete"/>
+                    <params>
+                        <value>
+                            <object code="lines" module="core" objectdef="script_param"/>
+                        </value>
+                        <value>
+                            <object code="row" module="core" objectdef="script_param"/>
+                        </value>
+                        <value>
+                            <object code="nameToCol" module="core" objectdef="script_param"/>
+                        </value>
+                    </params>            
+                    <script_code>    
+                        <value><![CDATA[
+//lines,row,nameToCol
+var line = lines[row];
+var colBid = nameToCol["Bid"];
+var colCmp = nameToCol["Име на фирма"];
+var colBul = nameToCol["Булстат"];
+if (line[colCmp] == null || line[colCmp].trim() == "")
+	return false;
+try {
+    line[colBid].castToExactNumber();    
+} catch(e) {
+    return false;
+}
+return true;                        
+         ]]></value>
+     </script_code>
+ </object>
+ 
+ <object code="gen.bg2lat" objectdef="vscript" module="core" >
+     <params>
+         <value>
+             <object code="str" module="core" objectdef="script_param"/>
+         </value>
+     </params>            
+     <script_code>    
+         <value><![CDATA[
+var arr=[];
+var ll = str.length();
+for (var i=0;i<ll;i++) {
+	var c = str[i];
+	function ns() {
+		return (i < ll-1 && str[i+1] >= "а" && str[i+1] <= "я"); 
+	}
+	if (c == "Ж") {
+		if (ns()) {
+			arr.push("Zh");
+		} else {
+			arr.push("ZH");
+		}
+	} else if (c == "Ч") {
+		if (ns()) {
+			arr.push("Ch");
+		} else {
+			arr.push("CH");
+		}
+	} else if (c == "Ш") {
+		if (ns()) {
+			arr.push("Sh");
+		} else {
+			arr.push("SH");
+		}
+	} else if (c == "Щ") {
+		if (ns()) {
+			arr.push("St");
+		} else {
+			arr.push("ST");
+		}
+	} else if (c == "Ю") {
+		if (ns()) {
+			arr.push("Ju");
+		} else {
+			arr.push("JU");
+		}
+	// ----------------------		
+	} else if (c == "ж") {
+		arr.push("zh");
+	} else if (c == "ч") {
+		arr.push("ch");
+	} else if (c == "ш") {
+		arr.push("sh");
+	} else if (c == "щ") {
+		arr.push("st");
+	} else if (c == "ю") {
+		arr.push("ju");
+	}
+	//----------------------
+	else {
+		arr.push(c);
+	}
+}          
+return arr.join("")
+
+	.replace("Йо","Jo")
+	.replace("ЙО","JO")
+	.replace("йо","jo")
+	.replace("йО","jO")
+	
+	.replace("Ьо","Jo")
+	.replace("ЬО","JO")
+	.replace("ьо","jo")
+	.replace("ьО","jO")
+	
+	.replace("А","A")
+	.replace("Б","B")
+	.replace("В","V")
+	.replace("Г","G")
+	.replace("Д","D")
+	.replace("Е","E")
+	.replace("З","Z")
+	.replace("И","I")
+	.replace("К","K")
+	.replace("Л","L")
+	.replace("М","M")
+	.replace("Н","N")
+	.replace("О","O")
+	.replace("П","P")
+	.replace("Р","R")
+	.replace("С","S")
+	.replace("Т","T")
+	.replace("У","U")
+	.replace("Ф","F")
+	.replace("Ц","C")
+	.replace("Ъ","A")
+	.replace("Я","Q")
+
+	.replace("а","a")
+	.replace("б","b")
+	.replace("в","v")
+	.replace("г","g")
+	.replace("д","d")
+	.replace("е","e")
+	.replace("з","z")
+	.replace("и","i")
+	.replace("к","k")
+	.replace("л","l")
+	.replace("м","m")
+	.replace("н","n")
+	.replace("о","o")
+	.replace("п","p")
+	.replace("р","r")
+	.replace("с","s")
+	.replace("т","t")
+	.replace("у","u")
+	.replace("ф","f")
+	.replace("ц","c")
+	.replace("ъ","a")
+	.replace("я","q")
+
+	
+	.replace("Й","I")
+	.replace("й","i")
+	.replace("Ь","I")
+	.replace("ь","i");
+         ]]></value>
+     </script_code>
+ </object>            
+                
+</objects>
+</import>
