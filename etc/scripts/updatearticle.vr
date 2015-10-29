@@ -1,0 +1,96 @@
+vscript
+
+var INITIAL = true;
+var DEBUG = false;
+
+function prod_find_or_create(code, name, product_line, description, vendor) {
+    //trim code
+    if ( code.indexOf("#") > 0 ) {
+        code = code.substring(0, code.indexOf("#"));
+    }
+
+    var artobj = db.most.article.INSTANCES[code];
+
+    if (artobj != null) {
+        if (DEBUG) console.log("product " + code + " found.");
+    } else {
+        if (DEBUG) console.log("product " + code + " not found. new instance.");
+        artobj = new db.most.article();
+    }
+
+    artobj.code = code;
+    artobj.name["en-US"] = name;
+    artobj.product_line = product_line;
+    artobj.description["en-US"] = description;
+
+    // new invoices should have vendor
+    vendor = db.contacts.vendor.INSTANCES[vendor];
+
+    // in case we have an empty record => deduce its old invoice
+    if ( vendor == null ) {
+        vendor = db.contacts.vendor.INSTANCES["HPOLD"];
+    }
+
+    artobj.vendor = vendor;
+
+    artobj.commit();
+
+    return artobj;
+}
+
+function connect_source_db() {
+    var map = new M();
+
+    map["user"] = db.prefs["most.import.sql.user"];
+    map["password"] = db.prefs["most.import.sql.pass"];
+    var con = new java.db.Connection(
+        "mssql_2008",
+        "jdbc:sqlserver://" + db.prefs["most.import.sql.host"] + ";database=" + db.prefs["most.import.sql.dbname"],
+        map);
+
+    return con;
+}
+
+// main // -----------------------------------------------------------
+
+var con = connect_source_db();
+
+var rnp = db.most.article.SELECT("product_line is null or name is null or description is null");
+
+var m = new M();
+
+for (var e: rnp) {
+    m[e.code] = e;
+}
+
+var cond = "'" + (new V(m.keys())).join("','") + "'";
+
+console.log("going to figure " + m.size() + " article's missing details ");
+
+var res = con.select([
+    "select ",
+    "product_line as article_product_line,",
+    "short_desc as article_name,",
+    "long_desc as article_description,",
+    "product_base_no as article_code",
+    " from NancyProducts where product_line is not null and product_base_no in (" + cond + ") "].join(" "));
+
+var cnt = 0;
+
+console.log("query went through... now iterate... ");
+
+while (res.next()) {
+    if (res.getString("article_product_line") != null) {
+        var mx = m[res.getString("article_code")];
+        mx.product_line = res.getString("article_product_line");
+        mx.name = res.getString("article_name");
+        mx.description = res.getString("article_description");
+        mx.commit();
+        if ( ++cnt % 256 == 0 ) {
+            console.log("processed " + cnt + " objects and counting " );
+            db.commit();
+        }
+    }
+}
+
+
