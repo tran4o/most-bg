@@ -110,7 +110,11 @@
         <!-- Customer custom -->
         <param name="most.import.sql.user">stelf</param>
         <param name="most.import.sql.pass">stelf00</param>
-        <param name="most.import.sql.host">92.247.187.56</param>
+        <param name="most.import.sql.host">localhost</param>
         <param name="most.import.sql.dbname">SmartEDI</param>        
+
+	    <!-- WEB Table block limit -->
+	    <param name="web.table.persist_result_limit" type="integer">30000</param>
+
     </task>
 </tasks>

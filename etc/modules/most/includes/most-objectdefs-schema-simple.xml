@@ -232,7 +232,7 @@ return null;
                                     </params>
                                     <script_code>
                                         <value><![CDATA[
-return "(is_active=1 OR is_show=1) AND \"date\" <= CURRENT_TIMESTAMP";
+return "((is_active=1 OR is_show=1) AND \"date\" <= CURRENT_TIMESTAMP)";
                                     ]]></value>
                                     </script_code>
                                 </object>
@@ -306,7 +306,7 @@ return "(is_active=1 OR is_show=1) AND \"date\" <= CURRENT_TIMESTAMP";
                 <sort_id>9000</sort_id>
                 <data_source>relation</data_source>
                 <is_multiple>false</is_multiple>
-                <is_readonly>true</is_readonly>
+                <is_readonly>false</is_readonly>
                 <related_objectdef>most.odit_entry</related_objectdef>
                 <is_dynamic>true</is_dynamic>
                 <name>
@@ -317,10 +317,15 @@ return "(is_active=1 OR is_show=1) AND \"date\" <= CURRENT_TIMESTAMP";
              	<index_code>oge</index_code>
              	<is_dynamic>true</is_dynamic>               
                 <calculation>
-                 	<object code="most.protocol_sale.odit_entry:calculation_vsql" objectdef="calculation_vsql" module="core" >
-						<select_value_statement><value>(SELECT article.odit_entries.id ORDER BY article.odit_entries.odit."date","date" LIMIT 1)</value></select_value_statement>
-					</object>
-				</calculation>
+	     			<object code="most.protocol_sale.odit_entry:calculation_relation_path" module="core" objectdef="calculation_relation_path">
+                         <property_code_path>
+                             <value>article.odit_entries</value>
+                         </property_code_path>
+                         <where_statement>
+                             <value>article.odit_entries.id IN (SELECT article.odit_entries.id WHERE id = :VR__OUTER_SELECT_ID ORDER BY article.odit_entries.odit."date"."date" DESC LIMIT 1 )</value>
+                         </where_statement>
+                     </object>
+                 </calculation>
              </odit_entry>               
 			 
 		     <opg is_keep_settings="true">
@@ -479,6 +484,7 @@ var params = new M();
 var sel = db.most.protocol_stock.SELECT("official_date.\"date\" <= :OFCD AND article = :PRID ORDER BY sort_id,id");
 sel["OFCD"]=object.official_date.date;
 sel["PRID"]=object.article.id;
+
 var arr=[];
 for (var e : sel.VALUE) 
 {
@@ -496,6 +502,12 @@ for (var e : sel.VALUE)
         if (sold == null)
         	sold=0;
     }
+    var params = new M();
+	params["OFCD"]=object.official_date.date;
+	params["SID"]=object.id;
+	sl = db.most.state_adjustment_official.VSQL_QUERY_SUM("SELECT official_value AS VAL WHERE odit_entry.stock = :SID AND odit_entry.odit.\"date\".\"date\" <= :OFCD",params);
+	if (sl.next() && sl.getInt("RES") != null) tsold+=sl.getInt("RES");     
+    
     //java.log.error("PRODUCT "+e.name+" | SOLD="+sold+" Q="+q+" | MORE = "+(q-sold)+" | REST="+rest);
     q-=sold;
 	if (q >= rest) 
@@ -1885,7 +1897,27 @@ for (var e : this.entries.OLD) {
      		 	<data_source>relation</data_source>
      		 	<related_objectdef>most.protocol_date</related_objectdef>
      		 	<relation_filter>
-                     <object code="most.COMMON.protocol_date_filter:basic" module="core" objectdef="relation_filter"/>
+                     <object code="most.COMMON.protocol_date_filter:param" module="core" objectdef="relation_filter">
+                        <get_related_objectdef_condition>
+                            <value>
+                                <object code="most.COMMON.protocol_date_filter:param:get_related_objectdef_condition" module="core" objectdef="vscript">
+                                    <params>
+                                         <value>
+                                            <object code="object" module="core" objectdef="script_param"></object>
+                                        </value>
+                                        <value>
+                                            <object code="property" module="core" objectdef="script_param"></object>
+                                        </value>
+                                    </params>
+                                    <script_code>
+                                        <value><![CDATA[
+return "(is_active=1 OR is_show=1)";
+                                    ]]></value>
+                                    </script_code>
+                                </object>
+                            </value>
+                        </get_related_objectdef_condition>
+                   </object>
                 </relation_filter>
      		 	<is_obligatory>true</is_obligatory>
      		 	<name>
@@ -1946,9 +1978,9 @@ return null;
                 <data_source>relation</data_source>
                 <related_objectdef>most.odit_entry</related_objectdef>
                 <name>
-                    <en-US>Odit</en-US>
-                    <de-DE>Odit</de-DE>
-                    <bg-BG>Ревизия</bg-BG>
+                    <en-US>Odit entry</en-US>
+                    <de-DE>Odit-Eintrag</de-DE>
+                    <bg-BG>Запис ревизия</bg-BG>
                 </name>
                 <index_code>odt</index_code>
 			</odit_entry>		
@@ -2114,21 +2146,23 @@ if (this.is_active)
 					<object code="most.odit_entry.on_update_object" objectdef="vscript" module="core" >
 						<script_code>
 							<value><![CDATA[
-var sel = db.most.state_adjustment_official.SELECT("odit_entry=:ID");
-sel["ID"]=this.id;
-for (var e : sel) {
-	e.delete();
-	e.commit();
-}
-var sel = db.most.state_adjustment_real.SELECT("odit_entry=:ID");
-sel["ID"]=this.id;
-for (var e : sel) {
-	e.delete();
-	e.commit();
-}
-		
+
 if (this.odit != null && this.odit.is_active && this.article != null) 
 {
+	var sel = db.most.state_adjustment_official.SELECT("odit_entry=:ID");
+	sel["ID"]=this.id;
+	for (var e : sel) {
+		e.delete();
+		e.commit();
+	}
+
+	var sel = db.most.state_adjustment_real.SELECT("odit_entry=:ID");
+	sel["ID"]=this.id;
+	for (var e : sel) {
+		e.delete();
+		e.commit();
+	}
+
 	var params=new M();
 	params["AID"]=this.article.id;
 	params["DID"]=this.odit.date.id;	
@@ -2137,17 +2171,13 @@ if (this.odit != null && this.odit.is_active && this.article != null)
 	var tstocked=0;
 	var tsold=0;
 	//TOTAL STOCKED OFFICIAL
-	var sl  = db.most.protocol_stock.VSQL_QUERY_SUM("SELECT quantity AS VAL WHERE article = :AID AND official_date.\"date\" <= :DTE",params);
-	sl["AID"]=this.article.id;
-	sl["DTE"]=this.odit.date.date;
+	var sl  = db.most.protocol_stock.VSQL_QUERY_SUM("SELECT quantity AS VAL WHERE article = :AID AND official_date.\"date\" <= :DTE",params);	
 	if (sl.next() && sl.getInt("RES") != null) tstocked=sl.getInt("RES");
 
 	//TOTAL SOLD  OFFICIAL
-	var sl  = db.most.protocol_sale.VSQL_QUERY_SUM("SELECT quantity AS VAL WHERE stock.article = :AID AND official_date.\"date\" <= :DTE",params);
-	sl["AID"]=this.article.id;
-	sl["DTE"]=this.odit.date.date;
+	var sl  = db.most.protocol_sale.VSQL_QUERY_SUM("SELECT quantity AS VAL WHERE stock.article = :AID AND official_date.\"date\" <= :DTE AND stock IS NOT NULL",params);	
 	if (sl.next() && sl.getInt("RES") != null) tsold=sl.getInt("RES");
-	sl  = db.most.state_adjustment.VSQL_QUERY_SUM("SELECT official_value AS VAL WHERE stock.article = :AID AND official_date.\"date\" <= :DTE",params);
+	sl  = db.most.state_adjustment_official.VSQL_QUERY_SUM("SELECT official_value AS VAL WHERE odit_entry.article = :AID AND odit_entry.odit.\"date\".\"date\" <= :DTE",params);
 	if (sl.next() && sl.getInt("RES") != null) tsold+=sl.getInt("RES");
 	
 	//  tstocked_reported - (tsold_reported + X) = on_stock_reported
@@ -2157,41 +2187,65 @@ if (this.odit != null && this.odit.is_active && this.article != null)
 	
 	// kolko oshte SALES trqbwa da naprawim na taq data 4e da izlezne smetkata 	
 	// zna4i imame razlikata koqto trabwa da se ADDNE kam sale (!! polojitelna)
+
+	var terr=this.odit.TEMP["terr"];
+	if (terr == null) 
+	{
+		terr=0;
+		this.odit.TEMP["terr"].reset(terr);
+		db.addExecutionAfterCommit(function(param) 
+        {
+          java.log.warn("FINISH is_active SET for ODIT "+param+" | ERR="+param.TEMP["terr"]+" | OK="+param.TEMP["done"]);
+        },this.odit);
+		
+	}
+	var tdone=this.odit.TEMP["done"];
+	if (tdone == null) {
+		tdone=0;
+		this.odit.TEMP["done"].reset(terr);
+	}
 	
 	var diff_official = tstocked - this.on_stock_reported - tsold;
 	if (diff_official != 0) 
 	{
 		if (diff_official < 0) {
-			throw new Exception("Inconsistent state for odit adjustment generation | DATE="+this.odit.date+" | ARTICLE = "+this.article+" | OFFICIAL "+this.on_stock_reported +" | REAL "+this.on_stock +" | DIFF OFFIC "+(rest)+" | "+this.toString()+"");
-		}  
-			
-	 	var oval = diff_official;
-		var sl = db.most.protocol_stock.SELECT("sales.official_date = :DID ORDER by real_date.\"date\",id") ;
-		sl["AID"]=this.article.id;
-		sl["DID"]=this.odit.date.id;
-		
-		for (var e : sl) {
-			tstocked=0;
-			tsold=0;
-			var sl  = db.most.protocol_sale.VSQL_QUERY_SUM("SELECT quantity AS VAL WHERE stock = :AID AND official_date.\"date\" <= :DTE",params);
+		    java.log.info("FOR ARTICLE="+this.article.code+" | HP="+this.on_stock_reported+" | MOST="+this.on_stock+" | TSTOCKED="+tstocked+" | TSOLD="+tsold);
+			java.log.error("CAN NOT DISTRIBUTE odit value TO STOCKS | DATE="+this.odit.date+" | ARTICLE = "+this.article+" | OFFICIAL "+this.on_stock_reported +" | REAL "+this.on_stock +" | DIFF OFFIC "+(diff_official));
+			terr++;
+			this.odit.TEMP["terr"].reset(terr);
+		} else {
+			var oval = diff_official;
+			var sl = db.most.protocol_stock.SELECT("official_date.\"date\" <= :DTE AND article = :AID ORDER by quantity,real_date.\"date\",id") ;
 			sl["AID"]=this.article.id;
 			sl["DTE"]=this.odit.date.date;
-			if (sl.next() && sl.getInt("RES") != null) tsold=sl.getInt("RES");
-			var avail = e.quantity-tsold;
-			var cc = diff_official < avail ? diff_official : avail;
-			var o = new db.most.state_adjustment();
-			o.odit_entry=this;
-			o.stock=e;		
-			o.real_value = 0;
-			o.official_value=cc;
-			o.commit();
-			diff_official-=cc;
-			if (diff_official == 0)
-				break;
-		}
-		if (diff_official > 0) {
-			throw new Exception("Can not assign stocks to "+oval+" to "+sl.size+" stocks (more left " + diff_official + ")| DATE="+this.odit.date+" | ARTICLE = "+this.article+" | OFFICIAL "+this.on_stock_reported +" | REAL "+this.on_stock +" | DIFF OFFIC "+(rest)+" | "+this.toString()+"");
-		}	
+			
+			for (var e : sl) {
+				tstocked=0;
+				tsold=0;
+				params["EID"]=e.id;
+				var sl = db.most.protocol_sale.VSQL_QUERY_SUM("SELECT quantity AS VAL WHERE stock = :EID AND official_date.\"date\" <= :DTE AND stock IS NOT NULL",params);
+				if (sl.next() && sl.getInt("RES") != null) tsold=sl.getInt("RES");
+				var avail = e.quantity-tsold;
+				var cc = diff_official < avail ? diff_official : avail;
+				var o = new db.most.state_adjustment_official();
+				o.odit_entry=this;
+				o.stock=e;		
+				o.official_value=cc;
+				o.commit();
+				diff_official-=cc;
+				if (diff_official == 0) {
+					tdone++;
+					this.odit.TEMP["done"].reset(tdone);
+					break;
+				}
+			}
+			if (diff_official > 0) {
+				java.log.info("FOR ARTICLE="+this.article.code+" | HP="+this.on_stock_reported+" | MOST="+this.on_stock+" | TSTOCKED="+tstocked+" | TSOLD="+tsold);
+				java.log.error("CAN NOT assign stocks to "+oval+" to "+sl.size+" stocks (more left " + diff_official + ")| DATE="+this.odit.date+" | ARTICLE = "+this.article+" | OFFICIAL "+this.on_stock_reported +" | REAL "+this.on_stock +" | DIFF OFFIC "+(diff_official)+" | "+this.toString()+"");
+				terr++;
+				this.odit.TEMP["terr"].reset(terr);
+			}			
+		}  
 	}		
 
 	// NOW FOR REAL DATA
@@ -2200,16 +2254,12 @@ if (this.odit != null && this.odit.is_active && this.article != null)
 	
 	//TOTAL STOCKED REAL
 	var sl  = db.most.protocol_stock.VSQL_QUERY_SUM("SELECT quantity AS VAL WHERE article = :AID AND real_date.\"date\" <= :DTE",params);
-	sl["AID"]=this.article.id;
-	sl["DTE"]=this.odit.date.date;
 	if (sl.next() && sl.getInt("RES") != null) tstocked=sl.getInt("RES");
 
 	//TOTAL SOLD REAL
-	var sl  = db.most.protocol_sale.VSQL_QUERY_SUM("SELECT quantity AS VAL WHERE stock.article = :AID AND real_date.\"date\" <= :DTE",params);
-	sl["AID"]=this.article.id;
-	sl["DTE"]=this.odit.date.date;
+	var sl  = db.most.protocol_sale.VSQL_QUERY_SUM("SELECT quantity AS VAL WHERE article = :AID AND real_date.\"date\" <= :DTE",params);
 	if (sl.next() && sl.getInt("RES") != null) tsold=sl.getInt("RES");
-	sl  = db.most.state_adjustment.VSQL_QUERY_SUM("SELECT real_value AS VAL WHERE stock = :SID AND real_date.\"date\" <= :DTE",params);
+	sl  = db.most.state_adjustment_real.VSQL_QUERY_SUM("SELECT real_value AS VAL WHERE odit_entry.article = :AID AND odit_entry.odit.\"date\".\"date\" <= :DTE",params);
 	if (sl.next() && sl.getInt("RES") != null) tsold+=sl.getInt("RES");
 	
 	//  tstocked_reported - (tsold_reported + X) = on_stock_reported
@@ -2348,19 +2398,19 @@ if (this.is_active)
 		e.delete();
 		e.commit();
 	}
-	for (var e : db.most.odit.SELECT("is_active = 1 ORDER \"date\".\"date\"")) 
+	for (var e : db.most.odit.SELECT("is_active = 1 ORDER BY \"date\".\"date\"")) 
 	{
 		for (var k : e.entries) 
 			k.on_update_object();
 	}
 } else {
-	var sel = db.most.state_official.SELECT("odit_entry.odit=:ID");
+	var sel = db.most.state_adjustment_official.SELECT("odit_entry.odit=:ID");
 	sel["ID"]=this.id;
 	for (var e : sel) {
 		e.delete();
 		e.commit();
 	}
-	var sel = db.most.state_real.SELECT("odit_entry.odit=:ID");
+	var sel = db.most.state_adjustment_real.SELECT("odit_entry.odit=:ID");
 	sel["ID"]=this.id;
 	for (var e : sel) {
 		e.delete();
@@ -2586,6 +2636,35 @@ for (var e : this.entries.OLD) {
                      </object>
                  </calculation>
         	</opgs>
+        	
+        	<odit_entry>
+                <category>main.basic</category>
+                <sort_id>9000</sort_id>
+                <data_source>relation</data_source>
+                <is_multiple>false</is_multiple>
+                <is_readonly>false</is_readonly>
+                <related_objectdef>most.odit_entry</related_objectdef>
+                <is_dynamic>true</is_dynamic>
+                <name>
+                    <en-US>Odit (entry)</en-US>
+                    <de-DE>Odit (Eintrag)</de-DE>
+                    <bg-BG>Ревизия (запис)</bg-BG>
+                </name>
+             	<index_code>oge</index_code>
+             	<is_dynamic>true</is_dynamic>               
+                <calculation>
+	     			<object code="most.article.odit_entry:calculation_relation_path" module="core" objectdef="calculation_relation_path">
+                         <property_code_path>
+                             <value>article.odit_entries</value>
+                         </property_code_path>
+                         <where_statement>
+                             <value>odit_entries.id IN (SELECT odit_entries.id WHERE id = :VR__OUTER_SELECT_ID ORDER BY odit_entries.odit."date"."date" DESC LIMIT 1 )</value>
+                         </where_statement>
+                     </object>
+                 </calculation>
+             </odit_entry>
+             
+             
         </article>
         
 		
