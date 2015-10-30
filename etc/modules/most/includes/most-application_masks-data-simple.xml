@@ -7,7 +7,7 @@
            <icon>
                 <value>
                     <object objectdef="icon" module="documents" code="/visionr/modules/icons/color/128/products.png"/>
-                </value>    
+                </value>
             </icon>
             <is_public>
                 <value>true</value>
@@ -22,10 +22,10 @@
                     <en-US>MOST</en-US>
                 </value>
             </name>
-            <widgets mode="replace">            
+            <widgets mode="replace">
                 <value>
                     <object code="most_app:contact" module="user_interface" objectdef="application_mask_objectdef_button">
-                        <sort_id><value>5000</value></sort_id>
+                        <sort_id><value>800</value></sort_id>
                         <name>
                             <value>
                                 <en-US>Customers</en-US>
@@ -86,16 +86,16 @@ return res;
 
                 <value>
                     <object code="most_app:invoice" module="user_interface" objectdef="application_mask_objectdef_button" proj="all">
-						<sort_id><value>5010</value></sort_id>
+						<sort_id><value>500</value></sort_id>
                         <name>
                             <value>
-			                    <en-US>Invoice</en-US>
+			                    <en-US>Stock - Invoices</en-US>
 			                </value>
 			                <value>
-			                    <de-DE>Rechnung</de-DE>
+			                    <de-DE>Belieferung - Rechnungen</de-DE>
 			                </value>
 			                <value>
-			                    <bg-BG>Фактури</bg-BG>
+			                    <bg-BG>Зареждане - Фактури</bg-BG>
 			                </value>
                         </name>
                         <target_objectdef>
@@ -144,6 +144,7 @@ return res;
 
                 <value>
                     <object code="most_app:article" module="user_interface" objectdef="application_mask_objectdef_button" proj="all">
+                    	<sort_id><value>300</value></sort_id>
                         <name>
                             <value>
 			                    <en-US>Article</en-US>
@@ -152,7 +153,7 @@ return res;
 			                    <de-DE>Artikel</de-DE>
 			                </value>
 			                <value>
-			                    <bg-BG>Артикул</bg-BG>
+			                    <bg-BG>Артикули</bg-BG>
 			                </value>
                         </name>
                         <target_objectdef>
@@ -203,6 +204,7 @@ return res;
                 
                 <value>
                     <object code="most_app:protocol_stock" module="user_interface" objectdef="application_mask_objectdef_button" proj="all">
+                    	<sort_id><value>400</value></sort_id>
                         <name>
                             <value>
 			                    <en-US>Stock</en-US>
@@ -260,6 +262,7 @@ return res;
                 
                 <value>
                     <object code="most_app:protocol_sale" module="user_interface" objectdef="application_mask_objectdef_button" proj="all">
+                    	<sort_id><value>600</value></sort_id>
                         <name>
                             <value>
 			                    <en-US>Sale</en-US>
@@ -317,6 +320,7 @@ return res;
                 
                 <value>
                     <object code="most_app:opg" module="user_interface" objectdef="application_mask_objectdef_button" proj="all">
+                    	<sort_id><value>700</value></sort_id>
                         <name>
                             <value>
 			                    <en-US>OPG</en-US>
@@ -368,6 +372,7 @@ return res;
                 
                 <value>
                     <object code="most_app:protocol_date" module="user_interface" objectdef="application_mask_objectdef_button" proj="all">
+                    	<sort_id><value>1000</value></sort_id>
                         <name>
                             <value>
 			                    <en-US>Dates</en-US>
@@ -422,10 +427,10 @@ return res;
                 
                 <value>
                     <object code="most_app:odit" module="user_interface" objectdef="application_mask_objectdef_button" proj="all">
-                    	<sort_id><value>9000</value></sort_id>
+                    	<sort_id><value>900</value></sort_id>
                         <name>
                             <value>
-			                    <en-US>Odit</en-US>
+			                    <en-US>Audit</en-US>
 			                    <de-DE>Odit</de-DE>
 			                    <bg-BG>Ревизия</bg-BG>
 			                </value>
@@ -473,16 +478,14 @@ return res;
                         </get_name>
                     </object>
                 </value>
-                
-                
                <value>
                     <object code="most_app:state_adjustment_official" module="user_interface" objectdef="application_mask_objectdef_button" proj="all">
-                    	<sort_id><value>10001</value></sort_id>
+                    	<sort_id><value>100</value></sort_id>
                         <name>
                             <value>
-			                    <en-US>+- Official</en-US>
-			                    <de-DE>+- Offiziel</de-DE>
-			                    <bg-BG>+- Официално</bg-BG>
+                                <en-US>Store/HP</en-US>
+                                <de-DE>Speicher/HP</de-DE>
+                                <bg-BG>Склад/HP</bg-BG>
 			                </value>
                         </name>
                         <target_objectdef>
@@ -528,16 +531,14 @@ return res;
                         </get_name>
                     </object>
                 </value>
-                
-                
                 <value>
                     <object code="most_app:state_adjustment_real" module="user_interface" objectdef="application_mask_objectdef_button" proj="all">
-                    	<sort_id><value>10002</value></sort_id>
+                    	<sort_id><value>200</value></sort_id>
                         <name>
                             <value>
-			                    <en-US>+- Real</en-US>
-			                    <de-DE>+- Real</de-DE>
-			                    <bg-BG>+- Реално</bg-BG>
+                                <en-US>Store/HP</en-US>
+                                <de-DE>Speicher/MOST</de-DE>
+                                <bg-BG>Склад/HP</bg-BG>
 			                </value>
                         </name>
                         <target_objectdef>
@@ -583,8 +584,6 @@ return res;
                         </get_name>
                     </object>
                 </value>
-                
-               
             </widgets>
         </object>
     </objects>
