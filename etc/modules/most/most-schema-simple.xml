@@ -26,10 +26,8 @@
     <xi:fallback><message type="error">No property categories in this module.</message></xi:fallback>
 </xi:include>
 
-
 <!-- Main include file -->
 <xi:include href="includes/most-objectdefs-schema-simple.xml" xpointer="element(/1)" />
-
 
 <xi:include href="most-custom-schema-simple.xml" xpointer="element(/1)">
     <xi:fallback><message type="info">No custom file: most-custom-schema-simple.xml.</message></xi:fallback> 

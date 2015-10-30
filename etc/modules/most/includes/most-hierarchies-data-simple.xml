@@ -33,7 +33,7 @@
                 <value>true</value>
             </is_show_element_count>
             <is_sort>
-                <value>false</value>
+                <value>true</value>
             </is_sort>
             <is_show_leafs>
                 <value>false</value>
@@ -147,7 +147,7 @@ return 0;
                 <value>true</value>
             </is_show_element_count>
             <is_sort>
-                <value>false</value>
+                <value>true</value>
             </is_sort>
             <is_show_leafs>
                 <value>false</value>
@@ -284,7 +284,7 @@ return res;
                 <value>true</value>
             </is_show_element_count>
             <is_sort>
-                <value>false</value>
+                <value>true</value>
             </is_sort>
             <is_show_leafs>
                 <value>false</value>

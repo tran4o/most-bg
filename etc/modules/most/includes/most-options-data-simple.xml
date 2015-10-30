@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<import revision="$LastChangedRevision: 12368 $">
+    <objects>
+        <object code="discount_mode" module="core" objectdef="option_set">
+            <options mode="update">
+                <value>
+                    <object code="M" cond="option_set.code='discount_mode' AND code='M'" module="core" objectdef="option">
+			            <name>
+			                <value>
+			                    <en-US>M (Modify)</en-US>
+			                </value>
+			            </name>
+                    </object>
+                    <object code="U" cond="option_set.code='discount_mode' AND code='U'" module="core" objectdef="option">
+			            <name>
+			                <value>
+			                    <en-US>U (Upfront)</en-US>
+			                </value>
+			            </name>
+                    </object>
+                    <object code="R" cond="option_set.code='discount_mode' AND code='R'" module="core" objectdef="option">
+			            <name>
+			                <value>
+			                    <en-US>R (Rabat)</en-US>
+			                </value>
+			            </name>
+                    </object>
+                </value>
+            </options>
+        </object>
+    </objects>        
+</import>

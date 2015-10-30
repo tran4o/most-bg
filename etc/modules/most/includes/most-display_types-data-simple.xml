@@ -101,8 +101,11 @@ return (obj.official_date != null && (obj.OBJECTDEF.PROPERTIES["stock"] == null 
                             </value>
                         </params>
                         <script_code>
-                            <value><![CDATA[
-return (obj.OBJECTDEF.PROPERTIES["stock"] == null || obj.stock != null);                                 
+                            <value><![CDATA[                            
+// NO CUSTOMER -> NOT POSSIBLE
+if (obj.OBJECTDEF.PROPERTIES["customer"] != null && obj.customer == null)
+	return true;                                 
+return (obj.OBJECTDEF.PROPERTIES["stock"] != null && obj.stock != null);                                 
                             ]]></value>
                         </script_code>
                     </object>

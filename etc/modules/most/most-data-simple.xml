@@ -13,6 +13,7 @@
     
 <!-- SCHEMA NAMES AT THE END -->
     <xi:include href="includes/most-schema_names-data-simple.xml" xpointer="element(/1)"/>
+	<xi:include href="includes/most-scripts-data-simple.xml" xpointer="element(/1)"/>
 
     <vsl:script timeout="360" type="text/vsc">
         <xi:include href="includes/most-access-schema.vsc" parse="text"></xi:include>

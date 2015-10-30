@@ -1,6 +1,10 @@
 java.log.warn("Generating report dates..");
+var FROM = 2014;
 var TO = 2016; 
 var d = java.date.today();
+d.year=FROM;
+d.month=0;
+d.day=1;
 while (d.year <= TO) 
 {
 	var key = ""+d.year;
@@ -31,6 +35,9 @@ while (d.year <= TO)
 	d=d.addYears(1);	
 }
 d = java.date.today();
+d.year=FROM;
+d.month=0;
+d.day=1;
 while (d.year <= TO) 
 {
 	var key = java.date.format( "dd.MM.yyyy", d );

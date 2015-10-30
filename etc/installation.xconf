@@ -104,5 +104,13 @@
         <!-- REGISTRATION -->
         <param name="web.registration.allow" type="boolean">true</param>
         
+        <!-- Schema customization -->
+        <param name="schema.contacts.i18n.mode">onlyi18n</param>
+        
+        <!-- Customer custom -->
+        <param name="most.import.sql.user">stelf</param>
+        <param name="most.import.sql.pass">stelf00</param>
+        <param name="most.import.sql.host">92.247.187.56</param>
+        <param name="most.import.sql.dbname">SmartEDI</param>        
     </task>
 </tasks>
