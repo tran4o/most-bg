@@ -3,7 +3,6 @@ vscript
 var INITIAL = 1;        // disable after inital import
 var DEBUG = false;
 
-
 var pcnt = 0; var pnew = 0;
 
 function prod_find_or_create(code, name, product_line, description, vendor) {
@@ -60,17 +59,33 @@ function connect_source_db() {
 var con = connect_source_db();
 console.log("fetching invoice list... ");
 
+var target;
+var datecond;
+
+if (INITIAL) {
+    target = "invoic inner join ( select distinct InvoiceNo from selinv3 ) s3 on invoic.InvoiceNo = s3.InvoiceNo";
+    datecond = "";
+} else {
+    target = "invoic";
+
+    var sl  = db.most.invoice.VSQL_QUERY_MAX("SELECT \"invoice_date\" AS VAL", new M());
+    if (sl.next() && sl.getDate("VAL") != null) mdate = sl.getDate("VAL");
+
+    datecond = java.date.format( "dd.MM.yyyy", mdate);
+}
+
 var res = con.select([
     "select ",
-    "'INV' + RIGHT('0000000000' + InvoiceNo, 10) as code, ",
+    "'INV' + RIGHT('0000000000' + invoic.InvoiceNo, 10) as code, ",
     "CompanyIdentifier as vendor, ",
     "ContractNo as contract, ",
     "InvoiceDate as invoice_date, ",
-    "InvoiceNo as name, ",
+    "invoic.InvoiceNo as name, ",
     "PurchOrderNo as purchase_order ",
-    "from selinv",
+    "from " + target,
     "where MsgType = 380",
-    " order by InvoiceDate desc"
+    "order by InvoiceDate desc",
+    datecond
 ].join(" "));
 
 console.log("query went through... processing");
@@ -79,7 +94,8 @@ var invlst = [];
 var cnt = 0; var cntnew = 0;
 
 while (res.next()) {
-    var code = res.getString("code");
+
+var code = res.getString("code");
     var vendor = res.getString("vendor");
 
     // new invoices should have vendor
@@ -109,6 +125,7 @@ while (res.next()) {
     inv.vendor = vendor;
     inv.contract = res.getString("contract");
     inv.invoice_date = res.getDate("invoice_date");
+    inv.import_time = java.date.today();
 
     invlst.push(inv);
     inv.commit();
@@ -127,9 +144,9 @@ console.log("fetching new invoices protocols...");
 cnt = 0; cntnew = 0;
 
 for (var inv: invlst) {
-    var res = con.select([
+    var q = [
     "select ",
-    "'INV' + RIGHT('0000000000' + InvoiceNo, 10) + 'PRO' + cast (ItemNo as varchar) as code,",
+    "'INV' + RIGHT('0000000000' + InvoiceNo, 10) + '/' + cast (ItemNo as varchar) as code,",
     "'OPG' + RIGHT('0000000000' + DealID, 10) as opg_code, ",
     "ItemNo as item_no,",
     "VendorPartNo as article_code,",
@@ -141,8 +158,14 @@ for (var inv: invlst) {
     "(select top 1 long_desc from NancyProducts where product_base_no = dbo.ven2clean(VendorPartNo) order by UpdatedDateTimeStamp desc) as article_description ",
     "from invdet",
     "where InvoiceNo = '" + inv.name + "' order by ItemNo asc"
-].join(" "));
+].join(" ");
 
+    if (cnt == 0) {
+        console.log("example query: ");
+        console.log(q);
+    }
+
+    var res = con.select(q);
 
     while(res.next()) {
         var stock_code = res.getString("code");
@@ -162,6 +185,11 @@ for (var inv: invlst) {
         stock.quantity = res.getInt("quantity");
         stock.price = res.getDouble("price");
         stock.real_date = db.most.protocol_date.INSTANCES[java.date.format( "dd.MM.yyyy", inv.invoice_date)];
+
+
+        if (stock.real_date == null) {
+            console.log("missing date " + java.date.format( "dd.MM.yyyy", inv.invoice_date));
+        }
 
         if (DEBUG) { console.log("set date to " + stock.real_date + " / " + java.date.format( "dd.MM.yyyy", inv.invoice_date)); }
 
@@ -183,7 +211,10 @@ for (var inv: invlst) {
         var opg = db.most.opg.INSTANCES[opgcode];
 
         if ( opg == null && res.getString("opg_code") != "OPG0000000000") {
-            console.log("error: encountered missing OPG: " + opgcode);
+            console.log("error: encountered missing OPG: " + opgcode +
+                " / article " + res.getString("article_code") +
+                " / invoice no " + inv.name
+            );
         }
         if ( opg != null && opg != "OPG0000000000" ) {
             stock.opg = opg;
@@ -215,8 +246,8 @@ for (var inv: invlst) {
         "select SerialNo as serial_num",
         "from invser where InvoiceNo = '" + inv.name + "' order by ItemNo asc"].join(" "));
 
+        stock.serial_ids.remove();
         while (res.next()) {
-            stock.serial_ids.remove();
             stock.serial_ids << res.getString("serial_num");
 
             stock.commit();

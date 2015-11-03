@@ -73,7 +73,7 @@ if ( INITIAL ) {
     }
 }
 
-var res = con.select("select DealID as name, 'OPG' + RIGHT('0000000000' + DealID, 10) as code, DealDescription as description, SelloutStartDate as valid_from, SelloutStartDate as valid_to, DiscountMode as discount_mode, Version as version, LastModifiedDate as update_time from dbo.opg where LastModifiedDate > '" + lastmod + "' or DealID in ( 90507106, 91547996, 90508563, 91547996 ) ");
+var res = con.select("select DealID as name, 'OPG' + RIGHT('0000000000' + DealID, 10) as code, DealDescription as description, SelloutStartDate as valid_from, SelloutEndDate as valid_to, DiscountMode as discount_mode, Version as version, LastModifiedDate as update_time from dbo.opg where ( DiscountMode = 'R' and LastModifiedDate > '" + lastmod + "' ) or DealID in ( select distinct DealID from selinv3 inner join invdet id on selinv3.InvoiceNo = id.InvoiceNo ) ");
 
 var opglst = [];
 var cnt = 0; var cntnew = 0;
@@ -101,6 +101,7 @@ while (res.next()) {
     opg.valid_from = res.getDate("valid_from");
     opg.valid_to = res.getDate("valid_to");
     opg.update_time = res.getDate("update_time");
+    opg.import_time = java.date.now();
 
     opg["version"] = res.getInt("version");
 
@@ -121,9 +122,11 @@ console.log("fetching new OPG details...");
 cnt = 0; cntnew = 0;
 
 for (var nopg: opglst) {
-    var res = con.select([
+    console.log("getting OPG " + nopg );
+
+    var q = [
         "select DealID as opg_code,",
-        "'OPG' + RIGHT('0000000000' + DealID, 10) + 'DET' + cast (ItemNo as varchar) as code,",
+        "'OPG' + RIGHT('0000000000' + DealID, 10) + '/' + cast (ItemNo as varchar) as code,",
         "dbo.ven2clean(VendorPartNo) as article_code,",
         "ProductLine as product_line, MaximumQuantity as max_quantity,",
         "BundleNumber as bundle_number,",
@@ -132,7 +135,9 @@ for (var nopg: opglst) {
         "(select top 1 CompanyIdentifier from NancyProducts where product_base_no = dbo.ven2clean(VendorPartNo) order by UpdatedDateTimeStamp desc) as article_vendor, ",
         "NetPrice as price",
         "from opgdet ",
-        "where DealID = '" + nopg.name + "'"].join(" "));
+        "where DealID = '" + nopg.name + "'"].join(" ");
+
+    var res = con.select(q);
 
     while(res.next()) {
         var opgdetcode = res.getString("code");
@@ -166,7 +171,7 @@ for (var nopg: opglst) {
         // add opg entry to opg
         nopg.entries << opgdet;
 
-        if ( cnt++ % 512 == 0 ) {
+        if ( cnt++ % 128 == 0 ) {
             console.log("processed " + cnt + " OPG positions and counting...");
             db.commit();
             java.util.commitDBConnection();

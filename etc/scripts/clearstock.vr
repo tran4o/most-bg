@@ -6,11 +6,14 @@ for (var s: db.most.protocol_stock.SELECT() ) {
     s.delete();
     s.commit();
     if ( ( cnt++ %128 ) == 0) {
-        console.log("deleted " + cnt + " records...");
+        console.log("deleted " + cnt + " invoices...");
         db.commit();
         java.util.commitDBConnection();
     }
 }
+
+console.log("deleted " + cnt + " stock positions...");
+cnt = 0;
 
 for (var s: db.most.invoice.SELECT() ) {
     s.delete();
@@ -22,3 +25,4 @@ for (var s: db.most.invoice.SELECT() ) {
     }
 }
 
+console.log("deleted " + cnt + " invoices...");
