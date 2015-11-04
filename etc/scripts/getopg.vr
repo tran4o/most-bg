@@ -103,6 +103,7 @@ while (res.next()) {
     opg.update_time = res.getDate("update_time");
     opg.import_time = java.date.now();
 
+
     opg["version"] = res.getInt("version");
 
     opglst.push(opg);

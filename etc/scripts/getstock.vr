@@ -189,6 +189,7 @@ for (var inv: invlst) {
 
         if (stock.real_date == null) {
             console.log("missing date " + java.date.format( "dd.MM.yyyy", inv.invoice_date));
+            stock.real_date = db.most.protocol_date.INSTANCES["01.01.2015"];
         }
 
         if (DEBUG) { console.log("set date to " + stock.real_date + " / " + java.date.format( "dd.MM.yyyy", inv.invoice_date)); }

@@ -60,7 +60,7 @@ function connect_source_db() {
 var con = connect_source_db();
 console.log("fetching useful prods list ... ");
 
-var res = con.select("select * from useprod");
+var res = con.select("select * from useprod where article_code in ( 'Q2503A','Q6547A','Q8047A','B3Q11A', 'C7998A','SA087A','SA042A','Q6572A','C3837A' )");
 
 console.log("query went through. iterate");
 
