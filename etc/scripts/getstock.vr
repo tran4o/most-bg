@@ -1,7 +1,7 @@
 vscript
 
-var INITIAL = 1;        // disable after inital import
-var DEBUG = false;
+var INITIAL = 0;        // disable after inital import
+var DEBUG = true;
 
 var pcnt = 0; var pnew = 0;
 
@@ -68,13 +68,20 @@ if (INITIAL) {
 } else {
     target = "invoic";
 
-    var sl  = db.most.invoice.VSQL_QUERY_MAX("SELECT \"invoice_date\" AS VAL", new M());
-    if (sl.next() && sl.getDate("VAL") != null) mdate = sl.getDate("VAL");
+    var params = new M();
+    var sl = db.most.invoice.VSQL_QUERY_MAX("SELECT invoice_date AS VAL", params);
+    var lastmod = null;
 
-    datecond = java.date.format( "dd.MM.yyyy", mdate);
+    if (sl.next()) {
+        var mt = sl.getDate("RES");
+        lastmod = java.date.format("yyyy-MM-dd", mt);
+    }
+
+    console.log("getting stock after " + lastmod);
+    datecond = "and InvoiceDate >= '" + lastmod + "'";
 }
 
-var res = con.select([
+var q = [
     "select ",
     "'INV' + RIGHT('0000000000' + invoic.InvoiceNo, 10) as code, ",
     "CompanyIdentifier as vendor, ",
@@ -84,9 +91,20 @@ var res = con.select([
     "PurchOrderNo as purchase_order ",
     "from " + target,
     "where MsgType = 380",
-    "order by InvoiceDate desc",
-    datecond
-].join(" "));
+    datecond,
+    "order by InvoiceDate desc"
+].join(" ");
+
+if (DEBUG) {
+    var res = con.select(q);
+    console.log("would have to get");
+
+    while (res.next()) {
+        console.log(res.getString("code") + "/" + res.getString("invoice_date"));
+    }
+}
+
+var res = con.select(q);
 
 console.log("query went through... processing");
 

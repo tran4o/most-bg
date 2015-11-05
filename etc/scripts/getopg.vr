@@ -1,6 +1,6 @@
 vscript
 
-var INITIAL = true;
+var INITIAL = false;
 var DEBUG = false;
 
 function prod_find_or_create(code, name, product_line, description, vendor) {
@@ -57,11 +57,13 @@ function connect_source_db() {
 
 var con = connect_source_db();
 
-
 var lastmod;
+var cond;
 
 if ( INITIAL ) {
     lastmod = "2014-01-01";
+    console.log("getting initil after " + lastmod);
+    cond = "( DiscountMode = 'R' and LastModifiedDate > '" + lastmod + "' ) or DealID in ( select distinct DealID from selinv3 inner join invdet id on selinv3.InvoiceNo = id.InvoiceNo )";
 } else {
     var params = new M();
     var sl = db.most.opg.VSQL_QUERY_MAX("SELECT import_time AS VAL", params);
@@ -71,12 +73,32 @@ if ( INITIAL ) {
         mt = sl.getDate("RES");
         lastmod = java.date.format("yyyy-MM-dd", mt);
     }
+
+    console.log("getting everything after " + lastmod);
+    cond = "LastModifiedDate >= '" + lastmod + "'";
 }
 
+/*
 var res = con.select("select DealID as name, 'OPG' + RIGHT('0000000000' + DealID, 10) as code, DealDescription as description, SelloutStartDate as valid_from, SelloutEndDate as valid_to, DiscountMode as discount_mode, Version as version, LastModifiedDate as update_time from dbo.opg where ( DiscountMode = 'R' and LastModifiedDate > '" + lastmod + "' ) or DealID in ( select distinct DealID from selinv3 inner join invdet id on selinv3.InvoiceNo = id.InvoiceNo ) ");
+*/
+
+var q = "select DealID as code, DealDescription as description, SelloutStartDate as valid_from, SelloutEndDate as valid_to, DiscountMode as discount_mode, Version as version, LastModifiedDate as update_time from dbo.opg where " + cond;
 
 var opglst = [];
 var cnt = 0; var cntnew = 0;
+
+if (INITIAL==false)  {
+    var opgcodes = [];
+    var res = con.select(q);
+
+    while (res.next()) {
+        opgcodes.push(res.getString("code") + "/" + res.getString("update_time"));
+    }
+
+    console.log("would have to fetch these: " + opgcodes.join("\n"));
+}
+
+var res = con.select(q);
 
 while (res.next()) {
     var oc = res.getString("code");
@@ -97,7 +119,7 @@ while (res.next()) {
     opg.code = res.getString("code");
     opg.discount_mode = res.getString("discount_mode");
     opg.description["en-US"] = res.getString("description");
-    opg.name["en-US"] = res.getString("name");
+//    opg.name["en-US"] = res.getString("name");
     opg.valid_from = res.getDate("valid_from");
     opg.valid_to = res.getDate("valid_to");
     opg.update_time = res.getDate("update_time");
@@ -136,7 +158,7 @@ for (var nopg: opglst) {
         "(select top 1 CompanyIdentifier from NancyProducts where product_base_no = dbo.ven2clean(VendorPartNo) order by UpdatedDateTimeStamp desc) as article_vendor, ",
         "NetPrice as price",
         "from opgdet ",
-        "where DealID = '" + nopg.name + "'"].join(" ");
+        "where DealID = '" + nopg.code + "'"].join(" ");
 
     var res = con.select(q);
 
