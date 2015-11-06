@@ -161,7 +161,64 @@ return arr.join("")
 	.replace("ь","i");
          ]]></value>
      </script_code>
- </object>            
+ </object>
+ 
+ <object code="availOpg" objectdef="vscript" module="core" >
+     <params>
+         <value>
+             <object code="object" module="core" objectdef="script_param"/>
+         </value>
+     </params>            
+     <script_code>    
+         <value><![CDATA[
+var rest = object.quantity;
+var params = new M();
+var sel = db.most.opg.SELECT("discount_mode.code = 'R' AND (valid_from IS NULL OR valid_from <= :OFCD) AND (valid_to IS NULL OR valid_to >= :OFCD) AND entries.article.id = :PRID ORDER BY COALESCE(valid_to,valid_from),id DESC");
+sel["OFCD"]=object.official_date.date;
+sel["PRID"]=object.article.id;
+var arr=[];
+var ok=false;
+for (var e : sel.VALUE) 
+{
+	if (e == object.opg)
+		continue;
+	for (var a : e.entries) 
+	{
+		if (a.article == object.article) 
+		{
+			if (a.max_quantity == null) 
+			{
+				arr.push(e);
+				break;
+			} else {
+				var q = a.max_quantity;
+			 	var params = new M();
+			 	params["ID"]=e.id;
+			 	var sl = db.most.protocol_sale.VSQL_QUERY_SUM("SELECT quantity AS VAL WHERE opg = :ID",params);
+				var used = 0;
+				if (sl.next()) {
+			        used=sl.getInt("RES");
+			        if (used == null)
+			        	used=0;
+			    }
+			    q-=used;
+			    if (q < 0) {
+					java.log.error("Inconsistent quantity state2 : "+a.toString());					    
+			    } else if (rest <= q) {
+					arr.push(e);
+					break;
+				} 	
+			}
+		}
+	}
+}
+return arr;
+         ]]></value>
+     </script_code>
+ </object>
+
+ 
+             
                 
 </objects>
 </import>

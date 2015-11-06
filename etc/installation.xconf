@@ -99,7 +99,7 @@
         <param name="openoffice.installation.path">D:/Program Files (x86)/LibreOffice 4</param>
         
         <!-- SERVER ADDRESS -->
-        <param name="web.server.href.external">http://localhost:8586</param>
+        <param name="web.server.href.external">http://localhost:8585</param>
         
         <!-- REGISTRATION -->
         <param name="web.registration.allow" type="boolean">true</param>
