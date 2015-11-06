@@ -1,0 +1,675 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<import revision="$LastChangedRevision: 18817 $" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:vsl="http://www.plan-vision.com/VSL/1.0">
+<objects>
+<!--  -->
+<object code="MOST BG - INTERNAL" objectdef="report_vsp" module="reports" cond="&quot;uuid&quot; = 'm9lIOjDlSRO84SOiC6GWVw'">
+   <name>
+      <value>
+         <bg-BG>МОСТ протокол - ВЪТРЕШЕН</bg-BG></value>
+   </name>
+   <sort_id>
+      <value>0</value>
+   </sort_id>
+   <objectdef_set mode="update">
+      <value sort_id="0"><object mode="update" code="protocol" objectdef="objectdef" module="core" cond="code='protocol' AND module.code='most'"/></value>
+      <value sort_id="1"><object mode="update" code="customer" objectdef="objectdef" module="core" cond="code='customer' AND module.code='most'"/></value>
+      <value sort_id="2"><object mode="update" code="article" objectdef="objectdef" module="core" cond="code='article' AND module.code='most'"/></value>
+   </objectdef_set>
+   <is_embedded>
+      <value>false</value>
+   </is_embedded>
+   <is_selection_sensitive>
+      <value>true</value>
+   </is_selection_sensitive>
+   <is_selection_obligatory>
+      <value>true</value>
+   </is_selection_obligatory>
+   <content>
+      <value>
+         <en-US><![CDATA[<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <%vsp:include page="${web.lib.dir}/meta.vsp" />
+    <link rel="SHORTCUT ICON" href="/favicon.ico"/>
+    <link rel="stylesheet" type="text/css" href="/script/print-object.css" />
+    <style>
+
+    td {
+    	padding : 0.25em;
+	}
+	
+	table thead td {
+		background-color: #A0A0A0;				
+	}
+
+	td.r {
+		text-align : right;
+	}
+
+</style>	
+</head>
+<body>
+<%= LINK(param["date"]) %><br/>
+<h1>Баланс HP</h1>
+<table>
+<thead> 
+		<tr>
+			<td>Продукт</td>
+			<td>Пр. Линия</td>
+			<td>Заредени</td>
+			<td>Продадени</td>
+			<td>Склад</td>
+			<td>MOST-HP</td>
+			<td>Име</td>
+			<td>Описание</td>
+	</tr>
+</thead>
+<tbody>
+<%
+
+var params=new M();
+var dateo = param.date;
+params["DID"]=dateo.id;	
+params["DTE"]=dateo.date;
+
+public function Object() {
+	public var stocked = null;
+	public var sold = null;
+	public var tstocked = null;
+	public var tsold = null;
+	public var avail = null;
+
+}
+
+function getOfficial(a) {
+	params["AID"]=a.id;
+	var res=new M();
+
+	var stocked = 0;
+	var sold  = 0;
+	var tsold = 0;
+	var tstocked = 0;
+
+	//STOCKED
+	var sl=db.most.protocol_stock.VSQL_QUERY_SUM("SELECT quantity AS VAL WHERE article = :AID AND official_date = :DID",params);
+	if (sl.next() && sl.getInt("RES") != null) stocked=sl.getInt("RES");
+		
+	//SOLD
+	var sl = db.most.protocol_sale.VSQL_QUERY_SUM("SELECT quantity AS VAL WHERE article = :AID AND official_date = :DID AND stock IS NOT NULL",params);
+	if (sl.next() && sl.getInt("RES") != null) sold=sl.getInt("RES");
+	sl = db.most.state_adjustment_official.VSQL_QUERY_SUM("SELECT official_value AS VAL WHERE article = :AID AND \"date\" = :DTE",params);
+	if (sl.next() && sl.getInt("RES") != null) {sold+=sl.getInt("RES"); }
+
+	//TOTAL STOCKED
+	var sl  = db.most.protocol_stock.VSQL_QUERY_SUM("SELECT quantity AS VAL WHERE article = :AID AND official_date.\"date\" <= :DTE",params);
+	if (sl.next() && sl.getInt("RES") != null) tstocked=sl.getInt("RES");
+
+	//TOTAL SOLD 
+	var sl = db.most.protocol_sale.VSQL_QUERY_SUM("SELECT quantity AS VAL WHERE article = :AID AND official_date.\"date\" <= :DTE AND stock IS NOT NULL",params);
+	if (sl.next() && sl.getInt("RES") != null) tsold=sl.getInt("RES");
+	
+	sl = db.most.state_adjustment_official.VSQL_QUERY_SUM("SELECT official_value AS VAL WHERE article = :AID AND \"date\" <= :DTE",params);
+	if (sl.next() && sl.getInt("RES") != null) tsold+=sl.getInt("RES"); 
+		
+    var m=new Object();
+	m.stocked=stocked;
+	m.sold=sold;
+	m.tstocked=tstocked;
+	m.tsold=tsold;
+	m.avail=tstocked-tsold;
+	return m;
+}
+
+function getReal(a) {
+	params["AID"]=a.id;
+
+	var stocked = 0;
+	var sold  = 0;
+	var tsold = 0;
+	var tstocked = 0;
+	
+	var stocked = 0;
+	var sold  = 0;
+	var tsold = 0;
+	var tstocked = 0;
+
+	//STOCKED
+	var sl=db.most.protocol_stock.VSQL_QUERY_SUM("SELECT quantity AS VAL WHERE article = :AID AND real_date = :DID",params);
+	if (sl.next() && sl.getInt("RES") != null) stocked=sl.getInt("RES");
+		
+	//SOLD
+	var sl = db.most.protocol_sale.VSQL_QUERY_SUM("SELECT quantity AS VAL WHERE article = :AID AND real_date = :DID AND stock IS NOT NULL",params);
+	if (sl.next() && sl.getInt("RES") != null) sold=sl.getInt("RES");
+	sl = db.most.state_adjustment_real.VSQL_QUERY_SUM("SELECT real_value AS VAL WHERE article = :AID AND \"date\" = :DTE",params);
+	if (sl.next() && sl.getInt("RES") != null) sold+=sl.getInt("RES");
+	
+	//TOTAL STOCKED
+	var sl  = db.most.protocol_stock.VSQL_QUERY_SUM("SELECT quantity AS VAL WHERE article = :AID AND real_date.\"date\" <= :DTE",params);
+	if (sl.next() && sl.getInt("RES") != null) tstocked=sl.getInt("RES");
+
+	//TOTAL SOLD 
+	var sl = db.most.protocol_sale.VSQL_QUERY_SUM("SELECT quantity AS VAL WHERE article = :AID AND real_date.\"date\" <= :DTE AND stock IS NOT NULL",params);
+	if (sl.next() && sl.getInt("RES") != null) tsold=sl.getInt("RES");
+	
+	sl = db.most.state_adjustment_real.VSQL_QUERY_SUM("SELECT real_value AS VAL WHERE article = :AID AND \"date\" <= :DTE",params);
+	if (sl.next() && sl.getInt("RES") != null) tsold+=sl.getInt("RES");
+	
+	var m=new Object();
+	m.stocked=stocked;
+	m.sold=sold;
+	m.tstocked=tstocked;
+	m.tsold=tsold;
+	m.avail=tstocked-tsold;
+	return m;
+}
+//---------------------------------
+var odata = new M();
+var rdata = new M();
+var sel1;
+var sel2;
+var tt = selector;
+java.log.error("SELECTOR : "+selector);
+if (tt != null) 
+{
+	tt = selector.get_as_map();
+	if (tt == null || tt.is_empty)
+		tt=null;
+	else {
+		if (!(tt[0] instanceof db.most.article))
+			tt=null;		
+	}
+}
+//---------------------------------
+if (tt == null) 
+{
+	sel1 = db.most.article.SELECT("COALESCE((SELECT SUM(quantity) FROM most.protocol WHERE article = :VR__OUTER_SELECT_ID AND objectdef.code='protocol_stock' AND official_date.\"date\" <= :DTE),0) - COALESCE((SELECT SUM(quantity) FROM most.protocol WHERE article = :VR__OUTER_SELECT_ID AND objectdef.code='protocol_sale' AND official_date.\"date\" <= :DTE),0) - COALESCE((SELECT SUM(real_value) FROM most.state_adjustment_real WHERE article = :VR__OUTER_SELECT_ID AND \"date\" <= :DTE),0) > 0 ORDER BY COALESCE((SELECT SUM(quantity) FROM most.protocol WHERE article = :VR__OUTER_SELECT_ID AND objectdef.code='protocol_sale' AND official_date = :DTA),0) DESC");
+	sel1["DTA"]=dateo.id;
+	sel1["DTE"]=dateo.date;
+	sel1.is_cached=false;
+	sel2 = db.most.article.SELECT("COALESCE((SELECT SUM(quantity) FROM most.protocol WHERE article = :VR__OUTER_SELECT_ID AND objectdef.code='protocol_stock' AND real_date.\"date\" <= :DTE),0) - COALESCE((SELECT SUM(quantity) FROM most.protocol WHERE article = :VR__OUTER_SELECT_ID AND objectdef.code='protocol_sale' AND real_date.\"date\" <= :DTE),0) - COALESCE((SELECT SUM(real_value) FROM most.state_adjustment_real WHERE article = :VR__OUTER_SELECT_ID AND \"date\" <= :DTE),0) > 0 ORDER BY COALESCE((SELECT SUM(quantity) FROM most.protocol WHERE article = :VR__OUTER_SELECT_ID AND objectdef.code='protocol_sale' AND real_date = :DTA),0) DESC");
+	sel2["DTA"]=dateo.id;
+	sel2["DTE"]=dateo.date;
+	sel2.is_cached=false;
+	for (var a : sel1) {
+		odata[a]=getOfficial(a);
+	}
+	for (var a : sel2) {
+		rdata[a]=getReal(a);
+	}
+} else {
+	sel1 = tt;
+	sel2 = tt;
+	for (var a : tt) 
+		odata[a]=getOfficial(a);
+	for (var a : tt)
+		rdata[a]=getReal(a);
+}
+
+for (var a : sel1)
+{
+    %>
+	<tr>
+	<td><%= LINK(a,a.code) %></td>
+	<td><%= STR2HTML(a.product_line == null ? "" : a.product_line) %></td>
+	<td class="r"><%= FORMAT(odata[a].stocked) %></td>
+	<td class="r"><%= FORMAT(odata[a].sold) %></td>
+	<td class="r"><%= FORMAT(odata[a].avail) %></td>
+	<% 
+		var ao = (odata[a] == null ? 0 : odata[a].avail);
+		var ar = (rdata[a] == null ? 0 : rdata[a].avail); %>
+	<td class="r"><%= FORMAT(ar-ao) %></td>
+	<td><%= STR2HTML(a.name) %></td>
+	<td><%= STR2HTML(a.description) %></td>
+	</tr>
+	<%
+}
+%>
+</tbody>
+</table>
+
+
+
+<h1>Пазарували HP</h1>
+<table>
+<thead> 
+		<tr>
+			<td>Булстат</td>
+			<td>Съкр. (Bid)</td>
+			<td>Име</td>
+			<td>Дневен</td>
+			<td>Месечен</td>
+			<td>30 дневен</td>
+		</tr>
+</thead>
+<tbody>
+<%
+var sel = db.most.customer.SELECT("sales.official_date = :DID ORDER BY code,id");
+sel["DID"]=dateo.id;
+sel.is_cached=false;
+for (var a : sel) 
+{
+    var params=new M();
+	params["AID"]=a.id;
+	params["DID"]=dateo.id;	
+	params["DTB"]=dateo.date.addMonths(-1);
+	params["DTE"]=dateo.date;
+	params["DT30"]=dateo.date.addDays(-30);
+	params["DTMF"]=java.date.format( "yyyyMM", dateo.date );
+	
+	var today = 0.0;
+	var month = 0.0;
+	var last30Days = 0.0;
+	// TODAY
+	var sl=db.most.protocol_sale.VSQL_QUERY_SUM("SELECT total AS VAL WHERE customer = :AID AND official_date = :DID",params);
+	if (sl.next() && sl.getInt("RES") != null) today=sl.getDouble("RES");
+	
+	var sl=db.most.protocol_sale.VSQL_QUERY_SUM("SELECT total AS VAL WHERE customer = :AID AND official_date.\"date\" >= :DTB AND official_date.\"date\" <= :DTE AND TO_CHAR(official_date.\"date\",'YYYYMM') = :DTMF",params);
+	if (sl.next() && sl.getInt("RES") != null) month=sl.getDouble("RES");
+
+	var sl=db.most.protocol_sale.VSQL_QUERY_SUM("SELECT total AS VAL WHERE customer = :AID AND official_date.\"date\" >= :DT30 AND official_date.\"date\" <= :DTE",params);
+	if (sl.next() && sl.getInt("RES") != null) last30Days=sl.getDouble("RES");
+	
+    %>
+	<tr>
+	<td class="r"><%= LINK(a,a.code) %></td>
+	<td class="r"><%= a.abbreviation %></td>
+	<td><%= STR2HTML(a.name) %></td>
+	<td class="r"><%= FORMAT(today) %></td>
+	<td class="r"><%= FORMAT(month) %></td>
+	<td class="r"><%= FORMAT(last30Days) %></td>
+	</tr>
+	<%
+}
+%>
+</tbody>
+</table>
+</body>
+
+<h1>Баланс MOST</h1>
+<table>
+<thead> 
+		<tr>
+			<td>Продукт</td>
+			<td>Пр. Линия</td>
+			<td>Заредени</td>
+			<td>Продадени</td>
+			<td>Склад</td>
+			<td>HP-MOST</td>
+			<td>Име</td>
+			<td>Описание</td>
+	</tr>
+</thead>
+<tbody>
+<%
+for (var a : sel2)
+{
+    var params=new M();
+	params["AID"]=a.id;
+	params["DID"]=dateo.id;	
+	params["DTE"]=dateo.date;	
+    %>
+	<tr>
+	<td><%= LINK(a,a.code) %></td>
+	<td><%= STR2HTML(a.product_line == null ? "" : a.product_line) %></td>
+	<td class="r"><%= FORMAT(rdata[a].stocked) %></td>
+	<td class="r"><%= FORMAT(rdata[a].sold) %></td>
+	<td class="r"><%= FORMAT(rdata[a].avail) %></td>
+	<% 
+		var ao = (odata[a] == null ? 0 : odata[a].avail);
+		var ar = (rdata[a] == null ? 0 : rdata[a].avail); %>
+	<td class="r"><%= FORMAT(ao-ar) %></td>
+	<td><%= STR2HTML(a.name) %></td>
+	<td><%= STR2HTML(a.description) %></td>
+	</tr>
+	<%
+}
+%>
+</tbody>
+</table>
+
+
+
+<h1>Пазарували MOST</h1>
+<table>
+<thead> 
+		<tr>
+			<td>Булстат</td>
+			<td>Съкр. (Bid)</td>
+			<td>Име</td>
+			<td>Дневен</td>
+			<td>Месечен</td>
+			<td>30 дневен</td>
+		</tr>
+</thead>
+<tbody>
+<%
+var sel = db.most.customer.SELECT("sales.real_date = :DID ORDER BY code,id");
+sel["DID"]=dateo.id;
+sel.is_cached=false;
+for (var a : sel) 
+{
+    var params=new M();
+	params["AID"]=a.id;
+	params["DID"]=dateo.id;	
+	params["DTB"]=dateo.date.addMonths(-1);
+	params["DTE"]=dateo.date;
+	params["DT30"]=dateo.date.addDays(-30);
+	params["DTMF"]=java.date.format( "yyyyMM", dateo.date );
+	
+	var today = 0.0;
+	var month = 0.0;
+	var last30Days = 0.0;
+
+	// TODAY
+	var sl=db.most.protocol_sale.VSQL_QUERY_SUM("SELECT total AS VAL WHERE customer = :AID AND real_date = :DID",params);
+	if (sl.next() && sl.getInt("RES") != null) today=sl.getDouble("RES");
+	
+	sl=db.most.protocol_sale.VSQL_QUERY_SUM("SELECT total AS VAL WHERE customer = :AID AND real_date.\"date\" >= :DTB AND real_date.\"date\" <= :DTE AND TO_CHAR(real_date.\"date\",'YYYYMM') = :DTMF",params);
+	if (sl.next() && sl.getInt("RES") != null) month=sl.getDouble("RES");
+	
+	sl=db.most.protocol_sale.VSQL_QUERY_SUM("SELECT total AS VAL WHERE customer = :AID AND real_date.\"date\" >= :DT30 AND real_date.\"date\" <= :DTE",params);
+	if (sl.next() && sl.getInt("RES") != null) last30Days=sl.getDouble("RES");
+		
+    %>
+	<tr>
+	<td class="r"><%= LINK(a,a.code) %></td>
+	<td class="r"><%= a.abbreviation %></td>
+	<td><%= STR2HTML(a.name) %></td>
+	<td class="r"><%= FORMAT(today) %></td>
+	<td class="r"><%= FORMAT(month) %></td>
+	<td class="r"><%= FORMAT(last30Days) %></td>
+	</tr>
+	<%
+}
+%>
+</tbody>
+</table>
+</body>
+]]></en-US></value>
+   </content>
+   <param_objectdef>
+      <value><object mode="update" code="script_execution_context_daily_report_param" objectdef="objectdef" module="core" cond="code='script_execution_context_daily_report_param' AND module.code='most'"/></value>
+   </param_objectdef>
+   <param_category_code>
+      <value>main</value>
+   </param_category_code>
+   <is_archived>
+      <value>false</value>
+   </is_archived>
+   <uuid>
+      <value>m9lIOjDlSRO84SOiC6GWVw</value>
+   </uuid>
+</object>
+<!--  -->
+<object code="MOST BG - HP" objectdef="report_vsp" module="reports" cond="&quot;uuid&quot; = 'Xlss2kpYRZq7y10PfxQcjw'">
+   <name>
+      <value>
+         <en-US>МОСТ протокол - HP</en-US>
+         <bg-BG>МОСТ протокол - HP ASCII</bg-BG></value>
+   </name>
+   <sort_id>
+      <value>0</value>
+   </sort_id>
+   <objectdef_set mode="update">
+      <value sort_id="0"><object mode="update" code="protocol" objectdef="objectdef" module="core" cond="code='protocol' AND module.code='most'"/></value>
+      <value sort_id="1"><object mode="update" code="customer" objectdef="objectdef" module="core" cond="code='customer' AND module.code='most'"/></value>
+   </objectdef_set>
+   <is_embedded>
+      <value>false</value>
+   </is_embedded>
+   <is_selection_sensitive>
+      <value>true</value>
+   </is_selection_sensitive>
+   <is_selection_obligatory>
+      <value>true</value>
+   </is_selection_obligatory>
+   <content>
+      <value>
+         <en-US><![CDATA[<% if (!session.loggedIn()) return; %><%vsp:include page="${web.lib.dir}/doctype.vsp" />
+<html style="padding:0; margin:0;">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <%vsp:include page="${web.lib.dir}/meta.vsp" />
+    <title><%= STR2HTML(MSG("INFO_DOWNLOAD")) %></title>
+    <link rel="SHORTCUT ICON" href="/favicon.ico"/>
+
+    <script type="text/javascript" src="/script/openseadragon/openseadragon.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/mobile/script/ol3/ol.css" />
+    <script type="text/javascript" src="/mobile/script/ol3/ol-simple.js"></script>
+    <style>
+	.highlight {
+		-webkit-box-shadow: 2px 2px 5px 0px rgba(0,0,0,0.75);
+		-moz-box-shadow: 2px 2px 5px 0px rgba(0,0,0,0.75);
+		box-shadow: 2px 2px 5px 0px rgba(0,0,0,0.75);
+	}
+	</style>
+</head>
+<body style="padding:0;margin:0;font-family : 'Arial', 'Lucida Grande', 'Tahoma', 'Verdana' ; font-size:15pt;">
+<%
+var dateo = param.date;
+var sel = db.contacts.vendor.SELECT("id IN (SELECT article.vendor FROM most.protocol_stock )");
+sel.is_cached=false;
+for (var ven : sel) 
+{
+	var tlines=0;
+	var file = new java.io.TmpFile("txt");
+	file.setEncoding("UTF-8");
+
+	function fix(str,len) 
+	{
+		str+="";
+		if (str.length() > len) {
+			return str.substring(0,len);
+		}
+		while (str.length() < len)
+			str=str+" ";
+		return str;
+	}
+
+	function fixR(str,len) 
+	{
+		str+="";
+		if (str.length() > len) {
+			return str.substring(0,len);
+		}
+		while (str.length() < len)
+			str=" "+str;
+		return str;
+	}
+	
+	function formatOPG(code) {
+		return fix(code,16);
+	}
+	function formatCustomerId(code) {
+		return fix("CUS"+code,27);
+	}
+	function formatCustomerName(name) {
+		if (name == null)
+			name="C_NAME";
+		return fix(name,35);
+	}
+	
+	function formatCustomerAddr(name) {
+		if (name == null)
+			name="C_ADDR";
+		return fix(name,35);
+	}
+	
+	function formatCustomerPostalCode(code) {
+		if (code == null)
+			code="C_POSTAL";
+		return fix(code,9);
+	}
+	function formatCustomerCity(code) {
+		if (code == null)
+			code="C_CITY";
+		return fix(code,44);
+	}
+	
+	function formatCustomerCode(code) {
+		return fix(code,22);
+	}
+	
+	
+	function formatCustomerId2(code) {
+		return fix("PRS"+code,37);
+	}
+		
+	function formatProductId(code) {
+		return fix("SIT"+code,43);
+	}
+	function formatProductIdNoPrefix(code) {
+		return fix(code,40);
+	}
+
+	function formatNumber10(num) {
+		return fixR(num,10);
+	}
+	
+	function myWrite(str,chk) {
+		/*if (str.length() != chk) {
+			throw new Exception("String size NOT "+chk+" | "+str.length()+" | "+str);
+		}*/
+		tlines++;
+		file.write(str+"\r\n");
+	}
+	myWrite("HDRFLASH1001WS00425  MOST COMPUTERS LTD.                ZACHARY MAVROV                                                        "
+		+ java.date.format( "yyyyMMddHHmm",java.date.now() )
+		+ java.date.format( "yyyyMMdd",dateo.date )
+		+ java.date.format( "yyyyMMdd",dateo.date )
+		+ "XXXXX"
+		+ "0"
+		,160);
+	
+	// ALL ARTICLES -----------------
+	var tt = selector;
+	if (tt != null) 
+	{
+		tt = selector.get_as_map();
+		if (tt == null || tt.is_empty)
+			tt=null;
+		else {
+			if (!(tt[0] instanceof db.most.article))
+				tt=null;		
+		}
+	}
+	var cnd = "(CAST ( CAST ( COALESCE((SELECT SUM(protocols.quantity) WHERE id = :VR__OUTER_SELECT_ID AND protocols.objectdef.code='protocol_stock' AND protocols.official_date.\"date\" <= :DTE ),0) AS INTEGER) - COALESCE((SELECT SUM(protocols.quantity) WHERE id = :VR__OUTER_SELECT_ID AND protocols.objectdef.code='protocol_sale' AND protocols.stock IS NOT NULL AND protocols.official_date.\"date\" <= :DTE ),0) - COALESCE((SELECT SUM(official_value) FROM most.state_adjustment_official WHERE article = :VR__OUTER_SELECT_ID),0) AS INTEGER) <> 0)";
+	var sel = null;
+	if (tt == null) {
+		sel = db.most.article.SELECT("vendor = :VID AND (protocols.official_date = :DID OR "+cnd+") ORDER BY code,id");
+		sel["DTE"]=dateo.date;
+		sel["DID"]=dateo.id;
+		sel["VID"]=ven.id;	
+		sel.is_cached=false;
+	} else {
+		sel = tt;
+	}
+	var arr=[];
+	for (var a : sel) if (a.vendor == ven)
+	{
+		var params=new M();
+		params["AID"]=a.id;
+		params["DID"]=dateo.id;	
+		params["DTE"]=dateo.date;
+		
+		var stocked = 0;
+		var sold  = 0;
+		var tsold = 0;
+		var tstocked = 0;
+
+		//STOCKED
+		var sl=db.most.protocol_stock.VSQL_QUERY_SUM("SELECT quantity AS VAL WHERE article = :AID AND official_date = :DID",params);
+		if (sl.next() && sl.getInt("RES") != null) stocked=sl.getInt("RES");
+		
+		//SOLD
+		var sl = db.most.protocol_sale.VSQL_QUERY_SUM("SELECT quantity AS VAL WHERE article = :AID AND real_date = :DID AND stock IS NOT NULL",params);
+		if (sl.next() && sl.getInt("RES") != null) sold=sl.getInt("RES");
+		sl = db.most.state_adjustment_official.VSQL_QUERY_SUM("SELECT official_value AS VAL WHERE article = :AID AND \"date\" = :DTE",params);
+		if (sl.next() && sl.getInt("RES") != null) sold+=sl.getInt("RES");
+		
+		//TOTAL STOCKED
+		var sl  = db.most.protocol_stock.VSQL_QUERY_SUM("SELECT quantity AS VAL WHERE article = :AID AND official_date.\"date\" <= :DTE",params);
+		if (sl.next() && sl.getInt("RES") != null) tstocked=sl.getInt("RES");
+
+		//TOTAL SOLD 
+		var sl = db.most.protocol_sale.VSQL_QUERY_SUM("SELECT quantity AS VAL WHERE article = :AID AND official_date.\"date\" <= :DTE AND stock IS NOT NULL",params);
+		if (sl.next() && sl.getInt("RES") != null) tsold=sl.getInt("RES");
+
+		sl = db.most.state_adjustment_official.VSQL_QUERY_SUM("SELECT official_value AS VAL WHERE article = :AID AND \"date\" <= :DTE",params);
+		if (sl.next() && sl.getInt("RES") != null) tsold+=sl.getInt("RES"); 
+		myWrite(
+			formatProductId(a.code)+
+			formatNumber10(stocked)+
+			formatNumber10(stocked)+
+			formatNumber10(tstocked-tsold)+
+			fix("",28)+
+			formatNumber10(sold)+
+			formatNumber10(0)
+
+			,121	// total 121 chars
+		);
+	}
+
+	// ALL CUSTOMERS -----------------
+	var ss = db.most.customer.SELECT("(sales.official_date = :DID) AND sales.article.vendor = :VID ORDER BY code,id");
+	ss["VID"]=ven.id;
+	ss["DID"]=dateo.id;
+	ss.is_cached=false;
+	for (var c : ss) 
+	{		
+		myWrite(
+			formatCustomerId(c.abbreviation)+
+			formatCustomerName(c.name["en-US"])+
+			formatCustomerAddr(c.street_str)+
+			formatCustomerPostalCode(c.postal_code_str)+
+			formatCustomerCity(c.city_str)+
+			formatCustomerCode(c.code == null ? "BGL" : "BGL"+c.code)
+			,172									
+		);
+	}
+	
+	var sel1 = db.most.protocol_sale.SELECT("official_date = :DID AND stock.article.vendor = :VID AND customer IS NOT NULL ORDER BY customer.code,code,id");
+	sel1["DID"]=dateo.id;
+	sel1["VID"]=ven.id;
+	sel1.is_cached=false;
+	for (var p : sel1) 
+	{
+		myWrite(
+			formatCustomerId2(p.customer.abbreviation)+
+			formatProductIdNoPrefix(p.stock.article.code)+
+			formatNumber10(p.quantity)+
+			fix("",69)+
+			formatOPG(p.stock.opg != null ? "BGL"+p.stock.opg.code : "BGL")+			// UPFRONT OPG
+			formatOPG(p.opg != null ? p.opg.code : "")			// RABAT OPG
+			,172									
+		);
+	}
+	file.write("TRL"+fixR(tlines+1,10)+"\r\n");
+	file.close();
+	
+%>
+<div style="padding:1em">
+<span style="background:url('<%= java.util.getLocalImageURLContent("/icons/22/internet-download-manager.png") %>') no-repeat left center;padding-left:26px;">
+<%= MSG("INFO_DOWNLOAD") + ": " %><a href="<%= file.getWebPath()+"?operation=download&filename="+URLENCODE(ven.code+"-"+dateo.code+".txt") %>"><%= STR2HTML(ven.code)+"-"+dateo.code+".txt" %></a>
+</span>
+</div>
+<%	
+}
+%>
+</body>
+</html>]]></en-US></value>
+   </content>
+   <param_objectdef>
+      <value><object mode="update" code="script_execution_context_daily_report_param" objectdef="objectdef" module="core" cond="code='script_execution_context_daily_report_param' AND module.code='most'"/></value>
+   </param_objectdef>
+   <param_category_code>
+      <value>main</value>
+   </param_category_code>
+   <is_archived>
+      <value>false</value>
+   </is_archived>
+   <uuid>
+      <value>Xlss2kpYRZq7y10PfxQcjw</value>
+   </uuid>
+</object>
+</objects></import>

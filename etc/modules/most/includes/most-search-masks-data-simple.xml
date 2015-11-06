@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<import revision="$LastChangedRevision: 18817 $" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:vsl="http://www.plan-vision.com/VSL/1.0">
+<objects>
+<!--  -->
+<object code="most.article" objectdef="search_mask" module="user_interface" cond="&quot;uuid&quot; = 'IDIRJzMlRmC05GjTnR2x-Q'">
+   <layout_type>
+      <value>flow</value>
+   </layout_type>
+   <target_objectdef>
+      <value><object mode="update" code="article" objectdef="objectdef" module="core" cond="code='article' AND module.code='most'"/></value>
+   </target_objectdef>
+   <widgets mode="update">
+      <value sort_id="0"><object mode="update" code="SEA000001538" objectdef="search_mask_input_widget" module="user_interface" cond="&quot;uuid&quot; = 'OqDWWEVwRk2kvPlWax2tww'"/></value>
+      <value sort_id="0"><object mode="update" code="SEA000001538" objectdef="search_mask_input_widget" module="user_interface" cond="&quot;uuid&quot; = 'OlFntLReSuOFjOhk5Kfeug'"/></value>
+   </widgets>
+   <height>
+      <value>auto</value>
+   </height>
+   <width>
+      <value>100%</value>
+   </width>
+   <is_skip_missing>
+      <value>false</value>
+   </is_skip_missing>
+   <sort_id>
+      <value>0</value>
+   </sort_id>
+   <is_archived>
+      <value>false</value>
+   </is_archived>
+   <uuid>
+      <value>IDIRJzMlRmC05GjTnR2x-Q</value>
+   </uuid>
+</object>
+<!--  -->
+<object code="most.stock" objectdef="search_mask" module="user_interface" cond="&quot;uuid&quot; = 'YdJLCwo_QxK0Dgk8ZxpTVA'">
+   <layout_type>
+      <value>flow</value>
+   </layout_type>
+   <target_objectdef>
+      <value><object mode="update" code="protocol_stock" objectdef="objectdef" module="core" cond="code='protocol_stock' AND module.code='most'"/></value>
+   </target_objectdef>
+   <widgets mode="update">
+      <value sort_id="1"><object mode="update" code="SEA000002560" objectdef="search_mask_input_widget" module="user_interface" cond="&quot;uuid&quot; = 'xTKYoMAFSi6DFEh9hFbVYw'"/></value>
+      <value sort_id="2"><object mode="update" code="SEA000002560" objectdef="search_mask_input_widget" module="user_interface" cond="&quot;uuid&quot; = 'w9dpbAVsTKaOV4HU1x4ZrQ'"/></value>
+      <value sort_id="3"><object mode="update" code="SEA000002565" objectdef="search_mask_input_widget" module="user_interface" cond="&quot;uuid&quot; = 'wC2UsVNASoWCyZbyWuIgrA'"/></value>
+      <value sort_id="4"><object mode="update" code="SEA000002564" objectdef="search_mask_input_widget" module="user_interface" cond="&quot;uuid&quot; = 'lSVTPBGtRmmk_OypaVVYyw'"/></value>
+      <value sort_id="5"><object mode="update" code="SEA000002560" objectdef="search_mask_input_widget" module="user_interface" cond="&quot;uuid&quot; = 'k4yiNIalTHqsL9jBVVjw1w'"/></value>
+      <value sort_id="6"><object mode="update" code="SEA000002560" objectdef="search_mask_input_widget" module="user_interface" cond="&quot;uuid&quot; = 'rFUu2PFeRkiH5t4ivnxlzw'"/></value>
+      <value sort_id="7"><object mode="update" code="SEA000002560" objectdef="search_mask_input_widget" module="user_interface" cond="&quot;uuid&quot; = 'ZCJRj7kiQey3g6dSy2TSQQ'"/></value>
+   </widgets>
+   <height>
+      <value>auto</value>
+   </height>
+   <width>
+      <value>100%</value>
+   </width>
+   <is_skip_missing>
+      <value>false</value>
+   </is_skip_missing>
+   <sort_id>
+      <value>0</value>
+   </sort_id>
+   <is_archived>
+      <value>false</value>
+   </is_archived>
+   <uuid>
+      <value>YdJLCwo_QxK0Dgk8ZxpTVA</value>
+   </uuid>
+</object>
+<!--  -->
+<object code="most.sale" objectdef="search_mask" module="user_interface" cond="&quot;uuid&quot; = 'itOhSt6wSPyC3l0rqDDa1Q'">
+   <layout_type>
+      <value>flow</value>
+   </layout_type>
+   <target_objectdef>
+      <value><object mode="update" code="protocol_sale" objectdef="objectdef" module="core" cond="code='protocol_sale' AND module.code='most'"/></value>
+   </target_objectdef>
+   <widgets mode="update">
+      <value sort_id="0"><object mode="update" code="SEA000002048" objectdef="search_mask_input_widget" module="user_interface" cond="&quot;uuid&quot; = '7mUNYdg3T_KLY8lsMGuc8Q'"/></value>
+      <value sort_id="0"><object mode="update" code="SEA000002048" objectdef="search_mask_input_widget" module="user_interface" cond="&quot;uuid&quot; = 'WD6lZ4nMSyGmPBS-dQ0wIA'"/></value>
+      <value sort_id="0"><object mode="update" code="SEA000002048" objectdef="search_mask_input_widget" module="user_interface" cond="&quot;uuid&quot; = 'VqXfCzA3QT68z6C8z9tIYw'"/></value>
+      <value sort_id="0"><object mode="update" code="SEA000002048" objectdef="search_mask_input_widget" module="user_interface" cond="&quot;uuid&quot; = '4lclTawNTxewu0Rdvn_niw'"/></value>
+      <value sort_id="0"><object mode="update" code="SEA000002048" objectdef="search_mask_input_widget" module="user_interface" cond="&quot;uuid&quot; = 'cWf9u_tMQm6_YYtyfvdjFw'"/></value>
+      <value sort_id="0"><object mode="update" code="SEA000002048" objectdef="search_mask_input_widget" module="user_interface" cond="&quot;uuid&quot; = 'X1xARtUqTdGMOgtjTdweBg'"/></value>
+   </widgets>
+   <height>
+      <value>auto</value>
+   </height>
+   <width>
+      <value>100%</value>
+   </width>
+   <is_skip_missing>
+      <value>false</value>
+   </is_skip_missing>
+   <sort_id>
+      <value>0</value>
+   </sort_id>
+   <is_archived>
+      <value>false</value>
+   </is_archived>
+   <uuid>
+      <value>itOhSt6wSPyC3l0rqDDa1Q</value>
+   </uuid>
+</object>
+</objects></import>
