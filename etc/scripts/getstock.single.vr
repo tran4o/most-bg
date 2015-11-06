@@ -1,0 +1,285 @@
+vscript
+
+var invoiceno = "7317636";
+
+var INITIAL = 0;        // disable after inital import
+var DEBUG = true;
+
+var pcnt = 0; var pnew = 0;
+
+function prod_find_or_create(code, name, product_line, description, vendor) {
+    //trim code
+    if ( code.indexOf("#") > 0 ) {
+        code = code.substring(0, code.indexOf("#"));
+    }
+
+    var artobj = db.most.article.INSTANCES[code];
+
+    if (artobj != null) {
+        if (DEBUG) console.log("product " + code + " found. vendor is " + vendor);
+    } else {
+        if (DEBUG) console.log("product " + code + " not found. new instance. vendor is " + vendor);
+        artobj = new db.most.article();
+        pnew++;
+    }
+
+    vendor = db.contacts.vendor.INSTANCES[vendor];
+    if ( vendor == null ) {
+        vendor = db.contacts.vendor.INSTANCES["HPOLD"];
+    }
+
+    artobj.code = code;
+    artobj.name["en-US"] = name;
+    artobj.product_line = product_line;
+    artobj.description["en-US"] = description;
+
+    artobj.vendor = vendor;
+
+    artobj.commit();
+
+    pcnt++;
+    return artobj;
+}
+
+// ------------------------------------------------------------
+
+function connect_source_db() {
+    var map = new M();
+
+    map["user"] = db.prefs["most.import.sql.user"];
+    map["password"] = db.prefs["most.import.sql.pass"];
+    var con = new java.db.Connection(
+        "mssql_2008",
+        "jdbc:sqlserver://" + db.prefs["most.import.sql.host"] + ";database=" + db.prefs["most.import.sql.dbname"],
+        map);
+
+    return con;
+}
+
+// main // -----------------------------------------------------------
+
+var con = connect_source_db();
+console.log("fetching invoice list... ");
+
+var target;
+var datecond;
+
+if (INITIAL) {
+    target = "invoic inner join ( select distinct InvoiceNo from selinv3 ) s3 on invoic.InvoiceNo = s3.InvoiceNo";
+    datecond = "and invoic.InvoiceNo = '" + invoiceno + "'";
+} else {
+    target = "invoic";
+
+    var params = new M();
+    var sl = db.most.invoice.VSQL_QUERY_MAX("SELECT invoice_date AS VAL", params);
+    var lastmod = null;
+
+    if (sl.next()) {
+        var mt = sl.getDate("RES");
+        lastmod = java.date.format("yyyy-MM-dd", mt);
+    }
+
+    console.log("getting stock after " + lastmod);
+    datecond = "and invoic.InvoiceNo = '" + invoiceno + "'";
+}
+
+var q = [
+    "select ",
+    "'INV' + RIGHT('0000000000' + invoic.InvoiceNo, 10) as code, ",
+    "CompanyIdentifier as vendor, ",
+    "ContractNo as contract, ",
+    "InvoiceDate as invoice_date, ",
+    "invoic.InvoiceNo as name, ",
+    "PurchOrderNo as purchase_order ",
+    "from " + target,
+    "where MsgType = 380",
+    datecond,
+    "order by InvoiceDate desc"
+].join(" ");
+
+if (DEBUG) {
+    var res = con.select(q);
+    console.log(q);
+    console.log("would have to get");
+
+    while (res.next()) {
+        console.log(res.getString("code") + "/" + res.getString("invoice_date"));
+    }
+}
+
+var res = con.select(q);
+
+console.log("query went through... processing");
+
+var invlst = [];
+var cnt = 0; var cntnew = 0;
+
+while (res.next()) {
+
+var code = res.getString("code");
+    var vendor = res.getString("vendor");
+
+    // new invoices should have vendor
+    vendor = db.contacts.vendor.INSTANCES[vendor];
+
+    // in case we have an empty record => deduce its old invoice
+    if ( vendor == null ) {
+        vendor = db.contacts.vendor.INSTANCES["HPOLD"];
+    }
+
+    var inv = db.most.invoice.INSTANCES[code];
+
+    if (inv != null) {
+        if (DEBUG) console.log("update inv. code " + code + " / " + vendor.code);
+    } else {
+        if (DEBUG) console.log("create inv. code " + code + " / " + vendor.code);
+        inv = new db.most.invoice();
+        inv.code = code;
+        cntnew++;
+    }
+
+    // set properties
+
+    inv.code = code;
+    inv.name["en-US"] = res.getString("name");
+    inv.purchase_order = res.getString("purchase_order");
+    inv.vendor = vendor;
+    inv.contract = res.getString("contract");
+    inv.invoice_date = res.getDate("invoice_date");
+    inv.import_time = java.date.today();
+
+    invlst.push(inv);
+    inv.commit();
+
+    if ( ++cnt % 128 == 0 ) {
+        console.log("processed " + cnt + " invoices and counting...");
+        db.commit();
+        java.util.commitDBConnection();
+    }
+}
+
+console.log("processed a total of " + cnt + " invoices, and " + cntnew + " of them are new. good work !");
+console.log("---------------------");
+console.log("fetching new invoices protocols...");
+
+cnt = 0; cntnew = 0;
+
+for (var inv: invlst) {
+    var q = [
+    "select ",
+    "'INV' + RIGHT('0000000000' + InvoiceNo, 10) + '/' + cast (ItemNo as varchar) as code,",
+    "'OPG' + RIGHT('0000000000' + DealID, 10) as opg_code, ",
+    "ItemNo as item_no,",
+    "VendorPartNo as article_code,",
+    "Quantity as quantity,",
+    "UnitNetPrice as price,",
+    "BundleId as bundle_number,",
+    "(select top 1 short_desc from NancyProducts where product_base_no = dbo.ven2clean(VendorPartNo) order by UpdatedDateTimeStamp desc) as article_name, ",
+    "(select top 1 product_line from NancyProducts where product_base_no = dbo.ven2clean(VendorPartNo) order by UpdatedDateTimeStamp desc) as article_product_line, ",
+    "(select top 1 long_desc from NancyProducts where product_base_no = dbo.ven2clean(VendorPartNo) order by UpdatedDateTimeStamp desc) as article_description ",
+    "from invdet",
+    "where InvoiceNo = '" + inv.name + "' order by ItemNo asc"
+].join(" ");
+
+    if (cnt == 0) {
+        console.log("example query: ");
+        console.log(q);
+    }
+
+    var res = con.select(q);
+
+    while(res.next()) {
+        var stock_code = res.getString("code");
+        var stock = db.most.protocol_stock.INSTANCES[stock_code];
+
+        if (stock != null) {
+            if (DEBUG) console.log("found stock protocol. code: " + stock_code);
+        } else {
+            stock  = new db.most.protocol_stock();
+            if (DEBUG) console.log("create stock protocol. code: " + stock_code);
+            cntnew++;
+        }
+
+        stock.code = stock_code;
+        stock.name["en-US"] = res.getString("article_description");
+        stock.bundle_number = res.getString("bundle_number");
+        stock.quantity = res.getInt("quantity");
+        stock.price = res.getDouble("price");
+        stock.real_date = db.most.protocol_date.INSTANCES[java.date.format( "dd.MM.yyyy", inv.invoice_date)];
+
+
+        if (stock.real_date == null) {
+            console.log("missing date " + java.date.format( "dd.MM.yyyy", inv.invoice_date));
+            stock.real_date = db.most.protocol_date.INSTANCES["01.01.2015"];
+        }
+
+        if (DEBUG) { console.log("set date to " + stock.real_date + " / " + java.date.format( "dd.MM.yyyy", inv.invoice_date)); }
+
+        if ( INITIAL ) stock.official_date = stock.real_date;
+
+        // set article, meanwhile creating it
+        var artobj = prod_find_or_create(
+            res.getString("article_code"),
+            res.getString("article_name"),
+            res.getString("product_line"),
+            res.getString("article_description"),
+            inv.vendor.code
+        );
+
+        stock.article = artobj;
+
+        // set opg to
+        var opgcode = res.getString("opg_code");
+        var opg = db.most.opg.INSTANCES[opgcode];
+
+        if ( opg == null && res.getString("opg_code") != "OPG0000000000") {
+            console.log("error: encountered missing OPG: " + opgcode +
+                " / article " + res.getString("article_code") +
+                " / invoice no " + inv.name
+            );
+        }
+        if ( opg != null && opg != "OPG0000000000" ) {
+            stock.opg = opg;
+/*
+// TODO: unblock this when we're ready to move opg to invoice
+            if ( inv.opg == null )  {
+                inv.opg = opg;
+            } else {
+                if ( inv.opg != opg ) {
+                throw new Exception("encountered invoice mismatch for OPG. has " + inv.opg + " while position designates " + opg);
+            }
+*/
+        }
+
+        stock.commit();
+        inv.stocks << stock;
+
+        if ( ++cnt % 512 == 0 ) {
+            console.log("processed " + cnt + " stock protocols and counting...");
+            db.commit();
+            java.util.commitDBConnection();
+        }
+
+        stock.commit();
+
+// serials -----------------------------------------------------------------------------------------
+
+    var res = con.select([
+        "select SerialNo as serial_num",
+        "from invser where InvoiceNo = '" + inv.name + "' order by ItemNo asc"].join(" "));
+
+        stock.serial_ids.remove();
+        while (res.next()) {
+            stock.serial_ids << res.getString("serial_num");
+
+            stock.commit();
+        }
+    }
+
+    inv.commit();
+}
+
+
+console.log("processed a total of " + cnt + " stock positions, and " + cntnew + " of them are new. good work !");
+console.log("intercepted " + pcnt + " products, and " + pnew + " of them are new. good work !");
+
