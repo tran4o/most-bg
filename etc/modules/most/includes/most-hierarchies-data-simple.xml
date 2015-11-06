@@ -59,6 +59,27 @@ return element.parent;
                     </object>                                   
                 </value>
             </get_parent>
+            
+            <get_order_by_from_objectdef>
+                <value>
+                    <object code="most.protocol_date:get_order_by_from_objectdef" objectdef="vscript" module="core" >
+                        <params>
+                            <value>                                     
+                                <object code="odef" module="core" objectdef="script_param"></object>
+                            </value>
+                        </params>   
+                        <script_code>
+                            <value><![CDATA[
+if (odef == db.most.category_date)
+	return "code";
+if (db.most.protocol.all_inherited_from.contains(odef))
+	return "\"date\"";
+return null;
+                            ]]></value>
+                        </script_code>
+                    </object>                                   
+                </value>
+            </get_order_by_from_objectdef>
 
             <get_subtree_element_count>
                 <value>
@@ -250,6 +271,11 @@ return res;
             <expand_inital_depth>
                 <value>0</value>
             </expand_inital_depth>
+			<get_order_by_from_objectdef>
+                <value>
+                    <object code="most.protocol_date:get_order_by_from_objectdef" objectdef="vscript" module="core"/>
+                </value>
+            </get_order_by_from_objectdef>
         </object>      
         
         
@@ -387,6 +413,11 @@ return res;
             <expand_inital_depth>
                 <value>0</value>
             </expand_inital_depth>
+			<get_order_by_from_objectdef>
+                <value>
+                    <object code="most.protocol_date:get_order_by_from_objectdef" objectdef="vscript" module="core"/>
+                </value>
+            </get_order_by_from_objectdef>
         </object>      
     </objects>
 </import>

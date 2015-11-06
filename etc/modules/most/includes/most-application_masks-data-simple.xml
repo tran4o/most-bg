@@ -70,7 +70,7 @@
                                         <value><![CDATA[
 var res = "<p style='line-height:16px;cursor:pointer;'>"+this.name+
           "<br/><b style='color:#D8D8D8;'>"+
-            db.most.customer.INSTANCES.approx_size_formated+" "+MSG("OVERVIEW_LABEL_OBJECTS")+
+            FORMAT(db.most.customer.INSTANCES.size)+" "+MSG("OVERVIEW_LABEL_OBJECTS")+
           "</b></p>";
 return res;
                                         ]]></value>
@@ -131,7 +131,7 @@ return res;
                                         <value><![CDATA[
 var res = "<p style='line-height:16px;cursor:pointer;'>"+this.name+
           "<br/><b style='color:#D8D8D8;'>"+
-            db.most.invoice.INSTANCES.approx_size_formated+" "+MSG("OVERVIEW_LABEL_OBJECTS")+
+            FORMAT(db.most.invoice.INSTANCES.size)+" "+MSG("OVERVIEW_LABEL_OBJECTS")+
           "</b></p>";
 return res;
 		                                ]]></value>
@@ -249,7 +249,7 @@ return res;
                                         <value><![CDATA[
 var res = "<p style='line-height:16px;cursor:pointer;'>"+this.name+
           "<br/><b style='color:#D8D8D8;'>"+
-            db.most.protocol_stock.INSTANCES.approx_size_formated+" "+MSG("OVERVIEW_LABEL_OBJECTS")+
+            FORMAT(db.most.protocol_stock.INSTANCES.size)+" "+MSG("OVERVIEW_LABEL_OBJECTS")+
           "</b></p>";
 return res;
 		                                ]]></value>
@@ -307,7 +307,7 @@ return res;
                                         <value><![CDATA[
 var res = "<p style='line-height:16px;cursor:pointer;'>"+this.name+
           "<br/><b style='color:#D8D8D8;'>"+
-            db.most.protocol_sale.INSTANCES.approx_size_formated+" "+MSG("OVERVIEW_LABEL_OBJECTS")+
+            FORMAT(db.most.protocol_sale.INSTANCES.size)+" "+MSG("OVERVIEW_LABEL_OBJECTS")+
           "</b></p>";
 return res;
 		                                ]]></value>
@@ -359,7 +359,7 @@ return res;
                                         <value><![CDATA[
 var res = "<p style='line-height:16px;cursor:pointer;'>"+this.name+
           "<br/><b style='color:#D8D8D8;'>"+
-            db.most.opg.INSTANCES.approx_size_formated+" "+MSG("OVERVIEW_LABEL_OBJECTS")+
+            FORMAT(db.most.opg.INSTANCES.size)+" "+MSG("OVERVIEW_LABEL_OBJECTS")+
           "</b></p>";
 return res;
 		                                ]]></value>
@@ -413,7 +413,7 @@ return res;
                                         <value><![CDATA[
 var res = "<p style='line-height:16px;cursor:pointer;'>"+this.name+
           "<br/><b style='color:#D8D8D8;'>"+
-            db.most.protocol_date.INSTANCES.approx_size_formated+" "+MSG("OVERVIEW_LABEL_OBJECTS")+
+            FORMAT(db.most.protocol_date.INSTANCES.size)+" "+MSG("OVERVIEW_LABEL_OBJECTS")+
           "</b></p>";
 return res;
 		                                ]]></value>
@@ -468,7 +468,7 @@ return res;
                                         <value><![CDATA[
 var res = "<p style='line-height:16px;cursor:pointer;'>"+this.name+
           "<br/><b style='color:#D8D8D8;'>"+
-            db.most.odit.INSTANCES.approx_size_formated+" "+MSG("OVERVIEW_LABEL_OBJECTS")+
+            FORMAT(db.most.odit.INSTANCES.size)+" "+MSG("OVERVIEW_LABEL_OBJECTS")+
           "</b></p>";
 return res;
 		                                ]]></value>
@@ -521,7 +521,7 @@ return res;
                                         <value><![CDATA[
 var res = "<p style='line-height:16px;cursor:pointer;'>"+this.name+
           "<br/><b style='color:#D8D8D8;'>"+
-            db.most.state_adjustment_official.INSTANCES.approx_size_formated+" "+MSG("OVERVIEW_LABEL_OBJECTS")+
+            FORMAT(db.most.state_adjustment_official.INSTANCES.size)+" "+MSG("OVERVIEW_LABEL_OBJECTS")+
           "</b></p>";
 return res;
 		                                ]]></value>
@@ -574,7 +574,7 @@ return res;
                                         <value><![CDATA[
 var res = "<p style='line-height:16px;cursor:pointer;'>"+this.name+
           "<br/><b style='color:#D8D8D8;'>"+
-            db.most.state_adjustment_real.INSTANCES.approx_size_formated+" "+MSG("OVERVIEW_LABEL_OBJECTS")+
+            FORMAT(db.most.state_adjustment_real.INSTANCES.size)+" "+MSG("OVERVIEW_LABEL_OBJECTS")+
           "</b></p>";
 return res;
 		                                ]]></value>
