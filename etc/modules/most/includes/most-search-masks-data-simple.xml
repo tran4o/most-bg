@@ -1,6 +1,132 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <import revision="$LastChangedRevision: 18817 $" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:vsl="http://www.plan-vision.com/VSL/1.0">
 <objects>
+<object code="SEA000001538" objectdef="search_mask_input_widget" module="user_interface" cond="&quot;uuid&quot; = 'OqDWWEVwRk2kvPlWax2tww'">
+   <uuid>
+      <value>OqDWWEVwRk2kvPlWax2tww</value>
+   </uuid>
+</object><object code="most.article" objectdef="search_mask" module="user_interface" cond="&quot;uuid&quot; = 'IDIRJzMlRmC05GjTnR2x-Q'">
+   <uuid>
+      <value>IDIRJzMlRmC05GjTnR2x-Q</value>
+   </uuid>
+</object><object code="SEA000001538" objectdef="search_mask_input_widget" module="user_interface" cond="&quot;uuid&quot; = 'OlFntLReSuOFjOhk5Kfeug'">
+   <uuid>
+      <value>OlFntLReSuOFjOhk5Kfeug</value>
+   </uuid>
+</object><object code="most.stock" objectdef="search_mask" module="user_interface" cond="&quot;uuid&quot; = 'YdJLCwo_QxK0Dgk8ZxpTVA'">
+   <uuid>
+      <value>YdJLCwo_QxK0Dgk8ZxpTVA</value>
+   </uuid>
+</object><object code="SEA000002560" objectdef="search_mask_input_widget" module="user_interface" cond="&quot;uuid&quot; = 'w9dpbAVsTKaOV4HU1x4ZrQ'">
+   <uuid>
+      <value>w9dpbAVsTKaOV4HU1x4ZrQ</value>
+   </uuid>
+</object><object code="SEA000002560" objectdef="search_mask_input_widget" module="user_interface" cond="&quot;uuid&quot; = 'xTKYoMAFSi6DFEh9hFbVYw'">
+   <uuid>
+      <value>xTKYoMAFSi6DFEh9hFbVYw</value>
+   </uuid>
+</object><object code="SEA000002560" objectdef="search_mask_input_widget" module="user_interface" cond="&quot;uuid&quot; = 'k4yiNIalTHqsL9jBVVjw1w'">
+   <uuid>
+      <value>k4yiNIalTHqsL9jBVVjw1w</value>
+   </uuid>
+</object><object code="SEA000002564" objectdef="search_mask_input_widget" module="user_interface" cond="&quot;uuid&quot; = 'lSVTPBGtRmmk_OypaVVYyw'">
+   <uuid>
+      <value>lSVTPBGtRmmk_OypaVVYyw</value>
+   </uuid>
+</object><object code="SEA000002565" objectdef="search_mask_input_widget" module="user_interface" cond="&quot;uuid&quot; = 'wC2UsVNASoWCyZbyWuIgrA'">
+   <uuid>
+      <value>wC2UsVNASoWCyZbyWuIgrA</value>
+   </uuid>
+</object><object code="SEA000002560" objectdef="search_mask_input_widget" module="user_interface" cond="&quot;uuid&quot; = 'rFUu2PFeRkiH5t4ivnxlzw'">
+   <uuid>
+      <value>rFUu2PFeRkiH5t4ivnxlzw</value>
+   </uuid>
+</object><object code="SEA000002560" objectdef="search_mask_input_widget" module="user_interface" cond="&quot;uuid&quot; = 'ZCJRj7kiQey3g6dSy2TSQQ'">
+   <uuid>
+      <value>ZCJRj7kiQey3g6dSy2TSQQ</value>
+   </uuid>
+</object><object code="SEA000002048" objectdef="search_mask_input_widget" module="user_interface" cond="&quot;uuid&quot; = '7mUNYdg3T_KLY8lsMGuc8Q'">
+   <uuid>
+      <value>7mUNYdg3T_KLY8lsMGuc8Q</value>
+   </uuid>
+</object><object code="most.sale" objectdef="search_mask" module="user_interface" cond="&quot;uuid&quot; = 'itOhSt6wSPyC3l0rqDDa1Q'">
+   <uuid>
+      <value>itOhSt6wSPyC3l0rqDDa1Q</value>
+   </uuid>
+</object><object code="SEA000002048" objectdef="search_mask_input_widget" module="user_interface" cond="&quot;uuid&quot; = 'WD6lZ4nMSyGmPBS-dQ0wIA'">
+   <uuid>
+      <value>WD6lZ4nMSyGmPBS-dQ0wIA</value>
+   </uuid>
+</object><object code="SEA000002048" objectdef="search_mask_input_widget" module="user_interface" cond="&quot;uuid&quot; = 'VqXfCzA3QT68z6C8z9tIYw'">
+   <uuid>
+      <value>VqXfCzA3QT68z6C8z9tIYw</value>
+   </uuid>
+</object><object code="SEA000002048" objectdef="search_mask_input_widget" module="user_interface" cond="&quot;uuid&quot; = '4lclTawNTxewu0Rdvn_niw'">
+   <uuid>
+      <value>4lclTawNTxewu0Rdvn_niw</value>
+   </uuid>
+</object><object code="SEA000002048" objectdef="search_mask_input_widget" module="user_interface" cond="&quot;uuid&quot; = 'cWf9u_tMQm6_YYtyfvdjFw'">
+   <uuid>
+      <value>cWf9u_tMQm6_YYtyfvdjFw</value>
+   </uuid>
+</object><object code="SEA000002048" objectdef="search_mask_input_widget" module="user_interface" cond="&quot;uuid&quot; = 'X1xARtUqTdGMOgtjTdweBg'">
+   <uuid>
+      <value>X1xARtUqTdGMOgtjTdweBg</value>
+   </uuid>
+</object><!-- user_interface.search_mask:1536|widgets| -->
+<object code="SEA000001538" objectdef="search_mask_input_widget" module="user_interface" cond="&quot;uuid&quot; = 'OqDWWEVwRk2kvPlWax2tww'">
+   <reference_owner>
+      <value><!--  -->
+<object mode="update" code="most.article" objectdef="search_mask" module="user_interface" cond="&quot;uuid&quot; = 'IDIRJzMlRmC05GjTnR2x-Q'"/></value>
+   </reference_owner>
+   <operator>
+      <value><object mode="update" code="EQUAL_OR_GREATER_THAN" objectdef="operator_number" module="core" /></value>
+   </operator>
+   <name>
+      <value>
+         <en-US>Min avail</en-US></value>
+   </name>
+   <sort_id>
+      <value>0</value>
+   </sort_id>
+   <search_mask>
+      <value><!--  -->
+<object mode="update" code="most.article" objectdef="search_mask" module="user_interface" cond="&quot;uuid&quot; = 'IDIRJzMlRmC05GjTnR2x-Q'"/></value>
+   </search_mask>
+   <relation_path>
+      <value>available_official</value>
+   </relation_path>
+   <is_auto_name_short>
+      <value>true</value>
+   </is_auto_name_short>
+   <width>
+      <value>120</value>
+   </width>
+   <height>
+      <value>auto</value>
+   </height>
+   <overflow>
+      <value>hidden</value>
+   </overflow>
+   <is_archived>
+      <value>false</value>
+   </is_archived>
+   <margin_left>
+      <value>2</value>
+   </margin_left>
+   <margin_top>
+      <value>2</value>
+   </margin_top>
+   <margin_right>
+      <value>2</value>
+   </margin_right>
+   <margin_bottom>
+      <value>2</value>
+   </margin_bottom>
+   <uuid>
+      <value>OqDWWEVwRk2kvPlWax2tww</value>
+   </uuid>
+</object>
 <!--  -->
 <object code="most.article" objectdef="search_mask" module="user_interface" cond="&quot;uuid&quot; = 'IDIRJzMlRmC05GjTnR2x-Q'">
    <layout_type>
@@ -10,8 +136,10 @@
       <value><object mode="update" code="article" objectdef="objectdef" module="core" cond="code='article' AND module.code='most'"/></value>
    </target_objectdef>
    <widgets mode="update">
-      <value sort_id="0"><object mode="update" code="SEA000001538" objectdef="search_mask_input_widget" module="user_interface" cond="&quot;uuid&quot; = 'OqDWWEVwRk2kvPlWax2tww'"/></value>
-      <value sort_id="0"><object mode="update" code="SEA000001538" objectdef="search_mask_input_widget" module="user_interface" cond="&quot;uuid&quot; = 'OlFntLReSuOFjOhk5Kfeug'"/></value>
+      <value sort_id="0"><!-- user_interface.search_mask:1536|widgets| -->
+<object mode="update" code="SEA000001538" objectdef="search_mask_input_widget" module="user_interface" cond="&quot;uuid&quot; = 'OqDWWEVwRk2kvPlWax2tww'"/></value>
+      <value sort_id="0"><!-- user_interface.search_mask:1536|widgets| -->
+<object mode="update" code="SEA000001538" objectdef="search_mask_input_widget" module="user_interface" cond="&quot;uuid&quot; = 'OlFntLReSuOFjOhk5Kfeug'"/></value>
    </widgets>
    <height>
       <value>auto</value>
@@ -32,6 +160,60 @@
       <value>IDIRJzMlRmC05GjTnR2x-Q</value>
    </uuid>
 </object>
+<!-- user_interface.search_mask:1536|widgets| -->
+<object code="SEA000001538" objectdef="search_mask_input_widget" module="user_interface" cond="&quot;uuid&quot; = 'OlFntLReSuOFjOhk5Kfeug'">
+   <reference_owner>
+      <value><!--  -->
+<object mode="update" code="most.article" objectdef="search_mask" module="user_interface" cond="&quot;uuid&quot; = 'IDIRJzMlRmC05GjTnR2x-Q'"/></value>
+   </reference_owner>
+   <operator>
+      <value><object mode="update" code="CONTAINS" objectdef="operator_string" module="core" /></value>
+   </operator>
+   <name>
+      <value>
+         <en-US>PL</en-US></value>
+   </name>
+   <sort_id>
+      <value>0</value>
+   </sort_id>
+   <search_mask>
+      <value><!--  -->
+<object mode="update" code="most.article" objectdef="search_mask" module="user_interface" cond="&quot;uuid&quot; = 'IDIRJzMlRmC05GjTnR2x-Q'"/></value>
+   </search_mask>
+   <relation_path>
+      <value>product_line</value>
+   </relation_path>
+   <is_auto_name_short>
+      <value>true</value>
+   </is_auto_name_short>
+   <width>
+      <value>120</value>
+   </width>
+   <height>
+      <value>auto</value>
+   </height>
+   <overflow>
+      <value>hidden</value>
+   </overflow>
+   <is_archived>
+      <value>false</value>
+   </is_archived>
+   <margin_left>
+      <value>2</value>
+   </margin_left>
+   <margin_top>
+      <value>2</value>
+   </margin_top>
+   <margin_right>
+      <value>5</value>
+   </margin_right>
+   <margin_bottom>
+      <value>2</value>
+   </margin_bottom>
+   <uuid>
+      <value>OlFntLReSuOFjOhk5Kfeug</value>
+   </uuid>
+</object>
 <!--  -->
 <object code="most.stock" objectdef="search_mask" module="user_interface" cond="&quot;uuid&quot; = 'YdJLCwo_QxK0Dgk8ZxpTVA'">
    <layout_type>
@@ -41,13 +223,20 @@
       <value><object mode="update" code="protocol_stock" objectdef="objectdef" module="core" cond="code='protocol_stock' AND module.code='most'"/></value>
    </target_objectdef>
    <widgets mode="update">
-      <value sort_id="1"><object mode="update" code="SEA000002560" objectdef="search_mask_input_widget" module="user_interface" cond="&quot;uuid&quot; = 'xTKYoMAFSi6DFEh9hFbVYw'"/></value>
-      <value sort_id="2"><object mode="update" code="SEA000002560" objectdef="search_mask_input_widget" module="user_interface" cond="&quot;uuid&quot; = 'w9dpbAVsTKaOV4HU1x4ZrQ'"/></value>
-      <value sort_id="3"><object mode="update" code="SEA000002565" objectdef="search_mask_input_widget" module="user_interface" cond="&quot;uuid&quot; = 'wC2UsVNASoWCyZbyWuIgrA'"/></value>
-      <value sort_id="4"><object mode="update" code="SEA000002564" objectdef="search_mask_input_widget" module="user_interface" cond="&quot;uuid&quot; = 'lSVTPBGtRmmk_OypaVVYyw'"/></value>
-      <value sort_id="5"><object mode="update" code="SEA000002560" objectdef="search_mask_input_widget" module="user_interface" cond="&quot;uuid&quot; = 'k4yiNIalTHqsL9jBVVjw1w'"/></value>
-      <value sort_id="6"><object mode="update" code="SEA000002560" objectdef="search_mask_input_widget" module="user_interface" cond="&quot;uuid&quot; = 'rFUu2PFeRkiH5t4ivnxlzw'"/></value>
-      <value sort_id="7"><object mode="update" code="SEA000002560" objectdef="search_mask_input_widget" module="user_interface" cond="&quot;uuid&quot; = 'ZCJRj7kiQey3g6dSy2TSQQ'"/></value>
+      <value sort_id="1"><!-- user_interface.search_mask:1537|widgets| -->
+<object mode="update" code="SEA000002560" objectdef="search_mask_input_widget" module="user_interface" cond="&quot;uuid&quot; = 'xTKYoMAFSi6DFEh9hFbVYw'"/></value>
+      <value sort_id="2"><!-- user_interface.search_mask:1537|widgets| -->
+<object mode="update" code="SEA000002560" objectdef="search_mask_input_widget" module="user_interface" cond="&quot;uuid&quot; = 'w9dpbAVsTKaOV4HU1x4ZrQ'"/></value>
+      <value sort_id="3"><!-- user_interface.search_mask:1537|widgets| -->
+<object mode="update" code="SEA000002565" objectdef="search_mask_input_widget" module="user_interface" cond="&quot;uuid&quot; = 'wC2UsVNASoWCyZbyWuIgrA'"/></value>
+      <value sort_id="4"><!-- user_interface.search_mask:1537|widgets| -->
+<object mode="update" code="SEA000002564" objectdef="search_mask_input_widget" module="user_interface" cond="&quot;uuid&quot; = 'lSVTPBGtRmmk_OypaVVYyw'"/></value>
+      <value sort_id="5"><!-- user_interface.search_mask:1537|widgets| -->
+<object mode="update" code="SEA000002560" objectdef="search_mask_input_widget" module="user_interface" cond="&quot;uuid&quot; = 'k4yiNIalTHqsL9jBVVjw1w'"/></value>
+      <value sort_id="6"><!-- user_interface.search_mask:1537|widgets| -->
+<object mode="update" code="SEA000002560" objectdef="search_mask_input_widget" module="user_interface" cond="&quot;uuid&quot; = 'rFUu2PFeRkiH5t4ivnxlzw'"/></value>
+      <value sort_id="7"><!-- user_interface.search_mask:1537|widgets| -->
+<object mode="update" code="SEA000002560" objectdef="search_mask_input_widget" module="user_interface" cond="&quot;uuid&quot; = 'ZCJRj7kiQey3g6dSy2TSQQ'"/></value>
    </widgets>
    <height>
       <value>auto</value>
@@ -68,6 +257,438 @@
       <value>YdJLCwo_QxK0Dgk8ZxpTVA</value>
    </uuid>
 </object>
+<!-- user_interface.search_mask:1537|widgets| -->
+<object code="SEA000002560" objectdef="search_mask_input_widget" module="user_interface" cond="&quot;uuid&quot; = 'w9dpbAVsTKaOV4HU1x4ZrQ'">
+   <reference_owner>
+      <value><!--  -->
+<object mode="update" code="most.stock" objectdef="search_mask" module="user_interface" cond="&quot;uuid&quot; = 'YdJLCwo_QxK0Dgk8ZxpTVA'"/></value>
+   </reference_owner>
+   <operator>
+      <value><object mode="update" code="CONTAINS" objectdef="operator_string" module="core" /></value>
+   </operator>
+   <name>
+      <value>
+         <en-US>Article</en-US></value>
+   </name>
+   <sort_id>
+      <value>2</value>
+   </sort_id>
+   <search_mask>
+      <value><!--  -->
+<object mode="update" code="most.stock" objectdef="search_mask" module="user_interface" cond="&quot;uuid&quot; = 'YdJLCwo_QxK0Dgk8ZxpTVA'"/></value>
+   </search_mask>
+   <relation_path>
+      <value>article.code</value>
+   </relation_path>
+   <is_auto_name_short>
+      <value>true</value>
+   </is_auto_name_short>
+   <width>
+      <value>120</value>
+   </width>
+   <height>
+      <value>auto</value>
+   </height>
+   <overflow>
+      <value>hidden</value>
+   </overflow>
+   <is_archived>
+      <value>false</value>
+   </is_archived>
+   <margin_left>
+      <value>2</value>
+   </margin_left>
+   <margin_top>
+      <value>2</value>
+   </margin_top>
+   <margin_right>
+      <value>2</value>
+   </margin_right>
+   <margin_bottom>
+      <value>2</value>
+   </margin_bottom>
+   <uuid>
+      <value>w9dpbAVsTKaOV4HU1x4ZrQ</value>
+   </uuid>
+</object>
+<!-- user_interface.search_mask:1537|widgets| -->
+<object code="SEA000002560" objectdef="search_mask_input_widget" module="user_interface" cond="&quot;uuid&quot; = 'xTKYoMAFSi6DFEh9hFbVYw'">
+   <reference_owner>
+      <value><!--  -->
+<object mode="update" code="most.stock" objectdef="search_mask" module="user_interface" cond="&quot;uuid&quot; = 'YdJLCwo_QxK0Dgk8ZxpTVA'"/></value>
+   </reference_owner>
+   <operator>
+      <value><object mode="update" code="CONTAINS" objectdef="operator_string" module="core" /></value>
+   </operator>
+   <name>
+      <value>
+         <en-US>PL</en-US></value>
+   </name>
+   <sort_id>
+      <value>1</value>
+   </sort_id>
+   <search_mask>
+      <value><!--  -->
+<object mode="update" code="most.stock" objectdef="search_mask" module="user_interface" cond="&quot;uuid&quot; = 'YdJLCwo_QxK0Dgk8ZxpTVA'"/></value>
+   </search_mask>
+   <relation_path>
+      <value>article.product_line</value>
+   </relation_path>
+   <is_auto_name_short>
+      <value>true</value>
+   </is_auto_name_short>
+   <width>
+      <value>70</value>
+   </width>
+   <height>
+      <value>auto</value>
+   </height>
+   <overflow>
+      <value>hidden</value>
+   </overflow>
+   <is_archived>
+      <value>false</value>
+   </is_archived>
+   <margin_left>
+      <value>2</value>
+   </margin_left>
+   <margin_top>
+      <value>2</value>
+   </margin_top>
+   <margin_right>
+      <value>2</value>
+   </margin_right>
+   <margin_bottom>
+      <value>2</value>
+   </margin_bottom>
+   <uuid>
+      <value>xTKYoMAFSi6DFEh9hFbVYw</value>
+   </uuid>
+</object>
+<!-- user_interface.search_mask:1537|widgets| -->
+<object code="SEA000002560" objectdef="search_mask_input_widget" module="user_interface" cond="&quot;uuid&quot; = 'k4yiNIalTHqsL9jBVVjw1w'">
+   <reference_owner>
+      <value><!--  -->
+<object mode="update" code="most.stock" objectdef="search_mask" module="user_interface" cond="&quot;uuid&quot; = 'YdJLCwo_QxK0Dgk8ZxpTVA'"/></value>
+   </reference_owner>
+   <operator>
+      <value><object mode="update" code="EQUAL_OR_GREATER_THAN" objectdef="operator_number" module="core" /></value>
+   </operator>
+   <name>
+      <value>
+         <en-US>Min</en-US></value>
+   </name>
+   <sort_id>
+      <value>5</value>
+   </sort_id>
+   <search_mask>
+      <value><!--  -->
+<object mode="update" code="most.stock" objectdef="search_mask" module="user_interface" cond="&quot;uuid&quot; = 'YdJLCwo_QxK0Dgk8ZxpTVA'"/></value>
+   </search_mask>
+   <relation_path>
+      <value>rest_quantity</value>
+   </relation_path>
+   <is_auto_name_short>
+      <value>true</value>
+   </is_auto_name_short>
+   <width>
+      <value>100</value>
+   </width>
+   <height>
+      <value>auto</value>
+   </height>
+   <overflow>
+      <value>hidden</value>
+   </overflow>
+   <is_archived>
+      <value>false</value>
+   </is_archived>
+   <margin_left>
+      <value>2</value>
+   </margin_left>
+   <margin_top>
+      <value>2</value>
+   </margin_top>
+   <margin_right>
+      <value>2</value>
+   </margin_right>
+   <margin_bottom>
+      <value>2</value>
+   </margin_bottom>
+   <uuid>
+      <value>k4yiNIalTHqsL9jBVVjw1w</value>
+   </uuid>
+</object>
+<!-- user_interface.search_mask:1537|widgets| -->
+<object code="SEA000002564" objectdef="search_mask_input_widget" module="user_interface" cond="&quot;uuid&quot; = 'lSVTPBGtRmmk_OypaVVYyw'">
+   <reference_owner>
+      <value><!--  -->
+<object mode="update" code="most.stock" objectdef="search_mask" module="user_interface" cond="&quot;uuid&quot; = 'YdJLCwo_QxK0Dgk8ZxpTVA'"/></value>
+   </reference_owner>
+   <operator>
+      <value><object mode="update" code="CONTAINS" objectdef="operator_string" module="core" /></value>
+   </operator>
+   <name>
+      <value>
+         <en-US>Serial</en-US></value>
+   </name>
+   <sort_id>
+      <value>4</value>
+   </sort_id>
+   <search_mask>
+      <value><!--  -->
+<object mode="update" code="most.stock" objectdef="search_mask" module="user_interface" cond="&quot;uuid&quot; = 'YdJLCwo_QxK0Dgk8ZxpTVA'"/></value>
+   </search_mask>
+   <relation_path>
+      <value>serial_ids</value>
+   </relation_path>
+   <is_auto_name_short>
+      <value>false</value>
+   </is_auto_name_short>
+   <width>
+      <value>120</value>
+   </width>
+   <height>
+      <value>auto</value>
+   </height>
+   <overflow>
+      <value>hidden</value>
+   </overflow>
+   <is_archived>
+      <value>false</value>
+   </is_archived>
+   <margin_left>
+      <value>2</value>
+   </margin_left>
+   <margin_top>
+      <value>2</value>
+   </margin_top>
+   <margin_right>
+      <value>2</value>
+   </margin_right>
+   <margin_bottom>
+      <value>2</value>
+   </margin_bottom>
+   <uuid>
+      <value>lSVTPBGtRmmk_OypaVVYyw</value>
+   </uuid>
+</object>
+<!-- user_interface.search_mask:1537|widgets| -->
+<object code="SEA000002565" objectdef="search_mask_input_widget" module="user_interface" cond="&quot;uuid&quot; = 'wC2UsVNASoWCyZbyWuIgrA'">
+   <reference_owner>
+      <value><!--  -->
+<object mode="update" code="most.stock" objectdef="search_mask" module="user_interface" cond="&quot;uuid&quot; = 'YdJLCwo_QxK0Dgk8ZxpTVA'"/></value>
+   </reference_owner>
+   <operator>
+      <value><object mode="update" code="CONTAINS" objectdef="operator_relation" module="core" /></value>
+   </operator>
+   <name>
+      <value>
+         <en-US>OPG</en-US></value>
+   </name>
+   <sort_id>
+      <value>3</value>
+   </sort_id>
+   <search_mask>
+      <value><!--  -->
+<object mode="update" code="most.stock" objectdef="search_mask" module="user_interface" cond="&quot;uuid&quot; = 'YdJLCwo_QxK0Dgk8ZxpTVA'"/></value>
+   </search_mask>
+   <relation_path>
+      <value>opg.code</value>
+   </relation_path>
+   <is_auto_name_short>
+      <value>true</value>
+   </is_auto_name_short>
+   <width>
+      <value>100</value>
+   </width>
+   <height>
+      <value>auto</value>
+   </height>
+   <overflow>
+      <value>hidden</value>
+   </overflow>
+   <is_archived>
+      <value>false</value>
+   </is_archived>
+   <margin_left>
+      <value>2</value>
+   </margin_left>
+   <margin_top>
+      <value>2</value>
+   </margin_top>
+   <margin_right>
+      <value>2</value>
+   </margin_right>
+   <margin_bottom>
+      <value>2</value>
+   </margin_bottom>
+   <uuid>
+      <value>wC2UsVNASoWCyZbyWuIgrA</value>
+   </uuid>
+</object>
+<!-- user_interface.search_mask:1537|widgets| -->
+<object code="SEA000002560" objectdef="search_mask_input_widget" module="user_interface" cond="&quot;uuid&quot; = 'rFUu2PFeRkiH5t4ivnxlzw'">
+   <reference_owner>
+      <value><!--  -->
+<object mode="update" code="most.stock" objectdef="search_mask" module="user_interface" cond="&quot;uuid&quot; = 'YdJLCwo_QxK0Dgk8ZxpTVA'"/></value>
+   </reference_owner>
+   <operator>
+      <value><object mode="update" code="EQUAL_OR_GREATER_THAN" objectdef="operator_date" module="core" /></value>
+   </operator>
+   <name>
+      <value>
+         <en-US>HP min</en-US></value>
+   </name>
+   <sort_id>
+      <value>6</value>
+   </sort_id>
+   <search_mask>
+      <value><!--  -->
+<object mode="update" code="most.stock" objectdef="search_mask" module="user_interface" cond="&quot;uuid&quot; = 'YdJLCwo_QxK0Dgk8ZxpTVA'"/></value>
+   </search_mask>
+   <relation_path>
+      <value><![CDATA[real_date."date"]]></value>
+   </relation_path>
+   <is_auto_name_short>
+      <value>true</value>
+   </is_auto_name_short>
+   <width>
+      <value>160</value>
+   </width>
+   <height>
+      <value>auto</value>
+   </height>
+   <overflow>
+      <value>hidden</value>
+   </overflow>
+   <is_archived>
+      <value>false</value>
+   </is_archived>
+   <margin_left>
+      <value>2</value>
+   </margin_left>
+   <margin_top>
+      <value>2</value>
+   </margin_top>
+   <margin_right>
+      <value>2</value>
+   </margin_right>
+   <margin_bottom>
+      <value>2</value>
+   </margin_bottom>
+   <uuid>
+      <value>rFUu2PFeRkiH5t4ivnxlzw</value>
+   </uuid>
+</object>
+<!-- user_interface.search_mask:1537|widgets| -->
+<object code="SEA000002560" objectdef="search_mask_input_widget" module="user_interface" cond="&quot;uuid&quot; = 'ZCJRj7kiQey3g6dSy2TSQQ'">
+   <reference_owner>
+      <value><!--  -->
+<object mode="update" code="most.stock" objectdef="search_mask" module="user_interface" cond="&quot;uuid&quot; = 'YdJLCwo_QxK0Dgk8ZxpTVA'"/></value>
+   </reference_owner>
+   <operator>
+      <value><object mode="update" code="EQUAL_OR_LESSER_THAN" objectdef="operator_date" module="core" /></value>
+   </operator>
+   <name>
+      <value>
+         <en-US>HP max</en-US></value>
+   </name>
+   <sort_id>
+      <value>7</value>
+   </sort_id>
+   <search_mask>
+      <value><!--  -->
+<object mode="update" code="most.stock" objectdef="search_mask" module="user_interface" cond="&quot;uuid&quot; = 'YdJLCwo_QxK0Dgk8ZxpTVA'"/></value>
+   </search_mask>
+   <relation_path>
+      <value><![CDATA[real_date."date"]]></value>
+   </relation_path>
+   <is_auto_name_short>
+      <value>true</value>
+   </is_auto_name_short>
+   <width>
+      <value>160</value>
+   </width>
+   <height>
+      <value>auto</value>
+   </height>
+   <overflow>
+      <value>hidden</value>
+   </overflow>
+   <is_archived>
+      <value>false</value>
+   </is_archived>
+   <margin_left>
+      <value>2</value>
+   </margin_left>
+   <margin_top>
+      <value>2</value>
+   </margin_top>
+   <margin_right>
+      <value>2</value>
+   </margin_right>
+   <margin_bottom>
+      <value>2</value>
+   </margin_bottom>
+   <uuid>
+      <value>ZCJRj7kiQey3g6dSy2TSQQ</value>
+   </uuid>
+</object>
+<!-- user_interface.search_mask:2048|widgets| -->
+<object code="SEA000002048" objectdef="search_mask_input_widget" module="user_interface" cond="&quot;uuid&quot; = '7mUNYdg3T_KLY8lsMGuc8Q'">
+   <reference_owner>
+      <value><!--  -->
+<object mode="update" code="most.sale" objectdef="search_mask" module="user_interface" cond="&quot;uuid&quot; = 'itOhSt6wSPyC3l0rqDDa1Q'"/></value>
+   </reference_owner>
+   <operator>
+      <value><object mode="update" code="CONTAINS" objectdef="operator_string" module="core" /></value>
+   </operator>
+   <name>
+      <value>
+         <en-US>SaleID</en-US></value>
+   </name>
+   <sort_id>
+      <value>0</value>
+   </sort_id>
+   <search_mask>
+      <value><!--  -->
+<object mode="update" code="most.sale" objectdef="search_mask" module="user_interface" cond="&quot;uuid&quot; = 'itOhSt6wSPyC3l0rqDDa1Q'"/></value>
+   </search_mask>
+   <relation_path>
+      <value>most_sale_id</value>
+   </relation_path>
+   <is_auto_name_short>
+      <value>true</value>
+   </is_auto_name_short>
+   <width>
+      <value>120</value>
+   </width>
+   <height>
+      <value>auto</value>
+   </height>
+   <overflow>
+      <value>hidden</value>
+   </overflow>
+   <is_archived>
+      <value>false</value>
+   </is_archived>
+   <margin_left>
+      <value>2</value>
+   </margin_left>
+   <margin_top>
+      <value>2</value>
+   </margin_top>
+   <margin_right>
+      <value>2</value>
+   </margin_right>
+   <margin_bottom>
+      <value>2</value>
+   </margin_bottom>
+   <uuid>
+      <value>7mUNYdg3T_KLY8lsMGuc8Q</value>
+   </uuid>
+</object>
 <!--  -->
 <object code="most.sale" objectdef="search_mask" module="user_interface" cond="&quot;uuid&quot; = 'itOhSt6wSPyC3l0rqDDa1Q'">
    <layout_type>
@@ -77,12 +698,18 @@
       <value><object mode="update" code="protocol_sale" objectdef="objectdef" module="core" cond="code='protocol_sale' AND module.code='most'"/></value>
    </target_objectdef>
    <widgets mode="update">
-      <value sort_id="0"><object mode="update" code="SEA000002048" objectdef="search_mask_input_widget" module="user_interface" cond="&quot;uuid&quot; = '7mUNYdg3T_KLY8lsMGuc8Q'"/></value>
-      <value sort_id="0"><object mode="update" code="SEA000002048" objectdef="search_mask_input_widget" module="user_interface" cond="&quot;uuid&quot; = 'WD6lZ4nMSyGmPBS-dQ0wIA'"/></value>
-      <value sort_id="0"><object mode="update" code="SEA000002048" objectdef="search_mask_input_widget" module="user_interface" cond="&quot;uuid&quot; = 'VqXfCzA3QT68z6C8z9tIYw'"/></value>
-      <value sort_id="0"><object mode="update" code="SEA000002048" objectdef="search_mask_input_widget" module="user_interface" cond="&quot;uuid&quot; = '4lclTawNTxewu0Rdvn_niw'"/></value>
-      <value sort_id="0"><object mode="update" code="SEA000002048" objectdef="search_mask_input_widget" module="user_interface" cond="&quot;uuid&quot; = 'cWf9u_tMQm6_YYtyfvdjFw'"/></value>
-      <value sort_id="0"><object mode="update" code="SEA000002048" objectdef="search_mask_input_widget" module="user_interface" cond="&quot;uuid&quot; = 'X1xARtUqTdGMOgtjTdweBg'"/></value>
+      <value sort_id="0"><!-- user_interface.search_mask:2048|widgets| -->
+<object mode="update" code="SEA000002048" objectdef="search_mask_input_widget" module="user_interface" cond="&quot;uuid&quot; = '7mUNYdg3T_KLY8lsMGuc8Q'"/></value>
+      <value sort_id="0"><!-- user_interface.search_mask:2048|widgets| -->
+<object mode="update" code="SEA000002048" objectdef="search_mask_input_widget" module="user_interface" cond="&quot;uuid&quot; = 'WD6lZ4nMSyGmPBS-dQ0wIA'"/></value>
+      <value sort_id="0"><!-- user_interface.search_mask:2048|widgets| -->
+<object mode="update" code="SEA000002048" objectdef="search_mask_input_widget" module="user_interface" cond="&quot;uuid&quot; = 'VqXfCzA3QT68z6C8z9tIYw'"/></value>
+      <value sort_id="0"><!-- user_interface.search_mask:2048|widgets| -->
+<object mode="update" code="SEA000002048" objectdef="search_mask_input_widget" module="user_interface" cond="&quot;uuid&quot; = '4lclTawNTxewu0Rdvn_niw'"/></value>
+      <value sort_id="0"><!-- user_interface.search_mask:2048|widgets| -->
+<object mode="update" code="SEA000002048" objectdef="search_mask_input_widget" module="user_interface" cond="&quot;uuid&quot; = 'cWf9u_tMQm6_YYtyfvdjFw'"/></value>
+      <value sort_id="0"><!-- user_interface.search_mask:2048|widgets| -->
+<object mode="update" code="SEA000002048" objectdef="search_mask_input_widget" module="user_interface" cond="&quot;uuid&quot; = 'X1xARtUqTdGMOgtjTdweBg'"/></value>
    </widgets>
    <height>
       <value>auto</value>
@@ -101,6 +728,276 @@
    </is_archived>
    <uuid>
       <value>itOhSt6wSPyC3l0rqDDa1Q</value>
+   </uuid>
+</object>
+<!-- user_interface.search_mask:2048|widgets| -->
+<object code="SEA000002048" objectdef="search_mask_input_widget" module="user_interface" cond="&quot;uuid&quot; = 'WD6lZ4nMSyGmPBS-dQ0wIA'">
+   <reference_owner>
+      <value><!--  -->
+<object mode="update" code="most.sale" objectdef="search_mask" module="user_interface" cond="&quot;uuid&quot; = 'itOhSt6wSPyC3l0rqDDa1Q'"/></value>
+   </reference_owner>
+   <operator>
+      <value><object mode="update" code="CONTAINS" objectdef="operator_string" module="core" /></value>
+   </operator>
+   <name>
+      <value>
+         <en-US>Article</en-US></value>
+   </name>
+   <sort_id>
+      <value>0</value>
+   </sort_id>
+   <search_mask>
+      <value><!--  -->
+<object mode="update" code="most.sale" objectdef="search_mask" module="user_interface" cond="&quot;uuid&quot; = 'itOhSt6wSPyC3l0rqDDa1Q'"/></value>
+   </search_mask>
+   <relation_path>
+      <value>article.code</value>
+   </relation_path>
+   <is_auto_name_short>
+      <value>true</value>
+   </is_auto_name_short>
+   <width>
+      <value>120</value>
+   </width>
+   <height>
+      <value>auto</value>
+   </height>
+   <overflow>
+      <value>hidden</value>
+   </overflow>
+   <is_archived>
+      <value>false</value>
+   </is_archived>
+   <margin_left>
+      <value>2</value>
+   </margin_left>
+   <margin_top>
+      <value>2</value>
+   </margin_top>
+   <margin_right>
+      <value>2</value>
+   </margin_right>
+   <margin_bottom>
+      <value>2</value>
+   </margin_bottom>
+   <uuid>
+      <value>WD6lZ4nMSyGmPBS-dQ0wIA</value>
+   </uuid>
+</object>
+<!-- user_interface.search_mask:2048|widgets| -->
+<object code="SEA000002048" objectdef="search_mask_input_widget" module="user_interface" cond="&quot;uuid&quot; = 'VqXfCzA3QT68z6C8z9tIYw'">
+   <reference_owner>
+      <value><!--  -->
+<object mode="update" code="most.sale" objectdef="search_mask" module="user_interface" cond="&quot;uuid&quot; = 'itOhSt6wSPyC3l0rqDDa1Q'"/></value>
+   </reference_owner>
+   <operator>
+      <value><object mode="update" code="CONTAINS" objectdef="operator_string" module="core" /></value>
+   </operator>
+   <name>
+      <value>
+         <en-US>OPG</en-US></value>
+   </name>
+   <sort_id>
+      <value>0</value>
+   </sort_id>
+   <search_mask>
+      <value><!--  -->
+<object mode="update" code="most.sale" objectdef="search_mask" module="user_interface" cond="&quot;uuid&quot; = 'itOhSt6wSPyC3l0rqDDa1Q'"/></value>
+   </search_mask>
+   <relation_path>
+      <value>opg.code</value>
+   </relation_path>
+   <is_auto_name_short>
+      <value>true</value>
+   </is_auto_name_short>
+   <width>
+      <value>120</value>
+   </width>
+   <height>
+      <value>auto</value>
+   </height>
+   <overflow>
+      <value>hidden</value>
+   </overflow>
+   <is_archived>
+      <value>false</value>
+   </is_archived>
+   <margin_left>
+      <value>2</value>
+   </margin_left>
+   <margin_top>
+      <value>2</value>
+   </margin_top>
+   <margin_right>
+      <value>2</value>
+   </margin_right>
+   <margin_bottom>
+      <value>2</value>
+   </margin_bottom>
+   <uuid>
+      <value>VqXfCzA3QT68z6C8z9tIYw</value>
+   </uuid>
+</object>
+<!-- user_interface.search_mask:2048|widgets| -->
+<object code="SEA000002048" objectdef="search_mask_input_widget" module="user_interface" cond="&quot;uuid&quot; = '4lclTawNTxewu0Rdvn_niw'">
+   <reference_owner>
+      <value><!--  -->
+<object mode="update" code="most.sale" objectdef="search_mask" module="user_interface" cond="&quot;uuid&quot; = 'itOhSt6wSPyC3l0rqDDa1Q'"/></value>
+   </reference_owner>
+   <operator>
+      <value><object mode="update" code="EQUAL_OR_GREATER_THAN" objectdef="operator_number" module="core" /></value>
+   </operator>
+   <name>
+      <value>
+         <en-US>Qty</en-US></value>
+   </name>
+   <sort_id>
+      <value>0</value>
+   </sort_id>
+   <search_mask>
+      <value><!--  -->
+<object mode="update" code="most.sale" objectdef="search_mask" module="user_interface" cond="&quot;uuid&quot; = 'itOhSt6wSPyC3l0rqDDa1Q'"/></value>
+   </search_mask>
+   <relation_path>
+      <value>quantity</value>
+   </relation_path>
+   <is_auto_name_short>
+      <value>true</value>
+   </is_auto_name_short>
+   <width>
+      <value>80</value>
+   </width>
+   <height>
+      <value>auto</value>
+   </height>
+   <overflow>
+      <value>hidden</value>
+   </overflow>
+   <is_archived>
+      <value>false</value>
+   </is_archived>
+   <margin_left>
+      <value>2</value>
+   </margin_left>
+   <margin_top>
+      <value>2</value>
+   </margin_top>
+   <margin_right>
+      <value>2</value>
+   </margin_right>
+   <margin_bottom>
+      <value>2</value>
+   </margin_bottom>
+   <uuid>
+      <value>4lclTawNTxewu0Rdvn_niw</value>
+   </uuid>
+</object>
+<!-- user_interface.search_mask:2048|widgets| -->
+<object code="SEA000002048" objectdef="search_mask_input_widget" module="user_interface" cond="&quot;uuid&quot; = 'cWf9u_tMQm6_YYtyfvdjFw'">
+   <reference_owner>
+      <value><!--  -->
+<object mode="update" code="most.sale" objectdef="search_mask" module="user_interface" cond="&quot;uuid&quot; = 'itOhSt6wSPyC3l0rqDDa1Q'"/></value>
+   </reference_owner>
+   <operator>
+      <value><object mode="update" code="CONTAINS" objectdef="operator_relation" module="core" /></value>
+   </operator>
+   <name>
+      <value>
+         <en-US>Ven</en-US></value>
+   </name>
+   <sort_id>
+      <value>0</value>
+   </sort_id>
+   <search_mask>
+      <value><!--  -->
+<object mode="update" code="most.sale" objectdef="search_mask" module="user_interface" cond="&quot;uuid&quot; = 'itOhSt6wSPyC3l0rqDDa1Q'"/></value>
+   </search_mask>
+   <relation_path>
+      <value>article.vendor</value>
+   </relation_path>
+   <is_auto_name_short>
+      <value>true</value>
+   </is_auto_name_short>
+   <width>
+      <value>120</value>
+   </width>
+   <height>
+      <value>auto</value>
+   </height>
+   <overflow>
+      <value>hidden</value>
+   </overflow>
+   <is_archived>
+      <value>false</value>
+   </is_archived>
+   <margin_left>
+      <value>2</value>
+   </margin_left>
+   <margin_top>
+      <value>2</value>
+   </margin_top>
+   <margin_right>
+      <value>2</value>
+   </margin_right>
+   <margin_bottom>
+      <value>2</value>
+   </margin_bottom>
+   <uuid>
+      <value>cWf9u_tMQm6_YYtyfvdjFw</value>
+   </uuid>
+</object>
+<!-- user_interface.search_mask:2048|widgets| -->
+<object code="SEA000002048" objectdef="search_mask_input_widget" module="user_interface" cond="&quot;uuid&quot; = 'X1xARtUqTdGMOgtjTdweBg'">
+   <reference_owner>
+      <value><!--  -->
+<object mode="update" code="most.sale" objectdef="search_mask" module="user_interface" cond="&quot;uuid&quot; = 'itOhSt6wSPyC3l0rqDDa1Q'"/></value>
+   </reference_owner>
+   <operator>
+      <value><object mode="update" code="CONTAINS" objectdef="operator_relation" module="core" /></value>
+   </operator>
+   <name>
+      <value>
+         <en-US>Cust</en-US></value>
+   </name>
+   <sort_id>
+      <value>0</value>
+   </sort_id>
+   <search_mask>
+      <value><!--  -->
+<object mode="update" code="most.sale" objectdef="search_mask" module="user_interface" cond="&quot;uuid&quot; = 'itOhSt6wSPyC3l0rqDDa1Q'"/></value>
+   </search_mask>
+   <relation_path>
+      <value>customer</value>
+   </relation_path>
+   <is_auto_name_short>
+      <value>true</value>
+   </is_auto_name_short>
+   <width>
+      <value>120</value>
+   </width>
+   <height>
+      <value>auto</value>
+   </height>
+   <overflow>
+      <value>hidden</value>
+   </overflow>
+   <is_archived>
+      <value>false</value>
+   </is_archived>
+   <margin_left>
+      <value>2</value>
+   </margin_left>
+   <margin_top>
+      <value>2</value>
+   </margin_top>
+   <margin_right>
+      <value>2</value>
+   </margin_right>
+   <margin_bottom>
+      <value>2</value>
+   </margin_bottom>
+   <uuid>
+      <value>X1xARtUqTdGMOgtjTdweBg</value>
    </uuid>
 </object>
 </objects></import>

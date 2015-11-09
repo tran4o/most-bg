@@ -40,11 +40,16 @@
             <value><en-US>Invoice</en-US></value>
             <value><de-DE>Rechnung</de-DE></value>
             <value><bg-BG>Фактура</bg-BG></value>
-        </name>           
+        </name>  
+        <icon>
+           <value>
+             <object code="/images/objectdefs/icons/color/128/invoices-invoice.png" module="documents" objectdef="icon"></object>
+           </value>
+       </icon>                 
     </object>
 
 
-<object cond="module.code='most' AND code='customer'"
+	<object cond="module.code='most' AND code='customer'"
             module="core" 
             objectdef="objectdef" 
             mode="update">
@@ -52,7 +57,7 @@
             <value><en-US>MOST Customer</en-US></value>
             <value><de-DE>MOST Kunde</de-DE></value>
             <value><bg-BG>MOST Клиент</bg-BG></value>
-        </name>           
+        </name> 
     </object>
 
 
@@ -154,7 +159,7 @@ return t.join(" | ");
         </name>     
      
     </object>
-
+ 
 	<object cond="module.code='most' AND code='opg'"
             module="core" 
             objectdef="objectdef" 
@@ -162,6 +167,11 @@ return t.join(" | ");
         <name>
             <value><en-US>OPG</en-US></value>
         </name>     
+       <icon>
+           <value>
+             <object code="/visionr/modules/icons/color/128/sales.png" module="documents" objectdef="icon"></object>
+           </value>
+       </icon>
     </object>
 
 	<object cond="module.code='most' AND code='opg_entry'"
@@ -173,6 +183,11 @@ return t.join(" | ");
             <value><de-DE>OPG Eintrag</de-DE></value>
             <value><bg-BG>OPG запис</bg-BG></value>
         </name>     
+       <icon>
+           <value>
+             <object code="/visionr/modules/icons/color/128/biddings.png" module="documents" objectdef="icon"></object>
+           </value>
+       </icon>
     </object>
     
     
