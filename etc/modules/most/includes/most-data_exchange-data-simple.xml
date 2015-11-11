@@ -1,0 +1,344 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<import revision="$LastChangedRevision: 18817 $" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:vsl="http://www.plan-vision.com/VSL/1.0">
+<objects>
+<!-- core.data_import_xls:4096|row_filter_script|core.vscript:2062848|params| -->
+<object code="row" objectdef="script_param" module="core" >
+   <sort_id>
+      <value>0</value>
+   </sort_id>
+   <is_hidden>
+      <value>false</value>
+   </is_hidden>
+</object>
+<!-- core.data_import_xls:4096|row_filter_script|core.vscript:2062848|params| -->
+<object code="lines" objectdef="script_param" module="core" >
+   <sort_id>
+      <value>0</value>
+   </sort_id>
+   <is_hidden>
+      <value>false</value>
+   </is_hidden>
+</object>
+<!-- core.data_import_xls:4096|row_filter_script|core.vscript:2062848|params| -->
+<object code="nameToCol" objectdef="script_param" module="core" >
+   <sort_id>
+      <value>0</value>
+   </sort_id>
+   <is_hidden>
+      <value>false</value>
+   </is_hidden>
+</object>
+<!--  -->
+<object code="most:sales" objectdef="data_import_xls" module="core" >
+   <sort_id>
+      <value>0</value>
+   </sort_id>
+   <name>
+      <value>
+         <bg-BG>MOST продажби</bg-BG></value>
+   </name>
+   <data_file>
+      <value><object mode="update" code="sales05.11.xlsx" objectdef="file" module="documents" cond="&quot;parent&quot;.&quot;code&quot; = 'sales' AND &quot;parent&quot;.&quot;parent&quot;.&quot;code&quot; = 'most' AND &quot;parent&quot;.&quot;parent&quot;.&quot;parent&quot;.&quot;code&quot; = '/' AND &quot;parent&quot;.&quot;parent&quot;.&quot;parent&quot;.&quot;parent&quot; IS NULL"/></value>
+   </data_file>
+   <template>
+      <value><![CDATA[<%
+var MOSTID = DATA_ORDERED[0];
+var BID = DATA_ORDERED[1];
+var CFGSUBTYPE = DATA_ORDERED[5];
+var SDATE = DATA_ORDERED[6];
+var QTY = DATA_ORDERED[7];
+var rdate = null;
+try {
+    QTY = QTY.castToExactNumber();
+} catch(e) {
+    java.log.error("Can not parse QTY to exact number");
+    throw new Exception("Can not parse QTY to exact number");
+}
+
+try {
+    rdate = java.date.parse("yyyy-MM-dd",SDATE);
+} catch(e) {
+	java.log.error("Can not parse SELL date : "+SDATE);
+	throw new Exception("Can not parse SELL date : "+SDATE);
+}
+if (BID == null || BID == "") {
+	java.log.error("BID is empty!");
+	throw new Exception("BID is empty!");
+}
+var x = db.most.customer.SELECT("abbreviation = :ABID");
+x["ABID"]=BID;
+x.is_cached=false;
+if (x.size > 1) {
+	java.log.error("Many COMPANIES found (>1) with BID="+BID);
+	throw new Exception("Many COMPANIES found (>1) with BID="+BID);
+}
+var customer;
+if (x.is_empty) {
+	java.log.warn("Customer with BID (abbreviation) "+BID+" NOT FOUND. Creating...");
+	customer=new db.most.customer();
+	customer.abbreviation=BID;
+} else {
+	customer=x[0];
+}
+//----------------------	
+var artcode;
+if (CFGSUBTYPE.indexOf(" ") < 0) {
+	artcode=CFGSUBTYPE;
+} else {
+	artcode=CFGSUBTYPE.substring(0,CFGSUBTYPE.indexOf(" "));
+}
+var article=db.most.article.INSTANCES[artcode];
+if (article == null) {
+	java.log.warn("Can not find article with CODE="+artcode+" | SKIP!");
+} else if (QTY <= 0) {
+	java.log.warn("Can not import article with CODE="+artcode+" AND QUANTITY : "+QTY);
+} else {
+	var sale=null;
+	//-----------------------------------
+	// rdate > real_date
+	// customer > customer
+
+	var kk = db.most.protocol_sale.SELECT("most_sale_id = :MID");
+	kk["MID"]=MOSTID;
+	kk.is_cached=false;
+	if (kk.size > 1) {
+		java.log.error("Many SALES found (>1) with most_sale_id="+MOSTID);
+		throw new Exception("Many SALES found (>1) with most_sale_id="+MOSTID);
+	}
+	if (kk.size == 1)
+		sale=kk[0];
+	//-----------------------------------
+	if (sale == null) 
+		sale = new db.most.protocol_sale();
+	sale.real_date = db.most.protocol_date.INSTANCES[java.date.format("dd.MM.yyyy",rdate)];
+	sale.quantity=QTY;
+	sale.customer=customer;
+	sale.article=article;
+	sale.most_sale_id=MOSTID;
+	sale.commit();
+	//-----------------------------------
+	if (QTY < 0) {
+		java.log.error("QTY < 0!");
+		throw new Exception("QTY < 0!");
+	}
+	java.log.info("BID DONE : "+OBJSTR(customer)+" | "+OBJSTR(artcode)+" | "+rdate);
+}
+
+%>	]]></value>
+   </template>
+   <header_row>
+      <value>0</value>
+   </header_row>
+   <is_use_events>
+      <value>true</value>
+   </is_use_events>
+   <is_archived>
+      <value>false</value>
+   </is_archived>
+   <uuid>
+      <value>0M_I2P4aRF-zK4emBtEE6g</value>
+   </uuid>
+</object>
+<!--  -->
+<object code="most.odit" objectdef="data_import_xls" module="core" >
+   <sort_id>
+      <value>0</value>
+   </sort_id>
+   <name>
+      <value>
+         <bg-BG>MOST ревизия</bg-BG></value>
+   </name>
+   <data_file>
+      <value><object mode="update" code="HPInventory20151102-2.xlsx" objectdef="file" module="documents" cond="&quot;parent&quot;.&quot;code&quot; = 'odits' AND &quot;parent&quot;.&quot;parent&quot;.&quot;code&quot; = 'most' AND &quot;parent&quot;.&quot;parent&quot;.&quot;parent&quot;.&quot;code&quot; = '/' AND &quot;parent&quot;.&quot;parent&quot;.&quot;parent&quot;.&quot;parent&quot; IS NULL"/></value>
+   </data_file>
+   <template>
+      <value><![CDATA[<%
+    var TTT = db.most.protocol.TEMP;
+    var prodId = DATA["ProdNo"];    
+    var article = db.most.article.INSTANCES[prodId];
+    if (article == null) {
+    	var cc = TTT["cc"];
+		if (cc == null)
+			cc=0;
+		cc++;
+		TTT["cc"]=cc;
+        java.log.error("Article "+prodId+" NOT FOUND ("+cc+")");
+	} else {
+		var hp = DATA["HP"].castToExactNumber();
+		var most = DATA["MOST"].castToExactNumber();
+		if (hp < 0)
+			hp=0;
+		if (most < 0) 
+			most = 0;
+		var date = db.most.protocol_date.INSTANCES[java.date.format("dd.MM.yyyy",java.date.now())];
+		var sel = db.most.odit.SELECT("\"date\" = :DID");
+		sel["DID"]=date.id;
+		var e;
+		if (TTT["done"]== null) 
+		{
+			for (e : sel) 
+			{		
+				e.delete();
+				e.commit();
+			}
+			e = new db.most.odit();
+			e.date=date;
+			e.code=date.code;
+			e.name["en-US"]="XLS imported odit "+date.code;
+			e.name["bg-BG"]="Ревизия от XLS "+date.code;
+			TTT["done"].reset(e);
+		} else {
+			e=TTT["done"];
+		}
+		var en = new db.most.odit_entry();
+		en.on_stock_reported=hp;
+		en.on_stock=most;
+		en.odit=e;
+		en.article=article;
+		e.commit();
+		en.commit();
+	}
+%>]]></value>
+   </template>
+   <is_use_events>
+      <value>true</value>
+   </is_use_events>
+   <is_archived>
+      <value>false</value>
+   </is_archived>
+   <uuid>
+      <value>1bnsErWRSgeiNepb2BF6uQ</value>
+   </uuid>
+</object>
+<!--  -->
+<object code="HP STOCKS XLS" objectdef="data_import_xls" module="core" >
+   <sort_id>
+      <value>0</value>
+   </sort_id>
+   <name>
+      <value>
+         <en-US>MOST stocks from XLS</en-US></value>
+   </name>
+   <data_file>
+      <value><object mode="update" code="dop products hp.xlsx" objectdef="file" module="documents" cond="&quot;parent&quot;.&quot;code&quot; = 'Stocks' AND &quot;parent&quot;.&quot;parent&quot;.&quot;code&quot; = 'most' AND &quot;parent&quot;.&quot;parent&quot;.&quot;parent&quot;.&quot;code&quot; = '/' AND &quot;parent&quot;.&quot;parent&quot;.&quot;parent&quot;.&quot;parent&quot; IS NULL"/></value>
+   </data_file>
+   <template>
+      <value><![CDATA[<%
+var PID = DATA["Part No"];
+var QTY = DATA["Qty HP"];
+var PRC = DATA["Euro"];
+var x = db.most.article.INSTANCES[PID];
+if (x == null || QTY == null || PRC == null) {
+    java.log.error("CAN NOT FIND ARTICLE WITH CODE="+PID);
+} else {
+    var article = x;
+    var key = "XLS"+PID;
+    var stock = db.most.protocol_stock[key];
+    if (stock == null) {
+        stock=new db.most.protocol_stock();
+        stock.code=key;
+	}
+	stock.article=article;
+	stock.real_date=db.most.protocol_date.INSTANCES["01.01.2015"];
+	stock.official_date=db.most.protocol_date.INSTANCES["01.01.2015"];
+	stock.price=PRC;
+	stock.quantity=QTY;        
+}
+%>	]]></value>
+   </template>
+   <is_use_events>
+      <value>true</value>
+   </is_use_events>
+   <is_archived>
+      <value>false</value>
+   </is_archived>
+   <uuid>
+      <value>qwHJ8FCrS8SbEKeUHT40Xg</value>
+   </uuid>
+</object>
+<!-- core.data_import_xls:4096|row_filter_script| -->
+<object code="most.import_companies.xls.filter-script" objectdef="vscript" module="core" >
+   <sort_id>
+      <value>0</value>
+   </sort_id>
+   <script_code>
+      <value><![CDATA[
+//lines,row,nameToCol
+var line = lines[row];
+var colBid = nameToCol["Bid"];
+var colCmp = nameToCol["Име на фирма"];
+var colBul = nameToCol["Булстат"];
+if (line[colCmp] == null || line[colCmp].trim() == "")
+	return false;
+try {
+    line[colBid].castToExactNumber();    
+} catch(e) {
+    return false;
+}
+return true;                        
+         ]]></value>
+   </script_code>
+   <params mode="update">
+      <value sort_id="0"><!-- core.data_import_xls:4096|row_filter_script|core.vscript:2062848|params| -->
+<object mode="update" code="lines" objectdef="script_param" module="core" /></value>
+      <value sort_id="0"><!-- core.data_import_xls:4096|row_filter_script|core.vscript:2062848|params| -->
+<object mode="update" code="row" objectdef="script_param" module="core" /></value>
+      <value sort_id="0"><!-- core.data_import_xls:4096|row_filter_script|core.vscript:2062848|params| -->
+<object mode="update" code="nameToCol" objectdef="script_param" module="core" /></value>
+   </params>
+   <is_autostart>
+      <value>false</value>
+   </is_autostart>
+   <is_hidden>
+      <value>false</value>
+   </is_hidden>
+   <is_supports_mobile>
+      <value>false</value>
+   </is_supports_mobile>
+</object>
+<!--  -->
+<object code="most:companies" objectdef="data_import_xls" module="core" >
+   <sort_id>
+      <value>0</value>
+   </sort_id>
+   <name>
+      <value>
+         <bg-BG>MOST компании</bg-BG></value>
+   </name>
+   <data_file>
+      <value><object mode="update" code="All-Companies.xls" objectdef="file" module="documents" cond="&quot;parent&quot;.&quot;code&quot; = 'initial' AND &quot;parent&quot;.&quot;parent&quot;.&quot;code&quot; = 'most' AND &quot;parent&quot;.&quot;parent&quot;.&quot;parent&quot;.&quot;code&quot; = '/' AND &quot;parent&quot;.&quot;parent&quot;.&quot;parent&quot;.&quot;parent&quot; IS NULL"/></value>
+   </data_file>
+   <template>
+      <value><![CDATA[<object cond="abbreviation='${Bid}'" module="most" objectdef="customer">
+    <code><value>${Булстат}</value></code>
+	<abbreviation>
+	<value>${Bid}</value>
+	</abbreviation>
+	<name>
+		<value><en-US><%= SCRIPTS["gen.bg2lat"](DATA["Име на фирма"]) %></en-US></value> 
+		<value><bg-BG>${Име на фирма}</bg-BG></value> 
+	</name>
+	<contact_types mode="update">
+		<value>
+			<object module="contacts" objectdef="contact_type" code="customer" mode="update">
+			</object>
+		</value>
+	</contact_types>
+</object>
+]]></value>
+   </template>
+   <row_filter_script>
+      <value><!-- core.data_import_xls:4096|row_filter_script| -->
+<object mode="update" code="most.import_companies.xls.filter-script" objectdef="vscript" module="core" /></value>
+   </row_filter_script>
+   <is_use_events>
+      <value>false</value>
+   </is_use_events>
+   <is_archived>
+      <value>false</value>
+   </is_archived>
+   <uuid>
+      <value>W2VC7S6uR_-lRkTG6nJqwQ</value>
+   </uuid>
+</object>
+</objects></import>

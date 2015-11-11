@@ -1,0 +1,1207 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--  FIX FORMAT EN TO BE BG / DE -->
+
+<import revision="$LastChangedRevision: 17816 $">
+    <objects>
+        <!-- *************** INPUT FORMATS ************* -->
+        <object code="input_format_integer_separator" module="core" objectdef="input_format_integer" proj="all">
+            <format_string>
+                <value>
+                    <en-US>###,###,###,###</en-US>
+                </value>
+                <value>
+                    <de-DE>###,###,###,###</de-DE>
+                </value>
+                <value>
+                    <bg-BG>###,###,###,###</bg-BG>
+                </value>
+            </format_string>
+            <digit_grouping_symbol>
+                <value>
+                    <en-US>,</en-US>
+                </value>
+                <value>
+                    <de-DE>.</de-DE>
+                </value>
+                <value>
+                    <bg-BG>.</bg-BG>
+                </value>
+            </digit_grouping_symbol>
+            <get_as_string>
+                <value>
+                    <object code="core.input_format_integer:input_format_integer_separator" module="core" objectdef="vscript">
+                        <params>
+                            <value>
+                                <object code="value" module="core" objectdef="script_param" proj="all"></object>
+                            </value>
+                        </params>
+                        <script_code>
+                            <value><![CDATA[return java.string.format.parseExactNumber( this.format_string, value, this.digit_grouping_symbol );]]></value>
+                        </script_code>
+                    </object>
+                </value>
+            </get_as_string>
+        </object>
+        <object code="default_input_format_double" module="core" objectdef="input_format_double" proj="all">
+            <format_string>
+                <value>
+                    <en-US>###,###,###,##0.00</en-US>
+                </value>
+                <value>
+                    <de-DE>###,###,###,##0.00</de-DE>
+                </value>
+                <value>
+                    <bg-BG>###,###,###,##0.00</bg-BG>
+                </value>
+            </format_string>
+            <decimal_symbol>
+                <value>
+                    <en-US>.</en-US>
+                </value>
+                <value>
+                    <de-DE>,</de-DE>
+                </value>
+                <value>
+                    <bg-BG>,</bg-BG>
+                </value>
+            </decimal_symbol>
+            <digit_grouping_symbol>
+                <value>
+                    <en-US>,</en-US>
+                </value>
+                <value>
+                    <de-DE>.</de-DE>
+                </value>
+                <value>
+                    <bg-BG>.</bg-BG>
+                </value>
+            </digit_grouping_symbol>
+            <!-- Important: VisionR makes rounding based on this precision internally!
+           This is done on every arithmetic operation, so the default output
+           format has no precision - it calculates with MAXIMUM precision!
+        <precision><value>X</value></precision> -->
+            <get_as_string>
+                <value>
+                    <object code="core_input_format_double_default_input_format_double" module="core" objectdef="vscript">
+                        <params>
+                            <value>
+                                <object code="value" module="core" objectdef="script_param" proj="all"></object>
+                            </value>
+                        </params>
+                        <script_code>
+                            <value><![CDATA[return java.string.format.parseInexactNumber( this.format_string, value, this.decimal_symbol, this.digit_grouping_symbol );]]></value>
+                        </script_code>
+                    </object>
+                </value>
+            </get_as_string>
+        </object>
+        <object code="input_format_double_1_decimal_places" module="core" objectdef="input_format_double" proj="all">
+            <format_string>
+                <value>
+                    <en-US>###,###,###,##0.0</en-US>
+                </value>
+                <value>
+                    <de-DE>###,###,###,##0.0</de-DE>
+                </value>
+                <value>
+                    <bg-BG>###,###,###,##0.0</bg-BG>
+                </value>
+            </format_string>
+            <decimal_symbol>
+                <value>
+                    <en-US>.</en-US>
+                </value>
+                <value>
+                    <de-DE>,</de-DE>
+                </value>
+                <value>
+                    <bg-BG>,</bg-BG>
+                </value>
+            </decimal_symbol>
+            <digit_grouping_symbol>
+                <value>
+                    <en-US>,</en-US>
+                </value>
+                <value>
+                    <de-DE>.</de-DE>
+                </value>
+                <value>
+                    <bg-BG>.</bg-BG>
+                </value>
+            </digit_grouping_symbol>
+            <!-- Important: VisionR makes rounding based on this precision internally!
+             This is done on every arithmetic operation -->
+            <precision>
+                <value>1</value>
+            </precision>
+            <get_as_string>
+                <value>
+                    <object code="core_input_format_double_input_format_double_1_decimal_places" module="core" objectdef="vscript">
+                        <params>
+                            <value>
+                                <object code="value" module="core" objectdef="script_param" proj="all"></object>
+                            </value>
+                        </params>
+                        <script_code>
+                            <value><![CDATA[var k = java.string.format.parseInexactNumber( this.format_string, value, this.decimal_symbol, this.digit_grouping_symbol ); if (k == null) return k;return java.math.round(k, this.precision);]]></value>
+                        </script_code>
+                    </object>
+                </value>
+            </get_as_string>
+        </object>
+        <object code="input_format_double_2_decimal_places" module="core" objectdef="input_format_double" proj="all">
+            <format_string>
+                <value>
+                    <en-US>###,###,###,##0.00</en-US>
+                </value>
+                <value>
+                    <de-DE>###,###,###,##0.00</de-DE>
+                </value>
+                <value>
+                    <bg-BG>###,###,###,##0.00</bg-BG>
+                </value>
+            </format_string>
+            <decimal_symbol>
+                <value>
+                    <en-US>.</en-US>
+                </value>
+                <value>
+                    <de-DE>,</de-DE>
+                </value>
+                <value>
+                    <bg-BG>,</bg-BG>
+                </value>
+            </decimal_symbol>
+            <digit_grouping_symbol>
+                <value>
+                    <en-US>,</en-US>
+                </value>
+                <value>
+                    <de-DE>.</de-DE>
+                </value>
+                <value>
+                    <bg-BG>.</bg-BG>
+                </value>
+            </digit_grouping_symbol>
+            <precision>
+                <value>2</value>
+            </precision>
+            <get_as_string>
+                <value>
+                    <object mode="lookup" module="core" objectdef="script">
+                        <code>
+                            <value>core_input_format_double_input_format_double_1_decimal_places</value>
+                        </code>
+                    </object>
+                </value>
+            </get_as_string>
+        </object>
+        <object code="input_format_double_3_decimal_places" module="core" objectdef="input_format_double" proj="all">
+            <format_string>
+                <value>
+                    <en-US>###,###,###,##0.000</en-US>
+                </value>
+                <value>
+                    <de-DE>###,###,###,##0.000</de-DE>
+                </value>
+                <value>
+                    <bg-BG>###,###,###,##0.000</bg-BG>
+                </value>
+            </format_string>
+            <decimal_symbol>
+                <value>
+                    <en-US>.</en-US>
+                </value>
+                <value>
+                    <de-DE>,</de-DE>
+                </value>
+                <value>
+                    <bg-BG>,</bg-BG>
+                </value>
+            </decimal_symbol>
+            <digit_grouping_symbol>
+                <value>
+                    <en-US>,</en-US>
+                </value>
+                <value>
+                    <de-DE>.</de-DE>
+                </value>
+                <value>
+                    <bg-BG>.</bg-BG>
+                </value>
+            </digit_grouping_symbol>
+            <precision>
+                <value>3</value>
+            </precision>
+            <get_as_string>
+                <value>
+                    <object mode="lookup" module="core" objectdef="script">
+                        <code>
+                            <value>core_input_format_double_input_format_double_1_decimal_places</value>
+                        </code>
+                    </object>
+                </value>
+            </get_as_string>
+        </object>
+
+        <object code="input_format_double_4_decimal_places" module="core" objectdef="input_format_double" proj="all">
+            <format_string>
+                <value>
+                    <en-US>###,###,###,##0.0000</en-US>
+                </value>
+                <value>
+                    <de-DE>###,###,###,##0.0000</de-DE>
+                </value>
+                <value>
+                    <bg-BG>###,###,###,##0.0000</bg-BG>
+                </value>
+            </format_string>
+            <decimal_symbol>
+                <value>
+                    <en-US>.</en-US>
+                </value>
+                <value>
+                    <de-DE>,</de-DE>
+                </value>
+                <value>
+                    <bg-BG>,</bg-BG>
+                </value>
+            </decimal_symbol>
+            <digit_grouping_symbol>
+                <value>
+                    <en-US>,</en-US>
+                </value>
+                <value>
+                    <de-DE>.</de-DE>
+                </value>
+                <value>
+                    <bg-BG>.</bg-BG>
+                </value>
+            </digit_grouping_symbol>
+            <precision>
+                <value>4</value>
+            </precision>
+            <get_as_string>
+                <value>
+                    <object mode="lookup" module="core" objectdef="script">
+                        <code>
+                            <value>core_input_format_double_input_format_double_1_decimal_places</value>
+                        </code>
+                    </object>
+                </value>
+            </get_as_string>
+        </object>
+
+        <object code="input_format_double_5_decimal_places" module="core" objectdef="input_format_double" proj="all">
+            <format_string>
+                <value>
+                    <en-US>###,###,###,##0.00000</en-US>
+                </value>
+                <value>
+                    <de-DE>###,###,###,##0.00000</de-DE>
+                </value>
+                <value>
+                    <bg-BG>###,###,###,##0.00000</bg-BG>
+                </value>
+            </format_string>
+            <decimal_symbol>
+                <value>
+                    <en-US>.</en-US>
+                </value>
+                <value>
+                    <de-DE>,</de-DE>
+                </value>
+                <value>
+                    <bg-BG>,</bg-BG>
+                </value>
+            </decimal_symbol>
+            <digit_grouping_symbol>
+                <value>
+                    <en-US>,</en-US>
+                </value>
+                <value>
+                    <de-DE>.</de-DE>
+                </value>
+                <value>
+                    <bg-BG>.</bg-BG>
+                </value>
+            </digit_grouping_symbol>
+            <precision>
+                <value>5</value>
+            </precision>
+            <get_as_string>
+                <value>
+                    <object mode="lookup" module="core" objectdef="script">
+                        <code>
+                            <value>core_input_format_double_input_format_double_1_decimal_places</value>
+                        </code>
+                    </object>
+                </value>
+            </get_as_string>
+        </object>
+
+        <object code="input_format_double_6_decimal_places" module="core" objectdef="input_format_double" proj="all">
+            <format_string>
+                <value>
+                    <en-US>###,###,###,##0.000000</en-US>
+                </value>
+                <value>
+                    <de-DE>###,###,###,##0.000000</de-DE>
+                </value>
+                <value>
+                    <bg-BG>###,###,###,##0.000000</bg-BG>
+                </value>
+            </format_string>
+            <decimal_symbol>
+                <value>
+                    <en-US>.</en-US>
+                </value>
+                <value>
+                    <de-DE>,</de-DE>
+                </value>
+                <value>
+                    <bg-BG>,</bg-BG>
+                </value>
+            </decimal_symbol>
+            <digit_grouping_symbol>
+                <value>
+                    <en-US>,</en-US>
+                </value>
+                <value>
+                    <de-DE>.</de-DE>
+                </value>
+                <value>
+                    <bg-BG>.</bg-BG>
+                </value>
+            </digit_grouping_symbol>
+            <precision>
+                <value>6</value>
+            </precision>
+            <get_as_string>
+                <value>
+                    <object mode="lookup" module="core" objectdef="script">
+                        <code>
+                            <value>core_input_format_double_input_format_double_1_decimal_places</value>
+                        </code>
+                    </object>
+                </value>
+            </get_as_string>
+        </object>
+
+        <object code="input_format_double_0_decimal_places" module="core" objectdef="input_format_double" proj="all">
+            <format_string>
+                <value>
+                    <en-US>###,###,###,##0</en-US>
+                </value>
+                <value>
+                    <de-DE>###,###,###,##0</de-DE>
+                </value>
+                <value>
+                    <bg-BG>###,###,###,##0</bg-BG>
+                </value>
+            </format_string>
+            <digit_grouping_symbol>
+                <value>
+                    <en-US>,</en-US>
+                </value>
+                <value>
+                    <de-DE>.</de-DE>
+                </value>
+                <value>
+                    <bg-BG>.</bg-BG>
+                </value>
+            </digit_grouping_symbol>
+            <precision>
+                <value>0</value>
+            </precision>
+            <get_as_string>
+                <value>
+                    <object mode="lookup" module="core" objectdef="script">
+                        <code>
+                            <value>core_input_format_double_input_format_double_1_decimal_places</value>
+                        </code>
+                    </object>
+                </value>
+            </get_as_string>
+        </object>
+        <object code="default_input_format_datetime" module="core" objectdef="input_format_datetime" proj="all">
+            <format_string>
+                <value>
+                    <en-US>dd.MM.yyyy HH:mm:ss</en-US>
+                    <de-DE>dd.MM.yyyy HH:mm:ss</de-DE>
+                    <bg-BG>dd.MM.yyyy HH:mm:ss</bg-BG>
+                </value>
+            </format_string>
+            <get_as_string>
+                <value>
+                    <object code="core_input_format_datetime_default_input_format_datetime" module="core" objectdef="vscript">
+                        <params>
+                            <value>
+                                <object code="value" module="core" objectdef="script_param" proj="all"></object>
+                            </value>
+                        </params>
+                        <script_code>
+                            <value><![CDATA[return java.date.parse( this.format_string, value );]]></value>
+                        </script_code>
+                    </object>
+                </value>
+            </get_as_string>
+        </object>
+        <object code="default_input_format_datetime_hour_minutes" module="core" objectdef="input_format_datetime" proj="all">
+            <format_string>
+                <value>
+                    <en-US>dd.MM.yyyy HH:mm</en-US>
+                    <de-DE>dd.MM.yyyy HH:mm</de-DE>
+                    <bg-BG>dd.MM.yyyy HH:mm</bg-BG>
+                </value>
+            </format_string>
+            <get_as_string>
+                <value>
+                    <object code="core_input_format_datetime_default_input_format_datetime_hour_minutes" module="core" objectdef="vscript">
+                        <params>
+                            <value>
+                                <object code="value" module="core" objectdef="script_param" proj="all"></object>
+                            </value>
+                        </params>
+                        <script_code>
+                            <value><![CDATA[return java.date.parse( this.format_string, value );]]></value>
+                        </script_code>
+                    </object>
+                </value>
+            </get_as_string>
+        </object>
+        <object code="default_input_format_datetime_millis" module="core" objectdef="input_format_date" proj="all">
+            <format_string>
+                <value>
+                    <en-US>dd.MM.yyyy HH:mm:ss.SSS</en-US>
+                    <de-DE>dd.MM.yyyy HH:mm:ss.SSS</de-DE>
+                    <bg-BG>dd.MM.yyyy HH:mm:ss.SSS</bg-BG>
+                </value>
+            </format_string>
+            <get_as_string>
+                <value>
+                    <object mode="lookup" module="core" objectdef="script">
+                        <code>
+                            <value>core_input_format_datetime_default_input_format_datetime</value>
+                        </code>
+                    </object>
+                </value>
+            </get_as_string>
+        </object>
+        <object code="default_input_format_date" module="core" objectdef="input_format_date" proj="all">
+            <format_string>
+                <value>
+                    <en-US>dd.MM.yyyy</en-US>
+                    <de-DE>dd.MM.yyyy</de-DE>
+                    <bg-BG>dd.MM.yyyy</bg-BG>
+                </value>
+            </format_string>
+            <get_as_string>
+                <value>
+                    <object mode="lookup" module="core" objectdef="script">
+                        <code>
+                            <value>core_input_format_datetime_default_input_format_datetime</value>
+                        </code>
+                    </object>
+                </value>
+            </get_as_string>
+        </object>
+        <object code="default_input_format_time" module="core" objectdef="input_format_time" proj="all">
+            <format_string>
+                <value>
+                    <en-US>HH:mm:ss</en-US>
+                    <de-DE>HH:mm:ss</de-DE>
+                    <bg-BG>HH:mm:ss</bg-BG>
+                </value>
+            </format_string>
+            <get_as_string>
+                <value>
+                    <object mode="lookup" module="core" objectdef="script">
+                        <code>
+                            <value>core_input_format_datetime_default_input_format_datetime</value>
+                        </code>
+                    </object>
+                </value>
+            </get_as_string>
+        </object>
+        <object code="default_input_format_hours_minutes" module="core" objectdef="input_format_time" proj="all">
+            <format_string>
+                <value>
+                    <en-US>HH:mm</en-US>
+                </value>
+                <value>
+                    <de-DE>HH:mm</de-DE>
+                </value>
+                <value>
+                    <bg-BG>HH:mm</bg-BG>
+                </value>
+            </format_string>
+            <get_as_string>
+                <value>
+                    <object mode="lookup" module="core" objectdef="script">
+                        <code>
+                            <value>core_input_format_datetime_default_input_format_datetime</value>
+                        </code>
+                    </object>
+                </value>
+            </get_as_string>
+        </object>
+        <!-- *************** DATETIME OUTPUT FORMATS ************* -->
+        <object code="default_output_format_datetime" module="core" objectdef="output_format_datetime" proj="all">
+            <format_string>
+                <value>
+                    <en-US>dd.MM.yyyy HH:mm:ss</en-US>
+                    <de-DE>dd.MM.yyyy HH:mm:ss</de-DE>
+                    <bg-BG>dd.MM.yyyy HH:mm:ss</bg-BG>
+                </value>
+            </format_string>
+            <vsql_compare_format>
+                <value>YYYYMMDD HH24MISS</value>
+            </vsql_compare_format>
+            <get_as_string>
+                <value>
+                    <object code="core_output_format_datetime_default_output_format_datetime" module="core" objectdef="vscript">
+                        <params>
+                            <value>
+                                <object code="value" module="core" objectdef="script_param" proj="all"></object>
+                            </value>
+                        </params>
+                        <script_code>
+                            <value><![CDATA[return java.date.format( this.format_string, value );]]></value>
+                        </script_code>
+                    </object>
+                </value>
+            </get_as_string>
+        </object>
+        <object code="default_output_format_datetime_hour_minutes" module="core" objectdef="output_format_datetime" proj="all">
+            <format_string>
+                <value>
+                    <en-US>dd.MM.yyyy HH:mm</en-US>
+                    <de-DE>dd.MM.yyyy HH:mm</de-DE>
+                    <bg-BG>dd.MM.yyyy HH:mm</bg-BG>
+                </value>
+            </format_string>
+            <vsql_compare_format>
+                <value>YYYYMMDD HH24MI</value>
+            </vsql_compare_format>
+            <get_as_string>
+                <value>
+                    <object code="core_output_format_datetime_default_output_format_datetime_hour_minutes" module="core" objectdef="vscript">
+                        <params>
+                            <value>
+                                <object code="value" module="core" objectdef="script_param" proj="all"></object>
+                            </value>
+                        </params>
+                        <script_code>
+                            <value><![CDATA[return java.date.format( this.format_string, value );]]></value>
+                        </script_code>
+                    </object>
+                </value>
+            </get_as_string>
+        </object>
+        <object code="default_output_format_datetime_millis" module="core" objectdef="output_format_date" proj="all">
+            <format_string>
+                <value>
+                    <en-US>dd.MM.yyyy HH:mm:ss.SSS</en-US>
+                    <de-DE>dd.MM.yyyy HH:mm:ss.SSS</de-DE>
+                    <bg-BG>dd.MM.yyyy HH:mm:ss.SSS</bg-BG>
+                </value>
+            </format_string>
+            <vsql_compare_format>
+                <value>YYYYMMDD HH24MISS</value>
+            </vsql_compare_format>
+            <get_as_string>
+                <value>
+                    <object mode="lookup" module="core" objectdef="script">
+                        <code>
+                            <value>core_output_format_datetime_default_output_format_datetime</value>
+                        </code>
+                    </object>
+                </value>
+            </get_as_string>
+        </object>
+        <object code="default_output_format_date" module="core" objectdef="output_format_date" proj="all">
+            <format_string>
+                <value>
+                    <en-US>dd.MM.yyyy</en-US>
+                    <de-DE>dd.MM.yyyy</de-DE>
+                    <bg-BG>dd.MM.yyyy</bg-BG>
+                </value>
+            </format_string>
+            <vsql_compare_format>
+                <value>YYYYMMDD</value>
+            </vsql_compare_format>
+            <get_as_string>
+                <value>
+                    <object mode="lookup" module="core" objectdef="script">
+                        <code>
+                            <value>core_output_format_datetime_default_output_format_datetime</value>
+                        </code>
+                    </object>
+                </value>
+            </get_as_string>
+        </object>
+        <object code="default_output_format_day_month" module="core" objectdef="output_format_date" proj="all">
+            <format_string>
+                <value>
+                    <en-US>MM/dd</en-US>
+                    <de-DE>dd.MM</de-DE>
+                    <bg-BG>dd.MM</bg-BG>
+                </value>
+            </format_string>
+            <vsql_compare_format>
+                <value>MMDD</value>
+            </vsql_compare_format>
+            <get_as_string>
+                <value>
+                    <object mode="lookup" module="core" objectdef="script">
+                        <code>
+                            <value>core_output_format_datetime_default_output_format_datetime</value>
+                        </code>
+                    </object>
+                </value>
+            </get_as_string>
+        </object>
+        <object code="default_output_format_month_year" module="core" objectdef="output_format_date" proj="all">
+            <format_string>
+                <value>
+                    <en-US>MM/yyyy</en-US>
+                    <de-DE>MM.yyyy</de-DE>
+                    <bg-BG>MM.yyyy</bg-BG>
+                </value>
+            </format_string>
+            <vsql_compare_format>
+                <value>YYYYMM</value>
+            </vsql_compare_format>
+            <get_as_string>
+                <value>
+                    <object mode="lookup" module="core" objectdef="script">
+                        <code>
+                            <value>core_output_format_datetime_default_output_format_datetime</value>
+                        </code>
+                    </object>
+                </value>
+            </get_as_string>
+        </object>
+        <object code="default_output_format_time" module="core" objectdef="output_format_time" proj="all">
+            <format_string>
+                <value>
+                    <en-US>HH:mm:ss</en-US>
+                    <de-DE>HH:mm:ss</de-DE>
+                    <bg-BG>HH:mm:ss</bg-BG>
+                </value>
+            </format_string>
+            <vsql_compare_format>
+                <value>HH24MISS</value>
+            </vsql_compare_format>
+            <get_as_string>
+                <value>
+                    <object mode="lookup" module="core" objectdef="script">
+                        <code>
+                            <value>core_output_format_datetime_default_output_format_datetime</value>
+                        </code>
+                    </object>
+                </value>
+            </get_as_string>
+        </object>
+        <object code="default_output_format_hours_minutes" module="core" objectdef="output_format_time" proj="all">
+            <format_string>
+                <value>
+                    <en-US>HH:mm</en-US>
+                </value>
+                <value>
+                    <de-DE>HH:mm</de-DE>
+                </value>
+                <value>
+                    <bg-BG>HH:mm</bg-BG>
+                </value>
+            </format_string>
+            <vsql_compare_format>
+                <value>HH24MI</value>
+            </vsql_compare_format>
+            <get_as_string>
+                <value>
+                    <object mode="lookup" module="core" objectdef="script">
+                        <code>
+                            <value>core_output_format_datetime_default_output_format_datetime</value>
+                        </code>
+                    </object>
+                </value>
+            </get_as_string>
+        </object>
+        <!-- *************** NUMBER OUTPUT FORMATS ************* -->
+        <object code="default_output_format_integer" module="core" objectdef="output_format_integer" proj="all">
+            <format_string>
+                <value>
+                    <en-US>##</en-US>
+                </value>
+                <value>
+                    <de-DE>##</de-DE>
+                </value>
+                <value>
+                    <bg-BG>##</bg-BG>
+                </value>
+            </format_string>
+            <get_as_string>
+                <value>
+                    <object code="core_output_format_integer_default_output_format_integer" module="core" objectdef="vscript">
+                        <params>
+                            <value>
+                                <object code="value" module="core" objectdef="script_param" proj="all"></object>
+                            </value>
+                        </params>
+                        <script_code>
+                            <value><![CDATA[return java.string.format.formatExactNumber( this.format_string, value );]]></value>
+                        </script_code>
+                    </object>
+                </value>
+            </get_as_string>
+        </object>
+        <object code="output_format_integer_separator" module="core" objectdef="output_format_integer" proj="all">
+            <format_string>
+                <value>
+                    <en-US>###,###,###,###</en-US>
+                </value>
+                <value>
+                    <de-DE>###,###,###,###</de-DE>
+                </value>
+                <value>
+                    <bg-BG>###,###,###,###</bg-BG>
+                </value>
+            </format_string>
+            <digit_grouping_symbol>
+                <value>
+                    <en-US>,</en-US>
+                </value>
+                <value>
+                    <de-DE>.</de-DE>
+                </value>
+                <value>
+                    <bg-BG>.</bg-BG>
+                </value>
+            </digit_grouping_symbol>
+            <get_as_string>
+                <value>
+                    <object code="core.output_format_integer:output_format_integer_separator" module="core" objectdef="vscript">
+                        <params>
+                            <value>
+                                <object code="value" module="core" objectdef="script_param" proj="all"></object>
+                            </value>
+                        </params>
+                        <script_code>
+                            <value><![CDATA[return java.string.format.formatExactNumber( this.format_string, value, this.digit_grouping_symbol );]]></value>
+                        </script_code>
+                    </object>
+                </value>
+            </get_as_string>
+        </object>
+        <object code="default_output_format_double" module="core" objectdef="output_format_double" proj="all">
+            <format_string>
+                <value>
+                    <en-US>###,###,###,##0.00</en-US>
+                </value>
+                <value>
+                    <de-DE>###,###,###,##0.00</de-DE>
+                </value>
+                <value>
+                    <bg-BG>###,###,###,##0.00</bg-BG>
+                </value>
+            </format_string>
+            <decimal_symbol>
+                <value>
+                    <en-US>.</en-US>
+                </value>
+                <value>
+                    <de-DE>,</de-DE>
+                </value>
+                <value>
+                    <bg-BG>,</bg-BG>
+                </value>
+            </decimal_symbol>
+            <digit_grouping_symbol>
+                <value>
+                    <en-US>,</en-US>
+                </value>
+                <value>
+                    <de-DE>.</de-DE>
+                </value>
+                <value>
+                    <bg-BG>.</bg-BG>
+                </value>
+            </digit_grouping_symbol>
+            <!-- Important: VisionR makes rounding based on this precision internally!
+		     This is done on every arithmetic operation, so the default output
+		     format has no precision - it calculates with MAXIMUM precision!
+		<precision><value>X</value></precision> -->
+            <get_as_string>
+                <value>
+                    <object code="core_output_format_double_default_output_format_double" module="core" objectdef="vscript">
+                        <params>
+                            <value>
+                                <object code="value" module="core" objectdef="script_param" proj="all"></object>
+                            </value>
+                            <value>
+                                <object code="lng" module="core" objectdef="script_param" proj="all"></object>
+                            </value>
+                        </params>
+                        <script_code>
+                            <value><![CDATA[
+var r = java.string.format.formatInexactNumber( this.format_string, value, this.decimal_symbol, this.digit_grouping_symbol );
+
+if(lng != null) {
+    var l = db.core.lang.INSTANCES[lng];
+    if(l != null 
+        && this.format_string[l] != null
+        && this.decimal_symbol[l] != null
+        && this.digit_grouping_symbol[l] != null)
+    r = java.string.format.formatInexactNumber( this.format_string[l], value, this.decimal_symbol[l], this.digit_grouping_symbol[l] );        
+}
+
+return r;
+                            ]]></value>
+                        </script_code>
+                    </object>
+                </value>
+            </get_as_string>
+        </object>
+        <object code="output_format_double_1_decimal_places" module="core" objectdef="output_format_double" proj="all">
+            <format_string>
+                <value>
+                    <en-US>###,###,###,##0.0</en-US>
+                </value>
+                <value>
+                    <de-DE>###,###,###,##0.0</de-DE>
+                </value>
+                <value>
+                    <bg-BG>###,###,###,##0.0</bg-BG>
+                </value>
+            </format_string>
+            <decimal_symbol>
+                <value>
+                    <en-US>.</en-US>
+                </value>
+                <value>
+                    <de-DE>,</de-DE>
+                </value>
+                <value>
+                    <bg-BG>,</bg-BG>
+                </value>
+            </decimal_symbol>
+            <digit_grouping_symbol>
+                <value>
+                    <en-US>,</en-US>
+                </value>
+                <value>
+                    <de-DE>.</de-DE>
+                </value>
+                <value>
+                    <bg-BG>.</bg-BG>
+                </value>
+            </digit_grouping_symbol>
+            <!-- Important: VisionR makes rounding based on this precision internally!
+             This is done on every arithmetic operation -->
+            <precision>
+                <value>1</value>
+            </precision>
+            <get_as_string>
+                <value>
+                    <object mode="lookup" module="core" objectdef="script">
+                        <code>
+                            <value>core_output_format_double_default_output_format_double</value>
+                        </code>
+                    </object>
+                </value>
+            </get_as_string>
+        </object>
+        <object code="output_format_double_2_decimal_places" module="core" objectdef="output_format_double" proj="all">
+            <format_string>
+                <value>
+                    <en-US>###,###,###,##0.00</en-US>
+                </value>
+                <value>
+                    <de-DE>###,###,###,##0.00</de-DE>
+                </value>
+                <value>
+                    <bg-BG>###,###,###,##0.00</bg-BG>
+                </value>
+            </format_string>
+            <decimal_symbol>
+                <value>
+                    <en-US>.</en-US>
+                </value>
+                <value>
+                    <de-DE>,</de-DE>
+                </value>
+                <value>
+                    <bg-BG>,</bg-BG>
+                </value>
+            </decimal_symbol>
+            <digit_grouping_symbol>
+                <value>
+                    <en-US>,</en-US>
+                </value>
+                <value>
+                    <de-DE>.</de-DE>
+                </value>
+                <value>
+                    <bg-BG>.</bg-BG>
+                </value>
+            </digit_grouping_symbol>
+            <!-- Important: VisionR makes rounding based on this precision internally!
+             This is done on every arithmetic operation -->
+            <precision>
+                <value>2</value>
+            </precision>
+            <get_as_string>
+                <value>
+                    <object mode="lookup" module="core" objectdef="script">
+                        <code>
+                            <value>core_output_format_double_default_output_format_double</value>
+                        </code>
+                    </object>
+                </value>
+            </get_as_string>
+        </object>
+        <object code="output_format_double_3_decimal_places" module="core" objectdef="output_format_double" proj="all">
+            <format_string>
+                <value>
+                    <en-US>###,###,###,##0.000</en-US>
+                </value>
+                <value>
+                    <de-DE>###,###,###,##0.000</de-DE>
+                </value>
+                <value>
+                    <bg-BG>###,###,###,##0.000</bg-BG>
+                </value>
+            </format_string>
+            <decimal_symbol>
+                <value>
+                    <en-US>.</en-US>
+                </value>
+                <value>
+                    <de-DE>,</de-DE>
+                </value>
+                <value>
+                    <bg-BG>,</bg-BG>
+                </value>
+            </decimal_symbol>
+            <digit_grouping_symbol>
+                <value>
+                    <en-US>,</en-US>
+                </value>
+                <value>
+                    <de-DE>.</de-DE>
+                </value>
+                <value>
+                    <bg-BG>.</bg-BG>
+                </value>
+            </digit_grouping_symbol>
+            <!-- Important: VisionR makes rounding based on this precision internally!
+             This is done on every arithmetic operation -->
+            <precision>
+                <value>3</value>
+            </precision>
+            <get_as_string>
+                <value>
+                    <object mode="lookup" module="core" objectdef="script">
+                        <code>
+                            <value>core_output_format_double_default_output_format_double</value>
+                        </code>
+                    </object>
+                </value>
+            </get_as_string>
+        </object>
+
+        <object code="output_format_double_4_decimal_places" module="core" objectdef="output_format_double" proj="all">
+            <format_string>
+                <value>
+                    <en-US>###,###,###,##0.0000</en-US>
+                </value>
+                <value>
+                    <de-DE>###,###,###,##0.0000</de-DE>
+                </value>
+                <value>
+                    <bg-BG>###,###,###,##0.0000</bg-BG>
+                </value>
+            </format_string>
+            <decimal_symbol>
+                <value>
+                    <en-US>.</en-US>
+                </value>
+                <value>
+                    <de-DE>,</de-DE>
+                </value>
+                <value>
+                    <bg-BG>,</bg-BG>
+                </value>
+            </decimal_symbol>
+            <digit_grouping_symbol>
+                <value>
+                    <en-US>,</en-US>
+                </value>
+                <value>
+                    <de-DE>.</de-DE>
+                </value>
+                <value>
+                    <bg-BG>.</bg-BG>
+                </value>
+            </digit_grouping_symbol>
+            <!-- Important: VisionR makes rounding based on this precision internally!
+             This is done on every arithmetic operation -->
+            <precision>
+                <value>4</value>
+            </precision>
+            <get_as_string>
+                <value>
+                    <object mode="lookup" module="core" objectdef="script">
+                        <code>
+                            <value>core_output_format_double_default_output_format_double</value>
+                        </code>
+                    </object>
+                </value>
+            </get_as_string>
+        </object>
+
+        <object code="output_format_double_5_decimal_places" module="core" objectdef="output_format_double" proj="all">
+            <format_string>
+                <value>
+                    <en-US>###,###,###,##0.00000</en-US>
+                </value>
+                <value>
+                    <de-DE>###,###,###,##0.00000</de-DE>
+                </value>
+                <value>
+                    <bg-BG>###,###,###,##0.00000</bg-BG>
+                </value>
+            </format_string>
+            <decimal_symbol>
+                <value>
+                    <en-US>.</en-US>
+                </value>
+                <value>
+                    <de-DE>,</de-DE>
+                </value>
+                <value>
+                    <bg-BG>,</bg-BG>
+                </value>
+            </decimal_symbol>
+            <digit_grouping_symbol>
+                <value>
+                    <en-US>,</en-US>
+                </value>
+                <value>
+                    <de-DE>.</de-DE>
+                </value>
+                <value>
+                    <bg-BG>.</bg-BG>
+                </value>
+            </digit_grouping_symbol>
+            <!-- Important: VisionR makes rounding based on this precision internally!
+             This is done on every arithmetic operation -->
+            <precision>
+                <value>5</value>
+            </precision>
+            <get_as_string>
+                <value>
+                    <object mode="lookup" module="core" objectdef="script">
+                        <code>
+                            <value>core_output_format_double_default_output_format_double</value>
+                        </code>
+                    </object>
+                </value>
+            </get_as_string>
+        </object>
+
+        <object code="output_format_double_6_decimal_places" module="core" objectdef="output_format_double" proj="all">
+            <format_string>
+                <value>
+                    <en-US>###,###,###,##0.000000</en-US>
+                </value>
+                <value>
+                    <de-DE>###,###,###,##0.000000</de-DE>
+                </value>
+                <value>
+                    <bg-BG>###,###,###,##0.000000</bg-BG>
+                </value>
+            </format_string>
+            <decimal_symbol>
+                <value>
+                    <en-US>.</en-US>
+                </value>
+                <value>
+                    <de-DE>,</de-DE>
+                </value>
+                <value>
+                    <bg-BG>,</bg-BG>
+                </value>
+            </decimal_symbol>
+            <digit_grouping_symbol>
+                <value>
+                    <en-US>,</en-US>
+                </value>
+                <value>
+                    <de-DE>.</de-DE>
+                </value>
+                <value>
+                    <bg-BG>.</bg-BG>
+                </value>
+            </digit_grouping_symbol>
+            <!-- Important: VisionR makes rounding based on this precision internally!
+             This is done on every arithmetic operation -->
+            <precision>
+                <value>6</value>
+            </precision>
+            <get_as_string>
+                <value>
+                    <object mode="lookup" module="core" objectdef="script">
+                        <code>
+                            <value>core_output_format_double_default_output_format_double</value>
+                        </code>
+                    </object>
+                </value>
+            </get_as_string>
+        </object>
+
+        <object code="output_format_double_0_decimal_places" module="core" objectdef="output_format_double" proj="all">
+            <format_string>
+                <value>
+                    <en-US>###,###,###,##0</en-US>
+                </value>
+                <value>
+                    <de-DE>###,###,###,##0</de-DE>
+                </value>
+                <value>
+                    <bg-BG>###,###,###,##0</bg-BG>
+                </value>
+            </format_string>
+            <digit_grouping_symbol>
+                <value>
+                    <en-US>,</en-US>
+                </value>
+                <value>
+                    <de-DE>.</de-DE>
+                </value>
+                <value>
+                    <bg-BG>.</bg-BG>
+                </value>
+            </digit_grouping_symbol>
+            <!-- Important: VisionR makes rounding based on this precision internally!
+             This is done on every arithmetic operation -->
+            <precision>
+                <value>0</value>
+            </precision>
+            <get_as_string>
+                <value>
+                    <object mode="lookup" module="core" objectdef="script">
+                        <code>
+                            <value>core_output_format_double_default_output_format_double</value>
+                        </code>
+                    </object>
+                </value>
+            </get_as_string>
+        </object>
+    </objects>
+</import>
+
+

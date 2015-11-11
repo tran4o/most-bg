@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+most-search-masks-data-simple.xmlmost-search-masks-data-simple.xml<?xml version="1.0" encoding="UTF-8"?>
 <import revision="$LastChangedRevision: 9299 $">		
 <!-- DEFAULT SCRIPTS -->
 <objects>
@@ -216,9 +216,17 @@ return arr;
          ]]></value>
      </script_code>
  </object>
-
  
-             
-                
+ 
+  <object code="syncEDI" objectdef="vscript" module="core" >             
+     <script_code>    
+         <value><![CDATA[
+/*system.vsp("<%vsp:include script=\"${web.lib.dir}/most/getstock.vr\" />");
+system.vsp("<%vsp:include script=\"${web.lib.dir}/most/getopg.vr\" />");*/
+java.log.error("OPLA : "+java.date.now());
+         ]]></value>
+     </script_code>
+ </object>
+ 
 </objects>
 </import>

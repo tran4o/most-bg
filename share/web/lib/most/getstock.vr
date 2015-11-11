@@ -1,5 +1,3 @@
-vscript
-
 var INITIAL = 0;        // disable after inital import
 var DEBUG = true;
 

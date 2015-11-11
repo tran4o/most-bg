@@ -10,7 +10,7 @@
         </object>
         
         <object code="de-DE" module="core" objectdef="lang" mode="update">
-            <is_active><value>true</value></is_active>
+            <is_active><value>false</value></is_active>
         </object>
         
         <object code="bg-BG" module="core" objectdef="lang" mode="update">

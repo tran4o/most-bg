@@ -654,7 +654,7 @@ for (var s : db.most.protocol_sale.selectWhere("stock IS NULL AND official_date 
                        <param_window_height><value>200</value></param_window_height>
                        <icon>
                             <value>
-                              <object code="/images/objectdefs/icons/color/128/accounting-payment_transaction_original.png" module="documents" objectdef="icon"></object>
+                              <object code="/images/objectdefs/icons/color/128/graphics-notice.png" module="documents" objectdef="icon"></object>
                             </value>
                         </icon>
                        <execute>
@@ -911,6 +911,217 @@ return "id IN ("+arr.join(",")+")";
                 </name>   	
         	</bundle_number>  
         
+            <sync_edi>
+                <category>main.basic</category>
+                <sort_id>100002</sort_id>
+                <data_source>relation</data_source>
+                <related_objectdef>core.embedded_execution_script</related_objectdef>
+                <is_constant>true</is_constant>
+                <is_hidden>true</is_hidden>
+                <display_type>property.relation.script_execution</display_type>
+                <name><en-US>Sync with EDI</en-US></name>
+                <name><de-DE>Mit EDI synchronizieren</de-DE></name>
+                <name><bg-BG>Синхронизирай с EDI</bg-BG></name>
+                <default_value>
+                    <object code="most.protocol_stock.sync_edi:default_value:embedded_execution_script" objectdef="embedded_execution_script" module="core">
+                       <name>
+                            <value>
+                                <en-US>Sync with EDI!</en-US>
+                            </value>
+                            <value>
+                                <de-DE>Mit EDI synchronizieren!</de-DE>
+                            </value>
+                            <value>
+                                <bg-BG>Синхронизирай с EDI!</bg-BG>
+                            </value>
+                       </name>
+                       <is_single_button><value>true</value></is_single_button>
+                       <is_skip_confirmation><value>false</value></is_skip_confirmation>
+                       <is_auto_close_result><value>true</value></is_auto_close_result> 
+                       <is_direct><value>true</value></is_direct>
+                       <is_object_obligatory><value>true</value></is_object_obligatory>
+                       <param_window_width><value>400</value></param_window_width>
+                       <param_window_height><value>200</value></param_window_height>
+                       <icon>
+                            <value>
+                              <object code="/images/objectdefs/icons/color/128/all-history.png" module="documents" objectdef="icon"></object>
+                            </value>
+                        </icon>
+                       <execute>
+                            <value>
+                                <object code="most.protocol_stock.sync_edi:default_value:embedded_execution_script.execute" module="core" objectdef="vscript">
+                                    <execution_timeout><value>7200</value></execution_timeout>
+                                    <params>
+                                        <value>
+                                            <object code="objects" module="core" objectdef="script_param"></object>
+                                        </value>
+                                        <value>
+                                            <object code="param" module="core" objectdef="script_param"></object>
+                                        </value>
+                                    </params>
+                                    <script_code>
+                                        <value><![CDATA[
+writeln("<h1>Get stock...</h1>");                                        
+writeln(STR2HTML(system.vsp_to_string("<%vsp:include script=\"${web.lib.dir}/most/getstock.vr\" />")));
+writeln("<br/><h1>Get OPG...</h1>");                                        
+writeln(STR2HTML(system.vsp_to_string("<%vsp:include script=\"${web.lib.dir}/most/getopg.vr\" />")));                                        
+                                        ]]></value>
+                                    </script_code>
+                                </object>
+                            </value>
+                        </execute>
+                        <is_show_multiple_relation><value>true</value></is_show_multiple_relation>
+                        <is_show_single_relation><value>true</value></is_show_single_relation>
+                    </object>
+                </default_value>
+            </sync_edi>				 
+
+
+            <assign_official_date>
+                <category>main.basic</category>
+                <sort_id>100002</sort_id>
+                <data_source>relation</data_source>
+                <related_objectdef>core.embedded_execution_script</related_objectdef>
+                <is_constant>true</is_constant>
+                <is_hidden>false</is_hidden>
+                <display_type>property.relation.script_execution</display_type>
+                <name><en-US>Auto official date</en-US></name>
+                <name><de-DE>Belieferungsdatum automatisch zuweisen</de-DE></name>
+                <name><bg-BG>Автоматично осчетоводяване</bg-BG></name>
+                <default_value>
+                    <object code="most.protocol_stock.assign_official_date:default_value:embedded_execution_script" objectdef="embedded_execution_script" module="core">
+                       <name>
+                            <value>
+                                <en-US>Auto official date!</en-US>
+                            </value>
+                            <value>
+                                <de-DE>Belieferungsdatum automatisch zuweisen!</de-DE>
+                            </value>
+                            <value>
+                                <bg-BG>Автоматично осчетоводяване!</bg-BG>
+                            </value>
+                       </name>
+                       <is_single_button><value>true</value></is_single_button>
+                       <is_skip_confirmation><value>false</value></is_skip_confirmation>
+                       <is_auto_close_result><value>false</value></is_auto_close_result> 
+                       <is_direct><value>true</value></is_direct>
+                       <is_object_obligatory><value>true</value></is_object_obligatory>
+                       <param_window_width><value>400</value></param_window_width>
+                       <param_window_height><value>200</value></param_window_height>
+                       <icon>
+                            <value>
+                              <object code="/images/objectdefs/icons/color/128/accounting-accounting_month.png" module="documents" objectdef="icon"></object>
+                            </value>
+                        </icon>
+                        <param_objectdef>
+                            <value>
+                                <object code="script_execution_context_daily_report_param" cond="module.code='most'" objectdef="objectdef" module="core" mode="update"/>
+                            </value>
+                        </param_objectdef>                   
+                       <execute>
+                            <value>
+                                <object code="most.protocol_stock.assign_official_date:default_value:embedded_execution_script.execute" module="core" objectdef="vscript">
+                                    <execution_timeout><value>7200</value></execution_timeout>
+                                    <params>
+                                        <value>
+                                            <object code="objects" module="core" objectdef="script_param"></object>
+                                        </value>
+                                        <value>
+                                            <object code="param" module="core" objectdef="script_param"></object>
+                                        </value>
+                                    </params>
+                                    <script_code>
+                                        <value><![CDATA[
+
+if (objects == null) {
+	return;
+}
+for (var e : objects) if (e.official_date == null) {
+	e.official_date=param.date;
+	e.commit();
+}
+                                        ]]></value>
+                                    </script_code>
+                                </object>
+                            </value>
+                        </execute>
+                        <is_show_multiple_relation><value>true</value></is_show_multiple_relation>
+                        <is_show_single_relation><value>true</value></is_show_single_relation>
+                    </object>
+                </default_value>
+            </assign_official_date>	            
+            
+            <clear_official_date>
+                <category>main.basic</category>
+                <sort_id>100002</sort_id>
+                <data_source>relation</data_source>
+                <related_objectdef>core.embedded_execution_script</related_objectdef>
+                <is_constant>true</is_constant>
+                <is_hidden>false</is_hidden>
+                <display_type>property.relation.script_execution</display_type>
+                <name><en-US>Clear official date</en-US></name>
+                <name><de-DE>Offizieles Belieferungdatum entfernen</de-DE></name>
+                <name><bg-BG>Премахни осчетоводяване</bg-BG></name>
+                <default_value>
+                    <object code="most.protocol_stock.clear_official_date:default_value:embedded_execution_script" objectdef="embedded_execution_script" module="core">
+                       <name>
+                            <value>
+                                <en-US>Clear official date!</en-US>
+                            </value>
+                            <value>
+                                <de-DE>Offizieles Belieferungdatum entfernen!</de-DE>
+                            </value>
+                            <value>
+                                <bg-BG>Премахни осчетоводяване!</bg-BG>
+                            </value>
+                       </name>
+                       <is_single_button><value>true</value></is_single_button>
+                       <is_skip_confirmation><value>false</value></is_skip_confirmation>
+                       <is_auto_close_result><value>true</value></is_auto_close_result> 
+                       <is_direct><value>true</value></is_direct>
+                       <is_object_obligatory><value>true</value></is_object_obligatory>
+                       <param_window_width><value>400</value></param_window_width>
+                       <param_window_height><value>200</value></param_window_height>
+                       <icon>
+                            <value>
+                              <object code="/images/objectdefs/icons/color/128/graphics-notice.png" module="documents" objectdef="icon"></object>
+                            </value>
+                        </icon>
+                       <execute>
+                            <value>
+                                <object code="most.protocol_stock.clear_official_date:default_value:embedded_execution_script.execute" module="core" objectdef="vscript">
+                                    <execution_timeout><value>7200</value></execution_timeout>
+                                    <params>
+                                        <value>
+                                            <object code="objects" module="core" objectdef="script_param"></object>
+                                        </value>
+                                        <value>
+                                            <object code="param" module="core" objectdef="script_param"></object>
+                                        </value>
+                                    </params>
+                                    <script_code>
+                                        <value><![CDATA[
+
+if (objects == null) {
+	return;
+}
+for (var s : objects) 
+{
+	s.official_date.remove();
+	s.commit();
+}
+	
+                                        ]]></value>
+                                    </script_code>
+                                </object>
+                            </value>
+                        </execute>
+                        <is_show_multiple_relation><value>true</value></is_show_multiple_relation>
+                        <is_show_single_relation><value>true</value></is_show_single_relation>
+                    </object>
+                </default_value>
+            </clear_official_date>				
+
 		</protocol_stock>
 
 

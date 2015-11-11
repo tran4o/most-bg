@@ -1,5 +1,3 @@
-vscript
-
 var INITIAL = false;
 var DEBUG = false;
 
