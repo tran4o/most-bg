@@ -97,12 +97,15 @@ var q = [
 
 if (DEBUG) {
     var res = con.select(q);
+    console.log(q);
     console.log("would have to get");
 
     while (res.next()) {
         console.log(res.getString("code") + "/" + res.getString("invoice_date"));
     }
 }
+
+return; 
 
 var res = con.select(q);
 
