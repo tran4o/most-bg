@@ -14,7 +14,8 @@
 		<bill_date mode="delete"/>
 		<hold_in mode="delete"/>
 		<hold_out mode="delete"/>
-		<report_date mode="delete"/>				
+		<report_date mode="delete"/>
+		<category_date mode="delete"/>				
 
 		<protocol tbl="prt" copy_from="core.template_normal_transaction" is_abstract="true">
 			 <date mode="delete"/>
@@ -188,6 +189,7 @@ else {
                 <is_inmaintbl>true</is_inmaintbl>
                 <data_source>relation</data_source>
                 <related_objectdef>most.protocol_date</related_objectdef>
+                <rel_display_string_order>is_active DESC,"date"</rel_display_string_order>                
                 <name>
                     <en-US>Real date</en-US>
                 </name>
@@ -247,6 +249,7 @@ return "((is_active=1 OR is_show=1) AND \"date\" <= CURRENT_TIMESTAMP)";
                 <sort_id>150</sort_id>
                 <is_inmaintbl>true</is_inmaintbl>
                 <data_source>relation</data_source>
+                <rel_display_string_order>is_active DESC,"date"</rel_display_string_order>                
                 <related_objectdef>most.protocol_date</related_objectdef>
                 <name>
                     <en-US>Official date</en-US>
@@ -313,7 +316,6 @@ return "((is_active=1 OR is_show=1) AND \"date\" <= CURRENT_TIMESTAMP)";
                     <de-DE>Odit (Eintrag)</de-DE>
                     <bg-BG>Ревизия (запис)</bg-BG>
                 </name>
-             	<index_code>oge</index_code>
              	<is_dynamic>true</is_dynamic>               
                 <calculation>
 	     			<object code="most.protocol_sale.odit_entry:calculation_relation_path" module="core" objectdef="calculation_relation_path">
@@ -1130,6 +1132,9 @@ for (var s : objects)
 			  <code is_keep_settings="true">
 				<is_unique>true</is_unique>
 	 		  </code>
+			  <objectdef is_keep_settings="true">
+				<is_hidden>true</is_hidden>
+	 		  </objectdef>
 
 			  <protocols mode="delete"></protocols>
      		  <total_in mode="delete"/>
@@ -1500,100 +1505,74 @@ if (this.is_active)
                 <default_value>false</default_value>              
              </is_show>		
 
-             <category>
+			 <category mode="delete"/>
+
+             <month>
                  <category>main.basic</category>
                  <sort_id>6000</sort_id>
                  <is_inmaintbl>true</is_inmaintbl>
                  <data_source>relation</data_source>
-                 <related_objectdef>most.category_date</related_objectdef>
+                 <related_objectdef>most.protocol_month</related_objectdef>
                  <name>
-                     <en-US>Category</en-US>
+                     <en-US>Month</en-US>
                  </name>
                  <name>
-                     <de-DE>Kategorie</de-DE>
+                     <de-DE>Monat</de-DE>
                  </name>
                  <name>
-                     <bg-BG>Категория</bg-BG>
+                     <bg-BG>Месец</bg-BG>
                  </name>
-                 <index_code>cat</index_code>
+                 <index_code>mn</index_code>
                  <is_obligatory>true</is_obligatory>                     
-             </category>
+             </month>
 
 		</protocol_date>
-
-		<category_date copy_from="core.template_transaction_access" db="VISIONR" is_id_check="true" tbl="catdrw">
-
-			<code is_keep_settings="true">
-				<is_unique>true</is_unique>
-			</code>
-
-            <!-- DELETE -->
-            <is_archived mode="delete"/>
-            
-            <!-- main.basic -->
-            <name is_keep_settings="true">
-                <value_table>$(DB_PREFIX)_m_var_catdrnam</value_table>
-            </name>
-            <description is_keep_settings="true">
-                <value_table>$(DB_PREFIX)_m_txt_catdrdsc</value_table>
-            </description>
-            
-            <!-- main.settings -->
-            <parent>
-                <category>main.settings</category>
-                <sort_id>1001</sort_id>
-                <is_inmaintbl>true</is_inmaintbl>
-                <data_source>relation</data_source>
-                <related_objectdef>most.category_date</related_objectdef>
-                <is_selfreference>true</is_selfreference>
-                <name>
-                    <en-US>Parent</en-US>
-                </name>
-                <name>
-                    <de-DE>Gehört zu</de-DE>
-                </name>
-                <name>
-                    <bg-BG>Се съдържа в</bg-BG>
-                </name>
-                <index_code>par</index_code>
-                <is_hidden>false</is_hidden>
-            </parent>
-            <children>
-                <category>main.settings</category>
-                <sort_id>1002</sort_id>
-                <data_source>relation</data_source>
-                <relation_parent>most.category_date.parent</relation_parent>
-                <name>
-                    <en-US>Children</en-US>
-                </name>
-                <name>
-                    <de-DE>Enthält</de-DE>
-                </name>
-                <name>
-                    <bg-BG>Съдържа</bg-BG>
-                </name>
-                <is_hidden>false</is_hidden>
-            </children>
-            
-            <protocol_dates>
-                <category>main.settings</category>
-                <sort_id>1003</sort_id>
-                <data_source>relation</data_source>
-                <relation_parent>most.protocol_date.category</relation_parent>
-                <name>
-                    <en-US>Dates</en-US>
-                </name>
-                <name>
-                    <de-DE>Daten</de-DE>
-                </name>
-                <name>
-                    <bg-BG>Дати</bg-BG>
-                </name>
-            </protocol_dates>
-
-        </category_date>
-
-		<invoice copy_from="core.template_normal_transaction" is_abstract="false" tbl="inv">
+		
+		<protocol_month copy_from="core.template_normal_transaction" is_abstract="false" tbl="mnt">
+ 			 
+ 			 <quarter>
+                 <category>main.basic</category>
+                 <sort_id>6000</sort_id>
+                 <is_inmaintbl>true</is_inmaintbl>
+                 <data_source>relation</data_source>
+                 <related_objectdef>most.protocol_quarter</related_objectdef>
+                 <name>
+                     <en-US>Quarter</en-US>
+                 </name>
+                 <name>
+                     <de-DE>Quartal</de-DE>
+                 </name>
+                 <name>
+                     <bg-BG>Тримесечие</bg-BG>
+                 </name>
+                 <index_code>qr</index_code>
+                 <is_obligatory>true</is_obligatory>                     
+             </quarter>	
+             
+        	 <dates>
+                 <category>main.basic</category>
+                 <sort_id>7000</sort_id>
+                 <is_inmaintbl>true</is_inmaintbl>
+                 <data_source>relation</data_source>
+                 <relation_parent>most.protocol_date.month</relation_parent>
+                 <name>
+                     <en-US>Dates</en-US>
+                 </name>
+                 <name>
+                     <de-DE>Daten</de-DE>
+                 </name>
+                 <name>
+                     <bg-BG>Дати</bg-BG>
+                 </name>
+                 <is_readonly>true</is_readonly>
+             </dates>
+             
+	 		 <product_lines mode="delete"/>
+             <product_groups mode="delete"/>                                       
+             
+	 	</protocol_month>
+	 	
+		<invoice copy_from="core.template_normal_transaction" is_abstract="true" tbl="inv">
 			
 			<company mode="delete"/>
 
@@ -1675,21 +1654,6 @@ if (this.is_active)
                 </name>                
 			</purchase_order>
 			
-			<stocks>
-                <category>main.basic</category>
-                <sort_id>160</sort_id>
-                <data_source>relation</data_source>
-                <relation_parent>most.protocol_stock.invoice</relation_parent>
-                <name>
-                    <en-US>Stocks</en-US>
-                </name>
-                <name>
-                    <de-DE>Belieferungen</de-DE>
-                </name>
-                <name>
-                    <bg-BG>Зареждания</bg-BG>
-                </name>
-			</stocks>
 
 			<import_time>
                 <category>main.basic</category>
@@ -1712,8 +1676,262 @@ if (this.is_active)
                 <index_code>itm</index_code>
             </import_time>
 
-			
+			<total>
+				<category>main.basic</category>
+                <sort_id>102</sort_id>
+                <data_source>input</data_source>
+                <data_type>double</data_type>
+                <is_inmaintbl>true</is_inmaintbl>
+  				<name>
+                    <en-US>Total</en-US>
+                </name>
+                <name>
+                    <de-DE>Total</de-DE>
+                </name>
+                <name>
+                    <bg-BG>Общо</bg-BG>
+                </name> 
+			 </total>
+
+			<stocks mode="delete"/>			
         </invoice>
+        
+		<invoice_stock parent_objectdef="most.invoice">
+			
+			<stocks>
+                <category>main.basic</category>
+                <sort_id>160</sort_id>
+                <data_source>relation</data_source>
+                <relation_parent>most.protocol_stock.invoice</relation_parent>
+                <name>
+                    <en-US>Stocks</en-US>
+                </name>
+                <name>
+                    <de-DE>Belieferungen</de-DE>
+                </name>
+                <name>
+                    <bg-BG>Зареждания</bg-BG>
+                </name>
+			</stocks>
+		</invoice_stock>
+
+		<credit_note parent_objectdef="most.invoice">
+
+			 <quarter>
+			 	<category>main.basic</category>
+			 	<sort_id>4000</sort_id>
+			 	<data_source>relation</data_source>
+			 	<related_objectdef>most.protocol_quarter</related_objectdef>
+			 	<is_obligatory>true</is_obligatory>
+			 	<is_inmaintbl>true</is_inmaintbl>
+			 	<index_code>qr</index_code>
+                <name>
+                     <en-US>Quarter</en-US>
+                </name>
+                <name>
+                     <de-DE>Quartal</de-DE>
+                 </name>
+                <name>
+                     <bg-BG>Тримесечие</bg-BG>
+                </name>
+                <default_value_calculation>
+                    <object code="most.credit_note.quarter:default_value_calculation" module="core" objectdef="vscript">
+                        <params>
+                            <value>
+                                <object code="id" module="core" objectdef="script_param" proj="all"></object>
+                            </value>
+                        </params>
+                        <script_code>
+                            <value><![CDATA[
+var month = java.date.now().month;
+var q=0;
+if (month >= 0 && month <= 2) 
+	q=1;
+else if (month >= 0+3 && month <= 2+3) 
+	q=2;
+else if (month >= 0+6 && month <= 2+6) 
+	q=3;
+else if (month >= 0+9 && month <= 2+9) 
+	q=4;
+var key = "Q"+q+" "+java.date.now().year;
+return db.most.protocol_quarter.INSTANCES[key];
+                            ]]></value>
+                        </script_code>
+                    </object>
+                </default_value_calculation>
+			 </quarter>				
+
+		</credit_note>
+
+
+		<protocol_quarter copy_from="core.template_normal_transaction" is_abstract="false" tbl="qrt">
+	 		 
+	 		 <objectdef is_keep_settings="true">
+	 		 	<is_hidden>true</is_hidden>
+	 		 </objectdef>
+
+	 		 <code is_keep_settings="true">
+				<is_unique>true</is_unique>
+			 </code>
+			 			 
+        	 <year>
+                 <category>main.basic</category>
+                 <sort_id>6000</sort_id>
+                 <is_inmaintbl>true</is_inmaintbl>
+                 <data_source>relation</data_source>
+                 <related_objectdef>most.protocol_year</related_objectdef>
+                 <name>
+                     <en-US>Year</en-US>
+                 </name>
+                 <name>
+                     <de-DE>Jahr</de-DE>
+                 </name>
+                 <name>
+                     <bg-BG>Година</bg-BG>
+                 </name>
+                 <index_code>pq</index_code>
+                 <is_obligatory>true</is_obligatory>                     
+             </year>
+              			 
+        	 <months>
+                 <category>main.basic</category>
+                 <sort_id>7000</sort_id>
+                 <data_source>relation</data_source>
+                 <relation_parent>most.protocol_month.quarter</relation_parent>
+                 <name>
+                     <en-US>Months</en-US>
+                 </name>
+                 <name>
+                     <de-DE>Monate</de-DE>
+                 </name>
+                 <name>
+                     <bg-BG>Месеци</bg-BG>
+                 </name>
+                 <is_readonly>true</is_readonly>
+             </months>
+             
+                          
+	 		<dates>
+                <category>main.basic</category>
+                <sort_id>9001</sort_id>
+                <data_source>relation</data_source>
+                <is_multiple>true</is_multiple>
+                <is_readonly>false</is_readonly>
+                <related_objectdef>most.protocol_date</related_objectdef>
+                <is_dynamic>true</is_dynamic>
+                <name>
+                    <en-US>Dates</en-US>
+                    <de-DE>Daten</de-DE>
+                    <bg-BG>Дати</bg-BG>
+                </name>
+             	<is_dynamic>true</is_dynamic>               
+                <calculation>
+	     			<object code="most.protocol_quarter.dates:calculation_relation_path" module="core" objectdef="calculation_relation_path">
+                         <property_code_path>
+                             <value>months.dates</value>
+                         </property_code_path>
+                     </object>
+                 </calculation>
+             </dates>       
+             
+        	 <credit_notes>
+                 <category>main.basic</category>
+                 <sort_id>10000</sort_id>
+                 <is_inmaintbl>true</is_inmaintbl>
+                 <data_source>relation</data_source>
+                 <relation_parent>most.credit_note.quarter</relation_parent>
+                 <name>
+                     <en-US>Credit notes</en-US>
+                 </name>
+                 <name>
+                     <de-DE>Kreditnoten</de-DE>
+                 </name>
+                 <name>
+                     <bg-BG>Кредитни известия</bg-BG>
+                 </name>
+                 <is_readonly>true</is_readonly>
+             </credit_notes>      
+             
+	 		 <product_lines mode="delete"/>
+             <product_groups mode="delete"/>  
+                     
+        </protocol_quarter>
+        
+        <protocol_year copy_from="core.template_normal_transaction" is_abstract="false" tbl="yr">
+	 		 
+	 		 <objectdef is_keep_settings="true">
+	 		 	<is_hidden>true</is_hidden>
+	 		 </objectdef>
+
+	 		 <code is_keep_settings="true">
+				<is_unique>true</is_unique>
+			 </code>
+			 			 
+        	 <quarters>
+                 <category>main.basic</category>
+                 <sort_id>7000</sort_id>
+                 <data_source>relation</data_source>
+                 <relation_parent>most.protocol_quarter.year</relation_parent>
+                 <name>
+                     <en-US>Quarters</en-US>
+                 </name>
+                 <name>
+                     <de-DE>Quartale</de-DE>
+                 </name>
+                 <name>
+                     <bg-BG>Тримесечия</bg-BG>
+                 </name>
+                 <is_readonly>true</is_readonly>
+             </quarters>
+
+ 			<months>
+                <category>main.basic</category>
+                <sort_id>9000</sort_id>
+                <data_source>relation</data_source>
+                <is_multiple>true</is_multiple>
+                <is_readonly>false</is_readonly>
+                <related_objectdef>most.protocol_month</related_objectdef>
+                <is_dynamic>true</is_dynamic>
+                <name>
+                    <en-US>Months</en-US>
+                    <de-DE>Monate</de-DE>
+                    <bg-BG>Месеци</bg-BG>
+                </name>
+             	<is_dynamic>true</is_dynamic>               
+                <calculation>
+	     			<object code="most.protocol_year.months:calculation_relation_path" module="core" objectdef="calculation_relation_path">
+                         <property_code_path>
+                             <value>quarters.months</value>
+                         </property_code_path>
+                     </object>
+                 </calculation>
+             </months>           
+             
+			 <dates>
+                <category>main.basic</category>
+                <sort_id>9001</sort_id>
+                <data_source>relation</data_source>
+                <is_multiple>true</is_multiple>
+                <is_readonly>false</is_readonly>
+                <related_objectdef>most.protocol_date</related_objectdef>
+                <is_dynamic>true</is_dynamic>
+                <name>
+                    <en-US>Dates</en-US>
+                    <de-DE>Daten</de-DE>
+                    <bg-BG>Дати</bg-BG>
+                </name>
+             	<is_dynamic>true</is_dynamic>               
+                <calculation>
+	     			<object code="most.protocol_year.dates:calculation_relation_path" module="core" objectdef="calculation_relation_path">
+                         <property_code_path>
+                             <value>quarters.months.dates</value>
+                         </property_code_path>
+                     </object>
+                 </calculation>
+             </dates>               
+                          
+        </protocol_year>        	
+
         
         
         <opg_entry tbl="ope" copy_from="core.template_normal_transaction" is_abstract="true">
@@ -2207,6 +2425,7 @@ for (var e : this.entries.OLD) {
      		 <date>
      		 	<category>main.basic</category>
      		 	<data_source>relation</data_source>
+                <rel_display_string_order>is_active DESC,"date"</rel_display_string_order>                
      		 	<related_objectdef>most.protocol_date</related_objectdef>
      		 	<relation_filter>
                      <object code="most.COMMON.protocol_date_filter:param" module="core" objectdef="relation_filter">
@@ -2698,6 +2917,7 @@ for (var e : db.most.state_adjustment_official.selectWhere("odit_entry="+this.id
                 <sort_id>500</sort_id>
                 <is_inmaintbl>true</is_inmaintbl>
                 <data_source>relation</data_source>
+                <rel_display_string_order>is_active DESC,"date"</rel_display_string_order>                
                 <related_objectdef>most.protocol_date</related_objectdef>
                 <name>
                     <en-US>Date</en-US>
@@ -2941,14 +3161,15 @@ for (var e : this.entries.OLD) {
                 <display_type mode="delete"/>
             </vendor>        
 
-        	<product_line>
-				<data_source>input</data_source>
-				<data_type>varchar</data_type>
+        	<product_line col="prod_line">
+				<data_source>relation</data_source>
+				<data_type>integer</data_type>
 				<is_inmaintbl>true</is_inmaintbl>
 				<is_obligatory>true</is_obligatory>
-				<index_code>pl</index_code>
+				<index_code>prl</index_code>
 				<sort_id>5000</sort_id>
                 <category>main.settings</category>
+                <related_objectdef>most.product_line</related_objectdef>
 	  			<name>
 	            	<en-US>Product line</en-US>
 	            	<de-DE>Produktlinie</de-DE>
@@ -3308,6 +3529,78 @@ for (var e : this.entries.OLD) {
              
         </article>
         
+		<product_line copy_from="core.template_normal_transaction" is_abstract="false" tbl="prl">
+
+			 <delta mode="delete"/>
+
+	 		 <objectdef is_keep_settings="true">
+	 		 	<is_hidden>true</is_hidden>
+	 		 </objectdef>
+	 		 <code is_keep_settings="true">
+				<is_unique>true</is_unique>
+			 </code>
+			 
+     		 <articles>
+                <category>main.basic</category>
+                <data_source>relation</data_source>
+                <relation_parent>most.article.product_line</relation_parent>
+                <name>
+                    <en-US>Articles</en-US>
+                </name>
+                <name>
+                    <de-DE>Artikel</de-DE>
+                </name>
+                <name>
+                    <bg-BG>Артикули</bg-BG>
+                </name>
+				<display_type>property.relation.multiple.add.new</display_type>
+				<relation_filter>core_property_default_relation_filter_simple_bidirectional_relation</relation_filter>
+				<sort_id>500</sort_id>
+             </articles>
+         	 
+         	 <product_group>
+				<data_source>relation</data_source>
+				<data_type>integer</data_type>
+				<is_inmaintbl>true</is_inmaintbl>
+				<is_obligatory>true</is_obligatory>
+				<index_code>pg</index_code>
+				<sort_id>1000</sort_id>
+                <category>main.basic</category>
+                <related_objectdef>most.product_group</related_objectdef>
+	  			<name>
+	            	<en-US>Product group</en-US>
+	            	<de-DE>Produktgruppe</de-DE>
+	            	<bg-BG>Продуктова група</bg-BG>
+	            </name>
+			 </product_group>
+			 
+		</product_line>
+
+		<product_group copy_from="core.template_normal_transaction" is_abstract="false" tbl="prg">
+	 		 <objectdef is_keep_settings="true">
+	 		 	<is_hidden>true</is_hidden>
+	 		 </objectdef>
+	 		 <code is_keep_settings="true">
+				<is_unique>true</is_unique>
+			 </code>
+     		 <product_lines>
+                <category>main.basic</category>
+                <data_source>relation</data_source>
+                <relation_parent>most.product_line.product_group</relation_parent>
+                <name>
+                    <en-US>Product lines</en-US>
+                </name>
+                <name>
+                    <de-DE>Productlinien</de-DE>
+                </name>
+                <name>
+                    <bg-BG>Придуктови линии</bg-BG>
+                </name>
+				<display_type>property.relation.multiple.add.new</display_type>
+				<relation_filter>core_property_default_relation_filter_simple_bidirectional_relation</relation_filter>
+				<sort_id>500</sort_id>
+             </product_lines>
+		</product_group>
 		
 		
 	</most>
