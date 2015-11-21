@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<import revision="$LastChangedRevision: 18817 $" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:vsl="http://www.plan-vision.com/VSL/1.0">
+<objects>
+<!--  -->
+<object code="most.article" objectdef="report_object_overview" module="reports" >
+   <name>
+      <value>
+         <en-US>Article</en-US>
+         <bg-BG>Артикул</bg-BG></value>
+   </name>
+   <sort_id>
+      <value>0</value>
+   </sort_id>
+   <objectdef_set mode="update">
+      <value sort_id="0"><object mode="update" code="article" objectdef="objectdef" module="core" cond="code='article' AND module.code='most'"/></value>
+   </objectdef_set>
+   <mode>
+      <value>both</value>
+   </mode>
+   <detailed_template>
+      <value><![CDATA[<b>Code :</b> <%= STR2HTML(obj.code) %><br/>
+<b>Vendor :</b> <%= (obj.vendor == null ? "" : STR2HTML(obj.vendor.code)) %><br/>
+<b>PL :</b> <%= (obj.product_line == null ? "" : STR2HTML(obj.product_line.code)) %><br/>
+<b>Name :</b> <%= STR2HTML(obj.name) %><br/>
+<b>Stocked HP :</b> <%= (STR2HTML(FORMAT(obj.total_stocked_official))) %><br/>
+<b>Sold HP :</b> <%= (STR2HTML(FORMAT(obj.total_sold_official))) %><br/>
+<b>Avail HP :</b> <%= (STR2HTML(FORMAT(obj.available_official))) %><br/>
+<b>Delta :</b> <%= (STR2HTML(FORMAT(obj.delta))) %><br/>
+]]></value>
+   </detailed_template>
+   <is_force_use_icon>
+      <value>false</value>
+   </is_force_use_icon>
+   <param_category_code>
+      <value>main</value>
+   </param_category_code>
+   <embedded_size_in_pixels>
+      <value>300</value>
+   </embedded_size_in_pixels>
+   <is_archived>
+      <value>false</value>
+   </is_archived>
+   <uuid>
+      <value>r1rH_MxyTeenawRqWyYLlA</value>
+   </uuid>
+</object>
+<!--  -->
+<object code="most.stock" objectdef="report_object_overview" module="reports" >
+   <name>
+      <value>
+         <en-US>Stock</en-US>
+         <bg-BG>Артикул</bg-BG></value>
+   </name>
+   <sort_id>
+      <value>0</value>
+   </sort_id>
+   <objectdef_set mode="update">
+      <value sort_id="0"><object mode="update" code="protocol_stock" objectdef="objectdef" module="core" cond="code='protocol_stock' AND module.code='most'"/></value>
+   </objectdef_set>
+   <mode>
+      <value>both</value>
+   </mode>
+   <detailed_template>
+      <value><![CDATA[<b>Article :</b> <%= (obj.article == null ? "" : (STR2HTML(obj.article.code)) ) %><br/>
+<b>Qty :</b> <%= (STR2HTML(FORMAT(obj.quantity))) %><br/>
+<b>MOST :</b> <%= (STR2HTML(OBJSTR(obj.real_date))) %><br/>
+<b>HP :</b> <%= (STR2HTML(OBJSTR(obj.official_date))) %><br/>
+<b>Price :</b> <%= (STR2HTML(OBJSTR(obj.price))) %><br/>
+<b>Discount price :</b> <%= (STR2HTML(FORMAT(obj.price_discount))) %><br/>
+<b>Total :</b> <%= (STR2HTML(FORMAT(obj.total))) %><br/>
+<b>Used  :</b> <%= (STR2HTML(FORMAT(obj.used_quantity))) %><br/>
+<b>Rest  :</b> <%= (STR2HTML(FORMAT(obj.rest_quantity))) %><br/>
+<b>OPG  :</b> <%= (obj.opg == null ? "" : (STR2HTML(obj.opg.code)))  %><br/>
+]]></value>
+   </detailed_template>
+   <is_force_use_icon>
+      <value>false</value>
+   </is_force_use_icon>
+   <param_category_code>
+      <value>main</value>
+   </param_category_code>
+   <embedded_size_in_pixels>
+      <value>300</value>
+   </embedded_size_in_pixels>
+   <is_archived>
+      <value>false</value>
+   </is_archived>
+   <uuid>
+      <value>Gj0NqdHzQ_6PqB3p-25nqQ</value>
+   </uuid>
+</object>
+<!--  -->
+<object code="most.sale" objectdef="report_object_overview" module="reports" >
+   <name>
+      <value>
+         <en-US>Sale</en-US>
+         <bg-BG>Артикул</bg-BG></value>
+   </name>
+   <sort_id>
+      <value>0</value>
+   </sort_id>
+   <objectdef_set mode="update">
+      <value sort_id="0"><object mode="update" code="protocol_sale" objectdef="objectdef" module="core" cond="code='protocol_sale' AND module.code='most'"/></value>
+   </objectdef_set>
+   <mode>
+      <value>both</value>
+   </mode>
+   <detailed_template>
+      <value><![CDATA[<b>Article :</b> <%= (obj.article == null ? "" : (STR2HTML(obj.article.code)) ) %><br/>
+<b>Qty :</b> <%= (STR2HTML(FORMAT(obj.quantity))) %><br/>
+<b>MOST :</b> <%= (STR2HTML(OBJSTR(obj.real_date))) %><br/>
+<b>HP :</b> <%= (STR2HTML(OBJSTR(obj.official_date))) %><br/>
+<b>Price :</b> <%= (STR2HTML(OBJSTR(obj.price))) %><br/>
+<b>Total :</b> <%= (STR2HTML(FORMAT(obj.total))) %><br/>
+<b>Customer :</b> <%= (STR2HTML(OBJSTR(obj.customer))) %><br/>
+<b>SaleID  :</b> <%= (STR2HTML(obj.most_sale_id)) %><br/>
+<b>Stock HP :</b> <%= (obj.stock != null ? STR2HTML(OBJSTR(obj.stock.official_date)) : "") %><br/>
+<b>Stock Inv :</b> <%= (obj.stock != null ? STR2HTML(OBJSTR(obj.stock.invoice)) : "") %><br/>
+<b>OPG  :</b> <%= (obj.opg == null ? "" : (STR2HTML(obj.opg.code))) %><br/>
+]]></value>
+   </detailed_template>
+   <is_force_use_icon>
+      <value>false</value>
+   </is_force_use_icon>
+   <param_category_code>
+      <value>main</value>
+   </param_category_code>
+   <embedded_size_in_pixels>
+      <value>300</value>
+   </embedded_size_in_pixels>
+   <is_archived>
+      <value>false</value>
+   </is_archived>
+   <uuid>
+      <value>9QthVJUFQPuC8NNqhmUQXg</value>
+   </uuid>
+</object>
+<!--  -->
+<object code="most.opg" objectdef="report_object_overview" module="reports" >
+   <name>
+      <value>
+         <en-US>OPG</en-US>
+         <bg-BG>Артикул</bg-BG></value>
+   </name>
+   <sort_id>
+      <value>0</value>
+   </sort_id>
+   <objectdef_set mode="update">
+      <value sort_id="0"><object mode="update" code="opg" objectdef="objectdef" module="core" cond="code='opg' AND module.code='most'"/></value>
+   </objectdef_set>
+   <mode>
+      <value>both</value>
+   </mode>
+   <detailed_template>
+      <value><![CDATA[<b>Type : <b> <%= (STR2HTML(OBJSTR(obj.OBJECTDEF))) %><br/>
+<b>Code  :</b> <%= (STR2HTML(obj.code)) %><br/>
+<b>From :</b> <%= STR2HTML(FORMAT_DATE(obj.valid_from)) %><br/>
+<b>To :</b> <%= STR2HTML(FORMAT_DATE(obj.valid_to)) %><br/>
+<b>Version :</b> <%= (STR2HTML(obj.version)) %><br/>
+<b>Mode  :</b> <%= (obj.discount_mode == null ? "" : (STR2HTML(obj.discount_mode.code))) %><br/>
+<b>Entries #:</b> <%= STR2HTML(FORMAT(obj.entries.size)) %><br/>
+]]></value>
+   </detailed_template>
+   <is_force_use_icon>
+      <value>false</value>
+   </is_force_use_icon>
+   <param_category_code>
+      <value>main</value>
+   </param_category_code>
+   <embedded_size_in_pixels>
+      <value>300</value>
+   </embedded_size_in_pixels>
+   <is_archived>
+      <value>false</value>
+   </is_archived>
+   <uuid>
+      <value>meC8gwO9Q8-LtT05j_nxVg</value>
+   </uuid>
+</object>
+</objects></import>

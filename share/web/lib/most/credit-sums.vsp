@@ -1,0 +1,129 @@
+<% 
+	var key = "CS"+java.date.now().getTime()+"_"+java.math.random();
+	var ppop = "null";
+	var def = null;
+	var opop = null;
+	var mode = "common";
+	try 
+	{
+		opop=pop;
+		mode = (opop instanceof db.web.popup) ? "popup" : "object";
+		ppop=QXID(pop);
+		var setting = db.currentSession().user.get_setting("MOST.credit-sums");
+		if (setting != null) 
+			def = setting.value;
+	} catch (e) {} 
+if (opop instanceof db.web.popup) { %>
+<h3>
+<% if (obj instanceof db.most.article) { %>
+	<%= STR2HTML(obj.code) %>&nbsp;<%= (obj.vendor == null ? "" : STR2HTML(obj.vendor.code)) %>&nbsp;<%= obj.product_line == null ? "" : STR2HTML(obj.product_line.code) %>  
+<% } else if (obj instanceof db.most.product_line) { %>
+	<%= STR2HTML(obj.code) %>&nbsp;<%= (obj.product_group == null ? "" : STR2HTML(obj.product_group.code)) %> 
+<% } else { %>
+	<%= STR2HTML(obj.code) %>
+<% } 
+var cond;
+if (obj instanceof db.most.article) {
+	cond="id=:OBJ";
+} else if (obj instanceof db.most.product_line)
+	cond="product_line=:OBJ";
+else if (obj instanceof db.most.product_group)
+	cond="product_line.product_group=:OBJ";
+%>
+&nbsp;<b style='color:#008000;'>&euro;<%= FORMAT(SCRIPTS["calcZeroPrice"](obj,cond)) %></b><br/>
+</h3>
+<% } %>
+<script>
+var pop = <%= ppop %>;
+var el = document.getElementById('<%= key %>');
+if (pop != null && !el.qx_Widget && typeof qx != 'undefined') 
+{	
+	var wdg = new qx.ui.basic.Inline('<%= key %>');
+	wdg.setWidth(150);
+	wdg.setHeight(20);
+	
+	var lay = new qx.ui.layout.BoxLayout();
+	lay.setOrientation("horizontal");
+	lay.setWidth("100%");
+	lay.setHeight(19);
+	lay.setSpacing(5);
+	wdg.add(lay);
+	
+	var lbl1 = new qx.ui.basic.Atom(<%= JSVAL(MSG("INFO_DURATION")) %>);
+	lbl1.setHorizontalChildrenAlign("left");
+	lbl1.setWidth("1*");
+	lbl1.setHeight(19);
+	lay.add(lbl1);
+
+	var combo = new qx.ui.form.ComboBox();
+	combo.setWidth(100);
+	combo.setHeight(19);
+	combo.setBorder("group-box-frame");
+	lay.add(combo);
+
+<%
+	var sel = db.most.protocol_quarter.SELECT("ORDER by \"year\".code,code");
+	var sz=sel.size;
+	for (var i=0;i<sz;i++)
+	{
+		var el = sel[i];
+		if (el.code.indexOf("Q1") == 0) 
+		{
+%>			var lit = new qx.ui.form.ListItem(<%= JSVAL("<b>"+el.year.code+"</b>") %>,null,<%= JSVAL(el.year.code) %>);
+			<% if (el.year.code == def) { %> combo.setSelected(lit); <% } %>  
+			combo.add(lit); 
+<%		} %>
+		var lit = new qx.ui.form.ListItem(<%= JSVAL("&nbsp;&nbsp;&nbsp;&nbsp;"+OBJSTR(el)) %>,null,<%= JSVAL(el.code) %>);
+<% 		if (el == def) { %> combo.setSelected(lit); <% } %>  
+		combo.add(lit);
+<%
+	}
+%>
+
+	if (pop instanceof qx.ui.popup.Popup) 
+	{
+		pop.add(wdg);
+		// prevent popup hiding 
+		combo._popup.addEventListener("beforeAppear",function() {
+			pop.setAutoHide(false);
+		});
+		combo._popup.addEventListener("disappear",function() {
+			pop.setAutoHide(true);
+		});
+	} else {
+		while (!(pop instanceof qx.ui.popup.Popup)) 
+			pop=pop.getParent();
+		if (pop.vr_inwdg) 
+			pop.remove(pop.vr_inwdg);
+		pop.add(pop.vr_inwdg=wdg);
+	}
+	function onChg() 
+	{		
+		var args=[];
+		args.push("object=<%= STRID(obj) %>");
+		args.push("intr="+encodeURIComponent(combo.getSelected().getValue()));
+		args.push("mode=<%= mode %>");
+		_VISIONR.getConnectionManager().getVSP("/modules/most/credit-sums-query.vsp?"+args.join("&"),function(cont) {  
+			document.getElementById('<%= key %>_B').innerHTML=cont;
+		});
+	}
+	
+	combo.addEventListener("changeSelected",onChg);
+}
+</script>
+<% if (ppop != "null") { %> 
+<div id='<%= key %>' style='width:150px;height:23px;margin-top:5px;margin-bottom:5px;'></div>
+<% } 
+//-----------------------------------------------------
+// include the result template with injected parameters
+//-----------------------------------------------------
+session.request.setParameter("object",STRID(obj));
+if (def != null)
+	session.request.setParameter("intr",def);
+else
+	session.request.setParameter("intr","");	
+session.request.setParameter("mode",mode);	
+%>
+<div id='<%= key %>_B'>
+<%vsp:include page="modules/most/credit-sums-query.vsp" />;
+</div>

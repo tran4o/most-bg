@@ -1,0 +1,98 @@
+<% 
+var mode = session.request.getParameter("mode");
+var object = db[session.request.getParameter("object")];
+var begin = null;
+var end = null;
+var str = null;
+if (session.request.getParameter("intr") != null && session.request.getParameter("intr") != "") 
+{
+	var cd = str = session.request.getParameter("intr");
+	try 
+	{
+		var year = cd.castToExactNumber();
+		begin=java.date.today();
+		begin.year=year;
+		begin.day=1;
+		begin.month=0;
+		end=begin.addYears(1);
+	} catch (e) {
+		var i1 = cd.indexOf(" ");
+		var q = cd.substring(1,i1).castToExactNumber();
+		var year = cd.substring(i1+1).castToExactNumber();
+		begin=java.date.today();
+		begin.year=year;
+		begin.day=1;
+		begin.month=(q-1)*3;
+		end=begin.addMonths(3);
+	}
+} else {
+	// DUMMY 
+	begin = java.date.today();
+	end = java.date.today();
+	begin.year=1970;
+	end.year=1970;
+}
+// store result (if neccesary)
+var setting = db.currentSession().user.get_setting("MOST.credit-sums");
+if (str == null) {
+	if (setting != null && setting.value != null)
+		setting.value=null;
+} else {
+	if (setting == null)
+		setting = core.misc.createSimpleUserSetting("MOST.credit-sums",db.core.user_setting_varchar);
+	if (setting.value != str)
+		setting.value=str;
+}
+//--------------------------------------------------------
+var cond;
+var cond1;
+if (object instanceof db.most.article) {
+	cond="article=:OBJ";
+	cond1="article=:OBJ";
+} else if (object instanceof db.most.product_line) {
+	cond="article.product_line=:OBJ";
+	cond1="product_line=:OBJ";
+} else if (object instanceof db.most.product_group) {
+	cond="article.product_line.product_group=:OBJ";
+	cond1="product_line.product_group=:OBJ";
+}
+	
+var chart = SCRIPTS["sumChartByCondition"](object,cond,begin,end,220,100);
+if (chart != null) 
+{ %>
+	<img src="<%= chart %>" style="width:220px;height:100px;<% if (mode == "popup") { %>margin-left:-53px;<% } %>"/>
+<% } %>
+<div style='margin-top:-5px;<% if (mode == "popup") { %>margin-left:-53px;<% } %>text-align:center;<% if (chart == null) { %>margin-bottom:100px; <% } %>'>
+<% 
+	var params=new M();
+	params["FROM"]=begin;
+	params["TO"]=end;
+	params["OBJ"]=object.id;
+	//----------------------------------------------------------------------------------------------------------------------------------
+	var tcost=0.0;
+	var sl=db.most.protocol_sale.VSQL_QUERY_SUM("SELECT total AS VAL WHERE "+cond+" AND official_date.\"date\" >= :FROM AND official_date.\"date\" < :TO",params);
+	if (sl.next() && sl.getDouble("RES") != null) tcost=sl.getDouble("RES"); 
+
+	var tsold=0.0;
+	var sl=db.most.protocol_sale.VSQL_QUERY_SUM("SELECT most_sale_total AS VAL WHERE "+cond+" AND official_date.\"date\" >= :FROM AND official_date.\"date\" < :TO",params);
+	if (sl.next() && sl.getDouble("RES") != null) tsold=sl.getDouble("RES"); 
+
+	var arr=[];
+	var t = begin.clone();
+	while (t < end) {
+		var key = "Q"+((t.month / 3)+1)+" "+t.year;
+		t=t.addMonths(3);
+		var q = db.most.protocol_quarter.INSTANCES[key];
+		arr.push(q.id); 
+	}
+
+	var tnotes=0.0;
+	if (!arr.is_empty) {
+		var sl=db.most.credit_note.VSQL_QUERY_SUM("SELECT total AS VAL WHERE quarter IN ("+arr.join(",")+") AND "+cond1,params);
+		if (sl.next() && sl.getDouble("RES") != null) tnotes=sl.getDouble("RES");
+	}
+	
+%>
+<b>COST </b><%= (STR2HTML(FORMAT(tcost))) %> | <b>SALE </b><%= (STR2HTML(FORMAT(tsold))) %> | <b>&Delta; </b><%= (STR2HTML(FORMAT(tsold-tcost))) %><br/>
+<b>CN </b><%= (STR2HTML(FORMAT(tnotes))) %> | <b>&Delta;-CN </b><%= (STR2HTML(FORMAT(tsold-tcost-tnotes))) %>
+</div>  

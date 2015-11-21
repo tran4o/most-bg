@@ -1,0 +1,147 @@
+<% 
+	var mode = "common";
+	var key = "CS"+java.date.now().getTime()+"_"+java.math.random();
+	var ppop = "null";
+	var defBegin = null;
+	var defEnd = null;
+	var opop = null;
+	try 
+	{
+		opop=pop;
+		mode = (opop instanceof db.web.popup) ? "popup" : "object";
+		ppop=QXID(pop);
+		var setting = db.currentSession().user.get_setting("MOST.sums-begin");
+		if (setting != null && setting.value != null) 
+			defBegin = java.date.fromMillis(setting.value.castToExactNumber());
+		setting = db.currentSession().user.get_setting("MOST.sums-end");
+		if (setting != null && setting.value != null)
+			defEnd = java.date.fromMillis(setting.value.castToExactNumber());				
+	} catch (e) {}
+	if (opop instanceof db.web.popup) { %>
+<h3><% if (obj instanceof db.most.article) { %>
+	<%= STR2HTML(obj.code) %>&nbsp;<%= (obj.vendor == null ? "" : STR2HTML(obj.vendor.code)) %>&nbsp;<%= obj.product_line == null ? "" : STR2HTML(obj.product_line.code) %>  
+<% } else if (obj instanceof db.most.product_line) { %>
+	<%= STR2HTML(obj.code) %>&nbsp;<%= (obj.product_group == null ? "" : STR2HTML(obj.product_group.code)) %>  
+<% } else { %>
+	<%= STR2HTML(obj.code) %>
+<% } 
+var cond;
+if (obj instanceof db.most.article) {
+	cond="id=:OBJ";
+} else if (obj instanceof db.most.product_line)
+	cond="product_line=:OBJ";
+else if (obj instanceof db.most.product_group)
+	cond="product_line.product_group=:OBJ";
+%>
+&nbsp;<b style='color:#008000;'>&euro;<%= FORMAT(SCRIPTS["calcZeroPrice"](obj,cond)) %></b><br/>
+</h3>
+<% } %>
+<script>
+var pop = <%= ppop %>;
+var el = document.getElementById('<%= key %>');
+if (pop != null && !el.qx_Widget && typeof qx != 'undefined') 
+{	
+	var wdg = new qx.ui.basic.Inline('<%= key %>');
+	wdg.setWidth(150);
+	wdg.setHeight(40);
+	
+	var lay = new qx.ui.layout.BoxLayout();
+	lay.setOrientation("horizontal");
+	lay.setWidth("100%");
+	lay.setHeight(19);
+	lay.setSpacing(5);
+	wdg.add(lay);
+	
+	var lbl1 = new qx.ui.basic.Atom(<%= JSVAL(MSG("INFO_FROM_2")) %>);
+	lbl1.setHorizontalChildrenAlign("left");
+	lbl1.setWidth("1*");
+	lbl1.setHeight(19);
+	lay.add(lbl1);
+
+	var fromd = new visionr.ui.form.DateField(<%= JSVAL(defBegin) %>,<%= JSVAL(db.core.format.INSTANCES["default_output_format_date"].format_string) %>);
+	fromd.setWidth(100);
+	fromd.setHeight(19);
+	lay.add(fromd);
+
+	var lay = new qx.ui.layout.BoxLayout();
+	lay.setOrientation("horizontal");
+	lay.setWidth("100%");
+	lay.setHeight(19);
+	lay.setSpacing(5);
+	lay.setTop(19+4);
+	wdg.add(lay);
+	
+	var lbl1 = new qx.ui.basic.Atom(<%= JSVAL(MSG("INFO_TO_2")) %>);
+	lbl1.setHorizontalChildrenAlign("left");
+	lbl1.setWidth("1*");
+	lbl1.setHeight(19);
+	lay.add(lbl1);
+
+	var tod = new visionr.ui.form.DateField(<%= JSVAL(defEnd) %>,<%= JSVAL(db.core.format.INSTANCES["default_output_format_date"].format_string) %>);
+	tod.setWidth(100);
+	tod.setHeight(19);
+	lay.add(tod);
+
+	if (pop instanceof qx.ui.popup.Popup) 
+	{		
+		pop.add(wdg);
+		// prevent popup hiding 
+		fromd._button._chooserWindow.addEventListener("beforeAppear",function() {
+			pop.setAutoHide(false);
+		});
+		fromd._button._chooserWindow.addEventListener("disappear",function() {
+			pop.setAutoHide(true);
+		});
+		tod._button._chooserWindow.addEventListener("beforeAppear",function() {
+			pop.setAutoHide(false);
+		});
+		tod._button._chooserWindow.addEventListener("disappear",function() {
+			pop.setAutoHide(true);
+		});
+	} else {
+		while (!(pop instanceof qx.ui.popup.Popup)) 
+			pop=pop.getParent();
+		if (pop.vr_inwdg) 
+			pop.remove(pop.vr_inwdg);
+		pop.add(pop.vr_inwdg=wdg);
+	}
+	
+	function onChg() {
+		var args=[];
+		args.push("object=<%= STRID(obj) %>");
+		if (fromd.value)
+			args.push("bdate="+fromd.value.getTime());
+		if (tod.value)
+			args.push("edate="+tod.value.getTime());
+		args.push("mode=<%= mode %>");
+		_VISIONR.getConnectionManager().getVSP("/modules/most/sums-query.vsp?"+args.join("&"),function(cont) {  
+			document.getElementById('<%= key %>_B').innerHTML=cont;
+		});
+	}
+	
+	fromd.addEventListener("changeValueR",onChg);
+	tod.addEventListener("changeValueR",onChg);
+}
+</script>
+<% if (ppop != "null") { %> 
+<div id='<%= key %>' style='width:150px;height:43px;margin-bottom:5px;'></div>
+<% } %>
+
+<%
+//-----------------------------------------------------
+// include the result template with injected parameters
+//-----------------------------------------------------
+session.request.setParameter("object",STRID(obj));
+if (defBegin != null)
+	session.request.setParameter("bdate",defBegin.getTime());
+else
+	session.request.setParameter("bdate","");
+if (defEnd != null)
+	session.request.setParameter("edate",defEnd.getTime());
+else
+	session.request.setParameter("edate","");
+session.request.setParameter("mode",mode);	
+%>
+<div id='<%= key %>_B'>
+<%vsp:include page="modules/most/sums-query.vsp" />;
+</div>
