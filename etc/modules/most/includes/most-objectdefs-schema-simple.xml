@@ -302,6 +302,16 @@ return "((is_active=1 OR is_show=1) AND \"date\" <= CURRENT_TIMESTAMP)";
                     <bg-BG>ИН продажба</bg-BG>
                 </name>
 			 </most_sale_id>
+
+			 <most_sale_total>
+                <category>main.basic</category>
+                <sort_id>9100</sort_id>
+                <data_source>input</data_source>
+                <data_type>double</data_type>
+                <name>
+                    <en-US>Most sale total</en-US>
+                </name>
+			 </most_sale_total>
 			 
 			 <odit_entry>
                 <category>main.basic</category>
@@ -1149,7 +1159,7 @@ for (var s : objects)
                  <is_inmaintbl>false</is_inmaintbl>
                  <is_multiple>true</is_multiple>
                  <data_source>relation</data_source>
-                 <related_objectdef>most.protocol</related_objectdef>
+                 <related_objectdef>most.protocol_stock</related_objectdef>
                  <is_readonly>true</is_readonly>
                  <name>
                      <en-US>Real stock</en-US>
@@ -1179,7 +1189,7 @@ for (var s : objects)
                  <is_inmaintbl>false</is_inmaintbl>
                  <is_multiple>true</is_multiple>
                  <data_source>relation</data_source>
-                 <related_objectdef>most.protocol</related_objectdef>
+                 <related_objectdef>most.protocol_stock</related_objectdef>
                  <name>
                      <en-US>Official stock</en-US>
                  </name>
@@ -1268,7 +1278,7 @@ for (var s : objects)
                  <is_inmaintbl>false</is_inmaintbl>
                  <is_multiple>true</is_multiple>
                  <data_source>relation</data_source>
-                 <related_objectdef>most.protocol</related_objectdef>
+                 <related_objectdef>most.protocol_sale</related_objectdef>
                  <is_readonly>true</is_readonly>
                  <name>
                      <en-US>Real sales</en-US>
@@ -1298,7 +1308,7 @@ for (var s : objects)
                  <is_inmaintbl>false</is_inmaintbl>
                  <is_multiple>true</is_multiple>
                  <data_source>relation</data_source>
-                 <related_objectdef>most.protocol</related_objectdef>
+                 <related_objectdef>most.protocol_sale</related_objectdef>
                  <is_readonly>true</is_readonly>
                  <name>
                      <en-US>Official sales</en-US>
@@ -1715,7 +1725,7 @@ if (this.is_active)
 			</stocks>
 		</invoice_stock>
 
-		<credit_note parent_objectdef="most.invoice">
+		<credit_note parent_objectdef="most.invoice" is_abstract="true">
 
 			 <quarter>
 			 	<category>main.basic</category>
@@ -1759,7 +1769,58 @@ return db.most.protocol_quarter.INSTANCES[key];
                         </script_code>
                     </object>
                 </default_value_calculation>
-			 </quarter>				
+			 </quarter>	
+			 
+			 <product_group mode="delete"/>
+			 
+         	 <product_line>
+				<data_source>relation</data_source>
+				<data_type>integer</data_type>
+				<is_inmaintbl>true</is_inmaintbl>
+				<is_obligatory>true</is_obligatory>
+				<index_code>pg</index_code>
+				<sort_id>10000</sort_id>
+                <category>main.basic</category>
+                <related_objectdef>most.product_line</related_objectdef>
+	  			<name>
+	            	<en-US>Product group</en-US>
+	            	<de-DE>Produktgruppe</de-DE>
+	            	<bg-BG>Продуктова група</bg-BG>
+	            </name>
+	            <display_type>property:most.credit_note.product_line</display_type>
+			 </product_line>
+
+			 <article>
+				<category>main.basic</category>
+				<display_type>property:most.protocol_sale.article</display_type>
+                <sort_id>10001</sort_id>
+                <data_source>relation</data_source>
+			 	<related_objectdef>most.article</related_objectdef>
+			 	<is_obligatory>true</is_obligatory>			 	
+                <is_inmaintbl>true</is_inmaintbl>
+                <index_code>a</index_code>
+  				<name>
+                    <en-US>Article</en-US>
+                </name>
+                <name>
+                    <de-DE>Artikel</de-DE>
+                </name>
+                <name>
+                    <bg-BG>Артикул</bg-BG>
+                </name>                
+                <on_insert_value>
+                    <object code="most.credit_note.article.on_update_insert_value" module="core" objectdef="vscript"/>
+                </on_insert_value>
+                <on_update_value>
+                    <object code="most.credit_note.article.on_update_insert_value" module="core" objectdef="vscript">                       
+                        <script_code>
+                            <value><![CDATA[
+this.product_line=this.article.product_line;                            
+                        ]]></value>
+                        </script_code>
+                    </object>
+                </on_update_value>
+			 </article>
 
 		</credit_note>
 
@@ -2110,7 +2171,7 @@ return db.most.protocol_quarter.INSTANCES[key];
 				<category>most.protocol_date.real.stock</category>
                 <sort_id>2000</sort_id>
                 <data_source>relation</data_source>
-			 	<related_objectdef>most.protocol</related_objectdef>
+			 	<related_objectdef>most.protocol_stock</related_objectdef>
 			 	<is_multiple>true</is_multiple>
   				<name>
                     <en-US>Stocks</en-US>
@@ -2138,7 +2199,7 @@ return db.most.protocol_quarter.INSTANCES[key];
 				<category>most.protocol_date.real.sale</category>
                 <sort_id>2001</sort_id>
                 <data_source>relation</data_source>
-			 	<related_objectdef>most.protocol</related_objectdef>
+			 	<related_objectdef>most.protocol_sale</related_objectdef>
 			 	<is_multiple>true</is_multiple>
   				<name>
                     <en-US>Sales</en-US>
@@ -3134,7 +3195,85 @@ for (var e : this.entries.OLD) {
 
 		</odit> 		
 		
-		
+
+		<dealer_price tbl="dlrp" copy_from="core.template_normal_transaction" is_abstract="false">
+			 
+			 <name is_keep_settings="true">
+			 	<is_hidden>true</is_hidden>
+			 </name>
+			 
+			 <article>
+				<category>main.basic</category>
+                <sort_id>2000</sort_id>
+                <data_source>relation</data_source>
+			 	<related_objectdef>most.article</related_objectdef>
+			 	<is_obligatory>true</is_obligatory>			 	
+                <is_inmaintbl>true</is_inmaintbl>
+                <index_code>a</index_code>
+  				<name>
+                    <en-US>Article</en-US>
+                </name>
+                <name>
+                    <de-DE>Artikel</de-DE>
+                </name>
+                <name>
+                    <bg-BG>Артикул</bg-BG>
+                </name>                
+			 </article>
+			
+     		 <date>
+                <category>main.basic</category>
+                <sort_id>1900</sort_id>
+                <is_inmaintbl>true</is_inmaintbl>
+                <data_source>input</data_source>
+                <data_type>datetime</data_type>
+                <name>
+                    <en-US>Date</en-US>
+                </name>
+                <name>
+                    <de-DE>Datum</de-DE>
+                </name>
+                <name>
+                    <bg-BG>Дата</bg-BG>
+                </name>
+                <input_format>default_input_format_date</input_format>
+                <output_format>default_output_format_date</output_format>
+                <is_obligatory>true</is_obligatory>
+                <default_value_calculation>
+                    <object code="most.dealer_price.date:default_value_calculation" module="core" objectdef="vscript">
+                        <params>
+                            <value>
+                                <object code="id" module="core" objectdef="script_param" proj="all"></object>
+                            </value>
+                        </params>
+                        <script_code>
+                            <value><![CDATA[return java.date.now(); ]]></value>
+                        </script_code>
+                    </object>
+                </default_value_calculation>
+                <index_code>d</index_code>
+             </date>
+             
+			 <value>
+				<category>main.basic</category>
+                <sort_id>3000</sort_id>
+                <data_source>input</data_source>
+                <data_type>double</data_type>
+                <is_inmaintbl>true</is_inmaintbl>
+  				<name>
+                    <en-US>Value</en-US>
+                </name>
+                <name>
+                    <de-DE>Wert</de-DE>
+                </name>
+                <name>
+                    <bg-BG>Стойност</bg-BG>
+                </name> 
+                <min_value_double>0</min_value_double>  
+			 </value>
+			 
+  		</dealer_price>
+				
 		<article copy_from="core.template_normal_transaction" is_abstract="false" tbl="art">
 
 			<code is_keep_settings="true">
@@ -3214,7 +3353,7 @@ for (var e : this.entries.OLD) {
 				<category>most.article.related.protocols</category>
                 <sort_id>1001</sort_id>
                 <data_source>relation</data_source>
-			 	<related_objectdef>most.protocol</related_objectdef>
+			 	<related_objectdef>most.protocol_stock</related_objectdef>
 			 	<is_multiple>true</is_multiple>
   				<name>
                     <en-US>Stocks</en-US>
@@ -3242,8 +3381,9 @@ for (var e : this.entries.OLD) {
 				<category>most.article.related.protocols</category>
                 <sort_id>1001</sort_id>
                 <data_source>relation</data_source>
-			 	<related_objectdef>most.protocol</related_objectdef>
+			 	<related_objectdef>most.protocol_sale</related_objectdef>
 			 	<is_multiple>true</is_multiple>
+			 	<is_dynamic>true</is_dynamic>
   				<name>
                     <en-US>Sales</en-US>
                 </name>
@@ -3280,11 +3420,82 @@ for (var e : this.entries.OLD) {
                 <name>
                     <bg-BG>Фактури</bg-BG>
                 </name>                               
-        	</invoices>        	
+        	</invoices>
+        	
+        	<dealer_price>
+                 <category>main.basic</category>
+                 <sort_id>15000</sort_id>
+                 <is_inmaintbl>false</is_inmaintbl>
+                 <is_multiple>false</is_multiple>
+                 <data_source>input</data_source>
+                 <data_type>double</data_type>
+                 <is_readonly>true</is_readonly>
+                 <name>
+                     <en-US>Dealer price (recent)</en-US>
+                 </name>
+                 <name>
+                     <de-DE>Dealer-Preis (lezter)</de-DE>
+                 </name>
+                 <name>
+                     <bg-BG>Дилъска цена (последна)</bg-BG>
+                 </name>
+                 <is_dynamic>true</is_dynamic>
+                 <calculation>
+                     <object code="most.article.dealer_price:calculation_relation_path" module="core" objectdef="calculation_relation_path">
+                         <property_code_path>
+                             <value>dealer_prices.value</value>
+                         </property_code_path>
+                         <where_statement>
+                             <value>dealer_prices.\"date"\ = (SELECT max_dealer_price_date WHERE id = :VR__OUTER_SELECT_ID) </value>
+                         </where_statement>
+                     </object>
+                 </calculation>
+            </dealer_price>
+            
+            <max_dealer_price_date>
+                 <category>most.protocol_date.real.stock</category>
+                 <sort_id>1000</sort_id>
+                 <is_inmaintbl>false</is_inmaintbl>
+                 <is_multiple>false</is_multiple>
+                 <data_source>input</data_source>
+                 <data_type>datetime</data_type>
+                 <is_readonly>true</is_readonly>
+                 <is_hidden>true</is_hidden>
+                 <is_dynamic>true</is_dynamic>
+                 <calculation>
+                     <object code="most.article.max_dealer_price_date:calculation_relation_path" module="core" objectdef="calculation_relation_path_max">
+                         <property_code_path>
+                             <value>dealer_prices.date</value>
+                         </property_code_path>                        
+                     </object>
+                 </calculation>
+             </max_dealer_price_date>
+        	
+        	<dealer_prices>	
+				<category>most.article.related.additional</category>
+                <sort_id>1002</sort_id>
+                <data_source>relation</data_source>
+			 	<relation_parent>most.dealer_price.article</relation_parent>
+			 	<is_multiple>true</is_multiple>
+  				<name>
+                    <en-US>Dealer prices</en-US>
+                </name>
+                <name>
+                    <de-DE>Dealerpreise</de-DE>
+                </name>
+                <name>
+                    <bg-BG>Дилърски цени</bg-BG>
+                </name>                               
+				<display_type>property.relation.multiple.add.new</display_type>
+				<relation_filter>core_property_default_relation_filter_simple_bidirectional_relation</relation_filter>
+                <rel_display_string_order>"date" DESC</rel_display_string_order>                
+				<rel_display_columns>most.dealer_price.date</rel_display_columns>
+             	<rel_display_columns>most.dealer_price.value</rel_display_columns>
+        	</dealer_prices>
         	
         	<odit_entries>	
 				<category>most.article.related.additional</category>
-                <sort_id>1002</sort_id>
+                <sort_id>1003</sort_id>
                 <data_source>relation</data_source>
 			 	<relation_parent>most.odit_entry.article</relation_parent>
 			 	<is_multiple>true</is_multiple>
@@ -3301,7 +3512,7 @@ for (var e : this.entries.OLD) {
 
 			<opgs>
 				<category>most.article.related.additional</category>
-                <sort_id>1003</sort_id>
+                <sort_id>1004</sort_id>
                 <data_source>relation</data_source>
 			 	<related_objectdef>most.opg</related_objectdef>
 			 	<is_multiple>true</is_multiple>
@@ -3553,8 +3764,7 @@ for (var e : this.entries.OLD) {
                 <name>
                     <bg-BG>Артикули</bg-BG>
                 </name>
-				<display_type>property.relation.multiple.add.new</display_type>
-				<relation_filter>core_property_default_relation_filter_simple_bidirectional_relation</relation_filter>
+				<display_type>property.relation.multiple.add.select</display_type>
 				<sort_id>500</sort_id>
              </articles>
          	 
@@ -3572,6 +3782,20 @@ for (var e : this.entries.OLD) {
 	            	<de-DE>Produktgruppe</de-DE>
 	            	<bg-BG>Продуктова група</bg-BG>
 	            </name>
+                <default_value_calculation>
+                    <object code="most.product_line.product_group:default_value_calculation" module="core" objectdef="vscript">
+                        <params>
+                            <value>
+                                <object code="id" module="core" objectdef="script_param" proj="all"></object>
+                            </value>
+                        </params>
+                        <script_code>
+                            <value><![CDATA[
+return db.most.product_group.INSTANCES["OTHERS"];
+                            ]]></value>
+                        </script_code>
+                    </object>
+                </default_value_calculation>
 			 </product_group>
 			 
 		</product_line>
@@ -3602,6 +3826,44 @@ for (var e : this.entries.OLD) {
              </product_lines>
 		</product_group>
 		
+		<script_execution_context_credit_notes_param parent_objectdef="core.script_execution_context">	
+
+     		 <begin_date>
+     		 	<category>main.basic</category>
+     		 	<data_source>input</data_source>
+     		 	<data_type>datetime</data_type>
+                <input_format>default_input_format_date</input_format>
+                <output_format>default_output_format_date</output_format>
+     		 	<name>
+                     <en-US>From</en-US>
+                 </name>
+                 <name>
+                     <de-DE>Von</de-DE>
+                 </name>
+                 <name>
+                     <bg-BG>От</bg-BG>
+                 </name>
+             </begin_date>
+
+     		 <end_date>
+     		 	<category>main.basic</category>
+     		 	<data_source>input</data_source>
+     		 	<data_type>datetime</data_type>
+                <input_format>default_input_format_date</input_format>
+                <output_format>default_output_format_date</output_format>
+     		 	<name>
+                     <en-US>To</en-US>
+                 </name>
+                 <name>
+                     <de-DE>Bis</de-DE>
+                 </name>
+                 <name>
+                     <bg-BG>До</bg-BG>
+                 </name>
+             </end_date>
+						
+		</script_execution_context_credit_notes_param>
+
 		
 	</most>
 </objectdefs>

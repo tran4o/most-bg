@@ -1,4 +1,33 @@
 java.log.warn("Generating report dates..");
+var defGrp = db.most.product_group.INSTANCES["OTHERS"];
+if (defGrp == null) {
+	defGrp = new db.most.product_group();
+	defGrp.code="OTHERS";	
+	defGrp.name["en-US"]="Others";
+}
+for (var e : db.most.product_line.SELECT("product_group.id IS NULL")) 
+{
+	e.product_group=defGrp;
+	e.commit();
+}
+for (var e : db.most.product_line.SELECT("product_group.id IS NULL")) 
+{
+	e.product_group=defGrp;
+	e.commit();
+}
+
+var defLin = db.most.product_line.INSTANCES["ALL"];
+if (defLin == null) {
+	defLin = new db.most.product_line();
+	defLin.product_group=defGrp;
+	defLin.code="ALL";	
+}
+for (var e : db.most.article.SELECT("product_line.id IS NULL")) 
+{
+	e.product_line=defLin;
+	e.commit();
+}
+
 var FROM = 2015;
 var TO = 2016;
 for (var y=FROM;y<=TO;y++) {

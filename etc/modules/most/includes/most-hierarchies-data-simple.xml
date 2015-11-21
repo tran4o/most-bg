@@ -316,7 +316,7 @@
             </is_sort>
 
             <is_show_leafs>
-                <value>true</value>
+                <value>false</value>
             </is_show_leafs>
 
             <expand_inital_depth>

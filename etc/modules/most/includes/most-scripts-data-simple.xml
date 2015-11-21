@@ -226,7 +226,350 @@ system.vsp("<%vsp:include script=\"${web.lib.dir}/most/getopg.vr\" />");*/
 java.log.error("OPLA : "+java.date.now());
          ]]></value>
      </script_code>
+   </object>
+
+<!-- 
+	sumChartByCondition(obj,cond,from,to,width,height);
+ -->
+
+  <object code="sumChartByCondition" objectdef="vscript" module="core">             
+     <script_code>    
+         <value><![CDATA[
+var obj = in[0];
+var cond = in[1];
+var from = in[2];
+var to = in[3];
+var width = in[4];
+var height = in[5];
+
+var min=null;
+var max=null;
+var params = new M();
+params["OBJ"]=obj.id;
+//---------------------------------------------------------------------------------------------------------------
+if (from == null) {
+	var sl=db.most.protocol_sale.VSQL_QUERY_MIN("SELECT official_date.\"date\" AS VAL WHERE "+cond,params);
+	if (sl.next() && sl.getDate("RES") != null) { var t=sl.getDate("RES");if (from == null || t < from) from = t; }
+	if (from == null)
+		return null;
+}
+//---------------------------------------------------------------------------------------------------------------
+if (to == null) {
+	var sl=db.most.protocol_sale.VSQL_QUERY_MAX("SELECT official_date.\"date\" AS VAL WHERE "+cond,params);
+	if (sl.next() && sl.getDate("RES") != null) { var t=sl.getDate("RES");if (to == null || t < to) to = t; }
+	if (to == null)
+		return null;
+}
+if (from >= to)
+	return null;
+//---------------------------------------------------------------------------------------------------------------
+from=from.getTime();
+to=to.getTime();
+
+var chart = new java.reports.chart.XYAreaChart();
+chart.has_legend = true;
+chart.has_tooltips = false;
+chart.has_x_axis=false;
+chart.background_color="#FFFFFF";
+chart.grid_x_color="#999999";
+chart.grid_y_color="#999999";
+chart.orientation="vertical";
+
+var nsteps = java.math.ceil(width/16);
+var a1=[];
+var a2=[];
+var a3=[];
+var a4=[];
+var xx=[];
+for (var i=0;i<nsteps-1;i++) 
+{
+	var j = i+1;
+	var t2 = java.date.fromMillis( java.math.floor(from+(to-from)*j.castToInexactNumber() / nsteps) + 1);
+	params["FROM"]=java.date.fromMillis(from);	//t1;
+	params["TO"]=t2;
+	//----------------------------------------------------------------------------------------------------------------------------------
+	var op = (i == nsteps-1) ? "<" : "<=";
+	var tsold=0.0;
+	var sl=db.most.protocol_sale.VSQL_QUERY_SUM("SELECT most_sale_total AS VAL WHERE "+cond+" AND official_date.\"date\" >= :FROM AND official_date.\"date\" "+op+" :TO",params);
+	if (sl.next() && sl.getDouble("RES") != null) tsold=sl.getDouble("RES"); 
+
+	var tcost=0.0;
+	var sl=db.most.protocol_sale.VSQL_QUERY_SUM("SELECT total AS VAL WHERE "+cond+" AND official_date.\"date\" >= :FROM AND official_date.\"date\" "+op+" :TO",params);
+	if (sl.next() && sl.getDouble("RES") != null) tcost=sl.getDouble("RES");
+	//----------------------------------------------------------------------------------------------------------------------------------
+	//a1.push(reported_stock);
+	//a2.push(reported_sale);
+	a3.push(tsold);
+	a4.push(tcost);
+	xx.push(i);
+	//----------------------------------------------------------------------------------------------------------------------------------
+}
+//chart.data << ["HP Stock",xx,a1];
+//chart.data << ["HP Sale",xx,a2];
+chart.data << ["Cost",xx,a4];
+chart.data << ["Sold",xx,a3];
+
+return chart.export_to_url(width,height);
+
+         ]]></value>
+     </script_code>
+ </object>
+
+
+  <object code="calcCost" objectdef="vscript" module="core">             
+     <script_code>    
+         <value><![CDATA[
+var obj = in[0];
+var cond = in[1];
+var from = in[2];
+var to = in[3];
+
+var params = new M();
+params["OBJ"]=obj.id;
+params["FROM"]=from;
+params["TO"]=to;
+
+var tcost=0.0;
+var sl=db.most.protocol_sale.VSQL_QUERY_SUM("SELECT total AS VAL WHERE "+cond+" AND official_date.\"date\" >= :FROM AND official_date.\"date\" <= :TO",params);
+if (sl.next() && sl.getDouble("RES") != null) tcost=sl.getDouble("RES");
+return tcost;
+         ]]></value>
+     </script_code>
+ </object>
+
+  <object code="calcSale" objectdef="vscript" module="core">             
+     <script_code>    
+         <value><![CDATA[
+var obj = in[0];
+var cond = in[1];
+var from = in[2];
+var to = in[3];
+
+var params = new M();
+params["OBJ"]=obj.id;
+params["FROM"]=from;
+params["TO"]=to;
+
+var tsell=0.0;
+var sl=db.most.protocol_sale.VSQL_QUERY_SUM("SELECT most_sale_total AS VAL WHERE "+cond+" AND official_date.\"date\" >= :FROM AND official_date.\"date\" <= :TO",params);
+if (sl.next() && sl.getDouble("RES") != null) tsell=sl.getDouble("RES");
+return tsell;
+         ]]></value>
+     </script_code>
  </object>
  
+  <object code="calcDelta" objectdef="vscript" module="core">             
+     <script_code>    
+         <value><![CDATA[
+var obj = in[0];
+var cond = in[1];
+var from = in[2];
+var to = in[3];
+
+var params = new M();
+params["OBJ"]=obj.id;
+params["FROM"]=from;
+params["TO"]=to;
+
+var tsell=0.0;
+var sl=db.most.protocol_sale.VSQL_QUERY_SUM("SELECT most_sale_total AS VAL WHERE "+cond+" AND official_date.\"date\" >= :FROM AND official_date.\"date\" <= :TO",params);
+if (sl.next() && sl.getDouble("RES") != null) tsell=sl.getDouble("RES");
+
+var tcost=0.0;
+var sl=db.most.protocol_sale.VSQL_QUERY_SUM("SELECT total AS VAL WHERE "+cond+" AND official_date.\"date\" >= :FROM AND official_date.\"date\" <= :TO",params);
+if (sl.next() && sl.getDouble("RES") != null) tcost=sl.getDouble("RES");
+
+return tsell-tcost;
+         ]]></value>
+     </script_code>
+ </object>
+ 
+  <object code="calcCn" objectdef="vscript" module="core">             
+     <script_code>    
+         <value><![CDATA[
+var obj = in[0];
+var cond = in[1];
+var from = in[2];
+var to = in[3];
+
+var params = new M();
+params["OBJ"]=obj.id;
+params["FROM"]=from;
+params["TO"]=to;
+
+var tnotes=0.0;
+var sl=db.most.credit_note.VSQL_QUERY_SUM("SELECT DISTINCT id,total AS VAL WHERE "+cond+" AND quarter.months.dates.\"date\" >= :FROM AND quarter.months.dates.\"date\" <= :TO",params);
+if (sl.next() && sl.getDouble("RES") != null) tnotes=sl.getDouble("RES");
+
+return tnotes;
+         ]]></value>
+     </script_code>
+ </object>
+ 
+ 
+  <object code="filterArticles" objectdef="vscript" module="core">             
+     <script_code>    
+         <value><![CDATA[
+var cond = in[0];
+var from = in[1];
+var to = in[2];
+
+var tt = db.most.article.TEMP["filterArticles0"];
+if (tt != null)
+	return tt;
+var params = new M();
+params["FROM"]=from;
+params["TO"]=to;
+
+var tnotes=0.0;
+var sl=db.most.article.SELECT("sales.official_date.\"date\" >= :FROM AND sales.official_date.\"date\" <= :TO AND id IN ("+cond+")");
+sl["FROM"]=from;
+sl["TO"]=to;
+
+var arr=[];
+for (var i=0;i<sl.size;i++) {
+	var el = sl[i];
+	arr.push(el.id);
+}
+
+var res = arr.join(",");
+tt.reset(res);
+return res;
+         ]]></value>
+     </script_code>
+ </object>
+ 
+  
+  <object code="filterProductLines" objectdef="vscript" module="core">             
+     <script_code>    
+         <value><![CDATA[
+var cond = in[0];
+var from = in[1];
+var to = in[2];
+
+var tt = db.most.product_line.TEMP["filterProductLines0"];
+if (tt != null)
+	return tt;
+var params = new M();
+params["FROM"]=from;
+params["TO"]=to;
+
+var tnotes=0.0;
+var sl=db.most.product_line.SELECT("articles.sales.official_date.\"date\" >= :FROM AND articles.sales.official_date.\"date\" <= :TO AND id IN ("+cond+")");
+sl["FROM"]=from;
+sl["TO"]=to;
+
+var arr=[];
+for (var i=0;i<sl.size;i++) {
+	var el = sl[i];
+	arr.push(el.id);
+}
+
+var res = arr.join(",");
+tt.reset(res);
+return res;
+         ]]></value>
+     </script_code>
+ </object>
+ 
+  <object code="filterProductGroups" objectdef="vscript" module="core">             
+     <script_code>    
+         <value><![CDATA[
+var cond = in[0];
+var from = in[1];
+var to = in[2];
+
+var tt = db.most.product_line.TEMP["filterProductGroups0"];
+if (tt != null)
+	return tt;
+var params = new M();
+params["FROM"]=from;
+params["TO"]=to;
+
+var tnotes=0.0;
+var sl=db.most.product_group.SELECT("product_lines.articles.sales.official_date.\"date\" >= :FROM AND product_lines.articles.sales.official_date.\"date\" <= :TO AND id IN ("+cond+")");
+sl["FROM"]=from;
+sl["TO"]=to;
+
+var arr=[];
+for (var i=0;i<sl.size;i++) {
+	var el = sl[i];
+	arr.push(el.id);
+}
+
+var res = arr.join(",");
+tt.reset(res);
+return res;
+         ]]></value>
+     </script_code>
+ </object>
+ 
+ 
+  <object code="calcDeltaMinusCn" objectdef="vscript" module="core">             
+     <script_code>    
+         <value><![CDATA[
+var obj = in[0];
+var cond = in[1];
+var from = in[2];
+var to = in[3];
+
+var params = new M();
+params["OBJ"]=obj.id;
+params["FROM"]=from;
+params["TO"]=to;
+
+var tsell=0.0;
+var sl=db.most.protocol_sale.VSQL_QUERY_SUM("SELECT most_sale_total AS VAL WHERE "+cond+" AND official_date.\"date\" >= :FROM AND official_date.\"date\" <= :TO",params);
+if (sl.next() && sl.getDouble("RES") != null) tsell=sl.getDouble("RES");
+
+var tcost=0.0;
+var sl=db.most.protocol_sale.VSQL_QUERY_SUM("SELECT total AS VAL WHERE "+cond+" AND official_date.\"date\" >= :FROM AND official_date.\"date\" <= :TO",params);
+if (sl.next() && sl.getDouble("RES") != null) tcost=sl.getDouble("RES");
+
+var delta = tsell-tcost;
+
+var tnotes=0.0;
+var sl=db.most.credit_note.VSQL_QUERY_SUM("SELECT DISTINCT id,total AS VAL WHERE "+cond+" AND quarter.months.dates.\"date\" >= :FROM AND quarter.months.dates.\"date\" <= :TO",params);
+if (sl.next() && sl.getDouble("RES") != null) tnotes=sl.getDouble("RES");
+
+return delta-tnotes;
+         ]]></value>
+     </script_code>
+ </object>
+ 
+ 
+
+  <object code="calcZeroPrice" objectdef="vscript" module="core">             
+     <script_code>    
+         <value><![CDATA[
+var obj = in[0];
+var cond = in[1];
+var params = new M();
+params["OBJ"]=obj.id;
+//---------------------------------------------------------------------------------------------------------------
+var sl=db.most.article.VSQL_QUERY_SUM("SELECT SUM(total) AS VAL FROM (SELECT DISTINCT id AS xid, available_real * dealer_price AS total WHERE "+cond+") GROUP BY xid",params);
+if (sl.next() && sl.getDouble("RES") != null) 
+	return sl.getDouble("RES");
+return 0.0;
+         ]]></value>
+     </script_code>
+ </object>
+ 
+ <object code="calcTotalAvail" objectdef="vscript" module="core">             
+     <script_code>    
+         <value><![CDATA[
+var obj = in[0];
+var cond = in[1];
+var params = new M();
+params["OBJ"]=obj.id;
+//---------------------------------------------------------------------------------------------------------------
+var sl=db.most.article.VSQL_QUERY_SUM("SELECT SUM(quantity) AS VAL FROM (SELECT DISTINCT id AS xid, quantity AS quantity WHERE "+cond+") GROUP BY xid",params);
+if (sl.next() && sl.getDouble("RES") != null) 
+	return sl.getDouble("RES");
+return 0.0;
+         ]]></value>
+     </script_code>
+ </object>
+
 </objects>
 </import>

@@ -162,7 +162,7 @@ return res;
                             </value>
                         </target_objectdef>
                         <mask_code>
-                            <value>parameterised-objectdef-instances-mask</value>
+                            <value>parameterised-objectdef-instances-mask-tree</value>
                         </mask_code>
                         <appearance_class>
                             <value>app-button-fat</value>
