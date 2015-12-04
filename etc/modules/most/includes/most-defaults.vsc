@@ -16,11 +16,12 @@ for (var e : db.most.product_line.SELECT("product_group.id IS NULL"))
 	e.commit();
 }
 
-var defLin = db.most.product_line.INSTANCES["ALL"];
+var defLin = db.most.product_line.INSTANCES["OTHERS"];
 if (defLin == null) {
 	defLin = new db.most.product_line();
 	defLin.product_group=defGrp;
-	defLin.code="ALL";	
+	defLin.code="OTHERS";	
+	defLin.name["en-US"]="Others";
 }
 for (var e : db.most.article.SELECT("product_line.id IS NULL")) 
 {

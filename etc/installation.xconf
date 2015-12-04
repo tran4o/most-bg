@@ -89,8 +89,8 @@
         
         <!-- GRAPHICS -->
         <param name="module.geoserver.activate" type="boolean">true</param>
-        <param name="graphics.teigha_file_converter.path" type="string">C:/Plan-Vision/TeighaFileConverter4.01.0/TeighaFileConverter.exe</param>
-        <param name="graphics.gdal.ogr2ogr.path" type="string">D:\Apps\GDAL\ogr2ogr.exe</param>
+        <param name="graphics.teigha_file_converter.path" type="string">D:/Program Files (x86)/ODA/Teigha File Converter 4.01.0/TeighaFileConverter.exe</param>
+        <param name="graphics.gdal.ogr2ogr.path" type="string">C:\Program Files (x86)\GDAL\ogr2ogr.exe</param>
 
         <!-- HTTPS -->
         <param name="web.security.enable_https" type="boolean">false</param>

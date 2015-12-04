@@ -11,6 +11,9 @@
    <sort_id>
       <value>0</value>
    </sort_id>
+   <categories mode="update">
+      <value sort_id="0"><object mode="update" code="object_overviews" objectdef="category" module="reports" cond="&quot;uuid&quot; = 'D21wLeskQTWz4UM9yfw8Yw'"/></value>
+   </categories>
    <objectdef_set mode="update">
       <value sort_id="0"><object mode="update" code="article" objectdef="objectdef" module="core" cond="code='article' AND module.code='most'"/></value>
    </objectdef_set>
@@ -28,6 +31,12 @@
 <b>Delta :</b> <%= (STR2HTML(FORMAT(obj.delta))) %><br/>
 ]]></value>
    </detailed_template>
+   <popup_max_width>
+      <value>250</value>
+   </popup_max_width>
+   <icon_size>
+      <value>48</value>
+   </icon_size>
    <is_force_use_icon>
       <value>false</value>
    </is_force_use_icon>
@@ -54,6 +63,9 @@
    <sort_id>
       <value>0</value>
    </sort_id>
+   <categories mode="update">
+      <value sort_id="0"><object mode="update" code="object_overviews" objectdef="category" module="reports" cond="&quot;uuid&quot; = 'D21wLeskQTWz4UM9yfw8Yw'"/></value>
+   </categories>
    <objectdef_set mode="update">
       <value sort_id="0"><object mode="update" code="protocol_stock" objectdef="objectdef" module="core" cond="code='protocol_stock' AND module.code='most'"/></value>
    </objectdef_set>
@@ -99,6 +111,9 @@
    <sort_id>
       <value>0</value>
    </sort_id>
+   <categories mode="update">
+      <value sort_id="0"><object mode="update" code="object_overviews" objectdef="category" module="reports" cond="&quot;uuid&quot; = 'D21wLeskQTWz4UM9yfw8Yw'"/></value>
+   </categories>
    <objectdef_set mode="update">
       <value sort_id="0"><object mode="update" code="protocol_sale" objectdef="objectdef" module="core" cond="code='protocol_sale' AND module.code='most'"/></value>
    </objectdef_set>
@@ -145,6 +160,9 @@
    <sort_id>
       <value>0</value>
    </sort_id>
+   <categories mode="update">
+      <value sort_id="0"><object mode="update" code="object_overviews" objectdef="category" module="reports" cond="&quot;uuid&quot; = 'D21wLeskQTWz4UM9yfw8Yw'"/></value>
+   </categories>
    <objectdef_set mode="update">
       <value sort_id="0"><object mode="update" code="opg" objectdef="objectdef" module="core" cond="code='opg' AND module.code='most'"/></value>
    </objectdef_set>
@@ -175,6 +193,116 @@
    </is_archived>
    <uuid>
       <value>meC8gwO9Q8-LtT05j_nxVg</value>
+   </uuid>
+</object>
+<!--  -->
+<object code="most:credit_sums" objectdef="report_object_overview" module="reports" >
+   <name>
+      <value>
+         <en-US>Credit sums</en-US>
+         <bg-BG>Артикул</bg-BG></value>
+   </name>
+   <sort_id>
+      <value>0</value>
+   </sort_id>
+   <categories mode="update">
+      <value sort_id="0"><object mode="update" code="object_overviews" objectdef="category" module="reports" cond="&quot;uuid&quot; = 'D21wLeskQTWz4UM9yfw8Yw'"/></value>
+   </categories>
+   <objectdef_set mode="update">
+      <value sort_id="0"><object mode="update" code="article" objectdef="objectdef" module="core" cond="code='article' AND module.code='most'"/></value>
+      <value sort_id="1"><object mode="update" code="product_line" objectdef="objectdef" module="core" cond="code='product_line' AND module.code='most'"/></value>
+      <value sort_id="2"><object mode="update" code="product_group" objectdef="objectdef" module="core" cond="code='product_group' AND module.code='most'"/></value>
+   </objectdef_set>
+   <mode>
+      <value>both</value>
+   </mode>
+   <detailed_template>
+      <value><![CDATA[<% system.libvsp("most/credit-sums.vsp"); %>
+
+
+
+
+
+
+
+
+]]></value>
+   </detailed_template>
+   <popup_max_width>
+      <value>270</value>
+   </popup_max_width>
+   <icon_size>
+      <value>48</value>
+   </icon_size>
+   <is_force_use_icon>
+      <value>false</value>
+   </is_force_use_icon>
+   <param_category_code>
+      <value>main</value>
+   </param_category_code>
+   <embedded_size_in_pixels>
+      <value>300</value>
+   </embedded_size_in_pixels>
+   <is_archived>
+      <value>false</value>
+   </is_archived>
+   <uuid>
+      <value>4eJWjpksSzOfpGrf_UDAkw</value>
+   </uuid>
+</object>
+<!--  -->
+<object code="most:sums" objectdef="report_object_overview" module="reports" >
+   <name>
+      <value>
+         <en-US>Sums</en-US>
+         <bg-BG>Артикул</bg-BG></value>
+   </name>
+   <sort_id>
+      <value>0</value>
+   </sort_id>
+   <categories mode="update">
+      <value sort_id="0"><object mode="update" code="object_overviews" objectdef="category" module="reports" cond="&quot;uuid&quot; = 'D21wLeskQTWz4UM9yfw8Yw'"/></value>
+   </categories>
+   <objectdef_set mode="update">
+      <value sort_id="0"><object mode="update" code="article" objectdef="objectdef" module="core" cond="code='article' AND module.code='most'"/></value>
+      <value sort_id="1"><object mode="update" code="product_line" objectdef="objectdef" module="core" cond="code='product_line' AND module.code='most'"/></value>
+      <value sort_id="2"><object mode="update" code="product_group" objectdef="objectdef" module="core" cond="code='product_group' AND module.code='most'"/></value>
+   </objectdef_set>
+   <mode>
+      <value>both</value>
+   </mode>
+   <detailed_template>
+      <value><![CDATA[<% system.libvsp("most/sums.vsp"); %>
+
+
+
+
+
+
+
+
+]]></value>
+   </detailed_template>
+   <popup_max_width>
+      <value>270</value>
+   </popup_max_width>
+   <icon_size>
+      <value>48</value>
+   </icon_size>
+   <is_force_use_icon>
+      <value>false</value>
+   </is_force_use_icon>
+   <param_category_code>
+      <value>main</value>
+   </param_category_code>
+   <embedded_size_in_pixels>
+      <value>300</value>
+   </embedded_size_in_pixels>
+   <is_archived>
+      <value>false</value>
+   </is_archived>
+   <uuid>
+      <value>XhsrUZ3pSJmAUNiLvzdlfw</value>
    </uuid>
 </object>
 </objects></import>

@@ -1725,7 +1725,7 @@ if (this.is_active)
 			</stocks>
 		</invoice_stock>
 
-		<credit_note parent_objectdef="most.invoice" is_abstract="true">
+		<credit_note parent_objectdef="most.invoice" is_abstract="false">
 
 			 <quarter>
 			 	<category>main.basic</category>
