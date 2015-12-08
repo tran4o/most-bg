@@ -1,4 +1,5 @@
 var INITIAL = false;
+var TEST = false;
 var DEBUG = false;
 
 var pcnt = 0;
@@ -72,11 +73,11 @@ var cond;
 
 if ( INITIAL ) {
     lastmod = "2014-01-01";
-    console.log("getting initil after " + lastmod);
-    cond = "( DiscountMode = 'R' and LastModifiedDate > '" + lastmod + "' ) or DealID in ( select distinct DealID from selinv3 inner join invdet id on selinv3.InvoiceNo = id.InvoiceNo )";
+    console.log("getting initial after " + lastmod);
+    cond = "( DiscountMode = 'R' or DiscountMode = 'U' ) and LastModifiedDate > '" + lastmod + "' ) or DealID in ( select distinct DealID from selinv3 inner join invdet id on selinv3.InvoiceNo = id.InvoiceNo )";
 } else {
     var params = new M();
-    var sl = db.most.opg.VSQL_QUERY_MAX("SELECT import_time AS VAL", params);
+    var sl = db.most.invoice_stock.VSQL_QUERY_MAX("SELECT invoice_date AS VAL", params);
     var mt = null;
 
     if (sl.next()) {
@@ -85,7 +86,23 @@ if ( INITIAL ) {
     }
 
     console.log("getting everything after " + lastmod);
-    cond = "LastModifiedDate >= '" + lastmod + "'";
+   // cond = "LastModifiedDate >= '" + lastmod + "'";
+    cond =
+        "DealID in" +
+        "   ( select distinct" +
+        "       invdet.DealID" +
+        "   from" +
+        "       invdet" +
+        "   where" +
+        "       InvoiceNo in (" +
+        "           select" +
+        "               InvoiceNo" +
+        "           from " +
+        "               invoic " +
+        "           where " +
+        "               invoic.InvoiceDate > '" + lastmod + "')" +
+        "   )" +
+        "and ( DiscountMode = 'R' or DiscountMode = 'U' )";
 }
 
 /*
@@ -93,6 +110,7 @@ var res = con.select("select DealID as name, 'OPG' + RIGHT('0000000000' + DealID
 */
 
 var q = "select DealID as code, DealDescription as description, SelloutStartDate as valid_from, SelloutEndDate as valid_to, DiscountMode as discount_mode, Version as version, LastModifiedDate as update_time from dbo.opg where " + cond;
+
 
 var opglst = [];
 var cnt = 0; var cntnew = 0;
@@ -109,6 +127,10 @@ if (INITIAL==false)  {
 }
 
 var res = con.select(q);
+if (TEST) {
+    console.log(q);
+    return;
+}
 
 while (res.next()) {
     var oc = res.getString("code");

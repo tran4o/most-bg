@@ -1,6 +1,7 @@
-var INITIAL = 0;        // disable after inital import
-var DEBUG = true;
 
+var INITIAL = 0;        // disable after inital import
+var TEST = 0;        // disable after inital import
+var DEBUG = true;
 var pcnt = 0; var pnew = 0;
 
 function prod_find_or_create(code, name, product_line, description, vendor) {
@@ -26,11 +27,21 @@ function prod_find_or_create(code, name, product_line, description, vendor) {
 
     artobj.code = code;
     artobj.name["en-US"] = name;
-    artobj.product_line = product_line;
+
+    if (product_line) {
+        var plobj = db.most.product_line.INSTANCES[product_line];
+        if (plobj != null) {
+            if (DEBUG) console.log("product line " + product_line + " found");
+        } else {
+            if (DEBUG) console.log("product line " + code + " not found. new instance");
+            plobj = new db.most.product_line();
+            plobj.code = product_line;
+        }
+        artobj.product_line = plobj;
+    }
+
     artobj.description["en-US"] = description;
-
     artobj.vendor = vendor;
-
     artobj.commit();
 
     pcnt++;
@@ -67,7 +78,7 @@ if (INITIAL) {
     target = "invoic";
 
     var params = new M();
-    var sl = db.most.invoice.VSQL_QUERY_MAX("SELECT invoice_date AS VAL", params);
+    var sl = db.most.invoice_stock.VSQL_QUERY_MAX("SELECT invoice_date AS VAL", params);
     var lastmod = null;
 
     if (sl.next()) {
@@ -103,7 +114,9 @@ if (DEBUG) {
     }
 }
 
-return; 
+if ( TEST ) {
+    return;
+}
 
 var res = con.select(q);
 
@@ -125,13 +138,13 @@ var code = res.getString("code");
         vendor = db.contacts.vendor.INSTANCES["HPOLD"];
     }
 
-    var inv = db.most.invoice.INSTANCES[code];
+    var inv = db.most.invoice_stock.INSTANCES[code];
 
     if (inv != null) {
         if (DEBUG) console.log("update inv. code " + code + " / " + vendor.code);
     } else {
         if (DEBUG) console.log("create inv. code " + code + " / " + vendor.code);
-        inv = new db.most.invoice();
+        inv = new db.most.invoice_stock();
         inv.code = code;
         cntnew++;
     }
@@ -167,8 +180,9 @@ for (var inv: invlst) {
     "select ",
     "'INV' + RIGHT('0000000000' + InvoiceNo, 10) + '/' + cast (ItemNo as varchar) as code,",
     "'OPG' + RIGHT('0000000000' + DealID, 10) as opg_code, ",
+    "DealID as deal_id, ",
     "ItemNo as item_no,",
-    "VendorPartNo as article_code,",
+    "dbo.ven2clean(VendorPartNo) as article_code,",
     "Quantity as quantity,",
     "UnitNetPrice as price,",
     "BundleId as bundle_number,",
@@ -227,7 +241,7 @@ for (var inv: invlst) {
         stock.article = artobj;
 
         // set opg to
-        var opgcode = res.getString("opg_code");
+        var opgcode = res.getString("deal_id");
         var opg = db.most.opg.INSTANCES[opgcode];
 
         if ( opg == null && res.getString("opg_code") != "OPG0000000000") {
@@ -235,6 +249,8 @@ for (var inv: invlst) {
                 " / article " + res.getString("article_code") +
                 " / invoice no " + inv.name
             );
+            console.log("did you import all necaessary OPGs?");
+            return;
         }
         if ( opg != null && opg != "OPG0000000000" ) {
             stock.opg = opg;
