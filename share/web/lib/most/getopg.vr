@@ -1,6 +1,9 @@
 var INITIAL = false;
 var DEBUG = false;
 
+var pcnt = 0;
+var pnew = 0;
+
 function prod_find_or_create(code, name, product_line, description, vendor) {
     //trim code
     if ( code.indexOf("#") > 0 ) {
@@ -10,29 +13,38 @@ function prod_find_or_create(code, name, product_line, description, vendor) {
     var artobj = db.most.article.INSTANCES[code];
 
     if (artobj != null) {
-        if (DEBUG) console.log("product " + code + " found.");
+        if (DEBUG) console.log("product " + code + " found. vendor is " + vendor);
     } else {
-        if (DEBUG) console.log("product " + code + " not found. new instance.");
+        if (DEBUG) console.log("product " + code + " not found. new instance. vendor is " + vendor);
         artobj = new db.most.article();
+        pnew++;
     }
 
-    artobj.code = code;
-    artobj.name["en-US"] = name;
-    artobj.product_line = product_line;
-    artobj.description["en-US"] = description;
-
-    // new invoices should have vendor
     vendor = db.contacts.vendor.INSTANCES[vendor];
-
-    // in case we have an empty record => deduce its old invoice
     if ( vendor == null ) {
         vendor = db.contacts.vendor.INSTANCES["HPOLD"];
     }
 
-    artobj.vendor = vendor;
+    artobj.code = code;
+    artobj.name["en-US"] = name;
 
+    if (product_line) {
+        var plobj = db.most.product_line.INSTANCES[product_line];
+        if (plobj != null) {
+            if (DEBUG) console.log("product line " + product_line + " found");
+        } else {
+            if (DEBUG) console.log("product line " + code + " not found. new instance");
+            plobj = new db.most.product_line();
+            plobj.code = product_line;
+        }
+        artobj.product_line = plobj;
+    }
+
+    artobj.description["en-US"] = description;
+    artobj.vendor = vendor;
     artobj.commit();
 
+    pcnt++;
     return artobj;
 }
 
@@ -203,4 +215,5 @@ for (var nopg: opglst) {
 }
 
 console.log("processed a total of " + cnt + " OPG positions, and " + cntnew + " of them are new. good work !");
+console.log("create a total of " + pnew+ " products on the fly. found existing " + pcnt);
 
