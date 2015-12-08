@@ -2,422 +2,364 @@
 <import revision="$LastChangedRevision: 7778 $" xmlns:xi="http://www.w3.org/2001/XInclude">
     <!-- DISPLAY TYPES -->
     <objects>
-        <object code="most.protocol_date:category_date.protocol_dates" module="core" objectdef="hierarchy_mixed">
+
+        <object code="most.protocol_date:year.months.dates" module="core" objectdef="hierarchy_relation_path">
             <name>
                 <value>
-                    <en-US>By category</en-US>
+                    <en-US>By month</en-US>
                 </value>
                 <value>
-                    <de-DE>Nach Kategorie</de-DE>
+                    <de-DE>Nach Monat</de-DE>
                 </value>
                 <value>
-                    <bg-BG>По категория</bg-BG>
+                    <bg-BG>По моесец</bg-BG>
                 </value>
             </name>
-            <objectdef_set_codes>
-                <value>most.protocol_date</value>
-            </objectdef_set_codes>
+			<objectdef_set_codes mode="delete"/>
             <selection_group_code>
-                <value>most.category_date</value>
+                <value>year.month.date</value>
             </selection_group_code>
             <path>
-                <value>most.category_date.children*.protocol_dates</value>
+                <value>most.protocol_year.months.dates</value>
             </path>
-            <vsql_condition>
-                <value>parent.id IS NULL</value>
-            </vsql_condition>
-            <is_visible_with_leaf>
-                <value>false</value>
-            </is_visible_with_leaf>
+
             <is_show_element_count>
                 <value>true</value>
             </is_show_element_count>
+
             <is_sort>
                 <value>true</value>
             </is_sort>
+
             <is_show_leafs>
                 <value>false</value>
             </is_show_leafs>
-            <is_remove_no_read_access_elements>
-                <value>true</value>
-            </is_remove_no_read_access_elements>
-            <get_parent>
+
+            <expand_inital_depth>
+                <value>0</value>
+            </expand_inital_depth>
+        </object>      
+        
+        <object code="most.protocol_date:year.quarters.dates" module="core" objectdef="hierarchy_relation_path">
+
+            <name>
                 <value>
-                    <object code="most.protocol_date:category_date.protocol_dates:get_parent" objectdef="vscript" module="core" >
-                        <params>
-                            <value>                                     
-                                <object code="element" module="core" objectdef="script_param"></object>
-                            </value>
-                        </params>   
-                        <script_code>
-                            <value><![CDATA[
-if (element instanceof db.most.protocol_date)
-    return element.category;
-return element.parent;        
-                            ]]></value>
-                        </script_code>
-                    </object>                                   
+                    <en-US>By quarter</en-US>
                 </value>
-            </get_parent>
+                <value>
+                    <de-DE>Nach Quartal</de-DE>
+                </value>
+                <value>
+                    <bg-BG>По тримесечие</bg-BG>
+                </value>
+            </name>
+
+			<objectdef_set_codes mode="delete"/>
+
+            <selection_group_code>
+                <value>year.quarter.date</value>
+            </selection_group_code>
+
+            <path>
+                <value>most.protocol_year.quarters.dates</value>
+            </path>
+
+            <is_show_element_count>
+                <value>true</value>
+            </is_show_element_count>
+
+            <is_sort>
+                <value>true</value>
+            </is_sort>
+
+            <is_show_leafs>
+                <value>false</value>
+            </is_show_leafs>
+
+            <expand_inital_depth>
+                <value>0</value>
+            </expand_inital_depth>
             
-            <get_order_by_from_objectdef>
-                <value>
-                    <object code="most.protocol_date:get_order_by_from_objectdef" objectdef="vscript" module="core" >
-                        <params>
-                            <value>                                     
-                                <object code="odef" module="core" objectdef="script_param"></object>
-                            </value>
-                        </params>   
-                        <script_code>
-                            <value><![CDATA[
-if (odef == db.most.category_date)
-	return "code";
-if (db.most.protocol.all_inherited_from.contains(odef))
-	return "\"date\"";
-return null;
-                            ]]></value>
-                        </script_code>
-                    </object>                                   
-                </value>
-            </get_order_by_from_objectdef>
-
-            <get_subtree_element_count>
-                <value>
-                    <object code="most.protocol_date:category_date.protocol_dates:get_subtree_element_count" objectdef="vscript" module="core" >
-                        <params>
-                           <value>
-                               <object code="path" module="core" objectdef="script_param" />
-                           </value>                          
-                        </params>
-                        <script_code>
-                            <value><![CDATA[
-if (path == null || path.last == null) {
-    return db.most.category_date.SELECT("parent IS NULL").size;
-}
-var umap=new M();
-function rec(cat) 
-{
-    var tres=this.TEMP["category_set_"+cat.id];
-    if (tres != null) {
-        return tres;    
-    }
-    if (umap[cat] == true)
-        return [];
-    umap[cat]=true;
-    var res=[];
-    for (var e : cat.protocol_dates) {
-        res.push(e);
-    }
-    for (var e : cat.children) 
-    {
-        for (var k : rec(e)) 
-        {
-            res.push(k);
-        }        
-    }
-    tres.reset(res);
-    return res;
-}
-
-if (path.last instanceof db.most.category_date) 
-{
-    return rec(path.last).size;
-}
-if (path.last instanceof db.most.protocol_date) {
-    return path.last.protocol_dates.size;
-}
-return 0;    
-                            ]]></value>
-                        </script_code>
-                    </object>                                   
-                </value>
-            </get_subtree_element_count>
-            <expand_inital_depth>
-                <value>0</value>
-            </expand_inital_depth>
         </object>      
 
-        <object code="most.protocol:category_date.protocol_dates.real_protocols" module="core" objectdef="hierarchy_mixed">
+
+
+
+
+        <object code="most.protocol:REAL.year.months.dates" module="core" objectdef="hierarchy_relation_path">
             <name>
                 <value>
-                    <en-US>By real date</en-US>
+                    <en-US>By month (real)</en-US>
                 </value>
                 <value>
-                    <de-DE>Nach realem Datum</de-DE>
+                    <de-DE>Nach Monat (real)</de-DE>
                 </value>
                 <value>
-                    <bg-BG>По реална дата</bg-BG>
+                    <bg-BG>По моесец (реален)</bg-BG>
                 </value>
             </name>
-             <objectdef_set_codes>
-                <value>most.protocol</value>
-            </objectdef_set_codes>
+
+			<objectdef_set_codes mode="delete"/>
+
             <selection_group_code>
-                <value>most.category_date</value>
+                <value>year.month.date</value>
             </selection_group_code>
             <path>
-                <value>most.category_date.children*.protocol_dates.real_protocols</value>
+                <value>most.protocol_year.months.dates.real_protocols</value>
             </path>
-            <vsql_condition>
-                <value>parent.id IS NULL</value>
-            </vsql_condition>
-            <is_visible_with_leaf>
-                <value>false</value>
-            </is_visible_with_leaf>
+
             <is_show_element_count>
                 <value>true</value>
             </is_show_element_count>
+
             <is_sort>
                 <value>true</value>
             </is_sort>
+
             <is_show_leafs>
                 <value>false</value>
             </is_show_leafs>
-            <is_remove_no_read_access_elements>
-                <value>true</value>
-            </is_remove_no_read_access_elements>
-            <get_parent>
-                <value>
-                    <object code="most.protocol:category_date.protocol_dates.real_protocols:get_parent" objectdef="vscript" module="core" >
-                        <params>
-                            <value>                                     
-                                <object code="element" module="core" objectdef="script_param"></object>
-                            </value>
-                        </params>   
-                        <script_code>
-                            <value><![CDATA[
-if (element instanceof db.most.protocol)
-    return element.real_date;                            
-if (element instanceof db.most.protocol_date)
-    return element.category;
-return element.parent;        
-                            ]]></value>
-                        </script_code>
-                    </object>                                   
-                </value>
-            </get_parent>
 
-            <get_subtree_element_count>
-                <value>
-                    <object code="most.protocol:category_date.protocol_dates.real_protocols:get_subtree_element_count" objectdef="vscript" module="core" >
-                        <params>
-                           <value>
-                               <object code="path" module="core" objectdef="script_param" />
-                           </value>
- 						   <value>
-                               <object code="filter" module="core" objectdef="script_param" />
-                           </value>
-                           <value>
-                               <object code="view" module="core" objectdef="script_param" />
-                           </value>
-                        </params>
-                        <script_code>
-                            <value><![CDATA[
-if (path == null || path.last == null) {
-    return db.most.category_date.SELECT("parent IS NULL").size;
-}
-var umap=new M();
-function rec(cat) 
-{
-    var tres=this.TEMP["category_set_"+cat.id];
-    if (tres != null) {
-        return tres;    
-    }
-    if (umap[cat] == true)
-        return [];
-    umap[cat]=true;
-    var res=[];
-    for (var e : cat.protocol_dates) {
-        res.push(e);
-    }
-    for (var e : cat.children) 
-    {
-        for (var k : rec(e)) 
-        {
-            res.push(k);
-        }        
-    }
-    tres.reset(res);
-    return res;
-}
-
-var res = 0;
-function addSum(obj) 
-{
-	if (obj["real_protocols"] == null)
-		return;
-	for (var e : obj.real_protocols) 
-	{
-		if (e.OBJECTDEF == view.objectdef_hint) 
-			res++;	
-	}
-}
-
-if (path.last instanceof db.most.category_date) 
-{
-    var rr = rec(path.last);
-    for (var e : rr)
-    	addSum(e);
-}
-if (path.last instanceof db.most.protocol_date) {  
-		addSum(path.last);
-}
-return res;    
-                            ]]></value>
-                        </script_code>
-                    </object>                                   
-                </value>
-            </get_subtree_element_count>
             <expand_inital_depth>
                 <value>0</value>
             </expand_inital_depth>
-			<get_order_by_from_objectdef>
-                <value>
-                    <object code="most.protocol_date:get_order_by_from_objectdef" objectdef="vscript" module="core"/>
-                </value>
-            </get_order_by_from_objectdef>
         </object>      
         
-        
-         <object code="most.protocol:category_date.protocol_dates.official_protocols" module="core" objectdef="hierarchy_mixed">
+        <object code="most.protocol:REAL.year.quarters.dates" module="core" objectdef="hierarchy_relation_path">
+
             <name>
                 <value>
-                    <en-US>By official date</en-US>
+                    <en-US>By quarter (real)</en-US>
                 </value>
                 <value>
-                    <de-DE>Nach offiziellem Datum</de-DE>
+                    <de-DE>Nach Quartal (real)</de-DE>
                 </value>
                 <value>
-                    <bg-BG>По официална дата</bg-BG>
+                    <bg-BG>По тримесечие (реален)</bg-BG>
                 </value>
             </name>
-            <objectdef_set_codes>
-                <value>most.protocol</value>
-            </objectdef_set_codes>
+
+			<objectdef_set_codes mode="delete"/>
+
             <selection_group_code>
-                <value>most.category_date</value>
+                <value>year.quarter.date</value>
             </selection_group_code>
+
             <path>
-                <value>most.category_date.children*.protocol_dates.official_protocols</value>
+                <value>most.protocol_year.quarters.dates.real_protocols</value>
             </path>
-            <vsql_condition>
-                <value>parent.id IS NULL</value>
-            </vsql_condition>
-            <is_visible_with_leaf>
-                <value>false</value>
-            </is_visible_with_leaf>
+
             <is_show_element_count>
                 <value>true</value>
             </is_show_element_count>
+
             <is_sort>
                 <value>true</value>
             </is_sort>
+
             <is_show_leafs>
                 <value>false</value>
             </is_show_leafs>
-            <is_remove_no_read_access_elements>
-                <value>true</value>
-            </is_remove_no_read_access_elements>
-            <get_parent>
-                <value>
-                    <object code="most.protocol:category_date.protocol_dates.official_protocols:get_parent" objectdef="vscript" module="core" >
-                        <params>
-                            <value>                                     
-                                <object code="element" module="core" objectdef="script_param"></object>
-                            </value>
-                        </params>   
-                        <script_code>
-                            <value><![CDATA[
-if (element instanceof db.most.protocol)
-    return element.official_date;                            
-if (element instanceof db.most.protocol_date)
-    return element.category;
-return element.parent;        
-                            ]]></value>
-                        </script_code>
-                    </object>                                   
-                </value>
-            </get_parent>
 
-            <get_subtree_element_count>
-                <value>
-                    <object code="most.protocol:category_date.protocol_dates.official_protocols:get_subtree_element_count" objectdef="vscript" module="core" >
-                        <params>
-                           <value>
-                               <object code="path" module="core" objectdef="script_param" />
-                           </value>
- 						   <value>
-                               <object code="filter" module="core" objectdef="script_param" />
-                           </value>
-                           <value>
-                               <object code="view" module="core" objectdef="script_param" />
-                           </value>
-                        </params>
-                        <script_code>
-                            <value><![CDATA[
-if (path == null || path.last == null) {
-    return db.most.category_date.SELECT("parent IS NULL").size;
-}
-var umap=new M();
-function rec(cat) 
-{
-    var tres=this.TEMP["category_set_"+cat.id];
-    if (tres != null) {
-        return tres;    
-    }
-    if (umap[cat] == true)
-        return [];
-    umap[cat]=true;
-    var res=[];
-    for (var e : cat.protocol_dates) {
-        res.push(e);
-    }
-    for (var e : cat.children) 
-    {
-        for (var k : rec(e)) 
-        {
-            res.push(k);
-        }        
-    }
-    tres.reset(res);
-    return res;
-}
-
-var res = 0;
-function addSum(obj) 
-{
-	if (obj["official_protocols"] == null)
-		return;
-	for (var e : obj.official_protocols) 
-	{
-		if (e.OBJECTDEF == view.objectdef_hint) 
-			res++;	
-	}
-}
-
-if (path.last instanceof db.most.category_date) 
-{
-    var rr = rec(path.last);
-    for (var e : rr)
-    	addSum(e);
-}
-if (path.last instanceof db.most.protocol_date) {
-		addSum(path.last);
-}
-return res;    
-                            ]]></value>
-                        </script_code>
-                    </object>                                   
-                </value>
-            </get_subtree_element_count>
             <expand_inital_depth>
                 <value>0</value>
             </expand_inital_depth>
-			<get_order_by_from_objectdef>
-                <value>
-                    <object code="most.protocol_date:get_order_by_from_objectdef" objectdef="vscript" module="core"/>
-                </value>
-            </get_order_by_from_objectdef>
+            
         </object>      
+
+	
+   		<object code="most.protocol:OFFICIAL.year.months.dates" module="core" objectdef="hierarchy_relation_path">
+            <name>
+                <value>
+                    <en-US>By month (official)</en-US>
+                </value>
+                <value>
+                    <de-DE>Nach Monat (offiziel)</de-DE>
+                </value>
+                <value>
+                    <bg-BG>По моесец (официално)</bg-BG>
+                </value>
+            </name>
+
+			<objectdef_set_codes mode="delete"/>
+
+            <selection_group_code>
+                <value>year.month.date</value>
+            </selection_group_code>
+            <path>
+                <value>most.protocol_year.months.dates.official_protocols</value>
+            </path>
+
+            <is_show_element_count>
+                <value>true</value>
+            </is_show_element_count>
+
+            <is_sort>
+                <value>true</value>
+            </is_sort>
+
+            <is_show_leafs>
+                <value>false</value>
+            </is_show_leafs>
+
+            <expand_inital_depth>
+                <value>0</value>
+            </expand_inital_depth>
+        </object>      
+        
+        <object code="most.protocol:OFFICIAL.year.quarters.dates" module="core" objectdef="hierarchy_relation_path">
+
+            <name>
+                <value>
+                    <en-US>By quarter (official)</en-US>
+                </value>
+                <value>
+                    <de-DE>Nach Quartal (offiziel)</de-DE>
+                </value>
+                <value>
+                    <bg-BG>По тримесечие (официален)</bg-BG>
+                </value>
+            </name>
+
+			<objectdef_set_codes mode="delete"/>
+
+            <selection_group_code>
+                <value>year.quarter.date</value>
+            </selection_group_code>
+
+            <path>
+                <value>most.protocol_year.quarters.dates.official_protocols</value>
+            </path>
+
+            <is_show_element_count>
+                <value>true</value>
+            </is_show_element_count>
+
+            <is_sort>
+                <value>true</value>
+            </is_sort>
+
+            <is_show_leafs>
+                <value>false</value>
+            </is_show_leafs>
+
+            <expand_inital_depth>
+                <value>0</value>
+            </expand_inital_depth>
+            
+        </object>      
+
+
+   
+        <object code="most.credit_note:year.quarters.credit_notes" module="core" objectdef="hierarchy_relation_path">
+
+            <name>
+                <value>
+                    <en-US>By quarter</en-US>
+                </value>
+                <value>
+                    <de-DE>Nach Quartal</de-DE>
+                </value>
+                <value>
+                    <bg-BG>По тримесечие</bg-BG>
+                </value>
+            </name>
+
+            <objectdef_set_codes mode="delete"/>
+            
+            <path>
+                <value>most.protocol_year.quarters.credit_notes</value>
+            </path>
+
+            <is_show_element_count>
+                <value>true</value>
+            </is_show_element_count>
+
+            <is_sort>
+                <value>true</value>
+            </is_sort>
+
+            <is_show_leafs>
+                <value>false</value>
+            </is_show_leafs>
+
+            <expand_inital_depth>
+                <value>0</value>
+            </expand_inital_depth>
+            
+        </object>      
+        
+        <object code="most.product_line:product_groups.product_lines" module="core" objectdef="hierarchy_relation_path">
+
+            <name>
+                <value>
+                    <en-US>By group</en-US>
+                </value>
+                <value>
+                    <de-DE>Nach Gruppe</de-DE>
+                </value>
+                <value>
+                    <bg-BG>По група</bg-BG>
+                </value>
+            </name>
+
+            <path>
+                <value>most.product_group.product_lines</value>
+            </path>
+            
+            <is_show_element_count>
+                <value>true</value>
+            </is_show_element_count>
+
+            <is_sort>
+                <value>true</value>
+            </is_sort>
+
+            <is_show_leafs>
+                <value>false</value>
+            </is_show_leafs>
+
+            <expand_inital_depth>
+                <value>0</value>
+            </expand_inital_depth>                    
+            
+        </object>      
+        
+       <object code="most.aricle:product_group.product_lines.articles" module="core" objectdef="hierarchy_relation_path">
+
+            <name>
+                <value>
+                    <en-US>By group/line</en-US>
+                </value>
+                <value>
+                    <de-DE>Nach Gruppe/Linie</de-DE>
+                </value>
+                <value>
+                    <bg-BG>По група/линия</bg-BG>
+                </value>
+            </name>
+
+            <path>
+                <value>most.product_group.product_lines.articles</value>
+            </path>
+            
+            <is_show_element_count>
+                <value>true</value>
+            </is_show_element_count>
+
+            <is_sort>
+                <value>true</value>
+            </is_sort>
+
+            <is_show_leafs>
+                <value>false</value>
+            </is_show_leafs>
+
+            <expand_inital_depth>
+                <value>0</value>
+            </expand_inital_depth>
+            
+        </object>      
+
     </objects>
 </import>

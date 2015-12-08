@@ -10,6 +10,65 @@
 	</object>
 	
 <!-- OBJECTDEF names -->
+	<object cond="module.code='most' AND code='product_line'"
+            module="core" 
+            objectdef="objectdef" 
+            mode="update">
+        <name>
+            <value><en-US>Product line</en-US></value>
+            <value><de-DE>Produktlinie</de-DE></value>
+            <value><bg-BG>Продуктова линия</bg-BG></value>
+        </name>           
+       <display_type>
+           <value>
+               <object code="most.product_line" objectdef="display_type_objectdef" module="core"/>
+           </value>
+       </display_type>  
+       <icon>
+           <value>
+             <object code="/images/objectdefs/icons/color/128/graphics-layer_group.png" module="documents" objectdef="icon"></object>
+           </value>
+       </icon>
+    </object>
+
+
+	<object cond="module.code='most' AND code='dealer_price'"
+            module="core" 
+            objectdef="objectdef" 
+            mode="update">
+        <name>
+            <value><en-US>Dealer price</en-US></value>
+            <value><de-DE>Daelerpreis</de-DE></value>
+            <value><bg-BG>Дилърска цена</bg-BG></value>
+        </name>                  
+       <icon>
+           <value>
+             <object code="/images/objectdefs/icons/color/128/operating_costs-costs_share.png" module="documents" objectdef="icon"></object>
+           </value>
+       </icon>
+    </object>
+
+	<object cond="module.code='most' AND code='product_group'"
+            module="core" 
+            objectdef="objectdef" 
+            mode="update">
+        <name>
+            <value><en-US>Product group</en-US></value>
+            <value><de-DE>Produktgruppe</de-DE></value>
+            <value><bg-BG>Продуктова група</bg-BG></value>
+        </name>           
+       <display_type>
+           <value>
+               <object code="most.product_group" objectdef="display_type_objectdef" module="core"/>
+           </value>
+       </display_type>  
+       <icon>
+           <value>
+             <object code="/images/objectdefs/icons/color/128/graphics-category_drawing.png" module="documents" objectdef="icon"></object>
+           </value>
+       </icon>
+    </object>
+
 	<object cond="module.code='most' AND code='protocol_date'"
             module="core" 
             objectdef="objectdef" 
@@ -29,7 +88,7 @@
              <object code="/images/objectdefs/icons/color/128/appointments-appointment.png" module="documents" objectdef="icon"></object>
            </value>
        </icon>
-       <rel_display_string_order><value>is_active DESC,"date"</value></rel_display_string_order>
+       <rel_display_string_order><value>"date"</value></rel_display_string_order>
     </object>
 
 	<object cond="module.code='most' AND code='invoice'"
@@ -48,6 +107,32 @@
        </icon>                 
     </object>
 
+	<object cond="module.code='most' AND code='invoice_stock'"
+            module="core" 
+            objectdef="objectdef" 
+            mode="update">
+        <name>
+            <value><en-US>Stock invoice</en-US></value>
+            <value><de-DE>Rechnung Belieferung</de-DE></value>
+            <value><bg-BG>Фактура зареждане</bg-BG></value>
+        </name>                     
+    </object>
+
+	<object cond="module.code='most' AND code='credit_note'"
+            module="core" 
+            objectdef="objectdef" 
+            mode="update">
+        <name>
+            <value><en-US>Credit note</en-US></value>
+            <value><de-DE>Kreditnote</de-DE></value>
+            <value><bg-BG>Кредитно известие</bg-BG></value>
+        </name>                     
+       <display_type>
+           <value>
+               <object code="most.credit_note" objectdef="display_type_objectdef" module="core"/>
+           </value>
+       </display_type>  
+    </object>
 
 	<object cond="module.code='most' AND code='customer'"
             module="core" 
@@ -116,7 +201,11 @@ return t.join(" | ");
             <value><de-DE>Artikel</de-DE></value>
             <value><bg-BG>Артикул</bg-BG></value>
         </name>     
-       <display_type mode="delete"/>
+       <display_type>
+           <value>
+               <object code="most.article" objectdef="display_type_objectdef" module="core"/>
+           </value>
+       </display_type>  
  	   <icon>
            <value>
              <object code="/visionr/modules/icons/color/128/products.png" module="documents" objectdef="icon"></object>
@@ -148,17 +237,59 @@ return t.join(" | ");
 
     </object>
 
-	<object cond="module.code='most' AND code='category_date'"
+	<object cond="module.code='most' AND code='protocol_year'"
             module="core" 
             objectdef="objectdef" 
             mode="update">
         <name>
-            <value><en-US>Category (date)</en-US></value>
-            <value><de-DE>Kategorie (Datum)</de-DE></value>
-            <value><bg-BG>Категория (дата)</bg-BG></value>
+            <value><en-US>Year</en-US></value>
+            <value><de-DE>Jahr</de-DE></value>
+            <value><bg-BG>Година</bg-BG></value>
+        </name>     
+       <rel_display_string_order><value>code</value></rel_display_string_order>
+    </object>
+    
+    
+	<object cond="module.code='most' AND code='protocol_month'"
+            module="core" 
+            objectdef="objectdef" 
+            mode="update">
+        <name>
+            <value><en-US>Month</en-US></value>
+            <value><de-DE>Monat</de-DE></value>
+            <value><bg-BG>Месец</bg-BG></value>
+        </name>     
+     
+       <rel_display_string_order><value>code</value></rel_display_string_order>
+
+    </object>
+    
+     
+	<object cond="module.code='most' AND code='protocol_quarter'"
+            module="core" 
+            objectdef="objectdef" 
+            mode="update">
+        <name>
+            <value><en-US>Quarter</en-US></value>
+            <value><de-DE>Quarter</de-DE></value>
+            <value><bg-BG>Тримесечие</bg-BG></value>
+        </name>     
+       <rel_display_string_order><value>code</value></rel_display_string_order>
+     
+    </object>
+
+	<object cond="module.code='most' AND code='credit_note'"
+            module="core" 
+            objectdef="objectdef" 
+            mode="update">
+        <name>
+            <value><en-US>Credit note</en-US></value>
+            <value><de-DE>Kreditnote</de-DE></value>
+            <value><bg-BG>Кредитно известие</bg-BG></value>
         </name>     
      
     </object>
+ 
  
 	<object cond="module.code='most' AND code='opg'"
             module="core" 

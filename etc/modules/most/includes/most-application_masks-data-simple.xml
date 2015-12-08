@@ -89,22 +89,80 @@ return res;
 						<sort_id><value>500</value></sort_id>
                         <name>
                             <value>
-			                    <en-US>Stock - Invoices</en-US>
+			                    <en-US>Invoices</en-US>
 			                </value>
 			                <value>
-			                    <de-DE>Belieferung - Rechnungen</de-DE>
+			                    <de-DE>Rechnungen</de-DE>
 			                </value>
 			                <value>
-			                    <bg-BG>Зареждане - Фактури</bg-BG>
+			                    <bg-BG>Фактури</bg-BG>
 			                </value>
                         </name>
                         <target_objectdef>
                             <value>
-                                <object code="invoice" cond="module.code='most' AND code='invoice'" mode="update" module="core" objectdef="objectdef"></object>
+                                <object code="invoice_stock" cond="module.code='most' AND code='invoice_stock'" mode="update" module="core" objectdef="objectdef"></object>
                             </value>
                         </target_objectdef>
                         <mask_code>
                             <value>parameterised-objectdef-instances-mask</value>
+                        </mask_code>
+                        <appearance_class>
+                            <value>app-button-fat</value>
+                        </appearance_class>
+                        <icon_url>
+                            <value><![CDATA[/tmp/documents/_visionr_objectdefs_icons_color_128_invoices-invoice.png.uuid.png?operation=resizeImage&width=32&height=32]]></value>
+                        </icon_url>
+                        <icon16_url>
+                            <value><![CDATA[/tmp/documents/_visionr_objectdefs_icons_color_128_invoices-invoice.png.uuid.png?operation=resizeImage&width=16&height=16]]></value>
+                        </icon16_url>
+                        <height>
+                            <value>40</value>
+                        </height>
+                        <icon_width>
+                            <value>32</value>
+                        </icon_width>
+                        <icon_height>
+                            <value>32</value>
+                        </icon_height>
+                        <get_name>
+                            <value>
+                                <object code="ui_app_mask_button.most_app:invoice_stock.get_name" module="core" objectdef="vscript">
+                                    <script_code>
+                                        <value><![CDATA[
+var res = "<p style='line-height:16px;cursor:pointer;'>"+this.name+
+          "<br/><b style='color:#D8D8D8;'>"+
+            FORMAT(db.most.invoice_stock.INSTANCES.size)+" "+MSG("OVERVIEW_LABEL_OBJECTS")+
+          "</b></p>";
+return res;
+		                                ]]></value>
+                                    </script_code>
+                                </object>
+                            </value>
+                        </get_name>
+                    </object>
+                </value>
+                
+				<value>
+                    <object code="most_app:credit_note" module="user_interface" objectdef="application_mask_objectdef_button" proj="all">
+						<sort_id><value>601</value></sort_id>
+                        <name>
+                            <value>
+			                    <en-US>Credit notes</en-US>
+			                </value>
+			                <value>
+			                    <de-DE>Kreditnoten</de-DE>
+			                </value>
+			                <value>
+			                    <bg-BG>Кредитни известия</bg-BG>
+			                </value>
+                        </name>
+                        <target_objectdef>
+                            <value>
+                                <object code="credit_note" cond="module.code='most' AND code='credit_note'" mode="update" module="core" objectdef="objectdef"></object>
+                            </value>
+                        </target_objectdef>
+                        <mask_code>
+                            <value>parameterised-objectdef-instances-mask-tree</value>
                         </mask_code>
                         <appearance_class>
                             <value>app-button-fat</value>
@@ -131,7 +189,7 @@ return res;
                                         <value><![CDATA[
 var res = "<p style='line-height:16px;cursor:pointer;'>"+this.name+
           "<br/><b style='color:#D8D8D8;'>"+
-            FORMAT(db.most.invoice.INSTANCES.size)+" "+MSG("OVERVIEW_LABEL_OBJECTS")+
+            FORMAT(db.most.credit_note.INSTANCES.size)+" "+MSG("OVERVIEW_LABEL_OBJECTS")+
           "</b></p>";
 return res;
 		                                ]]></value>
@@ -140,7 +198,7 @@ return res;
                             </value>
                         </get_name>
                     </object>
-                </value>
+                </value>           
 
                 <value>
                     <object code="most_app:article" module="user_interface" objectdef="application_mask_objectdef_button" proj="all">
@@ -162,7 +220,7 @@ return res;
                             </value>
                         </target_objectdef>
                         <mask_code>
-                            <value>parameterised-objectdef-instances-mask</value>
+                            <value>parameterised-objectdef-instances-mask-tree</value>
                         </mask_code>
                         <appearance_class>
                             <value>app-button-fat</value>
@@ -262,7 +320,7 @@ return res;
                 
                 <value>
                     <object code="most_app:protocol_sale" module="user_interface" objectdef="application_mask_objectdef_button" proj="all">
-                    	<sort_id><value>600</value></sort_id>
+                    	<sort_id><value>401</value></sort_id>
                         <name>
                             <value>
 			                    <en-US>Sale</en-US>
@@ -478,19 +536,21 @@ return res;
                         </get_name>
                     </object>
                 </value>
-               <value>
-                    <object code="most_app:state_adjustment_official" module="user_interface" objectdef="application_mask_objectdef_button" proj="all">
+
+
+                <value>
+                    <object code="most_app:product_group" module="user_interface" objectdef="application_mask_objectdef_button" proj="all">
                     	<sort_id><value>100</value></sort_id>
                         <name>
                             <value>
-                                <en-US>Store/HP</en-US>
-                                <de-DE>Speicher/HP</de-DE>
-                                <bg-BG>Склад/HP</bg-BG>
+			                    <en-US>Product group</en-US>
+			                    <de-DE>Produktgrupper</de-DE>
+			                    <bg-BG>Продуткова група</bg-BG>
 			                </value>
                         </name>
                         <target_objectdef>
                             <value>
-                                <object code="state_adjustment_official" cond="module.code='most' AND code='state_adjustment_official'" mode="update" module="core" objectdef="objectdef"></object>
+                                <object code="product_group" cond="module.code='most' AND code='product_group'" mode="update" module="core" objectdef="objectdef"></object>
                             </value>
                         </target_objectdef>
                         <mask_code>
@@ -500,10 +560,10 @@ return res;
                             <value>app-button-fat</value>
                         </appearance_class>
                         <icon_url>
-                            <value><![CDATA[/tmp/documents/_visionr_objectdefs_icons_color_128_all-status.png.uuid.png?operation=resizeImage&width=32&height=32]]></value>
+                            <value><![CDATA[/tmp/documents/_visionr_objectdefs_icons_color_128_graphics-category_drawing.png.uuid.png?operation=resizeImage&width=32&height=32]]></value>
                         </icon_url>
                         <icon16_url>
-                            <value><![CDATA[/tmp/documents/_visionr_objectdefs_icons_color_128_all-status.png.uuid.png?operation=resizeImage&width=16&height=16]]></value>
+                            <value><![CDATA[/tmp/documents/_visionr_objectdefs_icons_color_128_graphics-category_drawing.png.uuid.png?operation=resizeImage&width=16&height=16]]></value>
                         </icon16_url>
                         <height>
                             <value>40</value>
@@ -516,12 +576,12 @@ return res;
                         </icon_height>
                         <get_name>
                             <value>
-                                <object code="ui_app_mask_button.most_app:state_adjustment_official.get_name" module="core" objectdef="vscript">
+                                <object code="ui_app_mask_button.most_app:product_group.get_name" module="core" objectdef="vscript">
                                     <script_code>
                                         <value><![CDATA[
 var res = "<p style='line-height:16px;cursor:pointer;'>"+this.name+
           "<br/><b style='color:#D8D8D8;'>"+
-            FORMAT(db.most.state_adjustment_official.INSTANCES.size)+" "+MSG("OVERVIEW_LABEL_OBJECTS")+
+            FORMAT(db.most.product_group.INSTANCES.size)+" "+MSG("OVERVIEW_LABEL_OBJECTS")+
           "</b></p>";
 return res;
 		                                ]]></value>
@@ -531,32 +591,34 @@ return res;
                         </get_name>
                     </object>
                 </value>
+                
+                
                 <value>
-                    <object code="most_app:state_adjustment_real" module="user_interface" objectdef="application_mask_objectdef_button" proj="all">
-                    	<sort_id><value>200</value></sort_id>
+                    <object code="most_app:product_line" module="user_interface" objectdef="application_mask_objectdef_button" proj="all">
+                    	<sort_id><value>100</value></sort_id>
                         <name>
                             <value>
-                                <en-US>Store/HP</en-US>
-                                <de-DE>Speicher/MOST</de-DE>
-                                <bg-BG>Склад/HP</bg-BG>
+			                    <en-US>Product line</en-US>
+			                    <de-DE>Produktlinie</de-DE>
+			                    <bg-BG>Продутова линия</bg-BG>
 			                </value>
                         </name>
                         <target_objectdef>
                             <value>
-                                <object code="state_adjustment_real" cond="module.code='most' AND code='state_adjustment_real'" mode="update" module="core" objectdef="objectdef"></object>
+                                <object code="product_line" cond="module.code='most' AND code='product_line'" mode="update" module="core" objectdef="objectdef"></object>
                             </value>
                         </target_objectdef>
                         <mask_code>
-                            <value>parameterised-objectdef-instances-mask</value>
+                            <value>parameterised-objectdef-instances-mask-tree</value>
                         </mask_code>
                         <appearance_class>
                             <value>app-button-fat</value>
                         </appearance_class>
                         <icon_url>
-                            <value><![CDATA[/tmp/documents/_visionr_objectdefs_icons_color_128_all-status.png.uuid.png?operation=resizeImage&width=32&height=32]]></value>
+                            <value><![CDATA[/tmp/documents/_visionr_objectdefs_icons_color_128_graphics-layer_group.png.uuid.png?operation=resizeImage&width=32&height=32]]></value>
                         </icon_url>
                         <icon16_url>
-                            <value><![CDATA[/tmp/documents/_visionr_objectdefs_icons_color_128_all-status.png.uuid.png?operation=resizeImage&width=16&height=16]]></value>
+                            <value><![CDATA[/tmp/documents/_visionr_objectdefs_icons_color_128_graphics-layer_group.png.uuid.png?operation=resizeImage&width=16&height=16]]></value>
                         </icon16_url>
                         <height>
                             <value>40</value>
@@ -569,12 +631,12 @@ return res;
                         </icon_height>
                         <get_name>
                             <value>
-                                <object code="ui_app_mask_button.most_app:state_adjustment_real.get_name" module="core" objectdef="vscript">
+                                <object code="ui_app_mask_button.most_app:product_line.get_name" module="core" objectdef="vscript">
                                     <script_code>
                                         <value><![CDATA[
 var res = "<p style='line-height:16px;cursor:pointer;'>"+this.name+
           "<br/><b style='color:#D8D8D8;'>"+
-            FORMAT(db.most.state_adjustment_real.INSTANCES.size)+" "+MSG("OVERVIEW_LABEL_OBJECTS")+
+            FORMAT(db.most.product_line.INSTANCES.size)+" "+MSG("OVERVIEW_LABEL_OBJECTS")+
           "</b></p>";
 return res;
 		                                ]]></value>

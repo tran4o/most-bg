@@ -341,4 +341,37 @@ return true;
       <value>W2VC7S6uR_-lRkTG6nJqwQ</value>
    </uuid>
 </object>
+
+<object code="PRODUCT LINE MIGRATION" objectdef="data_import_xls" module="core" >
+   <sort_id>
+      <value>0</value>
+   </sort_id>
+   <name>
+      <value>
+         <en-US>Migrate product line after update </en-US></value>
+   </name>
+   <data_file>
+      <value><object mode="update" code="PROD-PL-04122015.xls" objectdef="file" module="documents" cond="&quot;parent&quot;.&quot;code&quot; = 'initial' AND &quot;parent&quot;.&quot;parent&quot;.&quot;code&quot; = 'most' AND &quot;parent&quot;.&quot;parent&quot;.&quot;parent&quot;.&quot;code&quot; = '/' AND &quot;parent&quot;.&quot;parent&quot;.&quot;parent&quot;.&quot;parent&quot; IS NULL"/></value>
+   </data_file>
+   <template>
+      <value><![CDATA[<object code="${CODE}" module="most" objectdef="article">
+    <product_line>
+		<value>
+			<object module="most" objectdef="product_line" code="${PL}"/>
+		</value>
+	</product_line>
+</object>
+]]></value>
+   </template>
+   <is_use_events>
+      <value>false</value>
+   </is_use_events>
+   <is_archived>
+      <value>false</value>
+   </is_archived>
+   <uuid>
+      <value>N3omIB1RRQq7DfoVdiEvGA</value>
+   </uuid>
+</object>
+
 </objects></import>

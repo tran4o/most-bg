@@ -1,0 +1,80 @@
+<% 
+var mode = session.request.getParameter("mode");
+var object = db[session.request.getParameter("object")];
+var begin = null;
+var end = null;
+if (session.request.getParameter("bdate") != null && session.request.getParameter("bdate") != "") {
+	begin = java.date.fromMillis(session.request.getParameter("bdate").castToExactNumber());
+}
+if (session.request.getParameter("edate") != null && session.request.getParameter("edate") != "") {
+	end = java.date.fromMillis(session.request.getParameter("edate").castToExactNumber());
+}
+if (begin != null && end != null && begin > end) 
+{
+	// swap if needed.
+	var t = begin;
+	begin=end;
+	end=t;
+}
+// store result (if neccesary)
+var setting = db.currentSession().user.get_setting("MOST.sums-begin");
+if (begin == null) {
+	if (setting != null && setting.value != null)
+		setting.value=null;
+} else {
+	if (setting == null)
+		setting = core.misc.createSimpleUserSetting("MOST.sums-begin",db.core.user_setting_varchar);
+	if (setting.value != ""+begin.getTime())
+		setting.value=""+begin.getTime();
+}
+setting = db.currentSession().user.get_setting("MOST.sums-end");
+if (end == null) {
+	if (setting != null && setting.value != null)
+		setting.value=null;
+} else {
+	if (setting == null)
+		setting = core.misc.createSimpleUserSetting("MOST.sums-end",db.core.user_setting_varchar);
+	if (setting.value != ""+end.getTime()) 
+		setting.value=""+end.getTime();
+}
+if (begin == null) {
+	begin = java.date.today();
+	begin.year=2015;
+	begin.month=0;
+	begin.day=0;
+}
+if (end == null) {
+	end = java.date.today();
+}
+//--------------------------------------------------------
+var cond;
+if (object instanceof db.most.article) {
+	cond="article=:OBJ";
+} else if (object instanceof db.most.product_line)
+	cond="article.product_line=:OBJ";
+else if (object instanceof db.most.product_group)
+	cond="article.product_line.product_group=:OBJ";
+	
+var chart = SCRIPTS["sumChartByCondition"](object,cond,begin,end,220,100);
+if (chart != null) 
+{ %>
+	<img src="<%= chart %>" style="width:220px;height:100px;<% if (mode == "popup") { %>margin-left:-53px;<% } %>"/>
+<% } %>
+<div style='margin-top:-5px;<% if (mode == "popup") { %>margin-left:-53px;<% } %>text-align:center;<% if (chart == null) { %>margin-bottom:100px; <% } %>'>
+<% 
+	var params=new M();
+	params["FROM"]=begin;
+	params["TO"]=end;
+	params["OBJ"]=object.id;
+	//----------------------------------------------------------------------------------------------------------------------------------
+	var tcost=0.0;
+	var sl=db.most.protocol_sale.VSQL_QUERY_SUM("SELECT total AS VAL WHERE "+cond+" AND official_date.\"date\" >= :FROM AND official_date.\"date\" <= :TO",params);
+	if (sl.next() && sl.getDouble("RES") != null) tcost=sl.getDouble("RES"); 
+
+	var tsold=0.0;
+	var sl=db.most.protocol_sale.VSQL_QUERY_SUM("SELECT most_sale_total AS VAL WHERE "+cond+" AND official_date.\"date\" >= :FROM AND official_date.\"date\" <= :TO",params);
+	if (sl.next() && sl.getDouble("RES") != null) tsold=sl.getDouble("RES"); 
+
+%>
+<b>COST </b><%= (STR2HTML(FORMAT(tcost))) %> | <b>SALE </b><%= (STR2HTML(FORMAT(tsold))) %> | <b>&Delta; </b><%= (STR2HTML(FORMAT(tsold-tcost))) %>
+</div>  
