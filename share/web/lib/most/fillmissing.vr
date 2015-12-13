@@ -1,0 +1,128 @@
+
+var DEBUG = true;
+var pcnt = 0; var pnew = 0;
+
+function prod_find_or_create(code, name, product_line, description, vendor) {
+    //trim code
+    if ( code.indexOf("#") > 0 ) {
+        code = code.substring(0, code.indexOf("#"));
+    }
+
+    var artobj = db.most.article.INSTANCES[code];
+
+    if (artobj != null) {
+        if (DEBUG) console.log("product " + code + " found. vendor is " + vendor);
+    } else {
+        if (DEBUG) console.log("product " + code + " not found. new instance. vendor is " + vendor);
+        artobj = new db.most.article();
+        pnew++;
+    }
+
+    vendor = db.contacts.vendor.INSTANCES[vendor];
+    if ( vendor == null ) {
+        vendor = db.contacts.vendor.INSTANCES["HPOLD"];
+    }
+
+    artobj.code = code;
+    artobj.name["en-US"] = name;
+
+    if (product_line) {
+        var plobj = db.most.product_line.INSTANCES[product_line];
+        if (plobj != null) {
+            if (DEBUG) console.log("product line " + product_line + " found");
+        } else {
+            if (DEBUG) console.log("product line " + code + " not found. new instance");
+            plobj = new db.most.product_line();
+            plobj.code = product_line;
+        }
+        artobj.product_line = plobj;
+    }
+
+    artobj.description["en-US"] = description;
+    artobj.vendor = vendor;
+    artobj.commit();
+
+    pcnt++;
+    return artobj;
+}
+
+// ------------------------------------------------------------
+
+function connect_source_db() {
+    var map = new M();
+
+    map["user"] = db.prefs["most.import.sql.user"];
+    map["password"] = db.prefs["most.import.sql.pass"];
+    var con = new java.db.Connection(
+        "mssql_2008",
+        "jdbc:sqlserver://" + db.prefs["most.import.sql.host"] + ";database=" + db.prefs["most.import.sql.dbname"],
+        map);
+
+    return con;
+}
+
+// main // -----------------------------------------------------------
+
+var con = connect_source_db();
+console.log("fetching missing articles list... ");
+
+var acol = db.most.article.SELECT("product_line.code = :PL");
+acol["PL"] = "OTHERS";
+var artlist = [];
+
+for (var a: acol) {
+    artlist.push("'" + a.code + "'");
+    if (artlist.length %128 == 0) {
+        console.log("found " + artlist.length);
+    }
+}
+
+var aj = artlist.join(",");
+
+console.log("our DB has " + artlist.size() + " elements without ID");
+
+var q = [
+	"SELECT DISTINCT nout.product_base_no as product_base_no,",
+	"                coalesce(np.product_line, nx.prod_line) AS pl",
+	" FROM",
+	"  (select distinct dbo.ven2clean(VendorPartNo) as product_base_no from opgdet ",
+	"   union ",
+	"   select distinct dbo.ven2clean(VendorPartNo) as product_base_no from invdet",
+	"   union",
+	"   select distinct product_base_no from products",
+	"   ) nout",
+	"left outer join products nx on nx.product_base_no = nout.product_base_no",
+	"CROSS apply",
+	"  (SELECT top 1 pin.product_line",
+	"   FROM NancyProducts pin",
+	"   WHERE product_base_no = nout.product_base_no) np",
+	" where nout.product_base_no in (" + aj + ")"
+].join(" ");
+
+var res = con.select(q);
+
+console.log("executing...");
+
+while(res.next()) {
+    pcnt++;
+    if ( pcnt % 128 == 0 ) {
+        console.log(pcnt);
+    }
+    var artobj = db.most.article.INSTANCES[res.getString("product_base_no")];
+    var plobj = db.most.product_line.INSTANCES[res.getString("pl")];
+
+    if (plobj == null && res.getString("pl").size()) { 
+	console.log("pl " + res.getString("pl") + " not found");
+        plobj = new db.most.product_line();
+        plobj.code = res.getString("pl");
+	plobj.commit();
+    }
+
+    if ( res.getString("pl").size() ) {
+	    artobj.product_line = plobj;
+	    artobj.commit();
+    }
+}
+
+console.log("intercepted " + pcnt + " products, and " + pnew + " of them are new. good work !");
+
