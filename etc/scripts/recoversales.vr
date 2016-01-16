@@ -1,0 +1,120 @@
+function autoAssignStock(sale,dateObj) {
+    var cr = "CAST ((quantity - COALESCE((SELECT SUM(sales.quantity) WHERE id = :VR__OUTER_SELECT_ID AND sales.official_date.\"date\" <= :OFCD ),0) - COALESCE((SELECT SUM(official_value) FROM most.state_adjustment_official WHERE stock = :VR__OUTER_SELECT_ID AND \"date\" <= :OFCD),0)) AS INTEGER)";
+    var sel = db.most.protocol_stock.SELECT("official_date.\"date\" <= :OFCD AND article = :PRID AND "+cr+" >= :MMIN ORDER BY official_date.\"date\","+cr+" DESC,id");
+    sel["OFCD"]=dateObj.date;
+    sel["PRID"]=sale.article.id;
+    sel["MMIN"]=sale.quantity;
+    sel.is_cached=false;
+
+    if (sel.size != 0) {
+        sale.stock=sel[0];
+        sale.official_date = dateObj;
+        sale.commit();
+        var opgs = SCRIPTS["availOpg"](sale);
+        if (!opgs.is_empty)
+            sale.opg=opgs[0];
+          console.log("Assigned stock "+sel[0].code+" to sell "+sale.code+" | OPGS : "+opgs.size+"<br/>");
+        return true;
+    } else {
+        return false;
+    }
+
+}
+
+function main() {
+    for (var sl: sales) {
+        var sl_customer_code = sl[0];
+        var sl_article_code = sl[1];
+        var sl_qty = sl[2];
+        var sl_date = sl[3];
+        var sl_opg = sl[4];
+
+        // resolve ac
+
+        var cust = db.most.customer.SELECT("abbreviation = :ABID");
+        cust["ABID"] = new String(sl_customer_code);
+        cust.is_cached = false;
+
+        if ( cust.size > 1 ) {
+            console.error("bad bid. more than 1 found..." + sl_customer_code);
+            continue;
+        }
+
+        if ( cust.size == 0 ) {
+            console.error("bad bid. NOT found..." + sl_customer_code);
+            continue;
+        }
+        cust = cust[0];
+
+        // resolve article
+
+        var artcl = db.most.article.SELECT("code = :CODE");
+        artcl["CODE"] = sl_article_code;
+        artcl.is_cached = false;
+
+        if ( artcl.size > 1 ) {
+            console.error("bad bid. more than 1 found..." + sl_article_code);
+            continue;
+        }
+
+        if ( artcl.size == 0 ) {
+            console.error("bad bid. NOT found..." + sl_article_code);
+            continue;
+        }
+        artcl = artcl[0];
+
+        // resolve optional OPG
+        var opg;
+
+        if ( sl_opg > 0 ) {
+            opg = db.most.protocol_date.SELECT("code = :CODE");
+            opg["CODE"] = sl_opg;
+            opg.is_cached = false;
+
+            if ( opg.size > 1 ) {
+                console.error("bad opg. more than 1 found..." + sl_opg);
+                continue;
+            }
+
+            if ( opg.size == 0 ) {
+                console.error("bad opg. NOT found..." + sl_opg);
+                continue;
+            }
+
+            opg = opg[0];
+        }
+
+        // resolve date
+        var pdate = db.most.protocol_date.INSTANCES[sl_date];
+        var prscode = "RSALE-" + sl_customer_code + "-" + sl_article_code + "-" + pdate;
+
+        if (pdate == null) {
+            console.log("date " + sl_date + " not found ");
+            continue;
+        }
+
+        // find if this exists already
+        var prs = db.most.protocol_date.SELECT("code = :CODE");
+        prs["CODE"] = prscode;
+
+        if ( prs.size == 0 ) {
+            console.log("the purchase " + prscode + " is not present. creating");
+            var sale = new db.most.protocol_sale();
+
+            sale.real_date = pdate;
+            sale.article = artcl;
+            sale.quantity = sl_qty;
+            sale.customer = cust;
+            sale.commit();
+
+            console.log("auto assign stock item.");
+
+            autoAssignStock(sale, pdate);
+        }
+    }
+}
+
+var sales = [[ 56270, "CZ181A", 1, "03.11.2015", 0 ],[ 68432, "C5141F", 0, "02.11.2015", 0 ],[ 68432, "C5141F", 0, "03.11.2015", 0 ],[ 68432, "C5141F", 0, "04.11.2015", 0 ],[ 1735, "51645AE", 2, "02.11.2015", 0 ],[ 1735, "51645AE", 4, "02.11.2015", 0 ],[ 1735, "CN047AE", 1, "02.11.2015", 0 ],[ 1735, "CN055AE", 2, "02.11.2015", 0 ],[ 1735, "CN056AE", 2, "02.11.2015", 0 ],[ 20983, "CZ102AE", 10, "02.11.2015", 0 ],[ 56270, "CZ181A", 1, "03.11.2015", 0 ],[ 8684, "C4812A", 1, "04.11.2015", 0 ],[ 22221, "C9351AE", 1, "04.11.2015", 0 ],[ 22221, "C9351CE", 1, "04.11.2015", 0 ],[ 22221, "C9352CE", 1, "04.11.2015", 0 ],[ 71520, "C2P25AE", 1, "04.11.2015", 0 ]];
+
+main();
+
