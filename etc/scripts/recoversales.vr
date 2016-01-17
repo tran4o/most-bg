@@ -53,12 +53,12 @@ function main() {
         artcl.is_cached = false;
 
         if ( artcl.size > 1 ) {
-            console.error("bad bid. more than 1 found..." + sl_article_code);
+            console.error("bad artc. more than 1 found..." + sl_article_code);
             continue;
         }
 
         if ( artcl.size == 0 ) {
-            console.error("bad bid. NOT found..." + sl_article_code);
+            console.error("bad artc. NOT found..." + sl_article_code);
             continue;
         }
         artcl = artcl[0];
@@ -94,13 +94,14 @@ function main() {
         }
 
         // find if this exists already
-        var prs = db.most.protocol_date.SELECT("code = :CODE");
-        prs["CODE"] = prscode;
+        // var prs = db.most.protocol_date.SELECT("code = :CODE");
+        // prs["CODE"] = prscode;
+        var prs = db.most.protocol_date.INSTANCES[prscode];
 
-        if ( prs.size == 0 ) {
+        if ( prs ) {
             console.log("the purchase " + prscode + " is not present. creating");
             var sale = new db.most.protocol_sale();
-
+            sale.code = prscode;
             sale.real_date = pdate;
             sale.article = artcl;
             sale.quantity = sl_qty;
