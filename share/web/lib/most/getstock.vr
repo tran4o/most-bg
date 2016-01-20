@@ -78,7 +78,7 @@ if (INITIAL) {
     target = "invoic";
 
     var params = new M();
-    var sl = db.most.invoice_stock.VSQL_QUERY_MAX("SELECT invoice_date AS VAL", params);
+    var sl = db.most.invoice_stock.VSQL_QUERY_MAX("SELECT invoice_date AS VAL where code like 'INV%' ", params);
     var lastmod = null;
 
     if (sl.next()) {
@@ -250,7 +250,6 @@ for (var inv: invlst) {
                 " / invoice no " + inv.name
             );
             console.log("did you import all necaessary OPGs?");
-            return;
         }
         if ( opg != null && opg != "OPG0000000000" ) {
             stock.opg = opg;
