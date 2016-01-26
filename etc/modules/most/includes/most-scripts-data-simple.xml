@@ -2,6 +2,43 @@
 <import revision="$LastChangedRevision: 9299 $">		
 <!-- DEFAULT SCRIPTS -->
 <objects>
+    <object code="most.import_sales.xls.filter-script" objectdef="vscript" module="core" >
+    				<package mode="delete"/>
+                    <params>
+                        <value>
+                            <object code="lines" module="core" objectdef="script_param"/>
+                        </value>
+                        <value>
+                            <object code="row" module="core" objectdef="script_param"/>
+                        </value>
+                        <value>
+                            <object code="nameToCol" module="core" objectdef="script_param"/>
+                        </value>
+                    </params>            
+                    <script_code>    
+                        <value><![CDATA[
+//lines,row,nameToCol
+var line = lines[row];
+try {
+	line[0].castToExactNumber();
+	line[1].castToExactNumber();
+	if (line[2] == "")
+		return false;
+	line[3].castToExactNumber();
+	line[4].castToExactNumber();
+    java.date.parse("yyyy-MM-dd",line[6]);
+	line[8].castToExactNumber();
+	line[9].castToInexactNumber();
+	return true;
+} catch(e) {
+    java.log.warn("Filtering row "+(row+1)+" because of unsupported format!");
+	return false;
+}
+         ]]></value>
+     </script_code>
+ </object>
+
+
     <object code="most.import_companies.xls.filter-script" objectdef="vscript" module="core" >
     				<package mode="delete"/>
                     <params>
@@ -571,5 +608,178 @@ return 0.0;
      </script_code>
  </object>
 
+
+ 
+ <object code="updateGUIActiveDate" objectdef="vscript" module="core">             
+     <script_code>    
+         <value><![CDATA[
+var rti_root= in[0];
+db.addExecutionAfterCommit(function(rti_root) 
+{
+	while (rti_root.root_parent != null && rti_root.root_parent != null)
+		rti_root=rti_root.root_parent;
+	
+	var cdate = db.most.protocol_date.SELECT("is_active=1");
+	cdate.is_cached=false;
+	if (cdate.size != 1)
+		return;
+	var dd = cdate[0];	
+	
+	var cxd = rti_root.context_data["gui_act_date"];
+	if (cxd == null) 
+	{
+		var wdg = new db.web.script_execution();
+		wdg.script=db.core.embedded_execution.INSTANCES["most:change_date"];
+	
+		wdg.parent = rti_root;
+		wdg.pos_top=7;
+		wdg.pos_right=200;
+		wdg.font=FONTS["default_bold_20"];
+	
+		cxd = new db.event.object_context_data_entry();
+		cxd.object=wdg;
+		cxd.reference_owner=rti_root;
+		cxd.code="gui_act_date";
+		rti_root.context_data<<cxd;
+	}
+	var wdg = cxd.object;
+	wdg.label=FORMAT_DATE(dd.date);
+},rti_root);
+         ]]></value>
+     </script_code>
+ </object>
+
+ <!--  EMBEDDED EXECUTIONS -->
+ <object code="most:change_date" module="core" objectdef="embedded_execution_script">
+     <name>
+         <value>
+             <en-US>Change active date</en-US>
+         </value>
+         <value>
+             <de-DE>Aktives Datum setzen</de-DE>
+         </value>
+         <value>
+             <bg-BG>Промяна активна дата</bg-BG>
+         </value>
+     </name>
+     <is_single_button><value>true</value></is_single_button>
+     <is_direct><value>true</value></is_direct>
+     <is_auto_close_result><value>true</value></is_auto_close_result>
+     <is_gui><value>true</value></is_gui>
+     <icon>
+         <value>
+           <object code="/images/objectdefs/icons/color/128/projects-project.png" module="documents" objectdef="icon"></object>
+         </value>
+     </icon>
+     <param_objectdef>
+        <value>
+          <object code="script_execution_context_set_active_date" cond="module.code='most'" objectdef="objectdef" module="core" mode="update"/>
+        </value>
+     </param_objectdef>                   
+     <execute>
+         <value>
+             <object code="most:embedded_execution.execute" module="core" objectdef="vscript">
+                 <params>
+                     <value>
+                         <object code="objects" module="core" objectdef="script_param"></object>
+                     </value>
+                     <value>
+                         <object code="param" module="core" objectdef="script_param"></object>
+                     </value>
+                     <value>
+                         <object code="rti_root" module="core" objectdef="script_param"></object>
+                     </value>
+                 </params>
+                 <script_code>
+                     <value><![CDATA[
+param.date.is_active=true;        
+SCRIPTS["updateGUIActiveDate"](rti_root);             
+                ]]></value>
+                </script_code>
+            </object>
+        </value>
+    </execute>
+ </object>    
+ 
+ 
+ <object code="importSalesFileDirect" objectdef="vscript" module="core">             
+     <name>
+         <value>
+             <en-US>Import sales</en-US>
+         </value>
+         <value>
+             <de-DE>Verkauf importieren</de-DE>
+         </value>
+         <value>
+             <bg-BG>Импорт продажби</bg-BG>
+         </value>
+     </name>
+     <icon>
+         <value>
+           <object code="/images/objectdefs/icons/color/128/spaces-warehouse.png" module="documents" objectdef="icon"></object>
+         </value>
+     </icon>
+     <params>
+         <value>
+             <object code="objects" module="core" objectdef="script_param"></object>
+         </value>
+         <value>
+             <object code="param" module="core" objectdef="script_param"></object>
+         </value>
+         <value>
+             <object code="rti_root" module="core" objectdef="script_param"></object>
+         </value>
+     </params>
+     <script_code>    
+         <value><![CDATA[
+var file = objects[0];
+
+var hres="";
+
+function info(msg) { hres+=STR2HTML(msg+"\n"); }
+function warn(msg) { hres+="<b>"+STR2HTML(msg+"\n")+"</b>"; }
+function error(msg) { hres+="<b style='color:#FF3030'>"+STR2HTML(msg+"\n")+"</b>"; }
+
+var ext = file.getExtension().toUpperCase();
+if (ext == "XLS" || ext == "XLSX") {
+	var res = core.data_exchange.get_xls_xml(file,db.core.data_import_xls.INSTANCES["most:sales"],info,warn,error);
+	core.script_import.importFile(res,true,info,warn,error,true);
+	web.win.warning(rti_root,hres);
+}
+file.delete();
+         ]]></value>
+     </script_code>
+ </object>
+
+ <object code="calcSaleSerials" objectdef="vscript" module="core">             
+     <script_code>    
+         <value><![CDATA[
+var obj = in[0];
+var arr=[];
+
+if (obj.stock != null && obj.quantity != null && obj.quantity > 0) 
+{
+	var used=0;
+	var params=new M();
+	params["ID"]=obj.id;
+	params["STK"]=obj.stock.id;
+	var sl=db.most.protocol_sale.VSQL_QUERY_SUM("SELECT quantity AS VAL WHERE stock = :STK AND id < :ID",params);
+	if (sl.next() && sl.getInt("RES") != null) used=sl.getInt("RES");
+	for (var i=0;i<obj.quantity;i++) 
+	{
+		var serial = obj.stock.serial_ids[used];
+		if (serial == null)
+			break;
+		used++;
+		arr.push(serial);		
+	}
+}
+return arr.join(",");
+         ]]></value>
+     </script_code>
+ </object>
+ 
+
+  
 </objects>
 </import>

@@ -623,7 +623,7 @@ for (var ven : sel)
 			formatCustomerAddr(c.street_str)+
 			formatCustomerPostalCode(c.postal_code_str)+
 			formatCustomerCity(c.city_str)+
-			formatCustomerCode(c.code == null ? "BGL" : "BGL"+c.code)
+			formatCustomerCode(c.code == null ? "BG" : "BG"+c.code)
 			,172									
 		);
 	}
@@ -638,9 +638,19 @@ for (var ven : sel)
 			formatCustomerId2(p.customer.abbreviation)+
 			formatProductIdNoPrefix(p.stock.article.code)+
 			formatNumber10(p.quantity)+
-			fix("",69)+
-			formatOPG(p.stock.opg != null ? "BGL"+p.stock.opg.code : "BGL")+			// UPFRONT OPG
-			formatOPG(p.opg != null ? p.opg.code : "")			// RABAT OPG
+			fix("",69)+			
+			
+			(p.stock.opg != null && p.opg != null) ?  
+				formatOPG("BGL"+p.stock.opg.code)+			// UPFRONT OPG
+				formatOPG(p.opg.code)						// RABAT OPG
+			: (p.stock.opg != null) ? 
+				formatOPG("BGL"+p.stock.opg.code)+			// UPFRONT OPG
+				formatOPG("")
+			: (p.opg != null) ? 
+				formatOPG(p.opg.code)+						// RABAT OPG
+				formatOPG("")
+			: formatOPG("")+formatOPG("")
+			 
 			,172									
 		);
 	}
@@ -672,4 +682,6 @@ for (var ven : sel)
       <value>Xlss2kpYRZq7y10PfxQcjw</value>
    </uuid>
 </object>
-</objects></import>
+</objects>
+
+</import>

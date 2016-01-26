@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <import revision="$LastChangedRevision: 7778 $" xmlns:xi="http://www.w3.org/2001/XInclude">
     <objects>
         <object code="most_app" module="user_interface" objectdef="application_mask" proj="all">
@@ -22,6 +21,47 @@
                     <en-US>MOST</en-US>
                 </value>
             </name>
+            <create_custom_buttons>
+            	<value>
+					<object code="most:app:create_custom_buttons" objectdef="vscript" module="core" >    
+                        <params>
+                           <value>
+                               <object code="parent" module="core" objectdef="script_param" proj="all"></object>
+                           </value>
+                        </params>
+						<script_code>
+						        <value><![CDATA[
+var rb = new db.web.script_execution();
+rb.parent=parent;
+rb.width=26+4;
+rb.height=26;
+rb.icon_width=22;
+rb.icon_height=22;
+rb.tooltip_show_interval=200;
+rb.script=db.core.embedded_execution.INSTANCES["most:change_date"];
+rb.icon_url=IMG(rb.script,22,22);
+rb.tooltip=OBJSTR(rb.script);
+
+
+var rb = new db.web.script_execution_file();
+rb.parent=parent;
+rb.width=120;
+rb.height=26;
+rb.margin_top=2;
+//rb.icon_width=22;
+//rb.icon_height=22;
+rb.tooltip_show_interval=200;
+rb.script=SCRIPTS["importSalesFileDirect"];
+//rb.icon_url=IMG(rb.script,22,22);
+rb.tooltip=OBJSTR(rb.script);
+//rb.appearance_class="button";
+
+SCRIPTS["updateGUIActiveDate"](parent.root_component);             
+					         ]]></value>
+					     </script_code>
+					 </object>            
+            	</value>
+            </create_custom_buttons>
             <widgets mode="replace">
                 <value>
                     <object code="most_app:contact" module="user_interface" objectdef="application_mask_objectdef_button">

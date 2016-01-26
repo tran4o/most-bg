@@ -46,84 +46,67 @@ var MOSTID = DATA_ORDERED[0];
 var BID = DATA_ORDERED[1];
 var CFGSUBTYPE = DATA_ORDERED[5];
 var SDATE = DATA_ORDERED[6];
-var QTY = DATA_ORDERED[7];
+var QTY = DATA_ORDERED[8];
+var SALEPRICE = DATA_ORDERED[9];
 var rdate = null;
-try {
-    QTY = QTY.castToExactNumber();
-} catch(e) {
-    java.log.error("Can not parse QTY to exact number");
-    throw new Exception("Can not parse QTY to exact number");
-}
-
-try {
-    rdate = java.date.parse("yyyy-MM-dd",SDATE);
-} catch(e) {
-	java.log.error("Can not parse SELL date : "+SDATE);
-	throw new Exception("Can not parse SELL date : "+SDATE);
-}
 if (BID == null || BID == "") {
-	java.log.error("BID is empty!");
-	throw new Exception("BID is empty!");
-}
-var x = db.most.customer.SELECT("abbreviation = :ABID");
-x["ABID"]=BID;
-x.is_cached=false;
-if (x.size > 1) {
-	java.log.error("Many COMPANIES found (>1) with BID="+BID);
-	throw new Exception("Many COMPANIES found (>1) with BID="+BID);
-}
-var customer;
-if (x.is_empty) {
-	java.log.warn("Customer with BID (abbreviation) "+BID+" NOT FOUND. Creating...");
-	customer=new db.most.customer();
-	customer.abbreviation=BID;
+	error("Empty BID provieded");
 } else {
-	customer=x[0];
-}
-//----------------------	
-var artcode;
-if (CFGSUBTYPE.indexOf(" ") < 0) {
-	artcode=CFGSUBTYPE;
-} else {
-	artcode=CFGSUBTYPE.substring(0,CFGSUBTYPE.indexOf(" "));
-}
-var article=db.most.article.INSTANCES[artcode];
-if (article == null) {
-	java.log.warn("Can not find article with CODE="+artcode+" | SKIP!");
-} else if (QTY <= 0) {
-	java.log.warn("Can not import article with CODE="+artcode+" AND QUANTITY : "+QTY);
-} else {
-	var sale=null;
-	//-----------------------------------
-	// rdate > real_date
-	// customer > customer
-
-	var kk = db.most.protocol_sale.SELECT("most_sale_id = :MID");
-	kk["MID"]=MOSTID;
-	kk.is_cached=false;
-	if (kk.size > 1) {
-		java.log.error("Many SALES found (>1) with most_sale_id="+MOSTID);
-		throw new Exception("Many SALES found (>1) with most_sale_id="+MOSTID);
+	var x = db.most.customer.SELECT("abbreviation = :ABID");
+	x["ABID"]=BID;
+	x.is_cached=false;
+	if (x.size > 1) {
+		error("Many COMPANIES found (>1) with BID="+BID);
+	} else {
+		var customer;
+		if (x.is_empty) {
+			warn("Customer with BID (abbreviation) "+BID+" NOT FOUND. Creating...");
+			customer=new db.most.customer();
+			customer.abbreviation=BID;
+		} else {
+			customer=x[0];
+		}
+		//----------------------	
+		var artcode;
+		if (CFGSUBTYPE.indexOf(" ") < 0) {
+			artcode=CFGSUBTYPE;
+		} else {
+			artcode=CFGSUBTYPE.substring(0,CFGSUBTYPE.indexOf(" "));
+		}
+		var article=db.most.article.INSTANCES[artcode];
+		if (article == null) {
+			warn("Can not find article with CODE="+artcode+" | SKIP!");
+		} else if (QTY <= 0) {
+			warn("Can not import article with CODE="+artcode+" AND QUANTITY : "+QTY);
+		} else {
+			var sale=null;
+			//-----------------------------------
+			// rdate > real_date
+			// customer > customer
+			var kk = db.most.protocol_sale.SELECT("most_sale_id = :MID");
+			kk["MID"]=MOSTID;
+			kk.is_cached=false;
+			if (kk.size > 1) {
+				error("Many SALES found (>1) with most_sale_id="+MOSTID);
+			} else {
+				if (kk.size == 1)
+					sale=kk[0];
+				//-----------------------------------
+				if (sale == null) 
+					sale = new db.most.protocol_sale();
+				sale.real_date = db.most.protocol_date.INSTANCES[java.date.format("dd.MM.yyyy",rdate)];
+				sale.quantity=QTY;
+				sale.customer=customer;
+				sale.article=article;
+				sale.most_sale_id=MOSTID;
+				sale.sale_price=SALEPRICE.castToInexactNumber() / 1.95583;
+				sale.commit();
+				//-----------------------------------
+				info((count+1)+" DONE : "+OBJSTR(customer)+" | "+OBJSTR(artcode)+" | "+rdate+" | "+sale.sale_price);
+			} 
+		}
 	}
-	if (kk.size == 1)
-		sale=kk[0];
-	//-----------------------------------
-	if (sale == null) 
-		sale = new db.most.protocol_sale();
-	sale.real_date = db.most.protocol_date.INSTANCES[java.date.format("dd.MM.yyyy",rdate)];
-	sale.quantity=QTY;
-	sale.customer=customer;
-	sale.article=article;
-	sale.most_sale_id=MOSTID;
-	sale.commit();
-	//-----------------------------------
-	if (QTY < 0) {
-		java.log.error("QTY < 0!");
-		throw new Exception("QTY < 0!");
-	}
-	java.log.info("BID DONE : "+OBJSTR(customer)+" | "+OBJSTR(artcode)+" | "+rdate);
 }
-
 %>	]]></value>
    </template>
    <header_row>
@@ -138,6 +121,10 @@ if (article == null) {
    <uuid>
       <value>0M_I2P4aRF-zK4emBtEE6g</value>
    </uuid>
+   <row_filter_script>
+      <value>
+		<object mode="update" code="most.import_sales.xls.filter-script" objectdef="vscript" module="core" /></value>
+   </row_filter_script>
 </object>
 <!--  -->
 <object code="most.odit" objectdef="data_import_xls" module="core" >

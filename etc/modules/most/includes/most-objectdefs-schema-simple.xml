@@ -302,6 +302,25 @@ return "((is_active=1 OR is_show=1) AND \"date\" <= CURRENT_TIMESTAMP)";
                     <bg-BG>ИН продажба</bg-BG>
                 </name>
 			 </most_sale_id>
+			 
+			 <sale_price>
+				<category>main.basic</category>
+                <sort_id>9101</sort_id>
+			 	<data_source>input</data_source>
+			 	<data_type>double</data_type>
+				<min_value_double>0</min_value_double>			 	
+                <is_inmaintbl>true</is_inmaintbl>
+                <is_readonly>false</is_readonly>
+				<name>
+                    <en-US>Sale price</en-US>
+                </name>
+                <name>
+                    <de-DE>Verkaufspreis</de-DE>
+                </name>
+                <name>
+                    <bg-BG>Продажна цена</bg-BG>
+                </name>      
+			 </sale_price>
 
 			 <most_sale_total>
                 <category>main.basic</category>
@@ -2481,6 +2500,67 @@ for (var e : this.entries.OLD) {
           
 		</customer>
 
+		<script_execution_context_generate_sale parent_objectdef="core.script_execution_context">
+			 <official_date mode="delete"/>
+       		 <customer>
+                <category>main.basic</category>
+                <sort_id>200</sort_id>
+                <data_source>relation</data_source>
+                <related_objectdef>most.customer</related_objectdef>
+                <name>
+                    <en-US>Customer</en-US>
+                </name>
+                <name>
+                    <de-DE>Kunde</de-DE>
+                </name>
+                <name>
+                    <bg-BG>Клиент</bg-BG>
+                </name>
+                <is_obligatory>true</is_obligatory>
+             </customer>
+             
+             <quantity>
+				<category>main.basic</category>
+                <sort_id>100</sort_id>
+			 	<data_source>input</data_source>
+			 	<data_type>integer</data_type>
+			 	<is_obligatory>true</is_obligatory>
+				<min_value_integer>1</min_value_integer>			 	
+				<name>
+                    <en-US>Quantity</en-US>
+                </name>
+                <name>
+                    <de-DE>Quantität</de-DE>
+                </name>
+                <name>
+                    <bg-BG>Количесто</bg-BG>
+                </name>      
+			 </quantity>
+
+     		 <date>
+                <category>main.basic</category>
+                <sort_id>150</sort_id>
+                <data_source>relation</data_source>
+                <rel_display_string_order>is_active DESC,"date"</rel_display_string_order>                
+                <related_objectdef>most.protocol_date</related_objectdef>
+                <is_obligatory>true</is_obligatory>
+                <name>
+                    <en-US>Official date</en-US>
+                </name>
+                <name>
+                    <de-DE>Offizieles Datum</de-DE>
+                </name>
+                <name>
+                    <bg-BG>Официална дата</bg-BG>
+                </name>                             
+                <relation_filter>
+                     <object code="most.COMMON.protocol_date_filter:basic" module="core" objectdef="relation_filter"/>
+                </relation_filter>
+        	</date>
+
+		</script_execution_context_generate_sale>
+			
+
 		<script_execution_context_daily_report_param parent_objectdef="core.script_execution_context">	
 
      		 <date>
@@ -2541,6 +2621,28 @@ return null;
              </date>
 						
 		</script_execution_context_daily_report_param>
+
+
+		<script_execution_context_set_active_date parent_objectdef="core.script_execution_context">	
+
+     		 <date>
+     		 	<category>main.basic</category>
+     		 	<data_source>relation</data_source>
+                <rel_display_string_order>"date"</rel_display_string_order>                
+     		 	<related_objectdef>most.protocol_date</related_objectdef>
+     		 	<is_obligatory>true</is_obligatory>
+     		 	<name>
+                     <en-US>Active date</en-US>
+                 </name>
+                 <name>
+                     <de-DE>Aktives Datum</de-DE>
+                 </name>
+                 <name>
+                     <bg-BG>Активна Дата</bg-BG>
+                 </name>
+             </date>
+						
+		</script_execution_context_set_active_date>
 		
 				
 		<state_adjustment_official tbl="stadjofc" copy_from="core.template_basic" is_abstract="true">
@@ -3314,6 +3416,7 @@ for (var e : this.entries.OLD) {
 	            	<de-DE>Produktlinie</de-DE>
 	            	<bg-BG>Продуктова линия</bg-BG>
 	            </name>
+				<display_type>property.relation.single.select.text</display_type>
 			</product_line>
 			        
         	<protocols>	
@@ -3571,18 +3674,18 @@ for (var e : this.entries.OLD) {
                  <data_type>integer</data_type>
                  <is_readonly>true</is_readonly>
                  <name>
-                     <en-US>Delta (MO-HP)</en-US>
+                     <en-US>Delta (HP-MO)</en-US>
                  </name>
                  <name>
-                     <de-DE>Delta (MO-HP)</de-DE>
+                     <de-DE>Delta (HP-MO)</de-DE>
                  </name>
                  <name>
-                     <bg-BG>Делта (MO-HP)</bg-BG>
+                     <bg-BG>Делта (HP-MO)</bg-BG>
                  </name>
                  <is_dynamic>true</is_dynamic>
                  <calculation>
                  	<object code="most.article.delta:calculation_vsql" objectdef="calculation_vsql" module="core" >
-						<select_value_statement><value><![CDATA[ available_real - available_official ]]></value></select_value_statement>
+						<select_value_statement><value><![CDATA[ available_official - available_real  ]]></value></select_value_statement>
 					</object>
 				 </calculation>
              </delta> 
@@ -3737,6 +3840,112 @@ for (var e : this.entries.OLD) {
 					</object>
 				 </calculation>
              </available_real>                   
+
+            <generate_sales>
+                <category>main.basic</category>
+                <sort_id>100002</sort_id>
+                <data_source>relation</data_source>
+                <related_objectdef>core.embedded_execution_script</related_objectdef>
+                <is_constant>true</is_constant>
+                <is_hidden>false</is_hidden>
+                <display_type>property.relation.script_execution</display_type>
+                <name><en-US>Generate sales</en-US></name>
+                <name><de-DE>Verkauf generieren</de-DE></name>
+                <name><bg-BG>Създай продажби</bg-BG></name>
+                <default_value>
+                    <object code="most.article.generate_sales:default_value:embedded_execution_script" objectdef="embedded_execution_script" module="core">
+                       <name>
+                            <value>
+                                <en-US>Generate sales!</en-US>
+                            </value>
+                            <value>
+                                <de-DE>Verkauf generieren!</de-DE>
+                            </value>
+                            <value>
+                                <bg-BG>Създай продажби!</bg-BG>
+                            </value>
+                       </name>
+                       <is_single_button><value>true</value></is_single_button>
+                       <is_skip_confirmation><value>false</value></is_skip_confirmation>
+                       <is_auto_close_result><value>false</value></is_auto_close_result> 
+                       <is_direct><value>true</value></is_direct>
+                       <is_object_obligatory><value>true</value></is_object_obligatory>
+                       <param_window_width><value>400</value></param_window_width>
+                       <param_window_height><value>200</value></param_window_height>
+                       <icon>
+                            <value>
+                              <object code="/images/objectdefs/icons/color/128/graphics-geometry_function-polygons_from_closed_lines.png" module="documents" objectdef="icon"></object>
+                            </value>
+                        </icon>
+                        <param_objectdef>
+                            <value>
+                                <object code="script_execution_context_generate_sale" cond="module.code='most'" objectdef="objectdef" module="core" mode="update"/>
+                            </value>
+                        </param_objectdef>                   
+                        <check_error>
+                            <value>
+                                <object code="most.article.generate_sales:default_value:embedded_execution_script.check_error" module="core" objectdef="vscript">
+                                    <params>
+                                        <value>
+                                            <object code="objects" module="core" objectdef="script_param"></object>
+                                        </value>
+                                    </params>
+                                    <script_code>
+                                        <value><![CDATA[
+if(objects.size == 0) {
+    return MSG("ERROR_NO_SELECTION");
+} if (objects.size != 1) {
+    return MSG("ERROR_SINGLE_SELECTION");
+} else {
+    return null;
+}
+                                   ]]></value>
+                                   </script_code>
+                               </object>
+                           </value>
+                       </check_error>
+                       <execute>
+                            <value>
+                                <object code="most.article.generate_sales:default_value:embedded_execution_script.execute" module="core" objectdef="vscript">
+                                    <execution_timeout><value>7200</value></execution_timeout>
+                                    <params>
+                                        <value>
+                                            <object code="objects" module="core" objectdef="script_param"></object>
+                                        </value>
+                                        <value>
+                                            <object code="param" module="core" objectdef="script_param"></object>
+                                        </value>
+                                    </params>
+                                    <script_code>
+                                        <value><![CDATA[
+var article = objects[0];
+
+var sale = new db.most.protocol_sale();
+sale.article=article;
+sale.customer=param.customer;
+sale.quantity=param.quantity;
+sale.commit();
+sale.real_date=null;
+sale.commit();
+var oo=[sale];
+SCRIPTS["most.protocol_sale.auto_assign_stock:default_value:embedded_execution_script.execute"](oo,param);
+
+db.commit();
+if (sale.official_date == null) {
+	console.log("UNABLE TO DISTRIBUTE QTY "+sale.quantity+"! DELETING SALE!");
+	sale.delete();
+}	
+
+                                        ]]></value>
+                                    </script_code>
+                                </object>
+                            </value>
+                        </execute>
+                        <is_show_multiple_relation><value>true</value></is_show_multiple_relation>
+                        <is_show_single_relation><value>true</value></is_show_single_relation>
+                    </object>
+                </default_value>
+            </generate_sales>	
              
         </article>
         

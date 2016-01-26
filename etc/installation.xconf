@@ -117,4 +117,13 @@
 	    <param name="web.table.persist_result_limit" type="integer">30000</param>
 
     </task>
+
+	<!-- Start legacy console -->
+	<task name="startLegacyConsole">
+		<param name="username">admin</param>
+		<param name="password">visionr</param>
+		<param name="address">0.0.0.0</param>
+		<param name="port" type="integer">9393</param>
+	</task>
+
 </tasks>
