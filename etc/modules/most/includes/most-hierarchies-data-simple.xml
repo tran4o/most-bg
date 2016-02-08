@@ -86,171 +86,6 @@
 
 
 
-        <object code="most.protocol:REAL.year.months.dates" module="core" objectdef="hierarchy_relation_path">
-            <name>
-                <value>
-                    <en-US>By month (real)</en-US>
-                </value>
-                <value>
-                    <de-DE>Nach Monat (real)</de-DE>
-                </value>
-                <value>
-                    <bg-BG>По моесец (реален)</bg-BG>
-                </value>
-            </name>
-
-			<objectdef_set_codes mode="delete"/>
-
-            <selection_group_code>
-                <value>year.month.date</value>
-            </selection_group_code>
-            <path>
-                <value>most.protocol_year.months.dates.real_protocols</value>
-            </path>
-
-            <is_show_element_count>
-                <value>true</value>
-            </is_show_element_count>
-
-            <is_sort>
-                <value>true</value>
-            </is_sort>
-
-            <is_show_leafs>
-                <value>false</value>
-            </is_show_leafs>
-
-            <expand_inital_depth>
-                <value>0</value>
-            </expand_inital_depth>
-        </object>      
-        
-        <object code="most.protocol:REAL.year.quarters.dates" module="core" objectdef="hierarchy_relation_path">
-
-            <name>
-                <value>
-                    <en-US>By quarter (real)</en-US>
-                </value>
-                <value>
-                    <de-DE>Nach Quartal (real)</de-DE>
-                </value>
-                <value>
-                    <bg-BG>По тримесечие (реален)</bg-BG>
-                </value>
-            </name>
-
-			<objectdef_set_codes mode="delete"/>
-
-            <selection_group_code>
-                <value>year.quarter.date</value>
-            </selection_group_code>
-
-            <path>
-                <value>most.protocol_year.quarters.dates.real_protocols</value>
-            </path>
-
-            <is_show_element_count>
-                <value>true</value>
-            </is_show_element_count>
-
-            <is_sort>
-                <value>true</value>
-            </is_sort>
-
-            <is_show_leafs>
-                <value>false</value>
-            </is_show_leafs>
-
-            <expand_inital_depth>
-                <value>0</value>
-            </expand_inital_depth>
-            
-        </object>      
-
-	
-   		<object code="most.protocol:OFFICIAL.year.months.dates" module="core" objectdef="hierarchy_relation_path">
-            <name>
-                <value>
-                    <en-US>By month (official)</en-US>
-                </value>
-                <value>
-                    <de-DE>Nach Monat (offiziel)</de-DE>
-                </value>
-                <value>
-                    <bg-BG>По моесец (официално)</bg-BG>
-                </value>
-            </name>
-
-			<objectdef_set_codes mode="delete"/>
-
-            <selection_group_code>
-                <value>year.month.date</value>
-            </selection_group_code>
-            <path>
-                <value>most.protocol_year.months.dates.official_protocols</value>
-            </path>
-
-            <is_show_element_count>
-                <value>true</value>
-            </is_show_element_count>
-
-            <is_sort>
-                <value>true</value>
-            </is_sort>
-
-            <is_show_leafs>
-                <value>false</value>
-            </is_show_leafs>
-
-            <expand_inital_depth>
-                <value>0</value>
-            </expand_inital_depth>
-        </object>      
-        
-        <object code="most.protocol:OFFICIAL.year.quarters.dates" module="core" objectdef="hierarchy_relation_path">
-
-            <name>
-                <value>
-                    <en-US>By quarter (official)</en-US>
-                </value>
-                <value>
-                    <de-DE>Nach Quartal (offiziel)</de-DE>
-                </value>
-                <value>
-                    <bg-BG>По тримесечие (официален)</bg-BG>
-                </value>
-            </name>
-
-			<objectdef_set_codes mode="delete"/>
-
-            <selection_group_code>
-                <value>year.quarter.date</value>
-            </selection_group_code>
-
-            <path>
-                <value>most.protocol_year.quarters.dates.official_protocols</value>
-            </path>
-
-            <is_show_element_count>
-                <value>true</value>
-            </is_show_element_count>
-
-            <is_sort>
-                <value>true</value>
-            </is_sort>
-
-            <is_show_leafs>
-                <value>false</value>
-            </is_show_leafs>
-
-            <expand_inital_depth>
-                <value>0</value>
-            </expand_inital_depth>
-            
-        </object>      
-
-
-   
         <object code="most.credit_note:year.quarters.credit_notes" module="core" objectdef="hierarchy_relation_path">
 
             <name>
@@ -360,6 +195,364 @@
             </expand_inital_depth>
             
         </object>      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <object code="most.protocol_stock:REAL.year.months.dates" module="core" objectdef="hierarchy_relation_path">
+            <name>
+                <value>
+                    <en-US>By month (real)</en-US>
+                </value>
+                <value>
+                    <de-DE>Nach Monat (real)</de-DE>
+                </value>
+                <value>
+                    <bg-BG>По моесец (реален)</bg-BG>
+                </value>
+            </name>
+
+			<objectdef_set_codes mode="delete"/>
+
+            <selection_group_code>
+                <value>year.month.date</value>
+            </selection_group_code>
+            <path>
+                <value>most.protocol_year.months.dates.stock_real</value>
+            </path>
+
+            <is_show_element_count>
+                <value>true</value>
+            </is_show_element_count>
+
+            <is_sort>
+                <value>true</value>
+            </is_sort>
+
+            <is_show_leafs>
+                <value>false</value>
+            </is_show_leafs>
+
+            <expand_inital_depth>
+                <value>0</value>
+            </expand_inital_depth>
+        </object>      
+        
+        <object code="most.protocol_stock:REAL.year.quarters.dates" module="core" objectdef="hierarchy_relation_path">
+
+            <name>
+                <value>
+                    <en-US>By quarter (real)</en-US>
+                </value>
+                <value>
+                    <de-DE>Nach Quartal (real)</de-DE>
+                </value>
+                <value>
+                    <bg-BG>По тримесечие (реален)</bg-BG>
+                </value>
+            </name>
+
+			<objectdef_set_codes mode="delete"/>
+
+            <selection_group_code>
+                <value>year.quarter.date</value>
+            </selection_group_code>
+
+            <path>
+                <value>most.protocol_year.quarters.dates.stock_real</value>
+            </path>
+
+            <is_show_element_count>
+                <value>true</value>
+            </is_show_element_count>
+
+            <is_sort>
+                <value>true</value>
+            </is_sort>
+
+            <is_show_leafs>
+                <value>false</value>
+            </is_show_leafs>
+
+            <expand_inital_depth>
+                <value>0</value>
+            </expand_inital_depth>
+            
+        </object>      
+
+	
+   		<object code="most.protocol_stock:OFFICIAL.year.months.dates" module="core" objectdef="hierarchy_relation_path">
+            <name>
+                <value>
+                    <en-US>By month (official)</en-US>
+                </value>
+                <value>
+                    <de-DE>Nach Monat (offiziel)</de-DE>
+                </value>
+                <value>
+                    <bg-BG>По моесец (официално)</bg-BG>
+                </value>
+            </name>
+
+			<objectdef_set_codes mode="delete"/>
+
+            <selection_group_code>
+                <value>year.month.date</value>
+            </selection_group_code>
+            <path>
+                <value>most.protocol_year.months.dates.stock_official</value>
+            </path>
+
+            <is_show_element_count>
+                <value>true</value>
+            </is_show_element_count>
+
+            <is_sort>
+                <value>true</value>
+            </is_sort>
+
+            <is_show_leafs>
+                <value>false</value>
+            </is_show_leafs>
+
+            <expand_inital_depth>
+                <value>0</value>
+            </expand_inital_depth>
+        </object>      
+        
+        <object code="most.protocol_stock:OFFICIAL.year.quarters.dates" module="core" objectdef="hierarchy_relation_path">
+
+            <name>
+                <value>
+                    <en-US>By quarter (official)</en-US>
+                </value>
+                <value>
+                    <de-DE>Nach Quartal (offiziel)</de-DE>
+                </value>
+                <value>
+                    <bg-BG>По тримесечие (официален)</bg-BG>
+                </value>
+            </name>
+
+			<objectdef_set_codes mode="delete"/>
+
+            <selection_group_code>
+                <value>year.quarter.date</value>
+            </selection_group_code>
+
+            <path>
+                <value>most.protocol_year.quarters.dates.stock_official</value>
+            </path>
+
+            <is_show_element_count>
+                <value>true</value>
+            </is_show_element_count>
+
+            <is_sort>
+                <value>true</value>
+            </is_sort>
+
+            <is_show_leafs>
+                <value>false</value>
+            </is_show_leafs>
+
+            <expand_inital_depth>
+                <value>0</value>
+            </expand_inital_depth>
+            
+        </object>      
+
+
+
+
+
+
+
+
+
+        <object code="most.protocol_sale:REAL.year.months.dates" module="core" objectdef="hierarchy_relation_path">
+            <name>
+                <value>
+                    <en-US>By month (real)</en-US>
+                </value>
+                <value>
+                    <de-DE>Nach Monat (real)</de-DE>
+                </value>
+                <value>
+                    <bg-BG>По моесец (реален)</bg-BG>
+                </value>
+            </name>
+
+			<objectdef_set_codes mode="delete"/>
+
+            <selection_group_code>
+                <value>year.month.date</value>
+            </selection_group_code>
+            <path>
+                <value>most.protocol_year.months.dates.sales_real</value>
+            </path>
+
+            <is_show_element_count>
+                <value>true</value>
+            </is_show_element_count>
+
+            <is_sort>
+                <value>true</value>
+            </is_sort>
+
+            <is_show_leafs>
+                <value>false</value>
+            </is_show_leafs>
+
+            <expand_inital_depth>
+                <value>0</value>
+            </expand_inital_depth>
+        </object>      
+        
+        <object code="most.protocol_sale:REAL.year.quarters.dates" module="core" objectdef="hierarchy_relation_path">
+
+            <name>
+                <value>
+                    <en-US>By quarter (real)</en-US>
+                </value>
+                <value>
+                    <de-DE>Nach Quartal (real)</de-DE>
+                </value>
+                <value>
+                    <bg-BG>По тримесечие (реален)</bg-BG>
+                </value>
+            </name>
+
+			<objectdef_set_codes mode="delete"/>
+
+            <selection_group_code>
+                <value>year.quarter.date</value>
+            </selection_group_code>
+
+            <path>
+                <value>most.protocol_year.quarters.dates.sales_real</value>
+            </path>
+
+            <is_show_element_count>
+                <value>true</value>
+            </is_show_element_count>
+
+            <is_sort>
+                <value>true</value>
+            </is_sort>
+
+            <is_show_leafs>
+                <value>false</value>
+            </is_show_leafs>
+
+            <expand_inital_depth>
+                <value>0</value>
+            </expand_inital_depth>
+            
+        </object>      
+
+	
+   		<object code="most.protocol_sale:OFFICIAL.year.months.dates" module="core" objectdef="hierarchy_relation_path">
+            <name>
+                <value>
+                    <en-US>By month (official)</en-US>
+                </value>
+                <value>
+                    <de-DE>Nach Monat (offiziel)</de-DE>
+                </value>
+                <value>
+                    <bg-BG>По моесец (официално)</bg-BG>
+                </value>
+            </name>
+
+			<objectdef_set_codes mode="delete"/>
+
+            <selection_group_code>
+                <value>year.month.date</value>
+            </selection_group_code>
+            <path>
+                <value>most.protocol_year.months.dates.sales_official</value>
+            </path>
+
+            <is_show_element_count>
+                <value>true</value>
+            </is_show_element_count>
+
+            <is_sort>
+                <value>true</value>
+            </is_sort>
+
+            <is_show_leafs>
+                <value>false</value>
+            </is_show_leafs>
+
+            <expand_inital_depth>
+                <value>0</value>
+            </expand_inital_depth>
+        </object>      
+        
+        <object code="most.protocol_sale:OFFICIAL.year.quarters.dates" module="core" objectdef="hierarchy_relation_path">
+
+            <name>
+                <value>
+                    <en-US>By quarter (official)</en-US>
+                </value>
+                <value>
+                    <de-DE>Nach Quartal (offiziel)</de-DE>
+                </value>
+                <value>
+                    <bg-BG>По тримесечие (официален)</bg-BG>
+                </value>
+            </name>
+
+			<objectdef_set_codes mode="delete"/>
+
+            <selection_group_code>
+                <value>year.quarter.date</value>
+            </selection_group_code>
+
+            <path>
+                <value>most.protocol_year.quarters.dates.sales_official</value>
+            </path>
+
+            <is_show_element_count>
+                <value>true</value>
+            </is_show_element_count>
+
+            <is_sort>
+                <value>true</value>
+            </is_sort>
+
+            <is_show_leafs>
+                <value>false</value>
+            </is_show_leafs>
+
+            <expand_inital_depth>
+                <value>0</value>
+            </expand_inital_depth>
+            
+        </object>      
+
+   
+
 
     </objects>
 </import>
