@@ -63,7 +63,7 @@
     </object>  
       
     <object code="most.protocol" module="core" objectdef="display_type_objectdef">
-        <hierarchies  mode="delete"7>               
+        <hierarchies  mode="delete"/>               
     </hierarchies>
       
     <object code="most.protocol_stock" module="core" objectdef="display_type_objectdef">
