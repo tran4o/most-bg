@@ -64,7 +64,7 @@
       
     <object code="most.protocol" module="core" objectdef="display_type_objectdef">
         <hierarchies  mode="delete"/>               
-    </hierarchies>
+    </object>
       
     <object code="most.protocol_stock" module="core" objectdef="display_type_objectdef">
         <hierarchies  mode="replace">               
