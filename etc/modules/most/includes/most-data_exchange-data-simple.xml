@@ -37,9 +37,6 @@
       <value>
          <bg-BG>MOST продажби</bg-BG></value>
    </name>
-   <data_file>
-      <value><object mode="update" code="sales05.11.xlsx" objectdef="file" module="documents" cond="&quot;parent&quot;.&quot;code&quot; = 'sales' AND &quot;parent&quot;.&quot;parent&quot;.&quot;code&quot; = 'most' AND &quot;parent&quot;.&quot;parent&quot;.&quot;parent&quot;.&quot;code&quot; = '/' AND &quot;parent&quot;.&quot;parent&quot;.&quot;parent&quot;.&quot;parent&quot; IS NULL"/></value>
-   </data_file>
    <template>
       <value><![CDATA[<%
 var MOSTID = DATA_ORDERED[0];
