@@ -286,6 +286,8 @@ return "((is_active=1 OR is_show=1) AND \"date\" <= CURRENT_TIMESTAMP)";
 		<protocol_sale parent_objectdef="most.protocol">
 			 
 			 <version mode="delete"/>
+			 <sale_total mode="delete"/>
+			 <most_sale_price mode="delete"/>
 
 			 <real_date is_keep_settings="true">
 			 	<is_obligatory>false</is_obligatory>
@@ -302,35 +304,56 @@ return "((is_active=1 OR is_show=1) AND \"date\" <= CURRENT_TIMESTAMP)";
                     <bg-BG>ИН продажба</bg-BG>
                 </name>
 			 </most_sale_id>
-			 
-			 <sale_price>
-				<category>main.basic</category>
+
+			 <most_order_id>
+                <category>main.basic</category>
                 <sort_id>9101</sort_id>
+                <data_source>input</data_source>
+                <data_type>varchar</data_type>
+                <name>
+                    <en-US>Most order id</en-US>
+                    <de-DE>Most BestellungsID</de-DE>
+                    <bg-BG>ИН продажа МОСТ</bg-BG>
+                </name>
+			 </most_order_id>
+			 
+			 <most_sale_total>
+				<category>main.basic</category>
+                <sort_id>9102</sort_id>
 			 	<data_source>input</data_source>
 			 	<data_type>double</data_type>
 				<min_value_double>0</min_value_double>			 	
                 <is_inmaintbl>true</is_inmaintbl>
                 <is_readonly>false</is_readonly>
 				<name>
-                    <en-US>Sale price</en-US>
+                    <en-US>MOST sale price</en-US>
                 </name>
                 <name>
-                    <de-DE>Verkaufspreis</de-DE>
+                    <de-DE>Verkaufspreis MOST</de-DE>
                 </name>
                 <name>
-                    <bg-BG>Продажна цена</bg-BG>
+                    <bg-BG>Продажна цена МОСТ</bg-BG>
                 </name>      
-			 </sale_price>
-
-			 <most_sale_total>
-                <category>main.basic</category>
-                <sort_id>9100</sort_id>
-                <data_source>input</data_source>
-                <data_type>double</data_type>
-                <name>
-                    <en-US>Most sale total</en-US>
-                </name>
 			 </most_sale_total>
+			 
+			 <m0_price>
+				<category>main.basic</category>
+                <sort_id>9103</sort_id>
+			 	<data_source>input</data_source>
+			 	<data_type>double</data_type>
+				<min_value_double>0</min_value_double>			 	
+                <is_inmaintbl>true</is_inmaintbl>
+                <is_readonly>false</is_readonly>
+				<name>
+                    <en-US>MOST sale price</en-US>
+                </name>
+                <name>
+                    <de-DE>Verkaufspreis MOST</de-DE>
+                </name>
+                <name>
+                    <bg-BG>Продажна цена МОСТ</bg-BG>
+                </name>      
+			 </m0_price>
 			 
 			 <odit_entry>
                 <category>main.basic</category>
