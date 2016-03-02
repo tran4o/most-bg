@@ -17,6 +17,7 @@
                     </params>            
                     <script_code>    
                         <value><![CDATA[
+
 //0 : most_sale_id
 //1 : BID (CUSTOMER abbreviation)
 //2 : CUSTOMER NAME
@@ -29,10 +30,11 @@
 //9 : SALEPRICE = Price_EUR (most_sale_total in schema - tam e BGN)
 //10 : BULSTAT 
 //11 : m0_price
-
 //lines,row,nameToCol
+
 var line = lines[row];
-try {
+try 
+{
 	line[0].castToExactNumber();
 	line[1].castToExactNumber();
 	if (line[2] == "")
@@ -48,8 +50,7 @@ try {
     java.log.warn("PROCESSING : "+line);
     java.log.warn("Filtering row "+(row+1)+" because of unsupported format!");
 	return false;
-}
-         ]]></value>
+}		]]></value>
      </script_code>
  </object>
 

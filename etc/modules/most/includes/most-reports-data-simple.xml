@@ -138,7 +138,7 @@ function getReal(a) {
 	if (sl.next() && sl.getInt("RES") != null) stocked=sl.getInt("RES");
 		
 	//SOLD
-	var sl = db.most.protocol_sale.VSQL_QUERY_SUM("SELECT quantity AS VAL WHERE article = :AID AND real_date = :DID AND stock IS NOT NULL",params);
+	var sl = db.most.protocol_sale.VSQL_QUERY_SUM("SELECT quantity AS VAL WHERE article = :AID AND real_date = :DID",params);			/* AND stock IS NOT NULL */
 	if (sl.next() && sl.getInt("RES") != null) sold=sl.getInt("RES");
 	sl = db.most.state_adjustment_real.VSQL_QUERY_SUM("SELECT real_value AS VAL WHERE article = :AID AND \"date\" = :DTE",params);
 	if (sl.next() && sl.getInt("RES") != null) sold+=sl.getInt("RES");
@@ -148,12 +148,11 @@ function getReal(a) {
 	if (sl.next() && sl.getInt("RES") != null) tstocked=sl.getInt("RES");
 
 	//TOTAL SOLD 
-	var sl = db.most.protocol_sale.VSQL_QUERY_SUM("SELECT quantity AS VAL WHERE article = :AID AND real_date.\"date\" <= :DTE AND stock IS NOT NULL",params);
+	var sl = db.most.protocol_sale.VSQL_QUERY_SUM("SELECT quantity AS VAL WHERE article = :AID AND real_date.\"date\" <= :DTE ",params); /* AND stock IS NOT NULL */
 	if (sl.next() && sl.getInt("RES") != null) tsold=sl.getInt("RES");
 	
 	sl = db.most.state_adjustment_real.VSQL_QUERY_SUM("SELECT real_value AS VAL WHERE article = :AID AND \"date\" <= :DTE",params);
 	if (sl.next() && sl.getInt("RES") != null) tsold+=sl.getInt("RES");
-	
 	var m=new Object();
 	m.stocked=stocked;
 	m.sold=sold;
@@ -168,7 +167,6 @@ var rdata = new M();
 var sel1;
 var sel2;
 var tt = selector;
-java.log.error("SELECTOR : "+selector);
 if (tt != null) 
 {
 	tt = selector.get_as_map();
@@ -582,7 +580,7 @@ for (var ven : sel)
 		if (sl.next() && sl.getInt("RES") != null) stocked=sl.getInt("RES");
 		
 		//SOLD
-		var sl = db.most.protocol_sale.VSQL_QUERY_SUM("SELECT quantity AS VAL WHERE article = :AID AND real_date = :DID AND stock IS NOT NULL",params);
+		var sl = db.most.protocol_sale.VSQL_QUERY_SUM("SELECT quantity AS VAL WHERE article = :AID AND official_date = :DID AND stock IS NOT NULL",params);
 		if (sl.next() && sl.getInt("RES") != null) sold=sl.getInt("RES");
 		sl = db.most.state_adjustment_official.VSQL_QUERY_SUM("SELECT official_value AS VAL WHERE article = :AID AND \"date\" = :DTE",params);
 		if (sl.next() && sl.getInt("RES") != null) sold+=sl.getInt("RES");
@@ -634,29 +632,33 @@ for (var ven : sel)
 	sel1.is_cached=false;
 	for (var p : sel1) 
 	{
+		var ostr;
+
+		if (p.stock.opg != null && p.opg != null)
+			ostr=formatOPG("BGL"+p.stock.opg.code)+			// UPFRONT OPG
+				 formatOPG(p.opg.code);						// RABAT OPG
+				 
+		else if (p.stock.opg != null)
+			ostr = formatOPG("BGL"+p.stock.opg.code)+			// UPFRONT OPG
+				   formatOPG("");
+				   
+		else if (p.opg != null)
+			ostr = formatOPG(p.opg.code)+						// RABAT OPG
+				   formatOPG("");
+		else
+			ostr = formatOPG("")+formatOPG("");
+
 		myWrite(
 			formatCustomerId2(p.customer.abbreviation)+
 			formatProductIdNoPrefix(p.stock.article.code)+
 			formatNumber10(p.quantity)+
 			fix("",69)+			
-			
-			(p.stock.opg != null && p.opg != null) ?  
-				formatOPG("BGL"+p.stock.opg.code)+			// UPFRONT OPG
-				formatOPG(p.opg.code)						// RABAT OPG
-			: (p.stock.opg != null) ? 
-				formatOPG("BGL"+p.stock.opg.code)+			// UPFRONT OPG
-				formatOPG("")
-			: (p.opg != null) ? 
-				formatOPG(p.opg.code)+						// RABAT OPG
-				formatOPG("")
-			: formatOPG("")+formatOPG("")
-			 
+			ostr			 
 			,172									
 		);
 	}
 	file.write("TRL"+fixR(tlines+1,10)+"\r\n");
 	file.close();
-	
 %>
 <div style="padding:1em">
 <span style="background:url('<%= java.util.getLocalImageURLContent("/icons/22/internet-download-manager.png") %>') no-repeat left center;padding-left:26px;">

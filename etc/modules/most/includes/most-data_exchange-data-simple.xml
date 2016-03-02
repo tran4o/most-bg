@@ -62,7 +62,9 @@ var QTY = DATA_ORDERED[8];
 var MOST_SALE_TOTAL = DATA_ORDERED[9];		// SALE_PRICE = Price_EUR
 var M0_PRICE = DATA_ORDERED[11];
 
-var rdate = null;
+var SDATE = java.date.parse("yyyy-MM-dd",SDATE);
+var rdate = db.most.protocol_date.INSTANCES[java.date.format("dd.MM.yyyy",SDATE)];
+
 if (BID == null || BID == "") {
 	error("Empty BID provieded");
 } else {
@@ -89,8 +91,12 @@ if (BID == null || BID == "") {
 		}
 		var article=db.most.article.INSTANCES[artcode];
 		if (article == null) {
-			warn("Can not find article with CODE="+artcode+" | SKIP!");
-		} else if (QTY <= 0) {
+			info("Can not find article with CODE="+artcode+" | Creating...");
+			article = new db.most.article();
+			article.code=artcode;
+			article.commit();
+		}
+		if (QTY == 0) {
 			error("Can not import article with CODE="+artcode+" AND QUANTITY : "+QTY);
 		} else {
 			var sale=null;
@@ -108,7 +114,6 @@ if (BID == null || BID == "") {
 				//-----------------------------------
 				if (sale == null) 
 					sale = new db.most.protocol_sale();
-				sale.real_date = db.most.protocol_date.INSTANCES[java.date.format("dd.MM.yyyy",rdate)];
 				sale.quantity=QTY;
 				sale.customer=customer;
 				sale.article=article;
@@ -117,8 +122,10 @@ if (BID == null || BID == "") {
 				sale.m0_price=M0_PRICE.castToInexactNumber() / 1.95583;	
 				sale.most_order_id=MOST_ORDER_ID;		
 				sale.commit();
+				sale.real_date = rdate;
+				sale.commit();
 				//-----------------------------------
-				info((count+1)+" DONE : "+OBJSTR(customer)+" | "+OBJSTR(artcode)+" | "+rdate+" | "+sale.sale_price);
+				info((count+1)+" DONE : "+OBJSTR(customer)+" | "+OBJSTR(artcode)+" | "+rdate+" | "+sale.most_sale_total);
 			} 
 		}
 	}

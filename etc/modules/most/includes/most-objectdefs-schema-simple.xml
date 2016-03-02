@@ -3033,7 +3033,7 @@ if (this.odit != null && this.odit.is_active && this.article != null)
 	//  - X = on_stock_reported - tstocked_reported + tsold_reported;
 	//  X = tstocked_reported - on_stock_reported -  tsold_reported;
 	
-	var diff_real  = tstocked - this.on_stock_reported - tsold;
+	var diff_real  = tstocked - this.on_stock - tsold;
 	if (diff_real != 0) {
 		var o = new db.most.state_adjustment_real();
 		o.odit_entry=this;
@@ -3440,6 +3440,20 @@ for (var e : this.entries.OLD) {
 	            	<bg-BG>Продуктова линия</bg-BG>
 	            </name>
 				<display_type>property.relation.single.select.text</display_type>
+                <default_value_calculation>
+                    <object code="most.article.product_line:default_value_calculation" module="core" objectdef="vscript">
+                        <params>
+                            <value>
+                                <object code="id" module="core" objectdef="script_param" proj="all"></object>
+                            </value>
+                        </params>
+                        <script_code>
+                            <value><![CDATA[
+return db.most.product_line.INSTANCES["OTHERS"];
+                            ]]></value>
+                        </script_code>
+                    </object>
+                </default_value_calculation>
 			</product_line>
 			        
         	<protocols>	
