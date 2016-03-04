@@ -22,6 +22,7 @@ function autoAssignStock(sale,dateObj) {
 }
 
 function main() {
+    // get sales from the array
     for (var sl: sales) {
         var sl_customer_code = sl[0];
         var sl_article_code = sl[1];
@@ -29,12 +30,12 @@ function main() {
         var sl_date = sl[3];
         var sl_opg = sl[4];
 
-        // resolve ac
-
+        // resolve customer by the abbreviation        
         var cust = db.most.customer.SELECT("abbreviation = :ABID");
         cust["ABID"] = new String(sl_customer_code);
         cust.is_cached = false;
 
+        // sanity check fro customer
         if ( cust.size > 1 ) {
             console.error("bad bid. more than 1 found..." + sl_customer_code);
             continue;
@@ -47,7 +48,6 @@ function main() {
         cust = cust[0];
 
         // resolve article
-
         var artcl = db.most.article.SELECT("code = :CODE");
         artcl["CODE"] = sl_article_code;
         artcl.is_cached = false;
@@ -84,33 +84,56 @@ function main() {
             opg = opg[0];
         }
 
-        // resolve date
+        // resolve date object
         var pdate = db.most.protocol_date.INSTANCES[sl_date];
-        var prscode = "RSALE-" + sl_customer_code + "-" + sl_article_code + "-" + pdate;
 
         if (pdate == null) {
             console.log("date " + sl_date + " not found ");
             continue;
         }
 
-        // find if this exists already
-        // var prs = db.most.protocol_date.SELECT("code = :CODE");
-        // prs["CODE"] = prscode;
-        var prs = db.most.protocol_date.INSTANCES[prscode];
+        /* there are are now two general cases
 
-        if ( prs ) {
-            console.log("the purchase " + prscode + " is not present. creating");
-            var sale = new db.most.protocol_sale();
-            sale.code = prscode;
-            sale.real_date = pdate;
-            sale.article = artcl;
-            sale.quantity = sl_qty;
-            sale.customer = cust;
-            sale.commit();
+            a) the sale in the report was a real one. then we have to identify
+            it among the already present sales that dont have an official date
 
-            console.log("auto assign stock item.");
+            please note that there's a good chance this script is run twice 
 
-            autoAssignStock(sale, pdate);
+            b) the sale was a bogus sale, that we have to add, but first make
+            sure it was not added before
+
+            NB: fuck imports of already reported shit
+
+        */
+
+        var prs = db.most.protocol_sale.SELECT("qty = :qty and customer =: cust and real_date.date < =: date");
+        prs["qty"] = quantity;
+        prs["customer"] = cust;
+        prs["real_date"] = pdate.date;
+
+        if (prs.size == 1) {
+
+        } else {
+            // create new object with specific code
+            var prs = db.most.protocol_sale.INSTANCES[prscode];
+            var prscode = "RSALE-" + sl_customer_code + "-" + sl_article_code + "-" + pdate;
+
+            if ( !prs ) {
+                console.log("the sale " + prscode + " is not present. should create....");
+                continue;
+
+                var sale = new db.most.protocol_sale();
+                sale.name = prscode;
+                sale.real_date = pdate;
+                sale.article = artcl;
+                sale.quantity = sl_qty;
+                sale.customer = cust;
+                sale.commit();
+
+                console.log("auto assign stock item.");
+
+                autoAssignStock(sale, pdate);
+            }
         }
     }
 }
