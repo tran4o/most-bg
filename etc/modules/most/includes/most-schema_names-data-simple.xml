@@ -355,12 +355,7 @@ return t.join(" | ");
             <value><de-DE>Protokoll</de-DE></value>
             <value><bg-BG>Протокол</bg-BG></value>
         </name>     
-       <display_type>
-           <value>
-               <object code="most.protocol" objectdef="display_type_objectdef" module="core"/>
-           </value>
-       </display_type>
-       
+       <display_type mode="delete"/>
        <rel_display_string>
             <value>
                 <object code="core.objectdef.rel_display_string:most.protocol" objectdef="vscript" module="core" >
@@ -403,6 +398,11 @@ return t.toString();
              <object code="/images/objectdefs/icons/color/128/invoices-payment_invoice_incoming.png" module="documents" objectdef="icon"></object>
            </value>
        </icon>
+       <display_type>
+           <value>
+               <object code="most.protocol_sale" objectdef="display_type_objectdef" module="core"/>
+           </value>
+       </display_type>
     </object>
     
      <object cond="module.code='most' AND code='protocol_stock'"
@@ -419,7 +419,11 @@ return t.toString();
              <object code="/images/objectdefs/icons/color/128/invoices-payment_invoice_outgoing.png" module="documents" objectdef="icon"></object>
            </value>
        </icon>
-
+       <display_type>
+           <value>
+               <object code="most.protocol_stock" objectdef="display_type_objectdef" module="core"/>
+           </value>
+       </display_type>
     </object>
 
 <!-- HISTORY -->

@@ -37,17 +37,31 @@
       <value>
          <bg-BG>MOST продажби</bg-BG></value>
    </name>
-   <data_file>
-      <value><object mode="update" code="sales05.11.xlsx" objectdef="file" module="documents" cond="&quot;parent&quot;.&quot;code&quot; = 'sales' AND &quot;parent&quot;.&quot;parent&quot;.&quot;code&quot; = 'most' AND &quot;parent&quot;.&quot;parent&quot;.&quot;parent&quot;.&quot;code&quot; = '/' AND &quot;parent&quot;.&quot;parent&quot;.&quot;parent&quot;.&quot;parent&quot; IS NULL"/></value>
-   </data_file>
    <template>
       <value><![CDATA[<%
-var MOSTID = DATA_ORDERED[0];
+      
+//0 : most_sale_id
+//1 : BID (CUSTOMER abbreviation)
+//2 : CUSTOMER NAME
+//3 : CSTID (NOT USED)
+//4 : TID (NOT USED)
+//5 : CFGSUBTYPE -> HARDCORE PARSE FUCK FOR PRODUCT ID
+//6 : SDATE (yyyy-MM-dd)
+//7 : most_order_id
+//8 : QTY
+//9 : SALEPRICE = Price_EUR (most_sale_price in schema - tam e BGN)
+//10 : BULSTAT 
+//11 : m0_price
+      
+var MOST_SALE_ID = DATA_ORDERED[0];
 var BID = DATA_ORDERED[1];
 var CFGSUBTYPE = DATA_ORDERED[5];
 var SDATE = DATA_ORDERED[6];
+var MOST_ORDER_ID = DATA_ORDERED[7];
 var QTY = DATA_ORDERED[8];
-var SALEPRICE = DATA_ORDERED[9];
+var MOST_SALE_TOTAL = DATA_ORDERED[9];		// SALE_PRICE = Price_EUR
+var M0_PRICE = DATA_ORDERED[11];
+
 var rdate = null;
 if (BID == null || BID == "") {
 	error("Empty BID provieded");
@@ -77,17 +91,17 @@ if (BID == null || BID == "") {
 		if (article == null) {
 			warn("Can not find article with CODE="+artcode+" | SKIP!");
 		} else if (QTY <= 0) {
-			warn("Can not import article with CODE="+artcode+" AND QUANTITY : "+QTY);
+			error("Can not import article with CODE="+artcode+" AND QUANTITY : "+QTY);
 		} else {
 			var sale=null;
 			//-----------------------------------
 			// rdate > real_date
 			// customer > customer
 			var kk = db.most.protocol_sale.SELECT("most_sale_id = :MID");
-			kk["MID"]=MOSTID;
+			kk["MID"]=MOST_SALE_ID;
 			kk.is_cached=false;
 			if (kk.size > 1) {
-				error("Many SALES found (>1) with most_sale_id="+MOSTID);
+				error("Many SALES found (>1) with most_sale_id="+MOST_SALE_ID);
 			} else {
 				if (kk.size == 1)
 					sale=kk[0];
@@ -98,8 +112,10 @@ if (BID == null || BID == "") {
 				sale.quantity=QTY;
 				sale.customer=customer;
 				sale.article=article;
-				sale.most_sale_id=MOSTID;
-				sale.sale_price=SALEPRICE.castToInexactNumber() / 1.95583;
+				sale.most_sale_id=MOST_SALE_ID;
+				sale.most_sale_total=MOST_SALE_TOTAL.castToInexactNumber() / 1.95583;
+				sale.m0_price=M0_PRICE.castToInexactNumber() / 1.95583;	
+				sale.most_order_id=MOST_ORDER_ID;		
 				sale.commit();
 				//-----------------------------------
 				info((count+1)+" DONE : "+OBJSTR(customer)+" | "+OBJSTR(artcode)+" | "+rdate+" | "+sale.sale_price);

@@ -62,34 +62,73 @@
         <hierarchies mode="delete"/>
     </object>  
       
-      
     <object code="most.protocol" module="core" objectdef="display_type_objectdef">
+        <hierarchies  mode="delete"/>               
+    </object>
+      
+    <object code="most.protocol_stock" module="core" objectdef="display_type_objectdef">
         <hierarchies  mode="replace">               
  			<value>
                 <object mode="lookup" module="core" objectdef="hierarchy_relation_path">
                     <code>
-                        <value>most.protocol:REAL.year.months.dates</value>
+                        <value>most.protocol_stock:REAL.year.months.dates</value>
                     </code>
                 </object>
             </value>  
 			<value>
                 <object mode="lookup" module="core" objectdef="hierarchy_relation_path">
                     <code>
-                        <value>most.protocol:REAL.year.quarters.dates</value>
+                        <value>most.protocol_stock:REAL.year.quarters.dates</value>
                     </code>
                 </object>
             </value> 			
  			<value>
                 <object mode="lookup" module="core" objectdef="hierarchy_relation_path">
                     <code>
-                        <value>most.protocol:OFFICIAL.year.months.dates</value>
+                        <value>most.protocol_stock:OFFICIAL.year.months.dates</value>
                     </code>
                 </object>
             </value>  
 			<value>
                 <object mode="lookup" module="core" objectdef="hierarchy_relation_path">
                     <code>
-                        <value>most.protocol:OFFICIAL.year.quarters.dates</value>
+                        <value>most.protocol_stock:OFFICIAL.year.quarters.dates</value>
+                    </code>
+                </object>
+            </value> 			
+        </hierarchies>
+        <is_object_select_from_hierarchy>
+            <value>true</value>
+        </is_object_select_from_hierarchy>     
+    </object>  
+
+    <object code="most.protocol_sale" module="core" objectdef="display_type_objectdef">
+        <hierarchies  mode="replace">               
+ 			<value>
+                <object mode="lookup" module="core" objectdef="hierarchy_relation_path">
+                    <code>
+                        <value>most.protocol_sale:REAL.year.months.dates</value>
+                    </code>
+                </object>
+            </value>  
+			<value>
+                <object mode="lookup" module="core" objectdef="hierarchy_relation_path">
+                    <code>
+                        <value>most.protocol_sale:REAL.year.quarters.dates</value>
+                    </code>
+                </object>
+            </value> 			
+ 			<value>
+                <object mode="lookup" module="core" objectdef="hierarchy_relation_path">
+                    <code>
+                        <value>most.protocol_sale:OFFICIAL.year.months.dates</value>
+                    </code>
+                </object>
+            </value>  
+			<value>
+                <object mode="lookup" module="core" objectdef="hierarchy_relation_path">
+                    <code>
+                        <value>most.protocol_sale:OFFICIAL.year.quarters.dates</value>
                     </code>
                 </object>
             </value> 			

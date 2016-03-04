@@ -17,6 +17,19 @@
                     </params>            
                     <script_code>    
                         <value><![CDATA[
+//0 : most_sale_id
+//1 : BID (CUSTOMER abbreviation)
+//2 : CUSTOMER NAME
+//3 : CSTID (NOT USED)
+//4 : TID (NOT USED)
+//5 : CFGSUBTYPE -> HARDCORE PARSE FUCK FOR PRODUCT ID
+//6 : SDATE (yyyy-MM-dd)
+//7 : most_order_id
+//8 : QTY
+//9 : SALEPRICE = Price_EUR (most_sale_total in schema - tam e BGN)
+//10 : BULSTAT 
+//11 : m0_price
+
 //lines,row,nameToCol
 var line = lines[row];
 try {
@@ -24,13 +37,15 @@ try {
 	line[1].castToExactNumber();
 	if (line[2] == "")
 		return false;
-	line[3].castToExactNumber();
-	line[4].castToExactNumber();
+	line[3].castToExactNumber();		// CSTID
+	line[4].castToExactNumber();		// TID -> BOTH NOT USED BUT INTEGET
     java.date.parse("yyyy-MM-dd",line[6]);
 	line[8].castToExactNumber();
 	line[9].castToInexactNumber();
+	line[11].castToInexactNumber();
 	return true;
 } catch(e) {
+    java.log.warn("PROCESSING : "+line);
     java.log.warn("Filtering row "+(row+1)+" because of unsupported format!");
 	return false;
 }

@@ -12,14 +12,14 @@
 <tasks>    
     <task name="setCoreProperties">
       
-      <param name="engine" value="5"/>
+ 	    <param name="engine" value="5"/>
       
         <param name="tomcat.port.http" type="integer">8585</param>    
         <param name="tomcat.port.https" type="integer">8448</param>    
         <param name="tomcat.port.shutdown" type="integer">8010</param>
         
-          <param name="tomcat.max.threads" type="integer">100</param>    
-          <param name="tomcat.min.threads" type="integer">10</param>
+        <param name="tomcat.max.threads" type="integer">100</param>    
+        <param name="tomcat.min.threads" type="integer">10</param>
     
         <param name="db.postgresql.backup_command">C:\Plan-Vision\PostgreSQL\9.4\bin\pg_dump.exe</param>
         
@@ -44,7 +44,7 @@
                 <value name="is_readonly" type="integer">0</value>          
                 <value name="db_link" type="string"></value>            
                 <value name="db_engine" type="string">postgresql_9.4</value>            
-                <value name="uri" type="string">jdbc:postgresql://localhost/VISIONRG_5_MOST</value>            
+                <value name="uri" type="string">jdbc:postgresql://localhost/VISIONRG_5_VKB</value>            
                 <value name="minimum_idle_connections" type="integer">5</value>         
                 <value name="maximum_idle_connections" type="integer">10</value>            
                 <value name="maximum_active_connections" type="integer">15</value>      
@@ -62,7 +62,7 @@
         <param name="jdbc.pool.swap.maximum_active_connections" type="integer">6</param>
         <param name="jdbc.pool.swap.maximum_idle_statements" type="integer">1000</param>                
              
-        <param name="jdbc.pool.uri.postgresql_9.4">jdbc:postgresql://localhost/VISIONR_5_MOST</param>
+        <param name="jdbc.pool.uri.postgresql_9.4">jdbc:postgresql://localhost/VISIONR_5_VKB</param>
         
         <param name="logging.configuration.file">etc/core/conf/logging/full-daily-roller.xconf</param>
         <param name="logging.logger.root.level">INFO</param>
@@ -125,5 +125,7 @@
 		<param name="address">0.0.0.0</param>
 		<param name="port" type="integer">9393</param>
 	</task>
+	
+	<param name="graphics.mapengine.concurrency" type="integer">4</param>
 
 </tasks>
