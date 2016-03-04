@@ -38,6 +38,138 @@
          <bg-BG>MOST продажби</bg-BG></value>
    </name>
    <template>
+       <value><![CDATA[<%
+
+	<%
+	      
+	//0 : may be a part of the OPG Desc or "Product Number: line"
+	//    https://regex101.com/r/dT6cA1/1
+
+	var opg = session.attributes["last_opg_import"];
+
+	var row = DATA_ORDERED;
+	var what = row[0];
+
+	function CREATE_OPG(d) {
+		if (db.most.opg.INSTANCES[d]) {
+			info("this opg already exists. overwriting: " + d);
+			opg = db.most.opg.INSTANCES[d];
+		} else {
+			info("creating new opg: " + d);
+			opg = new db.most.opg();
+			opg.code = d;			
+			opg.discount_mode = "R";
+		}
+
+		opg.import_time = java.date.today();
+		session.attributes["last_opg_import"] = opg;
+		return d;
+	}
+
+	function PARSE_OPGDATE(d[]) {
+		if (d.indexOf("/")) {
+		 	var s = d.split("/");
+		 	return java.date.parse("yyyy-MM-dd", (s[2] + 2000) + "-" + s[1] + "-" + s[0]);
+		} else {
+			return java.date.parse("yyyy-MM-dd", d);
+		}
+	}
+
+	function PARSE_OPGDETAIL() {
+		var pl = db.most.product_line.INSTANCES[row[4]];
+		var article = db.most.article.INSTANCES[row[1]];
+
+		if (article == undefined) {
+			error("missing article. creating with PL only.");
+			article = new db.most.article();
+			article.code = row[1];
+			article.pl = pl;
+			article.description = row[3];
+		}
+
+		var exist = SDATA(opg, "entries", "entries.article.id='" + article.id + "'");
+		var cdet;
+
+		if (exist != null) {
+			cdet = exist;
+			info("found existing  entry for: " + article.code);
+	 	} else {
+		 	db.most.opg_entry();
+			info("create opg <entr></entr>y for: " + article.code);
+	 	}
+		
+		cdet.article = article;
+		cdet.max_quantity = row[6];
+		cdet.value = PARSE_DOUBLE(row[9]);
+		cdet.commit();
+
+
+		opg.entries << cdet;
+		opg.commit();
+	}
+
+	var action = new M();
+
+	action["Deal Number"] = ["code", 2, CREATE_OPG];
+	action["Deal Description"] = ["description", 2, null];
+	action["Order From"] = ["valid_from", 2, PARSE_OPGDATE],
+	action["Order To"] = ["valid_to", 2, PARSE_OPGDATE],
+	action["Deal Version"] = ["version", 2, PARSE_INTEGER],
+	action["Product Number"] = [null, null, PARSE_OPGDETAIL];
+
+	for (var text: action.keys) {
+		if (row[0].indexOf(text) == 0) {
+			info(text + " MATCHED");
+
+			var prop = action[text][0];
+			var pos = action[text][1];
+			var fn = action[text][2];
+
+			if (prop == null) {
+				fn();	
+			} else {
+				info("setting property [" + prop + "] to [" + row[pos] + "]");
+				if ( fn != null ) {				
+					opg[prop] = fn(row[pos]);
+				} else {
+					opg[prop] = row[pos];
+				}
+			}
+		} 
+	}
+
+	%>	
+           %>]]></value>
+   </template>
+   <header_row>
+      <value>0</value>
+   </header_row>
+   <is_use_events>
+      <value>true</value>
+   </is_use_events>
+   <is_archived>
+      <value>false</value>
+   </is_archived>
+   <uuid>
+      <value>0M_I2P4aRF-zK4emBtEE6g</value>
+   </uuid>
+   <row_filter_script>
+      <value>
+		<object mode="update" code="most.import_sales.xls.filter-script" objectdef="vscript" module="core" /></value>
+   </row_filter_script>
+</object>
+<!--  -->
+
+
+<object code="most:sales" objectdef="data_import_xls" module="core" >
+   <sort_id>
+      <value>0</value>
+   </sort_id>
+   <name>
+      <value>
+         <bg-BG>MOST продажби</bg-BG></value>
+   </name>
+   <template>
       <value><![CDATA[<%
       
 //0 : most_sale_id
