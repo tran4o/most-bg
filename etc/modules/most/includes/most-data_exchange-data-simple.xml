@@ -29,18 +29,18 @@
    </is_hidden>
 </object>
 <!--  -->
-<object code="most:sales" objectdef="data_import_xls" module="core" >
+<object code="most:import_opg_from_hp" objectdef="data_import_opg_tsv" module="core" >
    <sort_id>
       <value>0</value>
    </sort_id>
    <name>
       <value>
-         <bg-BG>MOST продажби</bg-BG></value>
+         <en-EN>HP OPG Import from .TSV(TXT)</en-EN></value>
    </name>
    <template>
        <value><![CDATA[<%
 
-	<%
+    <%
 	      
 	//0 : may be a part of the OPG Desc or "Product Number: line"
 	//    https://regex101.com/r/dT6cA1/1
@@ -66,10 +66,12 @@
 		return d;
 	}
 
-	function PARSE_OPGDATE(d[]) {
-		if (d.indexOf("/")) {
-		 	var s = d.split("/");
-		 	return java.date.parse("yyyy-MM-dd", (s[2] + 2000) + "-" + s[1] + "-" + s[0]);
+	function PARSE_OPGDATE(d) {
+		if (d.indexOf("/") >= 0) {
+            var s = d.substring(0,6) + "20" + d.substring(6);
+            s = s.replace("/", ".");
+            info(s);
+		 	return java.date.parse("dd.MM.yyyy", s);
 		} else {
 			return java.date.parse("yyyy-MM-dd", d);
 		}
@@ -95,7 +97,7 @@
 			info("found existing  entry for: " + article.code);
 	 	} else {
 		 	db.most.opg_entry();
-			info("create opg <entr></entr>y for: " + article.code);
+			info("create opg entry for: " + article.code);
 	 	}
 		
 		cdet.article = article;
@@ -128,17 +130,18 @@
 			if (prop == null) {
 				fn();	
 			} else {
-				info("setting property [" + prop + "] to [" + row[pos] + "]");
 				if ( fn != null ) {				
 					opg[prop] = fn(row[pos]);
 				} else {
 					opg[prop] = row[pos];
 				}
+    			info("setting property [" + prop + "] to [" + opg[prop] + "]");
 			}
 		} 
 	}
 
-	%>	
+	%>	    
+    
            %>]]></value>
    </template>
    <header_row>
@@ -151,12 +154,8 @@
       <value>false</value>
    </is_archived>
    <uuid>
-      <value>0M_I2P4aRF-zK4emBtEE6g</value>
+      <value>crPIYMNSRWCeKBTiYHOv6Q</value>
    </uuid>
-   <row_filter_script>
-      <value>
-		<object mode="update" code="most.import_sales.xls.filter-script" objectdef="vscript" module="core" /></value>
-   </row_filter_script>
 </object>
 <!--  -->
 
