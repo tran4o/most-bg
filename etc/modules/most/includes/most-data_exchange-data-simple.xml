@@ -29,13 +29,107 @@
    </is_hidden>
 </object>
 <!--  -->
-<object code="most:import_opg_from_hp" objectdef="data_import_opg_tsv" module="core" >
+<object code="most:pl2group" objectdef="data_import_xls" module="core" >
    <sort_id>
       <value>0</value>
    </sort_id>
    <name>
       <value>
-         <en-EN>HP OPG Import from .TSV(TXT)</en-EN></value>
+         <en-US>MOST Product Line to Product Group</en-US>
+         <bg-BG>MOST отношение групи към продуктови линии</bg-BG>
+     </value>
+   </name>
+   <description>
+    <value>
+        <en-US>
+        
+        <![CDATA[<%
+    
+File format for import
+
+0 : family id
+1 : product line
+2 : category
+3 : pl desc
+4 : family desc
+
+         %>]]>
+
+        </en-US>
+    </value>
+   </description>
+   <template>
+       <value><![CDATA[<%
+
+<%
+      
+//0 : family id
+//1 : product line
+//2 : category
+//3 : pl desc
+//4 : family desc
+
+var row = DATA_ORDERED;
+var plcode = row[1];
+var catcode = row[2];
+
+if (catcode.length()) {
+    catcode = catcode.castToInexactNumber().castToExactNumber();
+}
+
+var pl = db.most.product_line.INSTANCES[plcode];
+
+if (pl==null) {
+  warn("pl not found: " + pl);
+  return;
+} else {
+  info("pl found: " + pl);
+}
+
+var cat = db.most.product_group.INSTANCES[catcode.castToString()];
+
+if (cat==null) {
+  warn("category not found: " + catcode);
+  return;
+} else {
+  info("pl found: " + catcode);
+}
+
+pl.product_group = cat;
+// pl.family_id = row[0];
+// pl.family_desc = row[4];
+pl.name = row[3];
+pl.commit();
+
+%>
+
+           %>]]>
+           </value>
+   </template>
+   <header_row>
+      <value>0</value>
+   </header_row>
+   <is_use_events>
+      <value>true</value>
+   </is_use_events>
+   <is_archived>
+      <value>false</value>
+   </is_archived>
+   <uuid>
+      <value>JmwQmr8HSuqaHlh6dYHI4Q</value>
+   </uuid>
+</object>
+
+<!--  -->
+<object code="most:import_opg_from_hp" objectdef="data_import_xls" module="core" >
+   <sort_id>
+      <value>0</value>
+   </sort_id>
+   <name>
+      <value>
+         <en-US>HP OPG Import from .TSV(TXT)</en-US>
+         <bg-BG>HP OPG внос от текстов файл .TSV(TXT)</bg-BG>
+         </value>
    </name>
    <template>
        <value><![CDATA[<%
