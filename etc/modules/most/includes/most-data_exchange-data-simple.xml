@@ -132,17 +132,35 @@ pl.commit();
          </value>
    </name>
    <template>
-       <value><![CDATA[<%
-
+       <value><![CDATA[
     <%
 	      
 	//0 : may be a part of the OPG Desc or "Product Number: line"
 	//    https://regex101.com/r/dT6cA1/1
 
 	var opg = session.attributes["last_opg_import"];
-
 	var row = DATA_ORDERED;
 	var what = row[0];
+    var mc2type = new M();
+    mc2type["7"] = "U";
+    mc2type["07"] = "U";
+    mc2type["72"] =  "U";
+    mc2type["77"] =  "U";
+    mc2type["78"] =  "U";
+    mc2type["09R"] =  "R";
+    mc2type["26R"] =  "R";
+    mc2type["26R"] =  "R";
+    mc2type["27R"] =  "R";
+    mc2type["69T"] =  "R";
+    mc2type["72G"] =  "M";
+    mc2type["72M"] =  "M";
+    mc2type["72R"] =  "R";
+    mc2type["77E"] =  "M";
+    mc2type["77R"] =  "R";
+    mc2type["78E"] =  "M";
+    mc2type["78R"] =  "R";
+    mc2type["A9R"] =  "R";
+    mc2type["A9U"] =  "U";
 
 	function CREATE_OPG(d) {
 		if (db.most.opg.INSTANCES[d]) {
@@ -151,8 +169,8 @@ pl.commit();
 		} else {
 			info("creating new opg: " + d);
 			opg = new db.most.opg();
-			opg.code = d;			
-			opg.discount_mode = "R";
+			opg.code = d;
+			opg.discount_mode = "U";
 		}
 
 		opg.import_time = java.date.today();
@@ -179,7 +197,7 @@ pl.commit();
 			error("missing article. creating with PL only.");
 			article = new db.most.article();
 			article.code = row[1];
-			article.pl = pl;
+			article.product_line = pl;
 			article.description = row[3];
 		}
 
@@ -203,9 +221,21 @@ pl.commit();
 		opg.entries << cdet;
 		opg.commit();
 	}
+    
+    function PARSE_DISCOUNT_MODE(d) {
+        var dmode = mc2type[d.castToString()];
+        if (dmode) {
+            info("resolved MC code " + d + " to discount mode: " + dmode;
+            return dmode;
+        } else { 
+            warn("could not resolve MC code to discount mode: " + d);
+            return "U";
+        }        
+    }
 
 	var action = new M();
-
+    
+	action["MC Code"] = ["discount_mode", 2, PARSE_DISCOUNT_MODE];
 	action["Deal Number"] = ["code", 2, CREATE_OPG];
 	action["Deal Description"] = ["description", 2, null];
 	action["Order From"] = ["valid_from", 2, PARSE_OPGDATE],
@@ -236,7 +266,7 @@ pl.commit();
 
 	%>	    
     
-           %>]]></value>
+   ]]></value>
    </template>
    <header_row>
       <value>0</value>
