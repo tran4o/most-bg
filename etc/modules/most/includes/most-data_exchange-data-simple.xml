@@ -225,7 +225,7 @@ pl.commit();
     function PARSE_DISCOUNT_MODE(d) {
         var dmode = mc2type[d.castToString()];
         if (dmode) {
-            info("resolved MC code " + d + " to discount mode: " + dmode;
+            info("resolved MC code " + d + " to discount mode: " + dmode);
             return dmode;
         } else { 
             warn("could not resolve MC code to discount mode: " + d);
