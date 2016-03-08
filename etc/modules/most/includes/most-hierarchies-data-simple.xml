@@ -12,7 +12,7 @@
                     <de-DE>Nach Monat</de-DE>
                 </value>
                 <value>
-                    <bg-BG>По моесец</bg-BG>
+                    <bg-BG>По месец</bg-BG>
                 </value>
             </name>
 			<objectdef_set_codes mode="delete"/>
@@ -226,7 +226,7 @@
                     <de-DE>Nach Monat (real)</de-DE>
                 </value>
                 <value>
-                    <bg-BG>По моесец (реален)</bg-BG>
+                    <bg-BG>По месец (реален)</bg-BG>
                 </value>
             </name>
 
@@ -302,13 +302,13 @@
    		<object code="most.protocol_stock:OFFICIAL.year.months.dates" module="core" objectdef="hierarchy_relation_path">
             <name>
                 <value>
-                    <en-US>By month (official)</en-US>
+                    <en-US>By month (HP/official)</en-US>
                 </value>
                 <value>
-                    <de-DE>Nach Monat (offiziel)</de-DE>
+                    <de-DE>Nach Monat (HP/offiziel)</de-DE>
                 </value>
                 <value>
-                    <bg-BG>По моесец (официално)</bg-BG>
+                    <bg-BG>По месец (HP/официално)</bg-BG>
                 </value>
             </name>
 
@@ -342,13 +342,13 @@
 
             <name>
                 <value>
-                    <en-US>By quarter (official)</en-US>
+                    <en-US>By quarter (HP/official)</en-US>
                 </value>
                 <value>
-                    <de-DE>Nach Quartal (offiziel)</de-DE>
+                    <de-DE>Nach Quartal (HP/offiziel)</de-DE>
                 </value>
                 <value>
-                    <bg-BG>По тримесечие (официален)</bg-BG>
+                    <bg-BG>По тримесечие (HP/официален)</bg-BG>
                 </value>
             </name>
 
@@ -391,13 +391,13 @@
         <object code="most.protocol_sale:REAL.year.months.dates" module="core" objectdef="hierarchy_relation_path">
             <name>
                 <value>
-                    <en-US>By month (real)</en-US>
+                    <en-US>By month (MOST/real)</en-US>
                 </value>
                 <value>
-                    <de-DE>Nach Monat (real)</de-DE>
+                    <de-DE>Nach Monat (MOST/real)</de-DE>
                 </value>
                 <value>
-                    <bg-BG>По моесец (реален)</bg-BG>
+                    <bg-BG>По месец (MOST/реален)</bg-BG>
                 </value>
             </name>
 
@@ -473,13 +473,13 @@
    		<object code="most.protocol_sale:OFFICIAL.year.months.dates" module="core" objectdef="hierarchy_relation_path">
             <name>
                 <value>
-                    <en-US>By month (official)</en-US>
+                    <en-US>By month (HP/official)</en-US>
                 </value>
                 <value>
-                    <de-DE>Nach Monat (offiziel)</de-DE>
+                    <de-DE>Nach Monat (HP/offiziel)</de-DE>
                 </value>
                 <value>
-                    <bg-BG>По моесец (официално)</bg-BG>
+                    <bg-BG>По месец (HP/официално)</bg-BG>
                 </value>
             </name>
 
@@ -513,13 +513,13 @@
 
             <name>
                 <value>
-                    <en-US>By quarter (official)</en-US>
+                    <en-US>By quarter (HP/official)</en-US>
                 </value>
                 <value>
-                    <de-DE>Nach Quartal (offiziel)</de-DE>
+                    <de-DE>Nach Quartal (HP/offiziel)</de-DE>
                 </value>
                 <value>
-                    <bg-BG>По тримесечие (официален)</bg-BG>
+                    <bg-BG>По тримесечие (HP/официален)</bg-BG>
                 </value>
             </name>
 

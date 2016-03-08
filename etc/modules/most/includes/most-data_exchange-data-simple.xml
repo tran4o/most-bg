@@ -29,6 +29,261 @@
    </is_hidden>
 </object>
 <!--  -->
+<object code="most:pl2group" objectdef="data_import_xls" module="core" >
+   <sort_id>
+      <value>0</value>
+   </sort_id>
+   <name>
+      <value>
+         <en-US>MOST Product Line to Product Group</en-US>
+         <bg-BG>MOST отношение групи към продуктови линии</bg-BG>
+     </value>
+   </name>
+   <description>
+    <value>
+        <en-US>
+        
+        <![CDATA[<%
+    
+File format for import
+
+0 : family id
+1 : product line
+2 : category
+3 : pl desc
+4 : family desc
+
+         %>]]>
+
+        </en-US>
+    </value>
+   </description>
+   <template>
+       <value><![CDATA[<%
+
+<%
+      
+//0 : family id
+//1 : product line
+//2 : category
+//3 : pl desc
+//4 : family desc
+
+var row = DATA_ORDERED;
+var plcode = row[1];
+var catcode = row[2];
+
+if (catcode.length()) {
+    catcode = catcode.castToInexactNumber().castToExactNumber();
+}
+
+var pl = db.most.product_line.INSTANCES[plcode];
+
+if (pl==null) {
+  warn("pl not found: " + pl);
+  return;
+} else {
+  info("pl found: " + pl);
+}
+
+var cat = db.most.product_group.INSTANCES[catcode.castToString()];
+
+if (cat==null) {
+  warn("category not found: " + catcode);
+  return;
+} else {
+  info("pl found: " + catcode);
+}
+
+pl.product_group = cat;
+// pl.family_id = row[0];
+// pl.family_desc = row[4];
+pl.name = row[3];
+pl.commit();
+
+%>
+
+           %>]]>
+           </value>
+   </template>
+   <header_row>
+      <value>0</value>
+   </header_row>
+   <is_use_events>
+      <value>true</value>
+   </is_use_events>
+   <is_archived>
+      <value>false</value>
+   </is_archived>
+   <uuid>
+      <value>JmwQmr8HSuqaHlh6dYHI4Q</value>
+   </uuid>
+</object>
+
+<!--  -->
+<object code="most:import_opg_from_hp" objectdef="data_import_xls" module="core" >
+   <sort_id>
+      <value>0</value>
+   </sort_id>
+   <name>
+      <value>
+         <en-US>HP OPG Import from .TSV(TXT)</en-US>
+         <bg-BG>HP OPG внос от текстов файл .TSV(TXT)</bg-BG>
+         </value>
+   </name>
+   <template>
+       <value><![CDATA[
+    <%
+	      
+	//0 : may be a part of the OPG Desc or "Product Number: line"
+	//    https://regex101.com/r/dT6cA1/1
+
+	var opg = session.attributes["last_opg_import"];
+	var row = DATA_ORDERED;
+	var what = row[0];
+    var mc2type = new M();
+    mc2type["7"] = "U";
+    mc2type["07"] = "U";
+    mc2type["72"] =  "U";
+    mc2type["77"] =  "U";
+    mc2type["78"] =  "U";
+    mc2type["09R"] =  "R";
+    mc2type["26R"] =  "R";
+    mc2type["26R"] =  "R";
+    mc2type["27R"] =  "R";
+    mc2type["69T"] =  "R";
+    mc2type["72G"] =  "M";
+    mc2type["72M"] =  "M";
+    mc2type["72R"] =  "R";
+    mc2type["77E"] =  "M";
+    mc2type["77R"] =  "R";
+    mc2type["78E"] =  "M";
+    mc2type["78R"] =  "R";
+    mc2type["A9R"] =  "R";
+    mc2type["A9U"] =  "U";
+
+	function CREATE_OPG(d) {
+		if (db.most.opg.INSTANCES[d]) {
+			info("this opg already exists. overwriting: " + d);
+			opg = db.most.opg.INSTANCES[d];
+		} else {
+			info("creating new opg: " + d);
+			opg = new db.most.opg();
+			opg.code = d;
+			opg.discount_mode = "U";
+		}
+
+		opg.import_time = java.date.today();
+		session.attributes["last_opg_import"] = opg;
+		return d;
+	}
+
+	function PARSE_OPGDATE(d) {
+		if (d.indexOf("/") >= 0) {
+            var s = d.substring(0,6) + "20" + d.substring(6);
+            s = s.replace("/", ".");
+            info(s);
+		 	return java.date.parse("dd.MM.yyyy", s);
+		} else {
+			return java.date.parse("yyyy-MM-dd", d);
+		}
+	}
+
+	function PARSE_OPGDETAIL() {
+		var pl = db.most.product_line.INSTANCES[row[4]];
+		var article = db.most.article.INSTANCES[row[1]];
+
+		if (article == undefined) {
+			error("missing article. creating with PL only.");
+			article = new db.most.article();
+			article.code = row[1];
+			article.product_line = pl;
+			article.description = row[3];
+		}
+
+		var exist = SDATA(opg, "entries", "entries.article.id='" + article.id + "'");
+		var cdet;
+
+		if (exist != null) {
+			cdet = exist;
+			info("found existing  entry for: " + article.code);
+	 	} else {
+		 	db.most.opg_entry();
+			info("create opg entry for: " + article.code);
+	 	}
+		
+		cdet.article = article;
+		cdet.max_quantity = row[6];
+		cdet.value = PARSE_DOUBLE(row[9]);
+		cdet.commit();
+
+
+		opg.entries << cdet;
+		opg.commit();
+	}
+    
+    function PARSE_DISCOUNT_MODE(d) {
+        var dmode = mc2type[d.castToString()];
+        if (dmode) {
+            info("resolved MC code " + d + " to discount mode: " + dmode);
+            return dmode;
+        } else { 
+            warn("could not resolve MC code to discount mode: " + d);
+            return "U";
+        }        
+    }
+
+	var action = new M();
+    
+	action["MC Code"] = ["discount_mode", 2, PARSE_DISCOUNT_MODE];
+	action["Deal Number"] = ["code", 2, CREATE_OPG];
+	action["Deal Description"] = ["description", 2, null];
+	action["Order From"] = ["valid_from", 2, PARSE_OPGDATE],
+	action["Order To"] = ["valid_to", 2, PARSE_OPGDATE],
+	action["Deal Version"] = ["version", 2, PARSE_INTEGER],
+	action["Product Number"] = [null, null, PARSE_OPGDETAIL];
+
+	for (var text: action.keys) {
+		if (row[0].indexOf(text) == 0) {
+			info(text + " MATCHED");
+
+			var prop = action[text][0];
+			var pos = action[text][1];
+			var fn = action[text][2];
+
+			if (prop == null) {
+				fn();	
+			} else {
+				if ( fn != null ) {				
+					opg[prop] = fn(row[pos]);
+				} else {
+					opg[prop] = row[pos];
+				}
+    			info("setting property [" + prop + "] to [" + opg[prop] + "]");
+			}
+		} 
+	}
+
+	%>	    
+    
+   ]]></value>
+   </template>
+   <header_row>
+      <value>0</value>
+   </header_row>
+   <is_use_events>
+      <value>true</value>
+   </is_use_events>
+   <is_archived>
+      <value>false</value>
+   </is_archived>
+   <uuid>
+      <value>crPIYMNSRWCeKBTiYHOv6Q</value>
+   </uuid>
+</object>
+<!--  -->
+
+
 <object code="most:sales" objectdef="data_import_xls" module="core" >
    <sort_id>
       <value>0</value>
