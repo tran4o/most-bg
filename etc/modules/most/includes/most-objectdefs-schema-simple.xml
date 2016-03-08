@@ -496,7 +496,7 @@ return "id IN ("+arr.join(",")+")";
 if (object.official_date == null || object.article == null || object.quantity == null || object.quantity <= 0)
 	return "0=1";
 var rest = object.quantity;
-var ew = " AND CAST ((quantity - COALESCE((SELECT SUM(sales.quantity) WHERE id = :VR__OUTER_SELECT_ID AND sales.official_date.\"date\" <= :OFCD ),0) - COALESCE((SELECT SUM(official_value) FROM most.state_adjustment_official WHERE stock = :VR__OUTER_SELECT_ID AND \"date\" <= :OFCD),0)) AS INTEGER) >= :MMIN";
+var ew = " AND CAST ((quantity - COALESCE((SELECT SUM(sales.quantity) WHERE id = :VR__OUTER_SELECT_ID AND sales.official_date.\"date\" <= :OFCD ),0) - COALESCE((SELECT SUM(official_value) FROM most.state_adjustment_official WHERE stock = :VR__OUTER_SELECT_ID AND \"date\" < :OFCD),0)) AS INTEGER) >= :MMIN";
 var sel = db.most.protocol_stock.SELECT("official_date.\"date\" <= :OFCD AND article = :PRID "+ew+" ORDER BY official_date.\"date\",id");
 sel["OFCD"]=object.official_date.date;
 sel["PRID"]=object.article.id;
@@ -644,7 +644,7 @@ if (arr.is_empty)
 
 for (var s : db.most.protocol_sale.selectWhere("stock IS NULL AND official_date IS NULL AND id IN ("+arr.join(",")+") ORDER BY quantity DESC,real_date")) 
 {
-	var cr = "CAST ((quantity - COALESCE((SELECT SUM(sales.quantity) WHERE id = :VR__OUTER_SELECT_ID AND sales.official_date.\"date\" <= :OFCD ),0) - COALESCE((SELECT SUM(official_value) FROM most.state_adjustment_official WHERE stock = :VR__OUTER_SELECT_ID AND \"date\" <= :OFCD),0)) AS INTEGER)"; 
+	var cr = "CAST ((quantity - COALESCE((SELECT SUM(sales.quantity) WHERE id = :VR__OUTER_SELECT_ID AND sales.official_date.\"date\" <= :OFCD ),0) - COALESCE((SELECT SUM(official_value) FROM most.state_adjustment_official WHERE stock = :VR__OUTER_SELECT_ID AND \"date\" < :OFCD),0)) AS INTEGER)"; 
 	var sel = db.most.protocol_stock.SELECT("official_date.\"date\" <= :OFCD AND article = :PRID AND "+cr+" >= :MMIN ORDER BY official_date.\"date\","+cr+" DESC,id");
 	sel["OFCD"]=param.date.date;
 	sel["PRID"]=s.article.id;
@@ -2979,7 +2979,7 @@ if (this.odit != null && this.odit.is_active && this.article != null)
 			this.odit.TEMP["terr"].reset(terr);
 		} else {
 			var oval = diff_official;
-			var cr = "CAST ((quantity - COALESCE((SELECT SUM(sales.quantity) WHERE id = :VR__OUTER_SELECT_ID AND sales.official_date.\"date\" <= :DTE ),0) - COALESCE((SELECT SUM(official_value) FROM most.state_adjustment_official WHERE stock = :VR__OUTER_SELECT_ID AND \"date\" <= :DTE),0))  AS  INTEGER)"; 
+			var cr = "CAST ((quantity - COALESCE((SELECT SUM(sales.quantity) WHERE id = :VR__OUTER_SELECT_ID AND sales.official_date.\"date\" <= :DTE ),0) - COALESCE((SELECT SUM(official_value) FROM most.state_adjustment_official WHERE stock = :VR__OUTER_SELECT_ID AND \"date\" < :DTE),0))  AS  INTEGER)"; 
 			var sl = db.most.protocol_stock.SELECT("official_date.\"date\" <= :DTE AND article = :AID AND "+cr+" > 0 ORDER by real_date.\"date\", "+cr+" DESC,id") ;
 			sl["AID"]=this.article.id;
 			sl["DTE"]=this.odit.date.date;			
@@ -3208,7 +3208,7 @@ if (this.is_active)
 							java.log.error("2) CAN NOT DISTRIBUTE odit value TO STOCKS | DATE="+g.date+" | ARTICLE = "+a+" | OFFICIAL 0 | REAL 0 | DIFF OFFIC "+(diff_official));
 						} else {
 							var oval = diff_official; 
-							var cr = "CAST ((quantity - COALESCE((SELECT SUM(sales.quantity) WHERE id = :VR__OUTER_SELECT_ID AND sales.official_date.\"date\" <= :DTE ),0) - COALESCE((SELECT SUM(official_value) FROM most.state_adjustment_official WHERE stock = :VR__OUTER_SELECT_ID AND \"date\" <= :DTE),0)) AS INTEGER)"; 
+							var cr = "CAST ((quantity - COALESCE((SELECT SUM(sales.quantity) WHERE id = :VR__OUTER_SELECT_ID AND sales.official_date.\"date\" <= :DTE ),0) - COALESCE((SELECT SUM(official_value) FROM most.state_adjustment_official WHERE stock = :VR__OUTER_SELECT_ID AND \"date\" < :DTE),0)) AS INTEGER)"; 
 							var sl = db.most.protocol_stock.SELECT("official_date.\"date\" <= :DTE AND article = :AID AND "+cr+" > 0 ORDER by quantity,real_date.\"date\","+cr+" DESC,id") ;
 							sl["DTE"]=g.date.date;
 							sl["AID"]=a.id;
@@ -3772,7 +3772,7 @@ return db.most.product_line.INSTANCES["OTHERS"];
                  <is_dynamic>true</is_dynamic>
                  <calculation>
                  	<object code="most.article.total_sold_official:calculation_vsql" objectdef="calculation_vsql" module="core" >
-						<select_value_statement><value><![CDATA[CAST ( COALESCE((SELECT SUM(protocols.quantity) WHERE id = :VR__OUTER_SELECT_ID AND protocols.objectdef.code='protocol_sale' AND protocols.stock IS NOT NULL AND protocols.official_date."date" <= CURRENT_TIMESTAMP ),0) + COALESCE((SELECT SUM(official_value) FROM most.state_adjustment_official WHERE article = :VR__OUTER_SELECT_ID),0) AS INTEGER)]]></value></select_value_statement>
+						<select_value_statement><value><![CDATA[CAST ( COALESCE((SELECT SUM(protocols.quantity) WHERE id = :VR__OUTER_SELECT_ID AND protocols.objectdef.code='protocol_sale' AND protocols.stock IS NOT NULL AND protocols.official_date."date" <= CURRENT_TIMESTAMP ),0) + COALESCE((SELECT SUM(official_value) FROM most.state_adjustment_official WHERE article = :VR__OUTER_SELECT_ID AND "date" < CURRENT_TIMESTAMP),0) AS INTEGER)]]></value></select_value_statement>
 					</object>
 				 </calculation>
              </total_sold_official>                  
@@ -3797,7 +3797,7 @@ return db.most.product_line.INSTANCES["OTHERS"];
                  <is_dynamic>true</is_dynamic>
                  <calculation>
                  	<object code="most.article.available_official:calculation_vsql" objectdef="calculation_vsql" module="core" >
-						<select_value_statement><value><![CDATA[CAST ( CAST ( COALESCE((SELECT SUM(protocols.quantity) WHERE id = :VR__OUTER_SELECT_ID AND protocols.objectdef.code='protocol_stock' AND protocols.official_date."date" <= CURRENT_TIMESTAMP ),0) AS INTEGER) - COALESCE((SELECT SUM(protocols.quantity) WHERE id = :VR__OUTER_SELECT_ID AND protocols.objectdef.code='protocol_sale' AND protocols.stock IS NOT NULL AND protocols.official_date."date" <= CURRENT_TIMESTAMP ),0) - COALESCE((SELECT SUM(official_value) FROM most.state_adjustment_official WHERE article = :VR__OUTER_SELECT_ID),0) AS INTEGER)]]></value></select_value_statement>
+						<select_value_statement><value><![CDATA[CAST ( CAST ( COALESCE((SELECT SUM(protocols.quantity) WHERE id = :VR__OUTER_SELECT_ID AND protocols.objectdef.code='protocol_stock' AND protocols.official_date."date" <= CURRENT_TIMESTAMP ),0) AS INTEGER) - COALESCE((SELECT SUM(protocols.quantity) WHERE id = :VR__OUTER_SELECT_ID AND protocols.objectdef.code='protocol_sale' AND protocols.stock IS NOT NULL AND protocols.official_date."date" <= CURRENT_TIMESTAMP ),0) - COALESCE((SELECT SUM(official_value) FROM most.state_adjustment_official WHERE article = :VR__OUTER_SELECT_ID  AND "date" < CURRENT_TIMESTAMP),0) AS INTEGER)]]></value></select_value_statement>
 					</object>
 				 </calculation>
              </available_official>  

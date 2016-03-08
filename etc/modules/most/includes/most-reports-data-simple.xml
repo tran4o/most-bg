@@ -180,11 +180,11 @@ if (tt != null)
 //---------------------------------
 if (tt == null) 
 {
-	sel1 = db.most.article.SELECT("COALESCE((SELECT SUM(quantity) FROM most.protocol WHERE article = :VR__OUTER_SELECT_ID AND objectdef.code='protocol_stock' AND official_date.\"date\" <= :DTE),0) - COALESCE((SELECT SUM(quantity) FROM most.protocol WHERE article = :VR__OUTER_SELECT_ID AND objectdef.code='protocol_sale' AND official_date.\"date\" <= :DTE),0) - COALESCE((SELECT SUM(real_value) FROM most.state_adjustment_real WHERE article = :VR__OUTER_SELECT_ID AND \"date\" <= :DTE),0) > 0 ORDER BY COALESCE((SELECT SUM(quantity) FROM most.protocol WHERE article = :VR__OUTER_SELECT_ID AND objectdef.code='protocol_sale' AND official_date = :DTA),0) DESC");
+	sel1 = db.most.article.SELECT("COALESCE((SELECT SUM(quantity) FROM most.protocol WHERE article = :VR__OUTER_SELECT_ID AND objectdef.code='protocol_stock' AND official_date.\"date\" <= :DTE),0) - COALESCE((SELECT SUM(quantity) FROM most.protocol WHERE article = :VR__OUTER_SELECT_ID AND objectdef.code='protocol_sale' AND official_date.\"date\" <= :DTE),0) - COALESCE((SELECT SUM(real_value) FROM most.state_adjustment_real WHERE article = :VR__OUTER_SELECT_ID AND \"date\" < :DTE),0) > 0 ORDER BY COALESCE((SELECT SUM(quantity) FROM most.protocol WHERE article = :VR__OUTER_SELECT_ID AND objectdef.code='protocol_sale' AND official_date = :DTA),0) DESC");
 	sel1["DTA"]=dateo.id;
 	sel1["DTE"]=dateo.date;
 	sel1.is_cached=false;
-	sel2 = db.most.article.SELECT("COALESCE((SELECT SUM(quantity) FROM most.protocol WHERE article = :VR__OUTER_SELECT_ID AND objectdef.code='protocol_stock' AND real_date.\"date\" <= :DTE),0) - COALESCE((SELECT SUM(quantity) FROM most.protocol WHERE article = :VR__OUTER_SELECT_ID AND objectdef.code='protocol_sale' AND real_date.\"date\" <= :DTE),0) - COALESCE((SELECT SUM(real_value) FROM most.state_adjustment_real WHERE article = :VR__OUTER_SELECT_ID AND \"date\" <= :DTE),0) > 0 ORDER BY COALESCE((SELECT SUM(quantity) FROM most.protocol WHERE article = :VR__OUTER_SELECT_ID AND objectdef.code='protocol_sale' AND real_date = :DTA),0) DESC");
+	sel2 = db.most.article.SELECT("COALESCE((SELECT SUM(quantity) FROM most.protocol WHERE article = :VR__OUTER_SELECT_ID AND objectdef.code='protocol_stock' AND real_date.\"date\" <= :DTE),0) - COALESCE((SELECT SUM(quantity) FROM most.protocol WHERE article = :VR__OUTER_SELECT_ID AND objectdef.code='protocol_sale' AND real_date.\"date\" <= :DTE),0) - COALESCE((SELECT SUM(real_value) FROM most.state_adjustment_real WHERE article = :VR__OUTER_SELECT_ID AND \"date\" < :DTE),0) > 0 ORDER BY COALESCE((SELECT SUM(quantity) FROM most.protocol WHERE article = :VR__OUTER_SELECT_ID AND objectdef.code='protocol_sale' AND real_date = :DTA),0) DESC");
 	sel2["DTA"]=dateo.id;
 	sel2["DTE"]=dateo.date;
 	sel2.is_cached=false;
@@ -551,7 +551,7 @@ for (var ven : sel)
 				tt=null;		
 		}
 	}
-	var cnd = "(CAST ( CAST ( COALESCE((SELECT SUM(protocols.quantity) WHERE id = :VR__OUTER_SELECT_ID AND protocols.objectdef.code='protocol_stock' AND protocols.official_date.\"date\" <= :DTE ),0) AS INTEGER) - COALESCE((SELECT SUM(protocols.quantity) WHERE id = :VR__OUTER_SELECT_ID AND protocols.objectdef.code='protocol_sale' AND protocols.stock IS NOT NULL AND protocols.official_date.\"date\" <= :DTE ),0) - COALESCE((SELECT SUM(official_value) FROM most.state_adjustment_official WHERE article = :VR__OUTER_SELECT_ID),0) AS INTEGER) <> 0)";
+	var cnd = "(CAST ( CAST ( COALESCE((SELECT SUM(protocols.quantity) WHERE id = :VR__OUTER_SELECT_ID AND protocols.objectdef.code='protocol_stock' AND protocols.official_date.\"date\" <= :DTE ),0) AS INTEGER) - COALESCE((SELECT SUM(protocols.quantity) WHERE id = :VR__OUTER_SELECT_ID AND protocols.objectdef.code='protocol_sale' AND protocols.stock IS NOT NULL AND protocols.official_date.\"date\" <= :DTE ),0) - COALESCE((SELECT SUM(official_value) FROM most.state_adjustment_official WHERE article = :VR__OUTER_SELECT_ID AND \"date\" < :DTE),0) AS INTEGER) <> 0)";
 	var sel = null;
 	if (tt == null) {
 		sel = db.most.article.SELECT("vendor = :VID AND (protocols.official_date = :DID OR "+cnd+") ORDER BY code,id");
