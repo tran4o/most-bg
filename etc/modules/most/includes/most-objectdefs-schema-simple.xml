@@ -3823,7 +3823,7 @@ return db.most.product_line.INSTANCES["OTHERS"];
                  <is_dynamic>true</is_dynamic>
                  <calculation>
                  	<object code="most.article.total_stocked_real:calculation_vsql" objectdef="calculation_vsql" module="core" >
-						<select_value_statement><value><![CDATA[CAST ( COALESCE((SELECT SUM(protocols.quantity) WHERE id = :VR__OUTER_SELECT_ID AND protocols.objectdef.code='protocol_stock'),0) AS INTEGER)]]></value></select_value_statement>
+						<select_value_statement><value><![CDATA[CAST ( COALESCE((SELECT SUM(protocols.quantity) WHERE id = :VR__OUTER_SELECT_ID AND protocols.objectdef.code='protocol_stock' AND protocols.real_date."date" <= CURRENT_TIMESTAMP),0) AS INTEGER)]]></value></select_value_statement>
 					</object>
 				 </calculation>
              </total_stocked_real>  
@@ -3848,7 +3848,7 @@ return db.most.product_line.INSTANCES["OTHERS"];
                  <is_dynamic>true</is_dynamic>
                  <calculation>
                  	<object code="most.article.total_sold:calculation_vsql" objectdef="calculation_vsql" module="core" >
-						<select_value_statement><value><![CDATA[CAST ( COALESCE((SELECT SUM(protocols.quantity) WHERE id = :VR__OUTER_SELECT_ID AND protocols.objectdef.code='protocol_sale'),0) + COALESCE((SELECT SUM(real_value) FROM most.state_adjustment_real WHERE article = :VR__OUTER_SELECT_ID),0) AS INTEGER)]]></value></select_value_statement>
+						<select_value_statement><value><![CDATA[CAST ( COALESCE((SELECT SUM(protocols.quantity) WHERE id = :VR__OUTER_SELECT_ID AND protocols.objectdef.code='protocol_sale' AND protocols.real_date."date" <= CURRENT_TIMESTAMP),0) + COALESCE((SELECT SUM(real_value) FROM most.state_adjustment_real WHERE article = :VR__OUTER_SELECT_ID),0) AS INTEGER)]]></value></select_value_statement>
 					</object>
 				 </calculation>
              </total_sold_real>      
@@ -3873,7 +3873,7 @@ return db.most.product_line.INSTANCES["OTHERS"];
                  <is_dynamic>true</is_dynamic>
                  <calculation>
                  	<object code="most.article.available_real:calculation_vsql" objectdef="calculation_vsql" module="core" >
-						<select_value_statement><value><![CDATA[CAST ( CAST ( COALESCE((SELECT SUM(protocols.quantity) WHERE id = :VR__OUTER_SELECT_ID AND protocols.objectdef.code='protocol_stock'),0) AS INTEGER) - COALESCE((SELECT SUM(protocols.quantity) WHERE id = :VR__OUTER_SELECT_ID AND protocols.objectdef.code='protocol_sale'),0) - COALESCE((SELECT SUM(real_value) FROM most.state_adjustment_real WHERE article = :VR__OUTER_SELECT_ID),0) AS INTEGER)]]></value></select_value_statement>
+						<select_value_statement><value><![CDATA[CAST ( CAST ( COALESCE((SELECT SUM(protocols.quantity) WHERE id = :VR__OUTER_SELECT_ID AND protocols.objectdef.code='protocol_stock' AND protocols.real_date."date" <= CURRENT_TIMESTAMP),0) AS INTEGER) - COALESCE((SELECT SUM(protocols.quantity) WHERE id = :VR__OUTER_SELECT_ID AND protocols.objectdef.code='protocol_sale' AND protocols.real_date."date" <= CURRENT_TIMESTAMP),0) - COALESCE((SELECT SUM(real_value) FROM most.state_adjustment_real WHERE article = :VR__OUTER_SELECT_ID),0) AS INTEGER)]]></value></select_value_statement>
 					</object>
 				 </calculation>
              </available_real>                   
