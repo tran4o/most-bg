@@ -582,8 +582,9 @@ for (var ven : sel)
 		//SOLD
 		var sl = db.most.protocol_sale.VSQL_QUERY_SUM("SELECT quantity AS VAL WHERE article = :AID AND official_date = :DID AND stock IS NOT NULL",params);
 		if (sl.next() && sl.getInt("RES") != null) sold=sl.getInt("RES");
-		sl = db.most.state_adjustment_official.VSQL_QUERY_SUM("SELECT official_value AS VAL WHERE article = :AID AND \"date\" = :DTE",params);
-		if (sl.next() && sl.getInt("RES") != null) sold+=sl.getInt("RES");
+		
+		/* sl = db.most.state_adjustment_official.VSQL_QUERY_SUM("SELECT official_value AS VAL WHERE article = :AID AND \"date\" = :DTE",params);
+		if (sl.next() && sl.getInt("RES") != null) sold+=sl.getInt("RES"); */
 		
 		//TOTAL STOCKED
 		var sl  = db.most.protocol_stock.VSQL_QUERY_SUM("SELECT quantity AS VAL WHERE article = :AID AND official_date.\"date\" <= :DTE",params);
