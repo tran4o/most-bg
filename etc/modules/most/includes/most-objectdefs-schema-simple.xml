@@ -292,7 +292,7 @@ return "((is_active=1 OR is_show=1) AND \"date\" <= CURRENT_TIMESTAMP)";
 			 <real_date is_keep_settings="true">
 			 	<is_obligatory>false</is_obligatory>
 			 </real_date>
-			 			 
+
 			 <most_sale_id>
                 <category>main.basic</category>
                 <sort_id>9100</sort_id>
@@ -316,13 +316,71 @@ return "((is_active=1 OR is_show=1) AND \"date\" <= CURRENT_TIMESTAMP)";
                     <bg-BG>ИН продажа МОСТ</bg-BG>
                 </name>
 			 </most_order_id>
-			 
+
+             <!-- let the MOST/Real sale be negative -->
+			 <quantity is_keep_settings="true">
+				<min_value_integer>-99999</min_value_integer>
+
+               <on_update_value>
+                    <object code="most.protocol_sale.quantity:on_change" module="core" objectdef="vscript">
+                        <script_code>
+                            <value><![CDATA[
+if (this.official_date != null && this.quantity < 0) {
+    java.log.error("can not set negative quantity to sale with official date");
+    this.quantity = this.quantity.OLD;
+} else {
+    java.log.info("passed check for quantity");
+}
+
+super();
+                        ]]></value>
+                        </script_code>
+                    </object>
+                </on_update_value>                   	
+                <on_insert_value>
+                    <object code="most.protocol_sale.quantity:on_change" module="core" objectdef="vscript"/>                       
+                </on_insert_value>
+                <on_delete_value>
+                    <object code="most.protocol_sale.quantity:on_change" module="core" objectdef="vscript"/>                       
+                </on_delete_value>
+			</quantity>
+
+            <official_date is_keep_settings="true">
+               <on_update_value>
+                    <object code="most.protocol_sale.official_date:on_change" module="core" objectdef="vscript">
+                        <script_code>
+                            <value><![CDATA[
+if (this.quantity < 0) {
+    java.log.error("can not set official_date to sale with negative quantity");
+    this.official_date = this.official_date.OLD;
+} else {
+    java.log.info("passed check for official_date");
+}
+
+super();
+                        ]]></value>
+                        </script_code>
+                    </object>
+                </on_update_value>                   	
+                <on_insert_value>
+                    <object code="most.protocol_sale.official_date:on_change" module="core" objectdef="vscript"/>                       
+                </on_insert_value>
+                <on_delete_value>
+                    <object code="most.protocol_sale.official_date:on_change" module="core" objectdef="vscript"/>                       
+                </on_delete_value>
+            </official_date>
+
+			 <total is_keep_settings="true">
+				<min_value_integer>-99999</min_value_integer>	
+			</total>
+
+             <!-- let the MOST/Real sale total be negative -->            			 
 			 <most_sale_total>
 				<category>main.basic</category>
                 <sort_id>9102</sort_id>
 			 	<data_source>input</data_source>
 			 	<data_type>double</data_type>
-				<min_value_double>0</min_value_double>			 	
+				<min_value_double>-999999</min_value_double>			 	
                 <is_inmaintbl>true</is_inmaintbl>
                 <is_readonly>false</is_readonly>
 				<name>
