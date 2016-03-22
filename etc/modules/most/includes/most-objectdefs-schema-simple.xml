@@ -143,14 +143,16 @@ else
                          </params>
                          <script_code>
                              <value><![CDATA[
-if (this.opg == null)
+if (this.opg == null) {
 	this.opg_entry=null;
-else {
+} else {
 	this.opg_entry=null;
-	for (var e : this.opg.entries) if (e.article == this.article) {
-		this.opg_entry=e;
-		break;
-	}
+    if ( opg.entries != null) { 
+        for (var e : this.opg.entries) if (e.article == this.article) {
+            this.opg_entry=e;
+            break;
+        }
+    }
 	if (this.opg_entry == null) {
 		this.opg=null; 
 		java.log.error("OPG ENTRY NOT FOUND! Reset opg to null | "+this.toString());

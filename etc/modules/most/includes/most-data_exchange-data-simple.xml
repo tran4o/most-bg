@@ -292,6 +292,33 @@ pl.commit();
       <value>
          <bg-BG>MOST продажби</bg-BG></value>
    </name>
+  <description>
+    <value>
+        <en-US>
+        
+        <![CDATA[<%
+    
+File format for import
+      
+0 : most_sale_id
+1 : BID (CUSTOMER abbreviation)
+2 : CUSTOMER NAME
+3 : CSTID (NOT USED)
+4 : TID (NOT USED)
+5 : CFGSUBTYPE -> HARDCORE PARSE FUCK FOR PRODUCT ID
+6 : SDATE (yyyy-MM-dd)
+7 : most_order_id
+8 : QTY
+9 : SALEPRICE = Price_EUR (most_sale_price in schema - tam e BGN)
+10 : BULSTAT 
+11 : m0_price
+ 
+         %>]]>
+
+        </en-US>
+    </value>
+   </description>
+ 
    <template>
       <value><![CDATA[<%
       
@@ -413,9 +440,6 @@ if (BID == null || BID == "") {
       <value>
          <bg-BG>MOST ревизия</bg-BG></value>
    </name>
-   <data_file>
-      <value><object mode="update" code="HPInventory20151102-2.xlsx" objectdef="file" module="documents" cond="&quot;parent&quot;.&quot;code&quot; = 'odits' AND &quot;parent&quot;.&quot;parent&quot;.&quot;code&quot; = 'most' AND &quot;parent&quot;.&quot;parent&quot;.&quot;parent&quot;.&quot;code&quot; = '/' AND &quot;parent&quot;.&quot;parent&quot;.&quot;parent&quot;.&quot;parent&quot; IS NULL"/></value>
-   </data_file>
    <template>
       <value><![CDATA[<%
     var TTT = db.most.protocol.TEMP;
@@ -484,9 +508,6 @@ if (BID == null || BID == "") {
       <value>
          <en-US>MOST stocks from XLS</en-US></value>
    </name>
-   <data_file>
-      <value><object mode="update" code="dop products hp.xlsx" objectdef="file" module="documents" cond="&quot;parent&quot;.&quot;code&quot; = 'Stocks' AND &quot;parent&quot;.&quot;parent&quot;.&quot;code&quot; = 'most' AND &quot;parent&quot;.&quot;parent&quot;.&quot;parent&quot;.&quot;code&quot; = '/' AND &quot;parent&quot;.&quot;parent&quot;.&quot;parent&quot;.&quot;parent&quot; IS NULL"/></value>
-   </data_file>
    <template>
       <value><![CDATA[<%
 var PID = DATA["Part No"];
@@ -638,5 +659,190 @@ return true;
       <value>N3omIB1RRQq7DfoVdiEvGA</value>
    </uuid>
 </object>
+
+<object code="most:import_invoice_from_hp" objectdef="data_import_xls" module="core" >
+   <sort_id>
+      <value>0</value>
+   </sort_id>
+   <name>
+      <value>
+         <en-US>HP Invoice import from XLS</en-US>
+         <bg-BG>HP фактура внос от XLS</bg-BG>
+      </value>
+   </name>
+   <description>
+      <value>
+         <en-US>
+<![CDATA[
+the file should have these columns : 
+
+0 - purchase order number
+1 - invoice date
+2 - invoice number
+3 - net invoice price
+4 - item price (real number)
+5 - deal id for item (OPG)
+6 - bundle id
+7 - article code (product part number)
+11 - quantity (integer)
+12 - product line (as code in system)
+13 - vendor (code as in system, i.e. HPE, HPI)
+]]>
+</en-US></value>
+   </description>
+   <template>
+      <value><![CDATA[<%
+
+/*global session, DATA_ORDERED, SDATA, PARSE_INTEGER, PARSE_DOUBLE */
+/*global info, error, db, java */
+/*eslint new-cap: [0] */
+/*eslint quotes: [2, "double"]*/
+
+var row = DATA_ORDERED;
+var purchase_order_no = row[0];
+var invoice_date = row[1];
+var invoice_no = row[2];
+var net_invoice_price = row[3];
+var price = row[4];
+var deal_id = row[5];
+var bundle_id = row[6];
+var article_code = row[7];
+var quantity = row[11];
+var product_line = row[12];
+var vendor = row[13];
+
+if (PARSE_INTEGER(quantity) == 0) {
+    return false;    
+}
+
+function PARSE_OPGDATE(d) {
+    if (d.indexOf("/") >= 0) {
+        var s = d.substring(0,6) + "20" + d.substring(6);
+        s = s.replace("/", ".");
+        info(s);
+     	return java.date.parse("dd.MM.yyyy", s);
+	} else {
+		return java.date.parse("yyyy-MM-dd", d);
+	}
+}
+
+function prod_find_or_create(code, name, product_line, description, vendor) {
+    //trim code
+    if ( code.indexOf("#") > 0 ) {
+        code = code.substring(0, code.indexOf("#"));
+    }
+
+    var artobj = db.most.article.INSTANCES[code];
+
+    if (artobj != null) {
+        info("product " + code + " found. vendor is " + vendor);
+    } else {
+        info("product " + code + " not found. new instance. vendor is " + vendor);
+        artobj = new db.most.article();
+    }
+
+    vendor = db.contacts.vendor.INSTANCES[vendor];
+    if ( vendor == null ) {
+        vendor = db.contacts.vendor.INSTANCES["HPOLD"];
+    }
+
+    artobj.code = code;
+    artobj.name["en-US"] = name;
+
+    if (product_line) {
+        var plobj = db.most.product_line.INSTANCES[product_line];
+        if (plobj != null) {
+            info("product line " + product_line + " found");
+        } else {
+            info("product line " + code + " not found. new instance");
+            plobj = new db.most.product_line();
+            plobj.code = product_line;
+        }
+        artobj.product_line = plobj;
+    }
+
+    if( description != null) {
+        info("updating article descripion");
+        artobj.description["en-US"] = description;    
+    }
+        
+    if (artobj.vendor == null) {
+        artobj.vendor = vendor;    
+    }
+    
+    artobj.commit();
+    return artobj;
+}
+
+var invobj = db.most.invoice_stock.INSTANCES[invoice_no];
+var vendobj = db.contacts.vendor.INSTANCES[vendor];
+
+if (invobj == null) {
+    info("creating new invoice: " + invoice_no);
+
+    invobj = new db.most.invoice_stock();
+    invobj.code = invoice_no;
+    invobj.vendor = vendobj;
+    invobj.invoice_date = PARSE_OPGDATE(invoice_date);
+    invobj.purchase_order = purchase_order_no;
+    invobj.import_time = java.date.today();
+    invobj.total = net_invoice_price;
+    invobj.description["en-US"] = "manual import from HP/XLS";
+} else {
+    info("found invoice: " + invoice_no);
+    if (invobj.description != "manual import from HP/XLS") {
+        info("...is previously existing. not part of import. skipping");
+        return;
+    } 
+}
+
+var artobj = prod_find_or_create(article_code, article_code, product_line, "", vendor);
+var opg = db.most.opg.INSTANCES[deal_id];
+
+var stockobj = new db.most.protocol_stock();
+stockobj.invoice = invobj;
+stockobj.bundle_number = bundle_id;
+stockobj.quantity = quantity;
+stockobj.article = artobj;
+stockobj.price = price;
+stockobj.total = PARSE_DOUBLE(price) * PARSE_INTEGER(quantity);
+
+if (opg != null) {
+  info("OPG resolved to " + deal_id);
+  stockobj.opg = stockobj;
+} else { 
+  if (deal_id != null) { 
+     info("could not resolve OPG " + deal_id);
+  }
+}
+
+var dtbrf = java.date.format("dd.MM.yyyy", invobj.invoice_date);
+var dateobj = db.most.protocol_date.INSTANCES[dtbrf];
+if (dateobj == null) {
+    error("date obj not found"  + dtbrf);    
+    
+} else { 
+    stockobj.real_date = dateobj;
+    info("add position for: " + article_code + " of " + invoice_no);
+    stockobj.commit();    
+}
+
+%> ]]></value>
+   </template>
+   <header_row>
+      <value>0</value>
+   </header_row>
+   <is_use_events>
+      <value>true</value>
+   </is_use_events>
+   <is_archived>
+      <value>false</value>
+   </is_archived>
+   <uuid>
+      <value>1qLpEgPpQ8SprN9HeeIrqA</value>
+   </uuid>
+</object>
+
+
 
 </objects></import>
