@@ -209,8 +209,8 @@ for (var a : sel1)
 	<tr>
 	<td><%= LINK(a,a.code) %></td>
 	<td><%= STR2HTML(a.product_line == null ? "" : a.product_line.code) %></td>
-	<td class="r"><%= FORMAT(odata[a].stocked) %></td>
-	<td class="r"><%= FORMAT(odata[a].sold) %></td>
+	<td class="r"><%= FORMAT(odata[a].tstocked) %></td>
+	<td class="r"><%= FORMAT(odata[a].tsold) %></td>
 	<td class="r"><%= FORMAT(odata[a].avail) %></td>
 	<% 
 		var ao = (odata[a] == null ? 0 : odata[a].avail);
@@ -309,8 +309,8 @@ for (var a : sel2)
 	<tr>
 	<td><%= LINK(a,a.code) %></td>
 	<td><%= STR2HTML(a.product_line == null ? "" : a.product_line.code) %></td>
-	<td class="r"><%= FORMAT(rdata[a].stocked) %></td>
-	<td class="r"><%= FORMAT(rdata[a].sold) %></td>
+	<td class="r"><%= FORMAT(rdata[a].tstocked) %></td>
+	<td class="r"><%= FORMAT(rdata[a].tsold) %></td>
 	<td class="r"><%= FORMAT(rdata[a].avail) %></td>
 	<% 
 		var ao = (odata[a] == null ? 0 : odata[a].avail);
