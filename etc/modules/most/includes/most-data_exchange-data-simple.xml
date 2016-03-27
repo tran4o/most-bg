@@ -704,6 +704,9 @@ var quantity = row[11];
 var product_line = row[12];
 var vendor = row[13];
 
+price = price.replace(".", ",");
+purchase_order_no = purchase_order_no.replace("-" + deal_id, "");
+
 var invoice_code = invoice_no.castToString();
 while (invoice_code.length() < 10 ) {
     invoice_code = "0" + invoice_code;
@@ -819,7 +822,7 @@ stockobj.invoice = invobj;
 stockobj.bundle_number = bundle_id;
 stockobj.quantity = quantity;
 stockobj.article = artobj;
-stockobj.price = price;
+stockobj.price = PARSE_DOUBLE(price);
 stockobj.total = PARSE_DOUBLE(price) * PARSE_INTEGER(quantity);
 
 // add serial if this is the first creation of protocol_stock
