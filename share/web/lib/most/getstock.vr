@@ -1,3 +1,8 @@
+/*eslint new-cap: [0] */
+/*eslint quotes: [2, "double"]*/
+/*global session, DATA_ORDERED, SDATA, PARSE_INTEGER, PARSE_DOUBLE */
+/*global info, error, db, java, M */
+/*global db */
 
 var INITIAL = 0;        // disable after inital import
 var TEST = 0;        // disable after inital import
