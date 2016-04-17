@@ -41,8 +41,7 @@
    </name>
    <description>
     <value>
-        <en-US>
-        
+        <en-US>        
         <![CDATA[<%
     
 File format for import
@@ -54,14 +53,11 @@ File format for import
 4 : family desc
 
          %>]]>
-
         </en-US>
     </value>
    </description>
    <template>
        <value><![CDATA[<%
-
-<%
       
 //0 : family id
 //1 : product line
@@ -101,8 +97,6 @@ pl.product_group = cat;
 pl.name = row[3];
 pl.commit();
 
-%>
-
            %>]]>
            </value>
    </template>
@@ -119,7 +113,6 @@ pl.commit();
       <value>JmwQmr8HSuqaHlh6dYHI4Q</value>
    </uuid>
 </object>
-
 <!--  -->
 <object code="most:import_opg_from_hp" objectdef="data_import_xls" module="core" >
    <sort_id>
@@ -282,8 +275,6 @@ pl.commit();
    </uuid>
 </object>
 <!--  -->
-
-
 <object code="most:sales" objectdef="data_import_xls" module="core" >
    <sort_id>
       <value>0</value>
@@ -627,7 +618,7 @@ return true;
       <value>W2VC7S6uR_-lRkTG6nJqwQ</value>
    </uuid>
 </object>
-
+<!--  -->
 <object code="PRODUCT LINE MIGRATION" objectdef="data_import_xls" module="core" >
    <sort_id>
       <value>0</value>
@@ -659,7 +650,7 @@ return true;
       <value>N3omIB1RRQq7DfoVdiEvGA</value>
    </uuid>
 </object>
-
+<!--  -->
 <object code="most:import_invoice_from_hp" objectdef="data_import_xls" module="core" >
    <sort_id>
       <value>0</value>
@@ -684,6 +675,7 @@ the file should have these columns : 
 5 - deal id for item (OPG)
 6 - bundle id
 7 - article code (product part number)
+8 - serial number
 11 - quantity (integer)
 12 - product line (as code in system)
 13 - vendor (code as in system, i.e. HPE, HPI)
@@ -707,11 +699,21 @@ var price = row[4];
 var deal_id = row[5];
 var bundle_id = row[6];
 var article_code = row[7];
+var serial_number = row[8];
 var quantity = row[11];
 var product_line = row[12];
 var vendor = row[13];
 
-if (PARSE_INTEGER(quantity) == 0) {
+price = price.replace(".", ",");
+purchase_order_no = purchase_order_no.replace("-" + deal_id, "");
+
+var invoice_code = invoice_no.castToString();
+while (invoice_code.length() < 10 ) {
+    invoice_code = "0" + invoice_code;
+}
+invoice_code = "INV" + invoice_code;
+
+if (PARSE_INTEGER(quantity) == null) {
     return false;    
 }
 
@@ -720,7 +722,7 @@ function PARSE_OPGDATE(d) {
         var s = d.substring(0,6) + "20" + d.substring(6);
         s = s.replace("/", ".");
         info(s);
-     	return java.date.parse("dd.MM.yyyy", s);
+         return java.date.parse("dd.MM.yyyy", s);
 	} else {
 		return java.date.parse("yyyy-MM-dd", d);
 	}
@@ -774,20 +776,23 @@ function prod_find_or_create(code, name, product_line, description, vendor) {
     return artobj;
 }
 
-var invobj = db.most.invoice_stock.INSTANCES[invoice_no];
+var invobj = db.most.invoice_stock.INSTANCES[invoice_code];
 var vendobj = db.contacts.vendor.INSTANCES[vendor];
 
 if (invobj == null) {
-    info("creating new invoice: " + invoice_no);
+    info("creating new invoice: " + invoice_code);
 
     invobj = new db.most.invoice_stock();
-    invobj.code = invoice_no;
+    invobj.code = invoice_code;
+    invobj.name = invoice_no;
     invobj.vendor = vendobj;
+//    invobj.contract = invoice_contract;
     invobj.invoice_date = PARSE_OPGDATE(invoice_date);
     invobj.purchase_order = purchase_order_no;
     invobj.import_time = java.date.today();
     invobj.total = net_invoice_price;
     invobj.description["en-US"] = "manual import from HP/XLS";
+    invobj.commit();
 } else {
     info("found invoice: " + invoice_no);
     if (invobj.description != "manual import from HP/XLS") {
@@ -799,35 +804,57 @@ if (invobj == null) {
 var artobj = prod_find_or_create(article_code, article_code, product_line, "", vendor);
 var opg = db.most.opg.INSTANCES[deal_id];
 
-var stockobj = new db.most.protocol_stock();
+var stockobj;
+
+// check if this is a serial number part of series of serials
+if (serial_number != null && serial_number.length()) {
+    stockobj = SDATA(invobj, "stocks", "stocks.article.id='" + artobj.id + "'");
+    if (stockobj != null) {
+        info("only add serial [" + serial_number + "] for article " + artobj.code);
+        stockobj.serial_ids << serial_number;
+        return;
+    }
+} 
+
+// create new protocol entry if one was not resolved via serial
+stockobj = new db.most.protocol_stock();
 stockobj.invoice = invobj;
 stockobj.bundle_number = bundle_id;
 stockobj.quantity = quantity;
 stockobj.article = artobj;
-stockobj.price = price;
+stockobj.price = PARSE_DOUBLE(price);
 stockobj.total = PARSE_DOUBLE(price) * PARSE_INTEGER(quantity);
 
+// add serial if this is the first creation of protocol_stock
+if (serial_number != null && serial_number.length()) {
+    info("adding serial [" + serial_number + "] to article " + artobj.code);
+    stockobj.serial_ids << serial_number;
+}
+
+// try to find the corresponding OPG and set it
 if (opg != null) {
   info("OPG resolved to " + deal_id);
-  stockobj.opg = stockobj;
+  stockobj.opg = opg;
 } else { 
   if (deal_id != null) { 
      info("could not resolve OPG " + deal_id);
   }
 }
 
+// convert the date to date object for the real/official date
 var dtbrf = java.date.format("dd.MM.yyyy", invobj.invoice_date);
 var dateobj = db.most.protocol_date.INSTANCES[dtbrf];
 if (dateobj == null) {
     error("date obj not found"  + dtbrf);    
-    
 } else { 
     stockobj.real_date = dateobj;
+    stockobj.official_date = dateobj;
     info("add position for: " + article_code + " of " + invoice_no);
-    stockobj.commit();    
 }
 
-%> ]]></value>
+stockobj.commit();
+
+%>  ]]></value>
    </template>
    <header_row>
       <value>0</value>
@@ -842,7 +869,6 @@ if (dateobj == null) {
       <value>1qLpEgPpQ8SprN9HeeIrqA</value>
    </uuid>
 </object>
-
-
+<!--  -->
 
 </objects></import>

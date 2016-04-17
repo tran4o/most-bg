@@ -402,8 +402,9 @@ for (var a : sel)
 <object code="MOST BG - HP" objectdef="report_vsp" module="reports" cond="&quot;uuid&quot; = 'Xlss2kpYRZq7y10PfxQcjw'">
    <name>
       <value>
-         <en-US>МОСТ протокол - HP</en-US>
-         <bg-BG>МОСТ протокол - HP ASCII</bg-BG></value>
+         <en-US>МОСТ protocol - HP ASCII</en-US>
+         <bg-BG>МОСТ протокол - HP ASCII</bg-BG>
+       </value>
    </name>
    <sort_id>
       <value>0</value>
@@ -423,7 +424,8 @@ for (var a : sel)
    </is_selection_obligatory>
    <content>
       <value>
-         <en-US><![CDATA[<% if (!session.loggedIn()) return; %><%vsp:include page="${web.lib.dir}/doctype.vsp" />
+         <en-US><![CDATA[
+<% if (!session.loggedIn()) return; %><%vsp:include page="${web.lib.dir}/doctype.vsp" />
 <html style="padding:0; margin:0;">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -445,16 +447,15 @@ for (var a : sel)
 <body style="padding:0;margin:0;font-family : 'Arial', 'Lucida Grande', 'Tahoma', 'Verdana' ; font-size:15pt;">
 <%
 var dateo = param.date;
-var sel = db.contacts.vendor.SELECT("id IN (SELECT article.vendor FROM most.protocol_stock )");
-sel.is_cached=false;
-for (var ven : sel) 
+var vendors = db.contacts.vendor.SELECT("id IN (SELECT article.vendor FROM most.protocol_stock )");
+vendors .is_cached=false;
+for (var ven : vendors) 
 {
-	var tlines=0;
+	var tlines = 0;
 	var file = new java.io.TmpFile("txt");
 	file.setEncoding("UTF-8");
 
-	function fix(str,len) 
-	{
+	function fix(str,len) {
 		str+="";
 		if (str.length() > len) {
 			return str.substring(0,len);
@@ -464,8 +465,7 @@ for (var ven : sel)
 		return str;
 	}
 
-	function fixR(str,len) 
-	{
+	function fixR(str,len) {
 		str+="";
 		if (str.length() > len) {
 			return str.substring(0,len);
@@ -482,14 +482,16 @@ for (var ven : sel)
 		return fix("CUS"+code,27);
 	}
 	function formatCustomerName(name) {
-		if (name == null)
-			name="C_NAME";
+		if (name == null) {
+			name="C_NAME";            
+        }
 		return fix(name,35);
 	}
 	
 	function formatCustomerAddr(name) {
-		if (name == null)
-			name="C_ADDR";
+		if (name == null) {
+			name="C_ADDR";            
+        }
 		return fix(name,35);
 	}
 	
@@ -507,7 +509,6 @@ for (var ven : sel)
 	function formatCustomerCode(code) {
 		return fix(code,22);
 	}
-	
 	
 	function formatCustomerId2(code) {
 		return fix("PRS"+code,37);
@@ -532,13 +533,13 @@ for (var ven : sel)
 		file.write(str+"\r\n");
 	}
 	myWrite("HDRFLASH1001WS00425  MOST COMPUTERS LTD.                ZACHARY MAVROV                                                        "
-		+ java.date.format( "yyyyMMddHHmm",java.date.now() )
-		+ java.date.format( "yyyyMMdd",dateo.date )
-		+ java.date.format( "yyyyMMdd",dateo.date )
-		+ "XXXXX"
+		+ java.date.format( "yyyyMMddHHmm", dateo.date )
+		+ java.date.format( "yyyyMMdd", dateo.date)
+		+ java.date.format( "yyyyMMdd", dateo.date)
+		+ java.date.format( "yyDDD", dateo.date )
 		+ "0"
 		,160);
-	
+
 	// ALL ARTICLES -----------------
 	var tt = selector;
 	if (tt != null) 
@@ -627,28 +628,30 @@ for (var ven : sel)
 		);
 	}
 	
-	var sel1 = db.most.protocol_sale.SELECT("official_date = :DID AND stock.article.vendor = :VID AND customer IS NOT NULL ORDER BY customer.code,code,id");
-	sel1["DID"]=dateo.id;
-	sel1["VID"]=ven.id;
-	sel1.is_cached=false;
-	for (var p : sel1) 
+	var sales = db.most.protocol_sale.SELECT("official_date = :DID AND stock.article.vendor = :VID AND customer IS NOT NULL ORDER BY customer.code,code,id");
+	sales["DID"]=dateo.id;
+	sales["VID"]=ven.id;
+	sales.is_cached=false;
+	for (var p : sales) 
 	{
 		var ostr;
 
-		if (p.stock.opg != null && p.opg != null)
-			ostr=formatOPG("BGL"+p.stock.opg.code)+			// UPFRONT OPG
-				 formatOPG(p.opg.code);						// RABAT OPG
-				 
-		else if (p.stock.opg != null)
-			ostr = formatOPG("BGL"+p.stock.opg.code)+			// UPFRONT OPG
+		if (p.stock.opg != null && p.opg != null) {
+			ostr=formatOPG("BGL"+p.stock.opg.code)+		// UPFRONT OPG
+				 formatOPG(p.opg.code);					// RABAT OPG
+        } 				 
+		else if (p.stock.opg != null) { 
+			ostr = formatOPG("BGL"+p.stock.opg.code)+   // UPFRONT OPG			
+				   formatOPG("");		
+        }		   
+		else if (p.opg != null) {                       
+			ostr = formatOPG("BGL"+p.opg.code)+			// RABAT OPG			
 				   formatOPG("");
-				   
-		else if (p.opg != null)
-			ostr = formatOPG(p.opg.code)+						// RABAT OPG
-				   formatOPG("");
-		else
+        }
+		else {
 			ostr = formatOPG("")+formatOPG("");
-
+        }
+        
 		myWrite(
 			formatCustomerId2(p.customer.abbreviation)+
 			formatProductIdNoPrefix(p.stock.article.code)+

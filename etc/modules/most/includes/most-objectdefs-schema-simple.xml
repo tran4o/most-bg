@@ -147,7 +147,7 @@ if (this.opg == null) {
 	this.opg_entry=null;
 } else {
 	this.opg_entry=null;
-    if ( opg.entries != null) { 
+    if ( this.opg.entries != null) { 
         for (var e : this.opg.entries) if (e.article == this.article) {
             this.opg_entry=e;
             break;
