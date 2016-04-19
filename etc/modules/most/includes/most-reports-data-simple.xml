@@ -599,6 +599,10 @@ for (var ven : vendors)
 
 		sl = db.most.state_adjustment_official.VSQL_QUERY_SUM("SELECT official_value AS VAL WHERE article = :AID AND \"date\" <= :DTE",params);
 		if (sl.next() && sl.getInt("RES") != null) tsold+=sl.getInt("RES"); 
+
+		// if total STOCKED is zero -> continue
+		if ((tstocked - tsold) == 0) continue;
+
 		myWrite(
 			formatProductId(a.code)+
 			formatNumber10(stocked)+
