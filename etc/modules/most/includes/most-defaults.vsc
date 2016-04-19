@@ -29,8 +29,8 @@ for (var e : db.most.article.SELECT("product_line.id IS NULL"))
 	e.commit();
 }
 
-var FROM = 2015;
-var TO = 2016;
+var FROM = 2007;
+var TO = 2014;
 for (var y=FROM;y<=TO;y++) {
 	var year = db.most.protocol_year.INSTANCES[""+y];
 	if (year == null) {

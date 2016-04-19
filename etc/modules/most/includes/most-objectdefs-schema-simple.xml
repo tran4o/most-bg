@@ -155,7 +155,7 @@ if (this.opg == null) {
     }
 	if (this.opg_entry == null) {
 		this.opg=null; 
-		java.log.error("OPG ENTRY NOT FOUND! Reset opg to null | "+this.toString());
+		java.log.error("OPG ENTRY NOT FOUND! Reset opg to null | ARTICLE " + this.article + " | OBJ " + this.toString());
 	}
 }
                           ]]></value>
@@ -2390,6 +2390,22 @@ this.product_line=this.article.product_line;
                 </name>   	
         	</deal_type>		
 
+        	<mc_code>
+				<category>main.basic</category>
+                <sort_id>140</sort_id>
+                <data_source>input</data_source>
+                <data_type>varchar</data_type>
+                <is_inmaintbl>true</is_inmaintbl>
+  				<name>
+                    <en-US>MC Code</en-US>
+                </name>
+                <name>
+                    <de-DE>MC Code</de-DE>
+                </name>
+                <name>
+                    <bg-BG>MC Код</bg-BG>     
+                </name>   	
+        	</mc_code>
         	
 			<valid_for>	
 				<data_source>relation</data_source>
