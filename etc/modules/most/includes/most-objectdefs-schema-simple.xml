@@ -2372,7 +2372,6 @@ this.product_line=this.article.product_line;
 			<code is_keep_settings="true">
 				<is_unique>true</is_unique>
 			</code>
-
         	
         	<deal_type>
 				<category>main.basic</category>
@@ -2390,6 +2389,25 @@ this.product_line=this.article.product_line;
                     <bg-BG>Вид сделка</bg-BG>     
                 </name>   	
         	</deal_type>		
+
+        	
+			<valid_for>	
+				<data_source>relation</data_source>
+				<category>main.basic</category>
+				<sort_id>8000</sort_id>
+				<related_objectdef>contacts.company</related_objectdef>	
+				<value_table>$(DB_PREFIX)_m_var_vopgs</value_table>
+                <is_multiple>true</is_multiple>
+  				<name>
+                    <en-US>Valid for (company)</en-US>
+                </name>
+                <name>
+                    <de-DE>Gültig für (Unternehmen)</de-DE>
+                </name>
+                <name>
+                    <bg-BG>Важи за (компания)</bg-BG>
+                </name>                
+			</valid_for>
 			
 			<discount_mode>
 				<category>main.basic</category>
