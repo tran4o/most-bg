@@ -398,7 +398,7 @@ if (BID == null || BID == "") {
 				sale.real_date = rdate;
 				sale.commit();
 				//-----------------------------------
-				info((count+1)+" DONE : "+OBJSTR(customer)+" | "+OBJSTR(artcode)+" | "+rdate+" | "+sale.most_sale_total);
+				// info((count+1)+" DONE : "+OBJSTR(customer)+" | "+OBJSTR(artcode)+" | "+rdate+" | "+sale.most_sale_total);
 			} 
 		}
 	}
