@@ -3365,7 +3365,7 @@ if (this.is_active)
 					var diff_official = tstocked - tsold;
 					if (diff_official != 0) 
 					{
-						java.log.info("ADJUST MISSING ARTICLE ODIT : "+a.code);
+						// java.log.info("ADJUST MISSING ARTICLE ODIT : "+a.code);
 						if (diff_official < 0) {
 						    java.log.info("2) FOR ARTICLE="+a.code+" | HP="+0+" | MOST="+0+" | TSTOCKED="+tstocked+" | TSOLD="+tsold);
 							java.log.error("2) CAN NOT DISTRIBUTE odit value TO STOCKS | DATE="+g.date+" | ARTICLE = "+a+" | OFFICIAL 0 | REAL 0 | DIFF OFFIC "+(diff_official));
