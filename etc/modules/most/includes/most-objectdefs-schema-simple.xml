@@ -2372,6 +2372,24 @@ this.product_line=this.article.product_line;
 			<code is_keep_settings="true">
 				<is_unique>true</is_unique>
 			</code>
+
+        	
+        	<deal_type>
+				<category>main.basic</category>
+                <sort_id>140</sort_id>
+                <data_source>input</data_source>
+                <data_type>varchar</data_type>
+                <is_inmaintbl>true</is_inmaintbl>
+  				<name>
+                    <en-US>Deal type</en-US>
+                </name>
+                <name>
+                    <de-DE>Angebotstyp</de-DE>
+                </name>
+                <name>
+                    <bg-BG>Вид сделка</bg-BG>     
+                </name>   	
+        	</deal_type>		
 			
 			<discount_mode>
 				<category>main.basic</category>

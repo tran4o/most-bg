@@ -136,7 +136,7 @@ while (res.next()) {
             console.log("update opg. code " + oc + ", mode is [" + res.getString("discount_mode") + "]" + 
             " old v" + vopg[oc] + " new v" + res.getInt("version"));        
         } else {
-            // opg.deal_type = res.getString("deal_type"); db.commit();   // just once
+            opg.deal_type = res.getString("deal_type"); db.commit();   // just once
             console.log("will NOT UPDATE opg. version is same. code " + oc  + " v" + opg.version);
             continue;
         }

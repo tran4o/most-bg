@@ -5,7 +5,9 @@
 <object code="MOST BG - INTERNAL" objectdef="report_vsp" module="reports" cond="&quot;uuid&quot; = 'm9lIOjDlSRO84SOiC6GWVw'">
    <name>
       <value>
-         <bg-BG>МОСТ протокол - ВЪТРЕШЕН</bg-BG></value>
+         <en-US>МОСТ protocol - internal</en-US>
+         <bg-BG>МОСТ протокол - вътрешен</bg-BG>
+       </value>
    </name>
    <sort_id>
       <value>0</value>
@@ -533,7 +535,7 @@ for (var ven : vendors)
 		file.write(str+"\r\n");
 	}
 	myWrite("HDRFLASH1001WS00425  MOST COMPUTERS LTD.                ZACHARY MAVROV                                                        "
-		+ java.date.format( "yyyyMMddHHmm", dateo.date )
+		+ java.date.format( "yyyyMMddHHmm", java.date.now() )
 		+ java.date.format( "yyyyMMdd", dateo.date)
 		+ java.date.format( "yyyyMMdd", dateo.date)
 		+ java.date.format( "yyDDD", dateo.date )
@@ -649,7 +651,7 @@ for (var ven : vendors)
 				   formatOPG("");
         }
 		else {
-			ostr = formatOPG("")+formatOPG("");
+			ostr = formatOPG("BGL")+formatOPG("");
         }
         
 		myWrite(
