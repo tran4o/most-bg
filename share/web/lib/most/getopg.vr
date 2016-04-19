@@ -5,6 +5,19 @@ var DEBUG = false;
 var pcnt = 0;
 var pnew = 0;
 
+function find_vendor(pl) {
+    var s1 = db.most.article.SELECT("product_line.code=:pl AND vendor.code<>'HPOLD'");
+    s1["pl"] = pl;
+    
+    if (s1.size > 0) {
+        var vend = s1[0].vendor;
+        if (DEBUG) console.log("identified vendor: " + vend.code);
+        return vend;
+    } 
+    
+    return null;
+}
+
 function prod_find_or_create(code, name, product_line, description, vendor) {
     //trim code
     if ( code.indexOf("#") > 0 ) {
@@ -13,12 +26,15 @@ function prod_find_or_create(code, name, product_line, description, vendor) {
 
     var artobj = db.most.article.INSTANCES[code];
 
+    if (vendor == null) {
+        vendor = find_vendor(product_line);
+    }
+
     if (artobj != null) {
-        if (DEBUG) console.log("product " + code + " found. vendor is " + vendor);
+        console.log("product " + code + " found. vendor is " + vendor);
     } else {
         if (DEBUG) console.log("product " + code + " not found. new instance. vendor is " + vendor);
         artobj = new db.most.article();
-        pnew++;
     }
 
     vendor = db.contacts.vendor.INSTANCES[vendor];
@@ -34,18 +50,23 @@ function prod_find_or_create(code, name, product_line, description, vendor) {
         if (plobj != null) {
             if (DEBUG) console.log("product line " + product_line + " found");
         } else {
-            if (DEBUG) console.log("product line " + code + " not found. new instance");
+            console.log("product line " + code + " not found. new instance");
             plobj = new db.most.product_line();
             plobj.code = product_line;
         }
         artobj.product_line = plobj;
     }
 
-    artobj.description["en-US"] = description;
-    artobj.vendor = vendor;
+    if( description != null) {
+        if (DEBUG) console.log("updating article descripion");
+        artobj.description["en-US"] = description;    
+    }
+        
+    if (artobj.vendor == null) {
+        artobj.vendor = vendor;    
+    }
+    
     artobj.commit();
-
-    pcnt++;
     return artobj;
 }
 
@@ -68,54 +89,27 @@ function connect_source_db() {
 
 var con = connect_source_db();
 
+var opgfilt = "(( DiscountMode = 'R' or DiscountMode = 'U' or DiscountMode = 'M' ) and LastModifiedDate > '2014-01-01')";
 var lastmod;
 var cond;
+var vopg = new M();
 
 if ( INITIAL ) {
-    lastmod = "2014-01-01";
-    console.log("getting initial after " + lastmod);
-    cond = "( DiscountMode = 'R' or DiscountMode = 'U' ) and LastModifiedDate > '" + lastmod + "' ) or DealID in ( select distinct DealID from selinv3 inner join invdet id on selinv3.InvoiceNo = id.InvoiceNo )";
+    console.log("getting initial after 2014-01-01");
+    cond = opgfilt + " or DealID in ( select distinct DealID from selinv3 inner join invdet id on selinv3.InvoiceNo = id.InvoiceNo )";
 } else {
-    var params = new M();
-    var sl = db.most.invoice_stock.VSQL_QUERY_MAX("SELECT invoice_date AS VAL", params);
-    var mt = null;
-
-    if (sl.next()) {
-        mt = sl.getDate("RES");
-        lastmod = java.date.format("yyyy-MM-dd", mt);
+    for (var opg: db.most.opg.SELECT()) {
+        vopg[opg.code] = opg.version;
     }
-
-    console.log("getting everything after " + lastmod);
-   // cond = "LastModifiedDate >= '" + lastmod + "'";
-    cond =
-        "DealID in" +
-        "   ( select distinct" +
-        "       invdet.DealID" +
-        "   from" +
-        "       invdet" +
-        "   where" +
-        "       InvoiceNo in (" +
-        "           select" +
-        "               InvoiceNo" +
-        "           from " +
-        "               invoic " +
-        "           where " +
-        "               invoic.InvoiceDate > '" + lastmod + "')" +
-        "   )" +
-        "and ( DiscountMode = 'R' or DiscountMode = 'U' )";
+    cond = opgfilt;
 }
-
-/*
-var res = con.select("select DealID as name, 'OPG' + RIGHT('0000000000' + DealID, 10) as code, DealDescription as description, SelloutStartDate as valid_from, SelloutEndDate as valid_to, DiscountMode as discount_mode, Version as version, LastModifiedDate as update_time from dbo.opg where ( DiscountMode = 'R' and LastModifiedDate > '" + lastmod + "' ) or DealID in ( select distinct DealID from selinv3 inner join invdet id on selinv3.InvoiceNo = id.InvoiceNo ) ");
-*/
-
-var q = "select DealID as code, DealDescription as description, SelloutStartDate as valid_from, SelloutEndDate as valid_to, DiscountMode as discount_mode, Version as version, LastModifiedDate as update_time from dbo.opg where " + cond;
-
+    
+var q = "select opg.DealID as code, opgcount.detcount, opg.DealType as deal_type, DealDescription as description, SelloutStartDate as valid_from, SelloutEndDate as valid_to, DiscountMode as discount_mode, Version as version, LastModifiedDate as update_time from dbo.opg inner join ( select count(*) as detcount, DealID from dbo.opgdet group by DealID ) opgcount on opg.DealID = opgcount.DealID where " + cond;
 
 var opglst = [];
 var cnt = 0; var cntnew = 0;
 
-if (INITIAL==false)  {
+if (INITIAL==false && DEBUG==true)  {
     var opgcodes = [];
     var res = con.select(q);
 
@@ -138,7 +132,14 @@ while (res.next()) {
     var p;
 
     if (opg != null) {
-        if (DEBUG) console.log("update opg. code " + oc);
+        if (vopg[oc] != res.getInt("version")) {
+            console.log("update opg. code " + oc + ", mode is [" + res.getString("discount_mode") + "]" + 
+            " old v" + vopg[oc] + " new v" + res.getInt("version"));        
+        } else {
+            // opg.deal_type = res.getString("deal_type"); db.commit();   // just once
+            console.log("will NOT UPDATE opg. version is same. code " + oc  + " v" + opg.version);
+            continue;
+        }
     } else {
         if (DEBUG) console.log("create opg. code " + oc + " / " + res.getString("discount_mode"));
         opg = new db.most.opg();
@@ -149,22 +150,21 @@ while (res.next()) {
     if (res.getString("discount_mode") == "2") continue;
 
     opg.code = res.getString("code");
-    opg.discount_mode = res.getString("discount_mode");
+    opg.discount_mode = db.core.option_set.INSTANCES["discount_mode"].options[res.getString("discount_mode")];
     opg.description["en-US"] = res.getString("description");
 //    opg.name["en-US"] = res.getString("name");
     opg.valid_from = res.getDate("valid_from");
     opg.valid_to = res.getDate("valid_to");
     opg.update_time = res.getDate("update_time");
     opg.import_time = java.date.now();
-
-
-    opg["version"] = res.getInt("version");
+    opg.version = res.getInt("version");
+    opg.deal_type = res.getString("deal_type");
 
     opglst.push(opg);
     opg.commit();
 
     if ( cnt++ % 128 == 0 ) {
-        console.log("processed " + cnt + " OPG(s) and counting...");
+        console.log("reviewed " + cnt + " OPG(s) and counting...");
         db.commit();
         java.util.commitDBConnection();
     }
