@@ -1,0 +1,1087 @@
+HDRFLASH1001WS00425  MOST COMPUTERS LTD.                ZACHARY MAVROV                                                        2015122904312015122820151228153620
+SIT51640YE                                          0         0         2                                     0         0
+SIT51645AE                                          0         0       203                                     6         0
+SITA2Q79AA                                          0         0        48                                     0         0
+SITA2Z50AA                                          0         0       140                                     0         0
+SITA7F64A                                           0         0        34                                     0         0
+SITA7F65A                                           0         0        23                                     0         0
+SITAS615AA                                          0         0       600                                     0         0
+SITB3M72AV                                          0         0        10                                     0         0
+SITB3P06A                                           0         0         5                                     0         0
+SITB3P17A                                           0         0         3                                     0         0
+SITB3P19A                                           0         0         3                                     0         0
+SITB3P20A                                           0         0         6                                     0         0
+SITB3P21A                                           0         0         1                                     1         0
+SITB3P22A                                           0         0         6                                     0         0
+SITB3P24A                                           0         0         3                                     0         0
+SITB3Q10A                                           0         0         4                                     0         0
+SITB3Q11A                                           0         0         2                                     0         0
+SITB4A21A                                           0         0         3                                     0         0
+SITB4A22A                                           0         0         2                                     0         0
+SITB4U37AA                                          0         0       400                                     0         0
+SITB5L23A                                           0         0         6                                     0         0
+SITB6Y07A                                           0         0         1                                     0         0
+SITB6Y08A                                           0         0         1                                     0         0
+SITB6Y09A                                           0         0         1                                     0         0
+SITB6Y10A                                           0         0         1                                     0         0
+SITB6Y11A                                           0         0         1                                     0         0
+SITB6Y12A                                           0         0         1                                     0         0
+SITB6Y13A                                           0         0         1                                     0         0
+SITB6Y14A                                           0         0         1                                     0         0
+SITB9S57C                                           0         0        10                                     0         0
+SITBP937AA                                          0         0      1300                                     0         0
+SITC1823GE                                          0         0         2                                     0         0
+SITC1P70A                                           0         0         1                                     0         0
+SITC2N93AE                                          0         0        56                                     0         0
+SITC2P11AE                                          0         0        60                                     0         0
+SITC2P19AE                                          0         0         6                                     0         0
+SITC2P20AE                                          0         0        45                                     2         0
+SITC2P21AE                                          0         0        47                                     2         0
+SITC2P22AE                                          0         0        45                                     2         0
+SITC2P24AE                                          0         0        59                                     1         0
+SITC2P43AE                                          0         0        24                                     0         0
+SITC3837A                                           0         0         8                                     0         0
+SITC4096A                                           0         0         1                                     0         0
+SITC4127X                                           0         0         1                                     0         0
+SITC4129X                                           0         0         9                                     0         0
+SITC4154A                                           0         0         1                                     0         0
+SITC4802A                                           0         0         1                                     0         0
+SITC4810A                                           0         0        48                                     1         0
+SITC4811A                                           0         0        50                                     0         0
+SITC4814A                                           0         0         3                                     0         0
+SITC4815A                                           0         0         7                                     0         0
+SITC4816A                                           0         0        23                                     0         0
+SITC4817A                                           0         0         3                                     0         0
+SITC4844A                                           0         0        98                                     0         0
+SITC4900A                                           0         0         3                                     0         0
+SITC4901A                                           0         0         2                                     0         0
+SITC4902AE                                          0         0         1                                     0         0
+SITC4906AE                                          0         0         9                                     0         0
+SITC4907AE                                          0         0        26                                     0         0
+SITC4908AE                                          0         0        87                                     0         0
+SITC4909AE                                          0         0        18                                     0         0
+SITC4921AE                                          0         0         1                                     0         0
+SITC5023A                                           0         0         1                                     0         0
+SITC5024A                                           0         0         1                                     0         0
+SITC5025A                                           0         0         2                                     0         0
+SITC5F94A                                           0         0         2                                     0         0
+SITC6050A                                           0         0         7                                     0         0
+SITC6656AE                                          0         0        54                                     5         0
+SITC6657GE                                          0         0         5                                     0         0
+SITC6818A                                           0         0        34                                     0         0
+SITC7115A                                           0         0        25                                    21         0
+SITC7115X                                           0         0        48                                    30         0
+SITC7F93AV                                          0         0        10                                     0         0
+SITC7F95AV                                          0         0         1                                     0         0
+SITC8061X                                           0         0        14                                     0         0
+SITC8091A                                           0         0         4                                     0         0
+SITC8543YC                                          0         0         3                                     0         0
+SITC8719EE                                          0         0        23                                     1         0
+SITC8721EE                                          0         0         1                                     1         0
+SITC8727AE                                          0         0        21                                     2         0
+SITC8728AE                                          0         0         8                                     0         0
+SITC8766EE                                          0         0       126                                     0         0
+SITC8767EE                                          0         0         1                                     0         0
+SITC8771EE                                          0         0        32                                     2         0
+SITC8772EE                                          0         0         0                                    45         0
+SITC8773EE                                          0         0        25                                     1         0
+SITC8775EE                                          0         0        30                                     0         0
+SITC9351AE                                          0         0       166                                     0         0
+SITC9351CE                                          0         0       117                                     1         0
+SITC9352AE                                          0         0       151                                     2         0
+SITC9352CE                                          0         0       380                                     0         0
+SITC9361EE                                          0         0        14                                     0         0
+SITC9362EE                                          0         0         5                                     0         0
+SITC9364EE                                          0         0        68                                     0         0
+SITC9370A                                           0         0         0                                     4         0
+SITC9371A                                           0         0        17                                     0         0
+SITC9372A                                           0         0        15                                     1         0
+SITC9381A                                           0         0        23                                     1         0
+SITC9382A                                           0         0         4                                     1         0
+SITC9385AE                                          0         0       100                                     0         0
+SITC9386AE                                          0         0         0                                    35         0
+SITC9387AE                                          0         0         2                                     0         0
+SITC9390A                                           0         0         1                                     0         0
+SITC9398A                                           0         0         2                                     0         0
+SITC9400A                                           0         0         2                                     0         0
+SITC9410A                                           0         0         1                                     0         0
+SITC9414A                                           0         0         2                                     0         0
+SITC9429A                                           0         0         1                                     0         0
+SITC9454A                                           0         0         1                                     0         0
+SITC9460A                                           0         0         5                                     0         0
+SITC9461A                                           0         0         1                                     0         0
+SITC9471A                                           0         0         1                                     0         0
+SITC9483A                                           0         0         1                                     0         0
+SITC9484A                                           0         0         1                                     0         0
+SITC9503AE                                          0         0         4                                     0         0
+SITC9504EE                                          0         0         1                                     0         0
+SITC9518A                                           0         0         8                                     0         0
+SITC9730AC                                          0         0         0                                     2         0
+SITCB304AE                                          0         0        10                                     0         0
+SITCB316EE                                          0         0         9                                     0         0
+SITCB317EE                                          0         0        30                                     0         0
+SITCB318EE                                          0         0        55                                     0         0
+SITCB319EE                                          0         0        10                                     0         0
+SITCB320EE                                          0         0        22                                     0         0
+SITCB322EE                                          0         0        11                                     0         0
+SITCB323EE                                          0         0        78                                     0         0
+SITCB324EE                                          0         0        80                                     0         0
+SITCB325EE                                          0         0        39                                     0         0
+SITCB335EE                                          0         0       208                                     0         0
+SITCB337EE                                          0         0        20                                     0         0
+SITCB338EE                                          0         0        87                                     0         0
+SITCB381YC                                          0         0        24                                     0         0
+SITCB382YC                                          0         0         4                                     0         0
+SITCB383YC                                          0         0        11                                     0         0
+SITCB385A                                           0         0         2                                     1         0
+SITCB386A                                           0         0         2                                     1         0
+SITCB389A                                           0         0         3                                     0         0
+SITCB390YC                                          0         0         5                                     0         0
+SITCB435AD                                          0         0        19                                     6         0
+SITCB436A                                           0         0        73                                     0         0
+SITCB436AD                                          0         0         3                                    18         0
+SITCB459A                                           0         0         8                                     0         0
+SITCB473A                                           0         0         1                                     0         0
+SITCB540A                                           0         0         2                                     3         0
+SITCB543A                                           0         0        25                                     1         0
+SITCC364XC                                          0         0        47                                     0         0
+SITCC530AD                                          0         0        36                                     0         0
+SITCC531A                                           0         0         2                                     0         0
+SITCC531AC                                          0         0         1                                     0         0
+SITCC532A                                           0         0        18                                     0         0
+SITCC533A                                           0         0         7                                     0         0
+SITCC641EE                                          0         0        60                                     0         0
+SITCC643EE                                          0         0       214                                     5         0
+SITCC644EE                                          0         0        64                                     5         0
+SITCC653AE                                          0         0       127                                     3         0
+SITCC654AE                                          0         0        59                                     0         0
+SITCD644A                                           0         0         1                                     0         0
+SITCD971AE                                          0         0        82                                     0         0
+SITCD972AE                                          0         0        49                                     3         0
+SITCD973AE                                          0         0        68                                     1         0
+SITCE247A                                           0         0         1                                     0         0
+SITCE250A                                           0         0        13                                     0         0
+SITCE251A                                           0         0         7                                     0         0
+SITCE252A                                           0         0         7                                     0         0
+SITCE253A                                           0         0         7                                     0         0
+SITCE255XC                                          0         0        16                                     0         0
+SITCE261AC                                          0         0         1                                     0         0
+SITCE262AC                                          0         0         1                                     0         0
+SITCE263AC                                          0         0         1                                     0         0
+SITCE270A                                           0         0         5                                     0         0
+SITCE278A                                           0         0       133                                     2         0
+SITCE278AC                                          0         0         3                                     2         0
+SITCE278AD                                          0         0       132                                     4         0
+SITCE285A                                           0         0       263                                    62         0
+SITCE285AD                                          0         0        81                                    65         0
+SITCE320A                                           0         0        10                                     0         0
+SITCE321A                                           0         0        12                                     2         0
+SITCE322A                                           0         0        12                                     1         0
+SITCE323A                                           0         0        17                                     0         0
+SITCE390A                                           0         0        24                                     0         0
+SITCE390XC                                          0         0        14                                     0         0
+SITCE400X                                           0         0         6                                     0         0
+SITCE400YC                                          0         0         6                                     0         0
+SITCE401A                                           0         0        34                                     0         0
+SITCE401YC                                          0         0        14                                     0         0
+SITCE402A                                           0         0        36                                     0         0
+SITCE402YC                                          0         0         9                                     0         0
+SITCE403A                                           0         0         9                                     1         0
+SITCE403YC                                          0         0        10                                     0         0
+SITCE410A                                           0         0         1                                     0         0
+SITCE410XC                                          0         0        16                                     0         0
+SITCE410XD                                          0         0         0                                    18         0
+SITCE411AC                                          0         0        13                                     0         0
+SITCE413AC                                          0         0        17                                     0         0
+SITCE505D                                           0         0         3                                     0         0
+SITCE505X                                           0         0        22                                    63         0
+SITCE505XC                                          0         0        30                                     0         0
+SITCE526A                                           0         0         2                                     0         0
+SITCE651A                                           0         0        22                                     0         0
+SITCE658A                                           0         0        40                                     0         0
+SITCE710A                                           0         0         1                                     0         0
+SITCE712A                                           0         0         1                                     0         0
+SITCE740A                                           0         0        13                                     0         0
+SITCE918A                                           0         0         4                                     0         0
+SITCE993A                                           0         0         1                                     0         0
+SITCF066A                                           0         0         1                                     0         0
+SITCF083A                                           0         0         1                                     0         0
+SITCF116A                                           0         0         1                                     0         0
+SITCF210X                                           0         0         0                                    14         0
+SITCF214X                                           0         0         5                                     6         0
+SITCF243A                                           0         0         6                                     0         0
+SITCF270A                                           0         0         1                                     0         0
+SITCF274A                                           0         0         2                                     0         0
+SITCF280XC                                          0         0        40                                     0         0
+SITCF280XD                                          0         0        21                                     1         0
+SITCF281XC                                          0         0         9                                     0         0
+SITCF283A                                           0         0        53                                    66         0
+SITCF283AD                                          0         0        10                                     0         0
+SITCF300AC                                          0         0        28                                     0         0
+SITCF301AC                                          0         0         1                                     0         0
+SITCF303AC                                          0         0         1                                     0         0
+SITCF333A                                           0         0         3                                     0         0
+SITCF338A                                           0         0         1                                     0         0
+SITCF346A                                           0         0         2                                     0         0
+SITCF358A                                           0         0         4                                     0         0
+SITCF371AM                                          0         0         3                                     0         0
+SITCF373AM                                          0         0         2                                     0         0
+SITCF377A                                           0         0         2                                     0         0
+SITCF380X                                           0         0         7                                     0         0
+SITCF399A                                           0         0        11                                     0         0
+SITCF400A                                           0         0         8                                     0         0
+SITCF400X                                           0         0         5                                     0         0
+SITCF401A                                           0         0        15                                     0         0
+SITCF402A                                           0         0        16                                     0         0
+SITCF455A                                           0         0         3                                     0         0
+SITCF485A                                           0         0        13                                     0         0
+SITCF547A                                           0         0         3                                     0         0
+SITCG826A                                           0         0         1                                     0         0
+SITCG966A                                           0         0        19                                     0         0
+SITCG969A                                           0         0         3                                     0         0
+SITCG970A                                           0         0         2                                     0         0
+SITCH081AE                                          0         0         7                                     0         0
+SITCH561EE                                          0         0        30                                    75         0
+SITCH562EE                                          0         0       247                                     5         0
+SITCH563EE                                          0         0       334                                    20         0
+SITCH565A                                           0         0        24                                     0         0
+SITCH644A                                           0         0         4                                     0         0
+SITCH645A                                           0         0         2                                     4         0
+SITCM994A                                           0         0         1                                     0         0
+SITCM996A                                           0         0         2                                     0         0
+SITCN046AE                                          0         0        28                                     1         0
+SITCN047AE                                          0         0         9                                     3         0
+SITCN049AE                                          0         0        50                                     0         0
+SITCN053AE                                          0         0        30                                     0         0
+SITCN054AE                                          0         0        67                                     0         0
+SITCN055AE                                          0         0        64                                     0         0
+SITCN056AE                                          0         0        30                                     0         0
+SITCN057AE                                          0         0         2                                     0         0
+SITCN550A                                           0         0         4                                     0         0
+SITCN551A                                           0         0         4                                     1         0
+SITCN598A                                           0         0         1                                     0         0
+SITCN625AE                                          0         0         5                                     0         0
+SITCN637EE                                          0         0         4                                     0         0
+SITCQ775A                                           0         0         1                                     0         0
+SITCQ891A                                           0         0         4                                     0         0
+SITCQ893A                                           0         0         1                                     0         0
+SITCR768A                                           0         0         5                                     0         0
+SITCV037A                                           0         0         5                                     0         0
+SITCV136A                                           0         0         6                                     0         0
+SITCZ102AE                                          0         0         0                                   119         0
+SITCZ111AE                                          0         0         4                                    45         0
+SITCZ112AE                                          0         0       170                                    18         0
+SITCZ129A                                           0         0        12                                     1         0
+SITCZ133A                                           0         0        18                                     2         0
+SITCZ165A                                           0         0         2                                     1         0
+SITCZ172A                                           0         0         2                                     0         0
+SITCZ173A                                           0         0         2                                     1         0
+SITCZ181A                                           0         0        37                                     0         0
+SITCZ183A                                           0         0        71                                     0         0
+SITCZ262A                                           0         0         1                                     0         0
+SITD1F58AV                                          0         0         2                                     0         0
+SITD1F67AV                                          0         0         1                                     0         0
+SITD3B20AV                                          0         0        10                                     0         0
+SITD3B22AV                                          0         0        10                                     0         0
+SITD5U72AV                                          0         0        11                                     0         0
+SITD7P53A4                                          0         0         1                                     0         0
+SITD8H29AV                                          0         0         1                                     0         0
+SITD8R82AV                                          0         0         2                                     0         0
+SITD8T58AV                                          0         0         2                                     0         0
+SITD8T60AV                                          0         0         2                                     0         0
+SITD8T87AV                                          0         0         1                                     0         0
+SITD8T91AV                                          0         0         1                                     0         0
+SITD9P29A                                           0         0         1                                     0         0
+SITD9S30AV                                          0         0        10                                     0         0
+SITD9S32AV                                          0         0        10                                     0         0
+SITD9S50AV                                          0         0        10                                     0         0
+SITD9S56AV                                          0         0        10                                     0         0
+SITD9S58AV                                          0         0        10                                     0         0
+SITD9S63AV                                          0         0        10                                     0         0
+SITD9S67AV                                          0         0        10                                     0         0
+SITD9S75AV                                          0         0        10                                     0         0
+SITD9Y19AV                                          0         0        10                                     0         0
+SITDL139A                                           0         0       100                                     0         0
+SITE0X22AV                                          0         0        10                                     0         0
+SITE0X23AV                                          0         0        10                                     0         0
+SITE3E02A                                           0         0        21                                     0         0
+SITE4A82AV                                          0         0         2                                     0         0
+SITE4A88AV                                          0         0         1                                     0         0
+SITE4A90AV                                          0         0         1                                     0         0
+SITE4W60AV                                          0         0         2                                     0         0
+SITE5B66AV                                          0         0         1                                     0         0
+SITE5M74AA                                          0         0       250                                     0         0
+SITE5T56AV                                          0         0        10                                     0         0
+SITE5T64AV                                          0         0        10                                     0         0
+SITE5T75AV                                          0         0        10                                     0         0
+SITE5T76AV                                          0         0        10                                     0         0
+SITE5V26AV                                          0         0        10                                     0         0
+SITE5W25AV                                          0         0         2                                     0         0
+SITE5W33AV                                          0         0         1                                     0         0
+SITE5W39AV                                          0         0         2                                     0         0
+SITE5W45AV                                          0         0         2                                     0         0
+SITE5W48AV                                          0         0         2                                     0         0
+SITE5W49AV                                          0         0         1                                     0         0
+SITE6B67A                                           0         0         2                                     0         0
+SITE6B70A                                           0         0         1                                     0         0
+SITE6B72A                                           0         0         1                                     0         0
+SITE6U97AV                                          0         0         1                                     0         0
+SITE7U25AA                                          0         0        36                                     0         0
+SITF0G82AV                                          0         0         2                                     0         0
+SITF0U92EA                                          0         0         4                                     0         0
+SITF1H90AV                                          0         0         2                                     0         0
+SITF1H95AV                                          0         0         1                                     0         0
+SITF2D64AV                                          0         0         1                                     0         0
+SITF2D67AV                                          0         0         1                                     0         0
+SITF2D70AV                                          0         0         1                                     0         0
+SITF2D82AV                                          0         0         1                                     0         0
+SITF2D96AV                                          0         0         2                                     0         0
+SITF2P07AA                                          0         0        50                                     0         0
+SITF3W16AA                                          0         0        20                                     0         0
+SITF5S21C                                           0         0       111                                     0         0
+SITF5S40B                                           0         0        53                                     0         0
+SITF5W13AV                                          0         0         3                                     0         0
+SITF5W14AV                                          0         0         3                                     0         0
+SITF5W21AV                                          0         0         3                                     0         0
+SITF5W25AV                                          0         0         3                                     0         0
+SITF6F34AV                                          0         0         1                                     0         0
+SITF6F36AV                                          0         0         1                                     0         0
+SITF6G30AV                                          0         0         1                                     0         0
+SITF6G37AV                                          0         0         1                                     0         0
+SITF6G41AV                                          0         0         1                                     0         0
+SITF6G46AV                                          0         0         1                                     0         0
+SITF6G58AV                                          0         0         1                                     0         0
+SITF6G59AV                                          0         0         1                                     0         0
+SITF6G63AV                                          0         0         1                                     0         0
+SITF6G64AV                                          0         0         1                                     0         0
+SITF6G73AV                                          0         0         1                                     0         0
+SITF6H29AV                                          0         0         1                                     0         0
+SITF6H31AV                                          0         0         1                                     0         0
+SITF6H32AV                                          0         0         1                                     0         0
+SITF6H38AV                                          0         0         1                                     0         0
+SITF6N12AV                                          0         0        10                                     0         0
+SITF6N15AV                                          0         0         1                                     0         0
+SITF6N18AV                                          0         0         1                                     0         0
+SITF6Q81AV                                          0         0        10                                     0         0
+SITF6U65AE                                          0         0        57                                     1         0
+SITF6U66AE                                          0         0        57                                     1         0
+SITF6V24AE                                          0         0        57                                     0         0
+SITF6W13A                                           0         0         2                                     0         0
+SITF9M44AV                                          0         0         1                                     0         0
+SITF9M49AV                                          0         0         1                                     0         0
+SITF9M67AV                                          0         0         1                                     0         0
+SITFG972AV                                          0         0        20                                     0         0
+SITFS933AV                                          0         0         1                                     0         0
+SITG0N59AV                                          0         0        10                                     0         0
+SITG0N72AV                                          0         0         1                                     0         0
+SITG1K28AA                                          0         0       400                                     0         0
+SITG1K98AV                                          0         0         1                                     0         0
+SITG1L01AV                                          0         0         1                                     0         0
+SITG1L05AV                                          0         0         1                                     0         0
+SITG1L16AV                                          0         0         1                                     0         0
+SITG1P83AV                                          0         0         1                                     0         0
+SITG1P86AV                                          0         0         1                                     0         0
+SITG1P90AV                                          0         0         1                                     0         0
+SITG1P96AV                                          0         0         1                                     0         0
+SITG1Q04AV                                          0         0         1                                     0         0
+SITG1Q11AV                                          0         0         1                                     0         0
+SITG1Q14AV                                          0         0         1                                     0         0
+SITG1Q19AV                                          0         0         1                                     0         0
+SITG1Q20AV                                          0         0         1                                     0         0
+SITG1R25AV                                          0         0         1                                     0         0
+SITG1V22AV                                          0         0         1                                     0         0
+SITG3H19AV                                          0         0         1                                     0         0
+SITG3J47A                                           0         0         5                                     0         0
+SITG5R80AV                                          0         0         1                                     0         0
+SITG7D28AV                                          0         0         1                                     0         0
+SITG7U14AV                                          0         0         1                                     0         0
+SITG7U78AA                                          0         0       200                                     0         0
+SITG8R97AV                                          0         0        10                                     0         0
+SITG8S14AV                                          0         0        10                                     0         0
+SITG8S20AV                                          0         0        10                                     0         0
+SITG8S24AV                                          0         0        10                                     0         0
+SITG8S27AV                                          0         0        10                                     0         0
+SITG8S39AV                                          0         0        10                                     0         0
+SITG8S48AV                                          0         0        10                                     0         0
+SITG8S67AV                                          0         0        10                                     0         0
+SITG8S69AV                                          0         0        10                                     0         0
+SITG8S70AV                                          0         0        10                                     0         0
+SITG8S86AV                                          0         0        10                                     0         0
+SITG8S90AV                                          0         0        10                                     0         0
+SITG8S93AV                                          0         0        10                                     0         0
+SITG8S94AV                                          0         0        10                                     0         0
+SITG8S98AV                                          0         0        10                                     0         0
+SITG8T06AV                                          0         0        10                                     0         0
+SITG8T96AV                                          0         0         3                                     0         0
+SITG8T99AV                                          0         0         3                                     0         0
+SITG8U08AV                                          0         0         3                                     0         0
+SITG8U19AV                                          0         0         3                                     0         0
+SITG8U21AV                                          0         0         3                                     0         0
+SITG8U24AV                                          0         0         3                                     0         0
+SITG8U36AV                                          0         0         3                                     0         0
+SITG8U40AV                                          0         0         3                                     0         0
+SITG8U50AV                                          0         0         1                                     0         0
+SITG8U61AV                                          0         0         1                                     0         0
+SITG8U66AV                                          0         0         1                                     0         0
+SITG8X22AV                                          0         0         1                                     0         0
+SITG8X30AV                                          0         0         1                                     0         0
+SITGY456AV                                          0         0        10                                     0         0
+SITH2C22AA                                          0         0       600                                     0         0
+SITH2W17AA                                          0         0       400                                     0         0
+SITH3T50AA                                          0         0        72                                     0         0
+SITH4J91AA                                          0         0       300                                     0         0
+SITH6L25AA                                          0         0        30                                     0         0
+SITH6L28AA                                          0         0        30                                     0         0
+SITJ1P93AV                                          0         0         1                                     0         0
+SITJ1Q16AV                                          0         0         1                                     0         0
+SITJ1Q46AV                                          0         0         1                                     0         0
+SITJ2J39AV                                          0         0        10                                     0         0
+SITJ2R51AV                                          0         0         3                                     0         0
+SITJ3G93AA                                          0         0         5                                     0         0
+SITJ3H85AV                                          0         0         3                                     0         0
+SITJ3J82AV                                          0         0         1                                     0         0
+SITJ3M80AE                                          0         0        20                                     0         0
+SITJ3M81AE                                          0         0        20                                     0         0
+SITJ3M83AE                                          0         0         1                                     0         0
+SITJ6F20AV                                          0         0         1                                     0         0
+SITJ6S72AV                                          0         0         3                                     0         0
+SITJ7934G                                           0         0         1                                     0         0
+SITJ7B37AV                                          0         0        10                                     0         0
+SITJ9N91AV                                          0         0         3                                     0         0
+SITJ9N94AV                                          0         0         1                                     0         0
+SITJ9W07AV                                          0         0         1                                     0         0
+SITK4F96AV                                          0         0         1                                     0         0
+SITK9H87EA                                          0         0         0                                    98         0
+SITL1910A                                          0         0         1                                     0         0
+SITL1912A                                          0         0         1                                     0         0
+SITL2734A                                          0         0        64                                     0         0
+SITL2737A                                          0         0         1                                     0         0
+SITL4K80AV                                          0         0         1                                     0         0
+SITL4K83AV                                          0         0         1                                     0         0
+SITL4K87AV                                          0         0         1                                     0         0
+SITL4K91AV                                          0         0         1                                     0         0
+SITL4K95AV                                          0         0         1                                     0         0
+SITL4K96AV                                          0         0         1                                     0         0
+SITL4Z36AV                                          0         0         1                                     0         0
+SITL5C54AV                                          0         0         1                                     0         0
+SITL5C56AV                                          0         0         1                                     0         0
+SITL5C57AV                                          0         0         1                                     0         0
+SITL6A84AV                                          0         0         1                                     0         0
+SITL6A90AV                                          0         0         1                                     0         0
+SITL6A93AV                                          0         0         1                                     0         0
+SITLD124AV                                          0         0         1                                     0         0
+SITLE333AV                                          0         0         1                                     0         0
+SITM0D56AV                                          0         0         1                                     0         0
+SITM0F22AV                                          0         0         1                                     0         0
+SITM1F20AV                                          0         0         3                                     0         0
+SITM6D61A                                           0         0         2                                     0         0
+SITM6P67AV                                          0         0         1                                     0         0
+SITM6V29AV                                          0         0         3                                     0         0
+SITM9S62EA                                          0         0         0                                   147         0
+SITN2V48AV                                          0         0         1                                     0         0
+SITN4U40AV                                          0         0         1                                     0         0
+SITP4T69EA                                          3         3         3                                     0         0
+SITP4T71EA                                          2         2         2                                     0         0
+SITQ1338A                                           0         0         3                                     0         0
+SITQ1786A                                           0         0         6                                     0         0
+SITQ2510A                                           0         0        76                                     0         0
+SITQ2612AC                                          0         0        35                                     5         0
+SITQ2612AD                                          0         0        43                                    14         0
+SITQ2613X                                           0         0        10                                     0         0
+SITQ2624A                                           0         0         5                                     0         0
+SITQ3934A                                           0         0         1                                     0         0
+SITQ3964A                                           0         0         1                                     0         0
+SITQ5942XC                                          0         0        14                                     0         0
+SITQ5942YC                                          0         0        12                                     0         0
+SITQ5945YC                                          0         0         6                                     0         0
+SITQ5949X                                           0         0         3                                    62         0
+SITQ5949XC                                          0         0        48                                     0         0
+SITQ5950A                                           0         0        16                                     0         0
+SITQ6470A                                           0         0         9                                     0         0
+SITQ6471A                                           0         0        20                                     0         0
+SITQ6473A                                           0         0        10                                     0         0
+SITQ6511X                                           0         0        20                                     0         0
+SITQ6572A                                           0         0         7                                     0         0
+SITQ6592A                                           0         0         3                                     0         0
+SITQ6593A                                           0         0         1                                     0         0
+SITQ7504A                                           0         0         1                                     0         0
+SITQ7516AC                                          0         0         9                                     0         0
+SITQ7551XC                                          0         0         1                                     0         0
+SITQ7553X                                           0         0        61                                     7         0
+SITQ7553XC                                          0         0        12                                     0         0
+SITQ7553XD                                          0         0         9                                     0         0
+SITQ7570A                                           0         0         7                                     0         0
+SITQ7966EE                                          0         0        16                                     0         0
+SITQ8005A                                           0         0        31                                     0         0
+SITQ8027A                                           0         0         8                                     0         0
+SITQ8029A                                           0         0         8                                     0         0
+SITQ8031A                                           0         0         7                                     0         0
+SITQ8704A                                           0         0         5                                     1         0
+SITQ8922A                                           0         0         2                                     0         0
+SITQF298AA                                          0         0        10                                     0         0
+SITQK640AA                                          0         0        28                                     0         0
+SITQY449AA                                          0         0       400                                     0         0
+SITQY776A6                                          0         0       407                                     0         0
+SITSA042A                                           0         0         2                                     0         0
+SITSD412EE                                          0         0        24                                     0         0
+SITU1H64E                                           0         0         3                                     0         0
+SITU1H90E                                           0         0         2                                     0         0
+SITU1V94E                                           0         0         5                                     0         0
+SITU1V95E                                           0         0         3                                     0         0
+SITU1W23E                                           0         0         2                                     0         0
+SITU4415E                                           0         0         2                                     0         0
+SITU5X82E                                           0         0         4                                     0         0
+SITU5Z50E                                           0         0         1                                     0         0
+SITUK735AV                                          0         0         1                                     0         0
+SITUK932E                                           0         0         5                                     0         0
+SITUM137E                                           0         0         2                                     0         0
+SITUM209AV                                          0         0         1                                     0         0
+SITUP872E                                           0         0         6                                     0         0
+SITXU979AV                                          0         0        10                                     0         0
+SITZD011A                                           0         0         1                                     0         0
+SITZD021A                                           0         0        21                                     0         0
+SITZD081AA                                          0         0         4                                     0         0
+CUS370                     MULTICOM LTD.                      TZAR SIMEON STR.57                 1000     SOFIA                                       BG3221031996          
+CUS419                     DAIS SET LTD.                      GEORGY PEACHEVICH 13               1000     SOFIA                                       BG1227047387          
+CUS630                     KOBO 90 LTD                        LULIN, BL.152                      1000     SOFIA                                       BG3222045931          
+CUS830                     COMPUTER CENTER BOURGAS            RAINA KNIAGINIA STR.16             8000     BOURGAS                                     BG1021129042          
+CUS876                     INFOBOX LTD.                       BRATIA MILADINOCI STR., 20         8800     SLIVEN                                      BG1201006399          
+CUS1058                    SBS (Siemens business services)    TZARIGRADSKO SHAUSSE, 7 KM,ZIT     1113     SOFIA                                       BG1223036895          
+CUS1156                    MAKTEAM LTD.                       JAMES BAUCHER STR. 51              1407     SOFIA                                       BG2220029649          
+CUS1168                    NET IS LTD.                        ROZOVA DOLINA STR., 18A            1000     SOFIA                                       BG2220042866          
+CUS1178                    RISK ELECTRONICS LTD.              TZARIGRADSKO CHAUSSE 125, BL.26B   1113     SOFIA                                       BG1226002002          
+CUS1281                    BOGITECH                           7, TIMOK STR.                      7200     RAZGRAD                                     BG1174005032          
+CUS1392                    HARD & SOFT LTD.                   TZAR SHISHMAN STR. 16              2700     BLAGOEVGRAD                                 BG1010070208          
+CUS1426                    SMART SYSTEMS                      DIANABAD, BL.10                    1000     SOFIA                                       BG1227060278          
+CUS1444                    SIRMA SOLUTIONS                    135, TSARIGRADSKO SHOUSE BLVD.     1000     SOFIA                                       BG040529004           
+CUS1446                    KONTRAX LTD.                       NIKOLA MIRCHEV STR.33              1000     SOFIA                                       BG1227016457          
+CUS1619                    KOMTEHS OOD                        26-28, FAKIISKA STR.               8000     BOURGAS                                     BG102041936           
+CUS1735                    PANDA COOP                         ILIA BESHKOV STR. 2                1000     SOFIA                                       BG1227019537          
+CUS2292                    RKA - B LTD                        BIGLA STR.50                       1000     SOFIA                                       BG2220038508          
+CUS2299                    KOMOS LTD.                         DRAGAN TZANKOV BLVD.2              1000     SOFIA                                       BG1226014337          
+CUS2320                    DATAPRO LTD.                       BREGALNICA STR. 44                 1000     SOFIA                                       BG1222062752          
+CUS2436                    RETEL AD                           UL. D. SAVOV 31                    2070     PIRDOP                                      BG175461795           
+CUS2709                    AKS LTD                            DIANABAD, BL.60                    1000     SOFIA                                       BG1223003466          
+CUS3097                    F-TECH COMPUTERS LTD.              DIANABAD, BL.36                    1000     SOFIA                                       BG1227094008          
+CUS3310                    DANINA G CO.                       TZAR BORIS III 149                 4000     PLOVDIV                                     BG1164770229          
+CUS3573                    INFOGUARD LTD                      EVLOGY GEORGIEV BLVD.48            1000     SOFIA                                       BG1227004181          
+CUS3721                    PARAFLOW COMMUNICATIONS LTD        OBORISHTE STR.103B                 1505     SOFIA                                       BG1223057655          
+CUS3857                    TOMAS COMERCE SERVICE              DRUJBA BL.20 VH.5 AP.73            1000     SOFIA                                       BG040058584           
+CUS4431                    LION TECHNOLOGIS LTD               MLADOST 2,BL 219B                  1000     SOFIA                                       BG2226115229          
+CUS5001                    TERACOM LTD.                       STRIJOVSKI STR., 4                 2800     SANDANSKI                                   BG1018060139          
+CUS5468                    NOVOTIKA - 97 LTD.                 KLOKOTNIZA STR.2A                  5000     VELIKO TURNOVO                              BG1040016593          
+CUS5480                    WINSTAR TECHNOLODGIES              MLADOST 4, BL 445                  1729     SOFIA                                       BG2226114117          
+CUS6118                    TETRA NET LTD                      6A, ALEN MAK STR                   5000     VELIKO TARNOVO                              BG104052038           
+CUS6338                    DEKADA DIGITAL LTD                 KOSTA LULCHEV STR.58               1000     SOFIA                                       BG1226083010          
+CUS6464                    SKY COMPANY LTD.                   AL.GENDOV STR.6                    1000     SOFIA                                       BG1226089507          
+CUS6517                    EAGLE SOFTWARE LTD                 ANTON CHECOV STR. 65               1000     SOFIA                                       BG1227047646          
+CUS6722                    MENORA CO.                         OHRID STR. 10                      9300     DOBRITCH                                    BG1082130175          
+CUS7539                    ITD COMPUTERS                      39, MITROPOLIT PANARET STR.        4000     PLOVDIV                                     BG115149517           
+CUS8281                    EUROSYS LTD.                       SLATINA , BL.30                    1000     SOFIA                                       BG1226090939          
+CUS8684                    CNCYS                              BITOLJA STR. 32                    1000     SOFIA                                       BG1221136035          
+CUS9247                    COM TRADE ' 98 LTD                 YANKO ZABUNOV, BL.28, FL.3         1000     SOFIA                                       BG2221122294          
+CUS9479                    COPYLINK LTD.                      CHERNI VRUH BLVD.71A               1000     SOFIA                                       BG2220099795          
+CUS10358                   EKSTREME LTD.                      DRAGALEVCI STR. 323                1000     SOFIA                                       BG3220040371          
+CUS11219                   ATLASCOM LTD.                      DENKOGLU STR.12-14                 1000     SOFIA                                       BG2223002784          
+CUS12071                   POWER SOFT LTD.                    DONDUKOV BLVD.129                  1000     SOFIA                                       BG1223099064          
+CUS12268                   DM CONSULT LTD.                    PATRIARH EVTIMII BLVD.36           1000     SOFIA                                       BG3221072307          
+CUS12791                   CDA COMPUTERS LTD.                 HRISTO BOTEV STR., 21              8000     BOURGAS                                     BG1021330228          
+CUS14889                   STENS LTD.                         83, GIUESHEVO STR.                 1000     SOFIA                                       BG1224084621          
+CUS15049                   PIC COMPUTER LTD.                  PETKO PETKOV STR.37                4000     PLOVDIV                                     BG1164777975          
+CUS15483                   INTEGRAL K LTD.                    DIANABAD,BL.1                      1000     SOFIA                                       BG1227055452          
+CUS15772                   BULSYS LTD.                        BRATIA MILADINOVI STR., 37         1000     SOFIA                                       BG1222103238          
+CUS16380                   ROMIT LTD.                         str. MAY 6                         4000     PLOVDIV                                     BG115162475           
+CUS16931                   LIREX BG.LTD                       MLADOST 1, BL.9                    1000     SOFIA                                       BG2226000383          
+CUS17040                   PNG ELEKTRONICS LTD.               ANTON IVANOV STR.2A                8801     SLIVEN                                      BG1201031075          
+CUS18515                   RO & NI                            MARITSA STR. 47                    9700     SHOUMEN                                     BG1270066611          
+CUS18546                   DATA PLUS LTD.                     KAPITAN RAICHO STR.55              4000     PLOVDIV                                     BG1165848213          
+CUS20021                   ANIS SK LTD.                       DRUJBA, BL.8, ENTR.B               1000     SOFIA                                       BG2225063752          
+CUS20983                   IPN BULGARIA LTD.                  HEMUS STR.28, BL.26                1000     SOFIA                                       BG1226121486          
+CUS23505                   DIGITEC  LTD.                      MLADOST 1, BL. 39                  1000     SOFIA                                       BG2226006322          
+CUS24016                   X-DIGITAL LTD.                     VRYBNITZA 1, BL. 527               1000     SOFIA                                       BG2223076567          
+CUS24928                   MG COMPUTERS     ZENA              DAME GRUEV, BL. 43                 8800     SLIVEN                                      BG119665246           
+CUS27304                   HARDWAREBG LTD                     16, J. KYURI STR.                  1000     SOFIA                                       BG131118859           
+CUS27828                   DPS BULGARIA LTD.                  DIANABAD, BL.59                    1000     SOFIA                                       BG1227083316          
+CUS29028                   ENTER LTD                          3, GEN. KARCOV                     4300     KARLOVO                                     BG115816448           
+CUS29419                   CAMEA COMPUTERS LTD.               TZARIGRADSKO CHAUSSEE BLVD., 113   1000     SOFIA                                       BG2226189885          
+CUS30220                   PACOM-P EOOD                       GOCE DELCHEV, BL.108A              1000     SOFIA                                       BG131171502           
+CUS33503                   DIGITAL LEND EOOD                  1A, HAN KRUM STR.                  4500     LOVETCH                                     BG110566841           
+CUS34120                   VAL GEN                            5, HADJI DIMITAR STR.              6100     KAZANLUK                                    BG1240908898          
+CUS34266                   3T SUPPLY LTD.                     20, DANAIL NIKOALEV                1000     SOFIA                                       BG1223136016          
+CUS34458                   VIPCOM LTD.                        17, MORSKA STR.                    8000     BOURGAS                                     BG1021449241          
+CUS34649                   LIP TRADE LTD.                     HRISTO MAXIMOV STR., 45A           1000     SOFIA                                       BG1226137544          
+CUS34880                   DENSI-M EOOD                       120, NISHAVA STR.                  1000     SOFIA                                       BG130444136           
+CUS36458                   BURAN CO.                          TODOR ALEKSANDROV STR., 21A        2700     BLAGOEVGRAD                                 BG1010060121          
+CUS36567                   INTERAKOM ENGINEERING              210,PODP.KALITIN STR.              1000     SOFIA                                       BG1224042686          
+CUS37445                   SATKOM TECHNOLOGY                  5, VLADAISKO VYSTANIE              9700     SHOUMEN                                     BG127587208           
+CUS37957                   DARTEC LTD.                        TSYRKOVNA NEZAVISIMOST STR., 27    7000     RUSSE                                       BG1181154051          
+CUS38295                   SPEED COMPUTERS                    10, TSAR SAMUIL STR.               9000     VARNA                                       BG148096673           
+CUS38540                   TOP SISTEMS LTD                    11,DUNAW STR.                      8000     BURGAS                                      BG4020119552          
+CUS40918                   MVM OOD                            23, VELA PEEVA STR.                6400     DIMITROVGRAD                                BG126513114           
+CUS41782                   KRIOS                              5, MAKSIM GORKI                    9300     DOBRICH                                     BG124630706           
+CUS43433                   STA EOOD                           KRASNA POLYANA 1                   1000     SOFIA                                       BG131100793           
+CUS43949                   GLOBAL NET CONSULTING              2, BULAIR STR.                     6600     KYRDJALI                                    BG108685240           
+CUS44324                   ILEKT BUSINESS GROUP AND KO        14, ELISAVETA BAGRIANA STR.        1000     SOFIA                                       BG175100492           
+CUS45342                   3 GEN OOD                          TOSHEVO, BL. 3                     9000     VARNA                                       BG103600058           
+CUS45748                   GIGAHERZ EOOD                      BAGRA 5, STR                       4000     PLOVDIV                                     BG115828315           
+CUS46285                   PIXEL 04                           5, HRISTO KUDEV                    8230     NESEBYR                                     BG147065244           
+CUS46879                   DJI DI PI LTD                      3 CHUCHURA                         6000     STARA ZAGORA                                BG123742136           
+CUS47182                   COMPUTEL                           27, TRAKIISKI UINAK                4000     PLOVDIV                                     BG160033486           
+CUS47931                   TECHNO VISION                      2, JORDAN JOVKOV                   6500     SVILENGRAD                                  BG126716844           
+CUS47946                   IZI OFFICE                         35, SREDNA GORA STR.               8000     BOURGAS                                     BG147096762           
+CUS48435                   TOP COMPUTERS                      2, ELIN PELIN STR.                 4000     PLOVDIV                                     BG160048068           
+CUS49215                   AGGRESSIS DZZD                     4D, STUDENTSKA STR.                9000     VARNA                                       BG148079550           
+CUS49305                   TECHPOINT                          MLADOST 1                          1000     SOFIA                                       BG175168080           
+CUS49760                   LAPTOP.BG                          ORLANDOVCY, 14 TAIGA  str          1225     SOFIA                                       BGBG1750241122        
+CUS49989                   VISION SISTEMS                     LIULIN, BL. 408                    1000     SOFIA                                       BG175225834           
+CUS49998                   HI TECH COMPUTERS                  29, PETER BOGDAN                   1000     SOFIA                                       BG175169225           
+CUS50170                   ET TEKOM - PLAMEN NIKOLOV          7, PETLESHKOV STR.                 7700     TYRGOVISTHE                                 BG125028072           
+CUS51096                   BAHCHEVANOV EOOD                   KV.OBELQ 2, BL.241                 1000     SOFIA                                       BG175229056           
+CUS51564                   SD ALTEYA                          17, AL. STAMBOLIISKI STR.          7650     DULOVO                                      BG118036460           
+CUS52076                   EMVIPI EOOD                        3, CYRKOVNA NEZAVISIMOST STR.      7000     RUSE                                        BG117683879           
+CUS52389                   COPYSERVICE OOD                    21, RAYKO ALEKSIEV STR.            1000     SOFIA                                       BG175278915           
+CUS52522                   NASTEK OOD                         IZTOK, BL. 71                      6100     KAZANLYK                                    BG200575323           
+CUS52543                   JUEL KONSULT                       28, STEFAN KARADJA                 9200     PROVADIA                                    BG148115248           
+CUS53104                   DIGITAL TRADING                    2, VLADIMIR DIMITROV STR.          9000     VARNA                                       BG200350255           
+CUS53748                   MAXCOMPUTERS OOD                   44, IVAYLO STR.                    8000     BOURGAS                                     BG200492817           
+CUS53834                   TECHNOSISTEM BULGARIA              5, ALEKO KONSTANTINO               9700     SHOUMEN                                     BG127627074           
+CUS54360                   ET GLOBAL PRINT                    LUILIN, BL. 629                    1000     SOFIA                                       BG121392513           
+CUS54372                   NETCOM COMPLECT 2000 EOOD          336, MLADOST 3                     1000     SOFIA                                       BG130322912           
+CUS55000                   FORMAT C LTD                       NADEJDA 1 BL.127                   1000     SOFIA                                       BG175394268           
+CUS56410                   TECHNOTRONICA EOOD                 86, ALEN MAK STR.                  9700     SHUMEN                                      BG127605619           
+CUS56490                   VALKOMP LTD                        29, J.K. GOCE DELCHEV              1000     SOFIA                                       BG175448794           
+CUS56795                   HILDA EOOD                         5, TRETI MART STR.                 5700     TETEVEN                                     BG110571030           
+CUS57439                   EVROPOS EOOD                       4, AL. BURMOV STR.                 5000     VELIKO TYRNOVO                              BG104690699           
+CUS57570                   L.M.G. COMPUTERS                   4, HRISTO BOTEV STR.               1000     SOFIA                                       BG175150520           
+CUS58116                   KNK SISTEMS EOOD                   16, NIKOLA VAPTSAROV STR.          7400     ISPERIH                                     BG116587550           
+CUS58681                   AUTMAKS OOD                        25, ALABIN STR.                    1000     SOFIA                                       BG200143210           
+CUS59629                   PC GEAR                            6, JELQZKOVA STR.                  9000     VARNA                                       BG200300640           
+CUS60109                   TRD OOD                            53, BELI LOM STR.                  7200     RAZGRAD                                     BG116586797           
+CUS61947                   THE NET                            STUDENTSKI GRAD, 55                1000     SOFIA                                       BG175108496           
+CUS62225                   VILMAKS 1 OOD                      18, TUNDJA STR.                    5800     PLEVEN                                      BG200644584           
+CUS62676                   SARA-55 EOOD                       BL. 63, BRATYA MILADINOVI STR.     9000     VARNA                                       BG103677439           
+CUS62844                   KA AND SI - ATANASOVI EOOD         UL. TRAKIA 32                      0559     KARNOBAT                                    BG20073889            
+CUS64386                   ITGI EOOD                          20, KUPENITE STR.                  1000     SOFIA                                       BG200756213           
+CUS64614                   ET VK COMPUTERS - VEJDI KUIDJUKU   19, AHINORA STR.                   7400     ISPERIH                                     BG201013084           
+CUS66310                   TECHNO GROUP BULGARIA EOOD         UL. DOBRICHKA EPOPEQ 10            9300     DOBRICH                                     BG201038116           
+CUS68682                   VENDI - 101 LTD                    UL. NEOFIT RILSKI 8                6100     KAZANLAK                                    BG833147752           
+CUS68882                   MAGI-MAGIC ART EOOD                17, BULGARIA BLVD.                 5000     VELIKO TYRNOVO                              BG104642964           
+CUS69361                   VSV SPEKTYR OOD                    3A, STAMBOLIISKI STR.              4150     RAKOVSKI                                    BG115822216           
+CUS72225                   MREJATA.BG OOD                     ZONA B5                            1000     SOFIA                                       BG131107211           
+CUS77352                   TNG IVANOV EOOD                    100A, SVETA BOGORODICA STR.        6000     STARA ZAGORA                                BG123598700           
+CUS82538                   OFFICE ZONA LTD.                   KRASNA POLYANA BL.30               1000     SOFIA                                       BG202163966           
+PRS370                               CE285A                                           2                                                                     BGL
+PRS370                               Q5949X                                           2                                                                     BGL
+PRS419                               CE410XD                                          2                                                                     BGL
+PRS419                               CH561EE                                          5                                                                     BGL
+PRS419                               CZ111AE                                          5                                                                     BGL
+PRS630                               CZ111AE                                          5                                                                     BGL
+PRS630                               CH561EE                                          5                                                                     BGL
+PRS630                               CE410XD                                          2                                                                     BGL
+PRS830                               CE410XD                                          2                                                                     BGL
+PRS830                               CH561EE                                          5                                                                     BGL
+PRS830                               CZ111AE                                          5                                                                     BGL
+PRS876                               CZ111AE                                          5                                                                     BGL
+PRS876                               CH561EE                                          5                                                                     BGL
+PRS876                               CE410XD                                          2                                                                     BGL
+PRS1058                              CE505X                                           2                                                                     BGL
+PRS1058                              CZ102AE                                          5                                                                     BGL
+PRS1058                              K9H87EA                                          1                                                                     BGL92814720     93126328
+PRS1058                              M9S62EA                                          5                                                                     BGL92814720     93126328
+PRS1156                              Q2612AD                                          2                                                                     BGL
+PRS1156                              C7115A                                           3                                                                     BGL
+PRS1156                              C9386AE                                          5                                                                     BGL
+PRS1156                              CF210X                                           2                                                                     BGL
+PRS1168                              M9S62EA                                          5                                                                     BGL92814720     93126328
+PRS1168                              K9H87EA                                          1                                                                     BGL92814720     93126328
+PRS1178                              CE410XD                                          2                                                                     BGL
+PRS1178                              CZ111AE                                          5                                                                     BGL
+PRS1178                              CH561EE                                          5                                                                     BGL
+PRS1281                              CH561EE                                          5                                                                     BGL
+PRS1281                              CZ111AE                                          5                                                                     BGL
+PRS1281                              CE410XD                                          2                                                                     BGL
+PRS1392                              CE505X                                           2                                                                     BGL
+PRS1392                              CZ102AE                                          5                                                                     BGL
+PRS1426                              K9H87EA                                          5                                                                     BGL92814720     93126328
+PRS1444                              CZ102AE                                          5                                                                     BGL
+PRS1444                              CE505X                                           2                                                                     BGL
+PRS1446                              CE410XD                                          2                                                                     BGL
+PRS1446                              CZ111AE                                          5                                                                     BGL
+PRS1446                              CH561EE                                          5                                                                     BGL
+PRS1619                              CH561EE                                          5                                                                     BGL
+PRS1619                              CZ111AE                                          5                                                                     BGL
+PRS1619                              CE410XD                                          2                                                                     BGL
+PRS1735                              CE321A                                           1                                                                     BGL
+PRS1735                              C4810A                                           1                                                                     BGL
+PRS1735                              C9381A                                           1                                                                     BGL
+PRS1735                              C9382A                                           1                                                                     BGL
+PRS1735                              CB435AD                                          5                                                                     BGL
+PRS2292                              C9386AE                                          5                                                                     BGL
+PRS2292                              C7115A                                           3                                                                     BGL
+PRS2292                              CF210X                                           2                                                                     BGL
+PRS2292                              Q2612AD                                          2                                                                     BGL
+PRS2299                              M9S62EA                                          5                                                                     BGL92814720     93126328
+PRS2299                              K9H87EA                                          1                                                                     BGL92814720     93126328
+PRS2320                              Q2612AD                                          2                                                                     BGL
+PRS2320                              CF210X                                           2                                                                     BGL
+PRS2320                              C7115A                                           3                                                                     BGL
+PRS2320                              C9386AE                                          5                                                                     BGL
+PRS2436                              C9386AE                                          5                                                                     BGL
+PRS2436                              C7115A                                           3                                                                     BGL
+PRS2436                              CF210X                                           2                                                                     BGL
+PRS2436                              Q2612AD                                          2                                                                     BGL
+PRS2709                              CE505X                                           2                                                                     BGL
+PRS2709                              CZ102AE                                          5                                                                     BGL
+PRS3097                              CH561EE                                          5                                                                     BGL
+PRS3097                              CZ111AE                                          5                                                                     BGL
+PRS3097                              CE410XD                                          2                                                                     BGL
+PRS3310                              CF210X                                           2                                                                     BGL
+PRS3310                              C7115A                                           3                                                                     BGL
+PRS3310                              C9386AE                                          5                                                                     BGL
+PRS3310                              Q2612AD                                          2                                                                     BGL
+PRS3573                              M9S62EA                                          5                                                                     BGL92814720     93126328
+PRS3573                              K9H87EA                                          1                                                                     BGL92814720     93126328
+PRS3721                              Q7553X                                           4                                                                     BGL
+PRS3721                              Q7553X                                           2                                                                     BGL
+PRS3721                              Q2612AC                                          1                                                                     BGL
+PRS3721                              CE278AC                                          1                                                                     BGL
+PRS3857                              CZ112AE                                          1                                                                     BGL
+PRS3857                              CZ102AE                                          4                                                                     BGL
+PRS3857                              CE505X                                           2                                                                     BGL
+PRS3857                              K9H87EA                                          1                                                                     BGL92814720     93126328
+PRS3857                              M9S62EA                                          5                                                                     BGL92814720     93126328
+PRS4431                              Q2612AD                                          2                                                                     BGL
+PRS4431                              M9S62EA                                          5                                                                     BGL92814720     93126328
+PRS4431                              K9H87EA                                          1                                                                     BGL92814720     93126328
+PRS4431                              C7115A                                           3                                                                     BGL
+PRS4431                              C9386AE                                          5                                                                     BGL
+PRS4431                              CF210X                                           2                                                                     BGL
+PRS5001                              CE505X                                           2                                                                     BGL
+PRS5001                              CZ102AE                                          5                                                                     BGL
+PRS5468                              CZ102AE                                          5                                                                     BGL
+PRS5468                              CE505X                                           2                                                                     BGL
+PRS5480                              CF210X                                           2                                                                     BGL
+PRS5480                              C7115A                                           3                                                                     BGL
+PRS5480                              C9386AE                                          5                                                                     BGL
+PRS5480                              Q2612AD                                          2                                                                     BGL
+PRS6118                              CE505X                                           2                                                                     BGL
+PRS6118                              CZ102AE                                          5                                                                     BGL
+PRS6338                              CZ102AE                                          5                                                                     BGL
+PRS6338                              CE505X                                           2                                                                     BGL
+PRS6464                              C7115X                                           2                                                                     BGL
+PRS6464                              C8772EE                                          3                                                                     BGL
+PRS6464                              CE505X                                           1                                                                     BGL
+PRS6464                              Q5949X                                           2                                                                     BGL
+PRS6517                              CE505X                                           2                                                                     BGL
+PRS6517                              CZ102AE                                          5                                                                     BGL
+PRS6722                              C7115X                                           2                                                                     BGL
+PRS6722                              C8772EE                                          3                                                                     BGL
+PRS6722                              CE505X                                           1                                                                     BGL
+PRS6722                              Q5949X                                           2                                                                     BGL
+PRS7539                              CE505X                                           2                                                                     BGL
+PRS7539                              CZ102AE                                          5                                                                     BGL
+PRS8281                              K9H87EA                                          5                                                                     BGL92814720     93126328
+PRS8684                              Q2612AC                                          4                                                                     BGL
+PRS8684                              CE278AC                                          1                                                                     BGL
+PRS9247                              CE505X                                           1                                                                     BGL
+PRS9247                              C7115X                                           2                                                                     BGL
+PRS9247                              C8772EE                                          3                                                                     BGL
+PRS9247                              Q5949X                                           2                                                                     BGL
+PRS9479                              CE505X                                           2                                                                     BGL
+PRS9479                              CZ102AE                                          5                                                                     BGL
+PRS10358                             CZ102AE                                          5                                                                     BGL
+PRS10358                             CE505X                                           2                                                                     BGL
+PRS11219                             CE285A                                           2                                                                     BGL
+PRS11219                             Q5949X                                           2                                                                     BGL
+PRS12071                             K9H87EA                                          5                                                                     BGL92814720     93126328
+PRS12071                             CE505X                                           2                                                                     BGL
+PRS12071                             CZ102AE                                          5                                                                     BGL
+PRS12268                             K9H87EA                                          1                                                                     BGL92814720     93126328
+PRS12268                             M9S62EA                                          5                                                                     BGL92814720     93126328
+PRS12791                             Q5949X                                           2                                                                     BGL
+PRS12791                             CE505X                                           1                                                                     BGL
+PRS12791                             C7115X                                           2                                                                     BGL
+PRS12791                             C8772EE                                          3                                                                     BGL
+PRS14889                             CE285A                                           2                                                                     BGL
+PRS14889                             Q5949X                                           2                                                                     BGL
+PRS15049                             CB436AD                                          1                                                                     BGL
+PRS15049                             CE285AD                                          2                                                                     BGL
+PRS15049                             CF283A                                           2                                                                     BGL
+PRS15483                             M9S62EA                                          5                                                                     BGL92814720     93126328
+PRS15483                             K9H87EA                                          1                                                                     BGL92814720     93126328
+PRS15772                             Q5949X                                           2                                                                     BGL
+PRS15772                             CE505X                                           1                                                                     BGL
+PRS15772                             C8772EE                                          3                                                                     BGL
+PRS15772                             C7115X                                           2                                                                     BGL
+PRS16380                             CE285A                                           2                                                                     BGL
+PRS16380                             Q5949X                                           2                                                                     BGL
+PRS16931                             C9730AC                                          2                                                                     BGL
+PRS17040                             CE285A                                           2                                                                     BGL
+PRS17040                             Q5949X                                           2                                                                     BGL
+PRS18515                             Q5949X                                           2                                                                     BGL
+PRS18515                             M9S62EA                                          5                                                                     BGL92814720     93126328
+PRS18515                             K9H87EA                                          1                                                                     BGL92814720     93126328
+PRS18515                             C8772EE                                          3                                                                     BGL
+PRS18515                             C7115X                                           2                                                                     BGL
+PRS18515                             CE505X                                           1                                                                     BGL
+PRS18546                             K9H87EA                                          1                                                                     BGL92814720     93126328
+PRS18546                             M9S62EA                                          5                                                                     BGL92814720     93126328
+PRS20021                             Q5949X                                           2                                                                     BGL
+PRS20021                             CE505X                                           1                                                                     BGL
+PRS20021                             C7115X                                           2                                                                     BGL
+PRS20021                             C8772EE                                          3                                                                     BGL
+PRS20983                             C6656AE                                          2                                                                     BGL
+PRS20983                             C6656AE                                          3                                                                     BGL
+PRS20983                             51645AE                                          4                                                                     BGL
+PRS20983                             51645AE                                          2                                                                     BGL
+PRS20983                             C2P20AE                                          2                                                                     BGL
+PRS20983                             C2P21AE                                          2                                                                     BGL
+PRS20983                             C2P22AE                                          2                                                                     BGL
+PRS20983                             C2P24AE                                          1                                                                     BGL
+PRS20983                             C8719EE                                          1                                                                     BGL
+PRS20983                             C8727AE                                          2                                                                     BGL
+PRS20983                             C8771EE                                          2                                                                     BGL
+PRS20983                             C8773EE                                          1                                                                     BGL
+PRS20983                             C9351CE                                          1                                                                     BGL
+PRS20983                             C9352AE                                          2                                                                     BGL
+PRS20983                             CB435AD                                          1                                                                     BGL
+PRS20983                             CB540A                                           3                                                                     BGL
+PRS20983                             CB543A                                           1                                                                     BGL
+PRS20983                             CC643EE                                          5                                                                     BGL
+PRS20983                             CC644EE                                          2                                                                     BGL
+PRS20983                             CC644EE                                          2                                                                     BGL
+PRS20983                             CC653AE                                          3                                                                     BGL
+PRS20983                             CD972AE                                          2                                                                     BGL
+PRS20983                             CD972AE                                          1                                                                     BGL
+PRS20983                             CD973AE                                          1                                                                     BGL
+PRS20983                             CE278A                                           2                                                                     BGL
+PRS20983                             CE285A                                           3                                                                     BGL
+PRS20983                             CE285A                                           6                                                                     BGL
+PRS20983                             CE285A                                           2                                                                     BGL
+PRS20983                             CE285A                                           3                                                                     BGL
+PRS20983                             CE285A                                          15                                                                     BGL
+PRS20983                             CE285A                                           1                                                                     BGL
+PRS20983                             CF214X                                           4                                                                     BGL
+PRS20983                             CF214X                                           2                                                                     BGL
+PRS20983                             CF280XD                                          1                                                                     BGL
+PRS20983                             CE321A                                           1                                                                     BGL
+PRS20983                             CE322A                                           1                                                                     BGL
+PRS20983                             CE403A                                           1                                                                     BGL
+PRS20983                             CE285AD                                          2                                                                     BGL
+PRS20983                             CE285AD                                         23                                                                     BGL
+PRS20983                             CE285AD                                          2                                                                     BGL
+PRS20983                             CE285AD                                          2                                                                     BGL
+PRS20983                             CZ165A                                           1                                                                     BGL93039808
+PRS20983                             CZ173A                                           1                                                                     BGL93039808
+PRS20983                             F6U65AE                                          1                                                                     BGL
+PRS20983                             F6U66AE                                          1                                                                     BGL
+PRS20983                             CZ133A                                           1                                                                     BGL
+PRS20983                             CZ112AE                                         17                                                                     BGL
+PRS20983                             CE278AD                                          4                                                                     BGL
+PRS20983                             CN047AE                                          2                                                                     BGL
+PRS20983                             CN551A                                           1                                                                     BGL93037242
+PRS20983                             CH561EE                                         30                                                                     BGL
+PRS20983                             CH562EE                                          5                                                                     BGL
+PRS20983                             CH563EE                                         20                                                                     BGL
+PRS20983                             CF283A                                           1                                                                     BGL
+PRS20983                             CF283A                                           3                                                                     BGL
+PRS20983                             CF283A                                           2                                                                     BGL
+PRS20983                             CF283A                                           1                                                                     BGL
+PRS20983                             CF283A                                           6                                                                     BGL
+PRS20983                             CF283A                                           1                                                                     BGL
+PRS20983                             Q8704A                                           1                                                                     BGL
+PRS23505                             CF283A                                           4                                                                     BGL
+PRS24016                             CE285A                                           2                                                                     BGL
+PRS24016                             Q5949X                                           2                                                                     BGL
+PRS24928                             Q5949X                                           2                                                                     BGL
+PRS24928                             C8772EE                                          3                                                                     BGL
+PRS24928                             C7115X                                           2                                                                     BGL
+PRS24928                             CE505X                                           1                                                                     BGL
+PRS27304                             CF283A                                           2                                                                     BGL
+PRS27304                             CE285AD                                          2                                                                     BGL
+PRS27304                             CB436AD                                          1                                                                     BGL
+PRS27828                             CC644EE                                          1                                                                     BGL
+PRS27828                             B3P21A                                           1                                                                     BGL
+PRS27828                             C9370A                                           4                                                                     BGL
+PRS27828                             C9372A                                           1                                                                     BGL
+PRS27828                             C8721EE                                          1                                                                     BGL
+PRS27828                             CB385A                                           1                                                                     BGL
+PRS27828                             CB386A                                           1                                                                     BGL
+PRS27828                             CN047AE                                          1                                                                     BGL
+PRS27828                             CF283A                                           2                                                                     BGL
+PRS27828                             CF283A                                           5                                                                     BGL
+PRS27828                             CF283A                                           1                                                                     BGL
+PRS27828                             CF283A                                           1                                                                     BGL
+PRS27828                             CH645A                                           4                                                                     BGL
+PRS27828                             CN046AE                                          1                                                                     BGL
+PRS27828                             CZ129A                                           1                                                                     BGL
+PRS27828                             CZ133A                                           1                                                                     BGL
+PRS27828                             Q7553X                                           1                                                                     BGL
+PRS29028                             Q5949X                                           2                                                                     BGL
+PRS29028                             CE285A                                           2                                                                     BGL
+PRS29419                             CZ102AE                                          5                                                                     BGL
+PRS29419                             CE505X                                           2                                                                     BGL
+PRS30220                             CE505X                                           1                                                                     BGL
+PRS30220                             C7115X                                           2                                                                     BGL
+PRS30220                             C8772EE                                          3                                                                     BGL
+PRS30220                             Q5949X                                           2                                                                     BGL
+PRS33503                             Q5949X                                           2                                                                     BGL
+PRS33503                             CE285A                                           2                                                                     BGL
+PRS34120                             K9H87EA                                          4                                                                     BGL92814720     93126328
+PRS34120                             M9S62EA                                          2                                                                     BGL92814720     93126328
+PRS34266                             CF283A                                           2                                                                     BGL
+PRS34266                             CB436AD                                          1                                                                     BGL
+PRS34266                             CE285AD                                          2                                                                     BGL
+PRS34458                             CE285A                                           2                                                                     BGL
+PRS34458                             Q5949X                                           2                                                                     BGL
+PRS34649                             CB436AD                                          1                                                                     BGL
+PRS34649                             CE285AD                                          2                                                                     BGL
+PRS34649                             CF283A                                           2                                                                     BGL
+PRS34880                             CE505X                                           1                                                                     BGL
+PRS34880                             C8772EE                                          3                                                                     BGL
+PRS34880                             C7115X                                           2                                                                     BGL
+PRS34880                             Q5949X                                           2                                                                     BGL
+PRS34880                             K9H87EA                                          5                                                                     BGL92814720     93126328
+PRS36458                             M9S62EA                                          5                                                                     BGL92814720     93126328
+PRS36458                             CE285AD                                          2                                                                     BGL
+PRS36458                             CB436AD                                          1                                                                     BGL
+PRS36458                             CF283A                                           2                                                                     BGL
+PRS36458                             K9H87EA                                          1                                                                     BGL92814720     93126328
+PRS36567                             CF283A                                           2                                                                     BGL
+PRS36567                             CB436AD                                          1                                                                     BGL
+PRS36567                             CE285AD                                          2                                                                     BGL
+PRS37445                             C7115X                                           2                                                                     BGL
+PRS37445                             C8772EE                                          3                                                                     BGL
+PRS37445                             CE505X                                           1                                                                     BGL
+PRS37445                             Q5949X                                           2                                                                     BGL
+PRS37957                             CF283A                                           2                                                                     BGL
+PRS37957                             CE285AD                                          2                                                                     BGL
+PRS37957                             CB436AD                                          1                                                                     BGL
+PRS38295                             CB436AD                                          1                                                                     BGL
+PRS38295                             CE285AD                                          2                                                                     BGL
+PRS38295                             CF283A                                           2                                                                     BGL
+PRS38540                             CE285A                                           2                                                                     BGL
+PRS38540                             Q5949X                                           2                                                                     BGL
+PRS40918                             CB436AD                                          1                                                                     BGL
+PRS40918                             CE285AD                                          2                                                                     BGL
+PRS40918                             CF283A                                           2                                                                     BGL
+PRS41782                             CE285A                                           2                                                                     BGL
+PRS41782                             Q5949X                                           2                                                                     BGL
+PRS41782                             M9S62EA                                          5                                                                     BGL92814720     93126328
+PRS41782                             K9H87EA                                          1                                                                     BGL92814720     93126328
+PRS43433                             Q5949X                                           2                                                                     BGL
+PRS43433                             C8772EE                                          3                                                                     BGL
+PRS43433                             C7115X                                           2                                                                     BGL
+PRS43433                             CE505X                                           1                                                                     BGL
+PRS43949                             CE505X                                           1                                                                     BGL
+PRS43949                             C7115X                                           2                                                                     BGL
+PRS43949                             C8772EE                                          3                                                                     BGL
+PRS43949                             Q5949X                                           2                                                                     BGL
+PRS44324                             Q5949X                                           2                                                                     BGL
+PRS44324                             CE285A                                           2                                                                     BGL
+PRS45342                             CE505X                                           2                                                                     BGL
+PRS45342                             K9H87EA                                          1                                                                     BGL92814720     93126328
+PRS45342                             CZ102AE                                          5                                                                     BGL
+PRS45342                             M9S62EA                                          5                                                                     BGL92814720     93126328
+PRS45748                             CZ102AE                                          5                                                                     BGL
+PRS45748                             CE505X                                           2                                                                     BGL
+PRS46285                             M9S62EA                                          5                                                                     BGL92814720     93126328
+PRS46285                             K9H87EA                                          1                                                                     BGL92814720     93126328
+PRS46879                             Q5949X                                           2                                                                     BGL
+PRS46879                             C7115X                                           2                                                                     BGL
+PRS46879                             C8772EE                                          3                                                                     BGL
+PRS46879                             CE505X                                           1                                                                     BGL
+PRS47182                             K9H87EA                                          1                                                                     BGL92814720     93126328
+PRS47182                             M9S62EA                                          5                                                                     BGL92814720     93126328
+PRS47931                             M9S62EA                                          5                                                                     BGL92814720     93126328
+PRS47931                             K9H87EA                                          1                                                                     BGL92814720     93126328
+PRS47946                             CE505X                                           2                                                                     BGL
+PRS47946                             CZ102AE                                          5                                                                     BGL
+PRS48435                             CE285A                                           2                                                                     BGL
+PRS48435                             K9H87EA                                          1                                                                     BGL92814720     93126328
+PRS48435                             M9S62EA                                          5                                                                     BGL92814720     93126328
+PRS48435                             Q5949X                                           2                                                                     BGL
+PRS49215                             CB436AD                                          1                                                                     BGL
+PRS49215                             CE285AD                                          2                                                                     BGL
+PRS49215                             CF283A                                           2                                                                     BGL
+PRS49305                             M9S62EA                                          5                                                                     BGL92814720     93126328
+PRS49305                             K9H87EA                                          1                                                                     BGL92814720     93126328
+PRS49760                             Q5949X                                           2                                                                     BGL
+PRS49760                             CE505X                                           1                                                                     BGL
+PRS49760                             C7115X                                           2                                                                     BGL
+PRS49760                             C8772EE                                          3                                                                     BGL
+PRS49989                             K9H87EA                                          5                                                                     BGL92814720     93126328
+PRS49998                             K9H87EA                                          5                                                                     BGL92814720     93126328
+PRS49998                             Q5949X                                           2                                                                     BGL
+PRS49998                             CE285A                                           2                                                                     BGL
+PRS50170                             CB436AD                                          1                                                                     BGL
+PRS50170                             CE285AD                                          2                                                                     BGL
+PRS50170                             CF283A                                           2                                                                     BGL
+PRS51096                             CE285A                                           2                                                                     BGL
+PRS51096                             Q5949X                                           2                                                                     BGL
+PRS51564                             Q5949X                                           2                                                                     BGL
+PRS51564                             CE285A                                           2                                                                     BGL
+PRS52076                             CE505X                                           2                                                                     BGL
+PRS52076                             CZ102AE                                          5                                                                     BGL
+PRS52389                             K9H87EA                                          1                                                                     BGL92814720     93126328
+PRS52389                             M9S62EA                                          5                                                                     BGL92814720     93126328
+PRS52522                             K9H87EA                                          5                                                                     BGL92814720     93126328
+PRS52543                             CF283A                                           2                                                                     BGL
+PRS52543                             CB436AD                                          1                                                                     BGL
+PRS52543                             CE285AD                                          2                                                                     BGL
+PRS53104                             K9H87EA                                          1                                                                     BGL92814720     93126328
+PRS53104                             M9S62EA                                          5                                                                     BGL92814720     93126328
+PRS53748                             CF283A                                           2                                                                     BGL
+PRS53748                             CE285AD                                          2                                                                     BGL
+PRS53748                             CB436AD                                          1                                                                     BGL
+PRS53834                             CB436AD                                          1                                                                     BGL
+PRS53834                             CE285AD                                          2                                                                     BGL
+PRS53834                             CF283A                                           2                                                                     BGL
+PRS54360                             K9H87EA                                          5                                                                     BGL92814720     93126328
+PRS54372                             CE505X                                           2                                                                     BGL
+PRS54372                             CZ102AE                                          5                                                                     BGL
+PRS55000                             CZ102AE                                          5                                                                     BGL
+PRS55000                             CE505X                                           2                                                                     BGL
+PRS56410                             K9H87EA                                          5                                                                     BGL92814720     93126328
+PRS56490                             CF283A                                           2                                                                     BGL
+PRS56490                             CE285AD                                          2                                                                     BGL
+PRS56490                             CB436AD                                          1                                                                     BGL
+PRS56795                             CE505X                                           2                                                                     BGL
+PRS56795                             CZ102AE                                          5                                                                     BGL
+PRS57439                             CF283A                                           2                                                                     BGL
+PRS57439                             CB436AD                                          1                                                                     BGL
+PRS57439                             CE285AD                                          2                                                                     BGL
+PRS57570                             CE505X                                           2                                                                     BGL
+PRS57570                             CZ102AE                                          5                                                                     BGL
+PRS58116                             CZ102AE                                          5                                                                     BGL
+PRS58116                             CE505X                                           2                                                                     BGL
+PRS58681                             CE285AD                                          2                                                                     BGL
+PRS58681                             CB436AD                                          1                                                                     BGL
+PRS58681                             CF283A                                           2                                                                     BGL
+PRS59629                             K9H87EA                                          1                                                                     BGL92814720     93126328
+PRS59629                             M9S62EA                                          5                                                                     BGL92814720     93126328
+PRS60109                             CF283A                                           2                                                                     BGL
+PRS60109                             CB436AD                                          1                                                                     BGL
+PRS60109                             CE285AD                                          2                                                                     BGL
+PRS61947                             K9H87EA                                          5                                                                     BGL92814720     93126328
+PRS62225                             K9H87EA                                          1                                                                     BGL92814720     93126328
+PRS62225                             M9S62EA                                          5                                                                     BGL92814720     93126328
+PRS62676                             K9H87EA                                          5                                                                     BGL92814720     93126328
+PRS62844                             K9H87EA                                          5                                                                     BGL92814720     93126328
+PRS64386                             K9H87EA                                          1                                                                     BGL92814720     93126328
+PRS64386                             M9S62EA                                          5                                                                     BGL92814720     93126328
+PRS64614                             M9S62EA                                          5                                                                     BGL92814720     93126328
+PRS64614                             K9H87EA                                          1                                                                     BGL92814720     93126328
+PRS66310                             K9H87EA                                          1                                                                     BGL92814720     93126328
+PRS66310                             M9S62EA                                          5                                                                     BGL92814720     93126328
+PRS68682                             M9S62EA                                          5                                                                     BGL92814720     93126328
+PRS68682                             K9H87EA                                          1                                                                     BGL92814720     93126328
+PRS68882                             K9H87EA                                          5                                                                     BGL92814720     93126328
+PRS69361                             K9H87EA                                          1                                                                     BGL92814720     93126328
+PRS69361                             M9S62EA                                          5                                                                     BGL92814720     93126328
+PRS72225                             M9S62EA                                          5                                                                     BGL92814720     93126328
+PRS72225                             K9H87EA                                          1                                                                     BGL92814720     93126328
+PRS77352                             K9H87EA                                          1                                                                     BGL92814720     93126328
+PRS77352                             M9S62EA                                          5                                                                     BGL92814720     93126328
+PRS82538                             CF283A                                           3                                                                     BGL
+TRL      1087

@@ -1,0 +1,88 @@
+HDRFLASH1001WS00425  MOST COMPUTERS LTD.                ZACHARY MAVROV                                                        2015122806072015122820151228153620
+SIT407339-B21                                      0         0         2                                     0         0
+SIT503296-B21                                      0         0         2                                     0         0
+SIT631679-B21                                      0         0         2                                     0         0
+SIT652241-B21                                      0         0         2                                     0         0
+SIT657750-B21                                      0         0         8                                     0         0
+SIT664046-B21                                      0         0         2                                     0         0
+SIT665868-B21                                      0         0         2                                     0         0
+SIT666988-B21                                      0         0         2                                     0         0
+SIT684527-B21                                      0         0         3                                     0         0
+SIT701605-A21                                      0         0         1                                     0         0
+SIT708637-B21                                      0         0         6                                     0         0
+SIT720478-B21                                      0         0         2                                     0         0
+SIT720865-B21                                      0         0         2                                     0         0
+SIT726736-B21                                      0         0         2                                     0         0
+SIT731761-B21                                      0         0         8                                     0         0
+SIT748921-B21                                      0         0         1                                     0         0
+SIT752687-B21                                      0         0         1                                     0         0
+SIT784108-425                                      0         0         1                                     0         0
+SITC5141F                                          0         0        10                                     0         0
+SITC5707A                                          0         0        10                                     0         0
+SITC5708A                                          0         0        11                                     0         0
+SITC5709A                                          0         0         7                                     0         0
+SITC7973A                                          0         0         0                                    72         0
+SITC7975A                                          0         0         7                                     0         0
+SITC7998A                                          0         0         3                                     0         0
+SITC8010A                                          0         0         8                                     0         0
+SITE7W40A                                          0         0         1                                     0         0
+SITJ9794A                                          0         0         8                                     0         0
+SITJ9980A                                          0         0         5                                     0         0
+SITJ9981A                                          0         0         5                                     0         0
+SITJG923A                                          0         0         4                                     0         0
+SITJG924A                                          0         0         5                                     0         0
+SITJG926A                                          0         0         1                                     0         0
+SITJG927A                                          0         0         3                                     0         0
+SITJH016A                                          0         0         4                                     0         0
+SITJH017A                                          0         0         2                                     0         0
+SITL9M79A                                          0         0         1                                     0         0
+SITQ2009A                                          0         0         1                                     0         0
+CUS1058                    SBS (Siemens business services)    TZARIGRADSKO SHAUSSE, 7 KM,ZIT     1113     SOFIA                                       BG1223036895          
+CUS1392                    HARD & SOFT LTD.                   TZAR SHISHMAN STR. 16              2700     BLAGOEVGRAD                                 BG1010070208          
+CUS1444                    SIRMA SOLUTIONS                    135, TSARIGRADSKO SHOUSE BLVD.     1000     SOFIA                                       BG040529004           
+CUS2709                    AKS LTD                            DIANABAD, BL.60                    1000     SOFIA                                       BG1223003466          
+CUS3857                    TOMAS COMERCE SERVICE              DRUJBA BL.20 VH.5 AP.73            1000     SOFIA                                       BG040058584           
+CUS5001                    TERACOM LTD.                       STRIJOVSKI STR., 4                 2800     SANDANSKI                                   BG1018060139          
+CUS5468                    NOVOTIKA - 97 LTD.                 KLOKOTNIZA STR.2A                  5000     VELIKO TURNOVO                              BG1040016593          
+CUS6118                    TETRA NET LTD                      6A, ALEN MAK STR                   5000     VELIKO TARNOVO                              BG104052038           
+CUS6338                    DEKADA DIGITAL LTD                 KOSTA LULCHEV STR.58               1000     SOFIA                                       BG1226083010          
+CUS6517                    EAGLE SOFTWARE LTD                 ANTON CHECOV STR. 65               1000     SOFIA                                       BG1227047646          
+CUS7539                    ITD COMPUTERS                      39, MITROPOLIT PANARET STR.        4000     PLOVDIV                                     BG115149517           
+CUS9479                    COPYLINK LTD.                      CHERNI VRUH BLVD.71A               1000     SOFIA                                       BG2220099795          
+CUS10358                   EKSTREME LTD.                      DRAGALEVCI STR. 323                1000     SOFIA                                       BG3220040371          
+CUS12071                   POWER SOFT LTD.                    DONDUKOV BLVD.129                  1000     SOFIA                                       BG1223099064          
+CUS29419                   CAMEA COMPUTERS LTD.               TZARIGRADSKO CHAUSSEE BLVD., 113   1000     SOFIA                                       BG2226189885          
+CUS45342                   3 GEN OOD                          TOSHEVO, BL. 3                     9000     VARNA                                       BG103600058           
+CUS45748                   GIGAHERZ EOOD                      BAGRA 5, STR                       4000     PLOVDIV                                     BG115828315           
+CUS47946                   IZI OFFICE                         35, SREDNA GORA STR.               8000     BOURGAS                                     BG147096762           
+CUS52076                   EMVIPI EOOD                        3, CYRKOVNA NEZAVISIMOST STR.      7000     RUSE                                        BG117683879           
+CUS54372                   NETCOM COMPLECT 2000 EOOD          336, MLADOST 3                     1000     SOFIA                                       BG130322912           
+CUS55000                   FORMAT C LTD                       NADEJDA 1 BL.127                   1000     SOFIA                                       BG175394268           
+CUS56795                   HILDA EOOD                         5, TRETI MART STR.                 5700     TETEVEN                                     BG110571030           
+CUS57570                   L.M.G. COMPUTERS                   4, HRISTO BOTEV STR.               1000     SOFIA                                       BG175150520           
+CUS58116                   KNK SISTEMS EOOD                   16, NIKOLA VAPTSAROV STR.          7400     ISPERIH                                     BG116587550           
+PRS1058                              C7973A                                           3                                                                     BGL
+PRS1392                              C7973A                                           3                                                                     BGL
+PRS1444                              C7973A                                           3                                                                     BGL
+PRS2709                              C7973A                                           3                                                                     BGL
+PRS3857                              C7973A                                           3                                                                     BGL
+PRS5001                              C7973A                                           3                                                                     BGL
+PRS5468                              C7973A                                           3                                                                     BGL
+PRS6118                              C7973A                                           3                                                                     BGL
+PRS6338                              C7973A                                           3                                                                     BGL
+PRS6517                              C7973A                                           3                                                                     BGL
+PRS7539                              C7973A                                           3                                                                     BGL
+PRS9479                              C7973A                                           3                                                                     BGL
+PRS10358                             C7973A                                           3                                                                     BGL
+PRS12071                             C7973A                                           3                                                                     BGL
+PRS29419                             C7973A                                           3                                                                     BGL
+PRS45342                             C7973A                                           3                                                                     BGL
+PRS45748                             C7973A                                           3                                                                     BGL
+PRS47946                             C7973A                                           3                                                                     BGL
+PRS52076                             C7973A                                           3                                                                     BGL
+PRS54372                             C7973A                                           3                                                                     BGL
+PRS55000                             C7973A                                           3                                                                     BGL
+PRS56795                             C7973A                                           3                                                                     BGL
+PRS57570                             C7973A                                           3                                                                     BGL
+PRS58116                             C7973A                                           3                                                                     BGL
+TRL        88

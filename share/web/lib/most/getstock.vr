@@ -6,7 +6,7 @@
 
 var INITIAL = 0;        // disable after inital import
 var TEST = 0;        // disable after inital import
-var DEBUG = true;
+var DEBUG = false;
 var pcnt = 0; var pnew = 0;
 
 function prod_find_or_create(code, name, product_line, description, vendor) {
@@ -102,7 +102,10 @@ var q = [
     "ContractNo as contract, ",
     "InvoiceDate as invoice_date, ",
     "invoic.InvoiceNo as name, ",
-    "PurchOrderNo as purchase_order ",
+    "PurchOrderNo as purchase_order, ",
+    "OrderNo as order_no, ",
+    "OrderDate as order_date,",
+    "CustBaseNo as customer_base_no",
     "from " + target,
     "where MsgType = 380",
     datecond,
@@ -131,8 +134,7 @@ var invlst = [];
 var cnt = 0; var cntnew = 0;
 
 while (res.next()) {
-
-var code = res.getString("code");
+    var code = res.getString("code");
     var vendor = res.getString("vendor");
 
     // new invoices should have vendor
@@ -156,13 +158,18 @@ var code = res.getString("code");
 
     // set properties
 
+    code = code.replace(" ","");
     inv.code = code;
     inv.name["en-US"] = res.getString("name");
-    inv.purchase_order = res.getString("purchase_order");
     inv.vendor = vendor;
     inv.contract = res.getString("contract");
     inv.invoice_date = res.getDate("invoice_date");
     inv.import_time = java.date.today();
+
+    inv.purchase_order_no = res.getString("purchase_order");
+    inv.order_no = res.getString("order_no");
+    inv.order_date = res.getDate("order_date");
+    inv.customer_base_no = res.getString("customer_base_no");
 
     invlst.push(inv);
     inv.commit();
@@ -224,7 +231,6 @@ for (var inv: invlst) {
         stock.price = res.getDouble("price");
         stock.real_date = db.most.protocol_date.INSTANCES[java.date.format( "dd.MM.yyyy", inv.invoice_date)];
 
-
         if (stock.real_date == null) {
             console.log("missing date " + java.date.format( "dd.MM.yyyy", inv.invoice_date));
             stock.real_date = db.most.protocol_date.INSTANCES["01.01.2015"];
@@ -232,7 +238,7 @@ for (var inv: invlst) {
 
         if (DEBUG) { console.log("set date to " + stock.real_date + " / " + java.date.format( "dd.MM.yyyy", inv.invoice_date)); }
 
-        if ( INITIAL ) stock.official_date = stock.real_date;
+        stock.official_date = stock.real_date;
 
         // set article, meanwhile creating it
         var artobj = prod_find_or_create(

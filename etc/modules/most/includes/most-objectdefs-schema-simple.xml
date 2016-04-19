@@ -1691,6 +1691,23 @@ if (this.is_active)
 			<code is_keep_settings="true">
 				<is_unique>true</is_unique>
 			</code>
+
+			<total>
+				<category>main.basic</category>
+                <sort_id>102</sort_id>
+                <data_source>input</data_source>
+                <data_type>double</data_type>
+                <is_inmaintbl>true</is_inmaintbl>
+  				<name>
+                    <en-US>Total</en-US>
+                </name>
+                <name>
+                    <de-DE>Total</de-DE>
+                </name>
+                <name>
+                    <bg-BG>Общо</bg-BG>
+                </name> 
+			 </total>
 			
 			<contract>
 				<category>main.basic</category>
@@ -1749,23 +1766,73 @@ if (this.is_active)
                <output_format>default_output_format_date</output_format>
 			</invoice_date>
 			
-			<purchase_order>
+			<purchase_order_no>
 				<category>main.basic</category>
                 <sort_id>140</sort_id>
                 <data_source>input</data_source>
                 <data_type>varchar</data_type>
                 <is_inmaintbl>true</is_inmaintbl>
   				<name>
-                    <en-US>Purchase order</en-US>
+                    <en-US>Purchase order (client)</en-US>
                 </name>
                 <name>
-                    <de-DE>Auftrag</de-DE>
+                    <de-DE>Auftrag (Kunde)</de-DE>
                 </name>
                 <name>
-                    <bg-BG>Заявка</bg-BG>
+                    <bg-BG>Поръчка номер (клиент)</bg-BG>
                 </name>                
-			</purchase_order>
+			</purchase_order_no>
 			
+			<order_no>
+				<category>main.basic</category>
+                <sort_id>150</sort_id>
+                <data_source>input</data_source>
+                <data_type>varchar</data_type>
+                <is_inmaintbl>true</is_inmaintbl>
+  				<name>
+                    <en-US>Order No (HP)</en-US>
+                </name>
+                <name>
+                    <de-DE>Auftrag (HP)</de-DE>
+                </name>
+                <name>
+                    <bg-BG>Поръчка номер (HP)</bg-BG>
+                </name>                
+			</order_no>
+
+			<order_date>
+				<category>main.basic</category>
+                <sort_id>160</sort_id>
+                <data_source>input</data_source>
+                <data_type>datetime</data_type>
+                <is_inmaintbl>true</is_inmaintbl>
+  				<name>
+                    <en-US>Order Date (HP)</en-US>
+                </name>
+                <name>
+                    <de-DE>Auftragsdatum (HP)</de-DE>
+                </name>
+                <name>
+                    <bg-BG>Поръчка дата (HP)</bg-BG>
+                </name>                
+			</order_date>
+
+			<customer_base_no>
+				<category>main.basic</category>
+                <sort_id>170</sort_id>
+                <data_source>input</data_source>
+                <data_type>varchar</data_type>
+                <is_inmaintbl>true</is_inmaintbl>
+  				<name>
+                    <en-US>Customer base number</en-US>
+                </name>
+                <name>
+                    <de-DE>Kundenbasis Nummer</de-DE>
+                </name>
+                <name>
+                    <bg-BG>Клиент базов номер</bg-BG>
+                </name>                
+			</customer_base_no>
 
 			<import_time>
                 <category>main.basic</category>
@@ -1788,23 +1855,7 @@ if (this.is_active)
                 <index_code>itm</index_code>
             </import_time>
 
-			<total>
-				<category>main.basic</category>
-                <sort_id>102</sort_id>
-                <data_source>input</data_source>
-                <data_type>double</data_type>
-                <is_inmaintbl>true</is_inmaintbl>
-  				<name>
-                    <en-US>Total</en-US>
-                </name>
-                <name>
-                    <de-DE>Total</de-DE>
-                </name>
-                <name>
-                    <bg-BG>Общо</bg-BG>
-                </name> 
-			 </total>
-
+            <purchase_order mode="delete"/>
 			<stocks mode="delete"/>			
         </invoice>
         

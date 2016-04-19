@@ -104,7 +104,7 @@ if ( INITIAL ) {
     cond = opgfilt;
 }
     
-var q = "select opg.DealID as code, opgcount.detcount, opg.DealType as deal_type, DealDescription as description, SelloutStartDate as valid_from, SelloutEndDate as valid_to, DiscountMode as discount_mode, Version as version, LastModifiedDate as update_time from dbo.opg inner join ( select count(*) as detcount, DealID from dbo.opgdet group by DealID ) opgcount on opg.DealID = opgcount.DealID where " + cond;
+var q = "select opg.DealID as code, opgcount.detcount, opg.DealType as deal_type, opg.McCode as mc_code, DealDescription as description, SelloutStartDate as valid_from, SelloutEndDate as valid_to, DiscountMode as discount_mode, Version as version, LastModifiedDate as update_time from dbo.opg inner join ( select count(*) as detcount, DealID from dbo.opgdet group by DealID ) opgcount on opg.DealID = opgcount.DealID where " + cond;
 
 var opglst = [];
 var cnt = 0; var cntnew = 0;
@@ -128,6 +128,8 @@ if (TEST) {
 
 while (res.next()) {
     var oc = res.getString("code");
+    oc = oc.replace(" ","");
+
     var opg = db.most.opg.INSTANCES[oc];
     var p;
 
@@ -136,7 +138,10 @@ while (res.next()) {
             console.log("update opg. code " + oc + ", mode is [" + res.getString("discount_mode") + "]" + 
             " old v" + vopg[oc] + " new v" + res.getInt("version"));        
         } else {
-            opg.deal_type = res.getString("deal_type"); db.commit();   // just once
+            opg.deal_type = res.getString("deal_type"); 
+            opg.mc_code  = res.getString("mc_code"); 
+            db.commit();   // just once
+
             console.log("will NOT UPDATE opg. version is same. code " + oc  + " v" + opg.version);
             continue;
         }
@@ -159,6 +164,7 @@ while (res.next()) {
     opg.import_time = java.date.now();
     opg.version = res.getInt("version");
     opg.deal_type = res.getString("deal_type");
+    opg.mc_code = res.getString("mc_code");
 
     opglst.push(opg);
     opg.commit();
@@ -177,7 +183,7 @@ console.log("fetching new OPG details...");
 cnt = 0; cntnew = 0;
 
 for (var nopg: opglst) {
-    console.log("getting OPG " + nopg );
+    console.log("getting OPG " + nopg);
 
     var q = [
         "select DealID as opg_code,",
@@ -196,7 +202,8 @@ for (var nopg: opglst) {
 
     while(res.next()) {
         var opgdetcode = res.getString("code");
-        var opgdet = db.most.opg_entry_fixed.INSTANCES[res.getString("code")];
+        opgdetcode.replace(" ", "");
+        var opgdet = db.most.opg_entry_fixed.INSTANCES[opgdetcode];
 
         if (opgdet != null) {
             if (DEBUG) console.log("found opg " + res.getString("opg_code") + " detail. code: " + opgdetcode);
