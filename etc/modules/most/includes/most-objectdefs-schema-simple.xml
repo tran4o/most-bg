@@ -811,6 +811,8 @@ for (var s : objects)
 
 		<protocol_stock parent_objectdef="most.protocol">	
 
+            <sync_edi mode="delete"/>
+            
         	<sales>	
 				<category>main.basic</category>
                 <sort_id>8000</sort_id>
@@ -1024,8 +1026,8 @@ return "id IN ("+arr.join(",")+")";
                     <bg-BG>Вързоп номер</bg-BG>     
                 </name>   	
         	</bundle_number>  
-        
-            <sync_edi>
+
+            <sync_edi_opg>
                 <category>main.basic</category>
                 <sort_id>100002</sort_id>
                 <data_source>relation</data_source>
@@ -1033,20 +1035,83 @@ return "id IN ("+arr.join(",")+")";
                 <is_constant>true</is_constant>
                 <is_hidden>true</is_hidden>
                 <display_type>property.relation.script_execution</display_type>
-                <name><en-US>Sync with EDI</en-US></name>
-                <name><de-DE>Mit EDI synchronizieren</de-DE></name>
-                <name><bg-BG>Синхронизирай с EDI</bg-BG></name>
+                <name><en-US>OPG Sync with EDI</en-US></name>
+                <name><de-DE>OPG Mit EDI synchronizieren</de-DE></name>
+                <name><bg-BG>OPG Синхронизирай с EDI</bg-BG></name>
                 <default_value>
                     <object code="most.protocol_stock.sync_edi:default_value:embedded_execution_script" objectdef="embedded_execution_script" module="core">
                        <name>
                             <value>
-                                <en-US>Sync with EDI!</en-US>
+                                <en-US>OPG Sync with EDI!</en-US>
                             </value>
                             <value>
-                                <de-DE>Mit EDI synchronizieren!</de-DE>
+                                <de-DE>OPG Mit EDI synchronizieren!</de-DE>
                             </value>
                             <value>
-                                <bg-BG>Синхронизирай с EDI!</bg-BG>
+                                <bg-BG>OPG синх. с EDI!</bg-BG>
+                            </value>
+                       </name>
+                       <is_single_button><value>true</value></is_single_button>
+                       <is_skip_confirmation><value>false</value></is_skip_confirmation>
+                       <is_auto_close_result><value>true</value></is_auto_close_result> 
+                       <is_direct><value>true</value></is_direct>
+                       <is_object_obligatory><value>true</value></is_object_obligatory>
+                       <param_window_width><value>400</value></param_window_width>
+                       <param_window_height><value>200</value></param_window_height>
+                       <icon>
+                            <value>
+                              <object code="/images/objectdefs/icons/color/128/all-history.png" module="documents" objectdef="icon"></object>
+                            </value>
+                        </icon>
+                       <execute>
+                            <value>
+                                <object code="most.protocol_stock.sync_edi:default_value:embedded_execution_script.execute" module="core" objectdef="vscript">
+                                    <execution_timeout><value>7200</value></execution_timeout>
+                                    <params>
+                                        <value>
+                                            <object code="objects" module="core" objectdef="script_param"></object>
+                                        </value>
+                                        <value>
+                                            <object code="param" module="core" objectdef="script_param"></object>
+                                        </value>
+                                    </params>
+                                    <script_code>
+                                        <value><![CDATA[
+writeln("<h1>Getting OPG updates...</h1>");                                        
+writeln(STR2HTML(system.vsp_to_string("<%vsp:include script=\"${web.lib.dir}/most/getopg.vr\" />")));
+                                        ]]></value>
+                                    </script_code>
+                                </object>
+                            </value>
+                        </execute>
+                        <is_show_multiple_relation><value>true</value></is_show_multiple_relation>
+                        <is_show_single_relation><value>true</value></is_show_single_relation>
+                    </object>
+                </default_value>
+            </sync_edi_opg>				 
+        
+            <sync_edi_stock>
+                <category>main.basic</category>
+                <sort_id>100002</sort_id>
+                <data_source>relation</data_source>
+                <related_objectdef>core.embedded_execution_script</related_objectdef>
+                <is_constant>true</is_constant>
+                <is_hidden>true</is_hidden>
+                <display_type>property.relation.script_execution</display_type>
+                <name><en-US>Stock Sync with EDI</en-US></name>
+                <name><de-DE>Stock Mit EDI synchronizieren</de-DE></name>
+                <name><bg-BG>Зареждабе Синхронизирай с EDI</bg-BG></name>
+                <default_value>
+                    <object code="most.protocol_stock.sync_edi:default_value:embedded_execution_script" objectdef="embedded_execution_script" module="core">
+                       <name>
+                            <value>
+                                <en-US>Stock Sync with EDI!</en-US>
+                            </value>
+                            <value>
+                                <de-DE>Stock Mit EDI synchronizieren!</de-DE>
+                            </value>
+                            <value>
+                                <bg-BG>Зареждане синх. с EDI!</bg-BG>
                             </value>
                        </name>
                        <is_single_button><value>true</value></is_single_button>
@@ -1077,8 +1142,6 @@ return "id IN ("+arr.join(",")+")";
                                         <value><![CDATA[
 writeln("<h1>Get stock...</h1>");                                        
 writeln(STR2HTML(system.vsp_to_string("<%vsp:include script=\"${web.lib.dir}/most/getstock.vr\" />")));
-writeln("<br/><h1>Get OPG...</h1>");                                        
-writeln(STR2HTML(system.vsp_to_string("<%vsp:include script=\"${web.lib.dir}/most/getopg.vr\" />")));                                        
                                         ]]></value>
                                     </script_code>
                                 </object>
@@ -1088,7 +1151,7 @@ writeln(STR2HTML(system.vsp_to_string("<%vsp:include script=\"${web.lib.dir}/mos
                         <is_show_single_relation><value>true</value></is_show_single_relation>
                     </object>
                 </default_value>
-            </sync_edi>				 
+            </sync_edi_stock>				 
 
 
             <assign_official_date>
@@ -4128,11 +4191,12 @@ sale.commit();
 sale.real_date=null;
 sale.commit();
 var oo=[sale];
-SCRIPTS["most.protocol_sale.auto_assign_stock:default_value:embedded_execution_script.execute"](oo,param);
+SCRIPTS["most.protocol_sale.auto_assign_stock:default_value:embedded_execution_script.execute"](oo, param);
 
 db.commit();
+
 if (sale.official_date == null) {
-	console.log("UNABLE TO DISTRIBUTE QTY "+sale.quantity+"! DELETING SALE!");
+	console.log("Could not set official_date. Unable to distribute QTY " + sale.quantity + "! DELETING SALE!");
 	sale.delete();
 }	
 
