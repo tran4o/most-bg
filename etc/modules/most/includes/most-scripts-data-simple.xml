@@ -3,6 +3,77 @@
 <!-- DEFAULT SCRIPTS -->
 <objects>
     <object code="most.import_sales.xls.filter-script" objectdef="vscript" module="core" >
+
+		<params>
+			<value>
+				<object code="code" module="core" objectdef="script_param"/>
+			</value>
+			<value>
+				<object code="name" module="core" objectdef="script_param"/>
+			</value>
+			<value>
+				<object code="product_line" module="core" objectdef="script_param"/>
+			</value>
+			<value>
+				<object code="description" module="core" objectdef="script_param"/>
+			</value>
+			<value>
+				<object code="vendor" module="core" objectdef="script_param"/>
+			</value>
+			<value>
+				<object code="DEBUG" module="core" objectdef="script_param"/>
+			</value>			
+		</params>     
+		<script_code>    
+			<value><![CDATA[
+    //trim code
+    if ( code.indexOf("#") > 0 ) {
+        code = code.substring(0, code.indexOf("#"));
+    }
+
+    var artobj = db.most.article.INSTANCES[code];
+
+    if (artobj != null) {
+        if (DEBUG) console.log("product " + code + " found. vendor is " + vendor);
+    } else {
+        if (DEBUG) console.log("product " + code + " not found. new instance. vendor is " + vendor);
+        artobj = new db.most.article();
+        pnew++;
+    }
+
+    vendor = db.contacts.vendor.INSTANCES[vendor];
+    if ( vendor == null ) {
+        vendor = db.contacts.vendor.INSTANCES["HPOLD"];
+    }
+
+    artobj.code = code;
+    artobj.name["en-US"] = name;
+
+    if (product_line) {
+        var plobj = db.most.product_line.INSTANCES[product_line];
+        if (plobj != null) {
+            if (DEBUG) console.log("product line " + product_line + " found");
+        } else {
+            if (DEBUG) console.log("product line " + code + " not found. new instance");
+            plobj = new db.most.product_line();
+            plobj.code = product_line;
+        }
+        artobj.product_line = plobj;
+    }
+
+    artobj.description["en-US"] = description;
+    artobj.vendor = vendor;
+    artobj.commit();
+
+    pcnt++;
+    return artobj;			
+			]]>
+			</value>
+		</script_code>
+	</object>
+
+
+    <object code="most.prod_find_or_create.common" objectdef="vscript" module="core" >
     				<package mode="delete"/>
                     <params>
                         <value>
