@@ -142,7 +142,7 @@ var code = res.getString("code");
 
     inv.code = code;
     inv.name["en-US"] = res.getString("name");
-    inv.purchase_order = res.getString("purchase_order");
+    inv.purchase_order_no = res.getString("purchase_order");
     inv.vendor = vendor;
     inv.contract = res.getString("contract");
     inv.invoice_date = res.getDate("invoice_date");

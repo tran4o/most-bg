@@ -398,7 +398,7 @@ if (BID == null || BID == "") {
 				sale.real_date = rdate;
 				sale.commit();
 				//-----------------------------------
-				info((count+1)+" DONE : "+OBJSTR(customer)+" | "+OBJSTR(artcode)+" | "+rdate+" | "+sale.most_sale_total);
+				// info((count+1)+" DONE : "+OBJSTR(customer)+" | "+OBJSTR(artcode)+" | "+rdate+" | "+sale.most_sale_total);
 			} 
 		}
 	}
@@ -788,7 +788,7 @@ if (invobj == null) {
     invobj.vendor = vendobj;
 //    invobj.contract = invoice_contract;
     invobj.invoice_date = PARSE_OPGDATE(invoice_date);
-    invobj.purchase_order = purchase_order_no;
+    invobj.purchase_order_no = purchase_order_no;
     invobj.import_time = java.date.today();
     invobj.total = net_invoice_price;
     invobj.description["en-US"] = "manual import from HP/XLS";
