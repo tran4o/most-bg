@@ -705,7 +705,9 @@ if (arr.is_empty)
 for (var s : db.most.protocol_sale.selectWhere("stock IS NULL AND official_date IS NULL AND id IN ("+arr.join(",")+") ORDER BY quantity DESC,real_date")) 
 {
 	var cr = "CAST ((quantity - COALESCE((SELECT SUM(sales.quantity) WHERE id = :VR__OUTER_SELECT_ID AND sales.official_date.\"date\" <= :OFCD ),0) - COALESCE((SELECT SUM(official_value) FROM most.state_adjustment_official WHERE stock = :VR__OUTER_SELECT_ID AND \"date\" < :OFCD),0)) AS INTEGER)"; 
+
 	var sel = db.most.protocol_stock.SELECT("official_date.\"date\" <= :OFCD AND article = :PRID AND "+cr+" >= :MMIN ORDER BY official_date.\"date\","+cr+" DESC,id");
+
 	sel["OFCD"]=param.date.date;
 	sel["PRID"]=s.article.id;
 	sel["MMIN"]=s.quantity;
@@ -1039,7 +1041,7 @@ return "id IN ("+arr.join(",")+")";
                 <name><de-DE>OPG Mit EDI synchronizieren</de-DE></name>
                 <name><bg-BG>OPG Синхронизирай с EDI</bg-BG></name>
                 <default_value>
-                    <object code="most.protocol_stock.sync_edi:default_value:embedded_execution_script" objectdef="embedded_execution_script" module="core">
+                    <object code="most.protocol_stock.sync_edi_opg:default_value:embedded_execution_script" objectdef="embedded_execution_script" module="core">
                        <name>
                             <value>
                                 <en-US>OPG Sync with EDI!</en-US>
@@ -1065,7 +1067,7 @@ return "id IN ("+arr.join(",")+")";
                         </icon>
                        <execute>
                             <value>
-                                <object code="most.protocol_stock.sync_edi:default_value:embedded_execution_script.execute" module="core" objectdef="vscript">
+                                <object code="most.protocol_stock.sync_edi_opg:default_value:embedded_execution_script.execute" module="core" objectdef="vscript">
                                     <execution_timeout><value>7200</value></execution_timeout>
                                     <params>
                                         <value>
@@ -1100,9 +1102,9 @@ writeln(STR2HTML(system.vsp_to_string("<%vsp:include script=\"${web.lib.dir}/mos
                 <display_type>property.relation.script_execution</display_type>
                 <name><en-US>Stock Sync with EDI</en-US></name>
                 <name><de-DE>Stock Mit EDI synchronizieren</de-DE></name>
-                <name><bg-BG>Зареждабе Синхронизирай с EDI</bg-BG></name>
+                <name><bg-BG>Зареждане Синхронизирай с EDI</bg-BG></name>
                 <default_value>
-                    <object code="most.protocol_stock.sync_edi:default_value:embedded_execution_script" objectdef="embedded_execution_script" module="core">
+                    <object code="most.protocol_stock.sync_edi_stock:default_value:embedded_execution_script" objectdef="embedded_execution_script" module="core">
                        <name>
                             <value>
                                 <en-US>Stock Sync with EDI!</en-US>
@@ -1128,7 +1130,7 @@ writeln(STR2HTML(system.vsp_to_string("<%vsp:include script=\"${web.lib.dir}/mos
                         </icon>
                        <execute>
                             <value>
-                                <object code="most.protocol_stock.sync_edi:default_value:embedded_execution_script.execute" module="core" objectdef="vscript">
+                                <object code="most.protocol_stock.sync_edi_stock:default_value:embedded_execution_script.execute" module="core" objectdef="vscript">
                                     <execution_timeout><value>7200</value></execution_timeout>
                                     <params>
                                         <value>
@@ -4183,22 +4185,27 @@ if(objects.size == 0) {
                                         <value><![CDATA[
 var article = objects[0];
 
-var sale = new db.most.protocol_sale();
-sale.article=article;
-sale.customer=param.customer;
-sale.quantity=param.quantity;
-sale.commit();
-sale.real_date=null;
-sale.commit();
-var oo=[sale];
-SCRIPTS["most.protocol_sale.auto_assign_stock:default_value:embedded_execution_script.execute"](oo, param);
+if (article.total_stock_offical > param.quantity) {
+    var sale = new db.most.protocol_sale();
+    sale.article=article;
+    sale.customer=param.customer;
+    sale.quantity=param.quantity;
+    sale.commit();
+    sale.real_date=null;
+    sale.commit();
+    var oo=[sale];
+    SCRIPTS["most.protocol_sale.auto_assign_stock:default_value:embedded_execution_script.execute"](oo, param);
 
-db.commit();
+    db.commit();
 
-if (sale.official_date == null) {
-	console.log("Could not set official_date. Unable to distribute QTY " + sale.quantity + "! DELETING SALE!");
-	sale.delete();
-}	
+    if (sale.official_date == null) {
+        console.log("Could not set official_date. Unable to distribute QTY " + sale.quantity + "! DELETING SALE!");
+        sale.delete();
+    }	
+} else {
+    console.log("not enough minerals - official stock for " + article.code + " = " + article.total_stock_offical + " is lower than desired quantity of " + sale.quantity);
+}
+
 
                                         ]]></value>
                                     </script_code>
