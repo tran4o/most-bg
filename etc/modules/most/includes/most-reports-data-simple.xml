@@ -601,7 +601,7 @@ for (var ven : vendors)
 		if (sl.next() && sl.getInt("RES") != null) tsold+=sl.getInt("RES"); 
 
 		// if total STOCKED is zero -> continue
-		if ((tstocked - tsold) == 0) continue;
+		if ((sold == 0) && (stocked == 0) && ((tstocked - tsold) == 0)) continue;
 
 		myWrite(
 			formatProductId(a.code)+
