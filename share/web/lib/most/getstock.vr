@@ -102,7 +102,7 @@ var q = [
     "ContractNo as contract, ",
     "InvoiceDate as invoice_date, ",
     "invoic.InvoiceNo as name, ",
-    "PurchOrderNo as purchase_order, ",
+    "PurchOrderNo as purchase_order_no, ",
     "OrderNo as order_no, ",
     "OrderDate as order_date,",
     "CustBaseNo as customer_base_no",
@@ -166,7 +166,7 @@ while (res.next()) {
     inv.invoice_date = res.getDate("invoice_date");
     inv.import_time = java.date.today();
 
-    inv.purchase_order_no = res.getString("purchase_order");
+    inv.purchase_order_no = res.getString("purchase_order_no");
     inv.order_no = res.getString("order_no");
     inv.order_date = res.getDate("order_date");
     inv.customer_base_no = res.getString("customer_base_no");

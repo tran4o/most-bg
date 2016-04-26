@@ -31,7 +31,7 @@ function prod_find_or_create(code, name, product_line, description, vendor) {
     }
 
     if (artobj != null) {
-        console.log("product " + code + " found. vendor is " + vendor);
+        // console.log("product " + code + " found. vendor is " + vendor);
     } else {
         if (DEBUG) console.log("product " + code + " not found. new instance. vendor is " + vendor);
         artobj = new db.most.article();
@@ -142,7 +142,7 @@ while (res.next()) {
             opg.mc_code  = res.getString("mc_code"); 
             db.commit();   // just once
 
-            console.log("will NOT UPDATE opg. version is same. code " + oc  + " v" + opg.version);
+            // console.log("will NOT UPDATE opg. version is same. code " + oc  + " v" + opg.version);
             continue;
         }
     } else {
