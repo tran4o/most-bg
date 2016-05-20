@@ -238,7 +238,7 @@ for (var inv: invlst) {
 
         if (DEBUG) { console.log("set date to " + stock.real_date + " / " + java.date.format( "dd.MM.yyyy", inv.invoice_date)); }
 
-        stock.official_date = stock.real_date;
+        stock.official_date = db.most.protocol_date.SELECT("is_active=1")[0];
 
         // set article, meanwhile creating it
         var artobj = prod_find_or_create(
