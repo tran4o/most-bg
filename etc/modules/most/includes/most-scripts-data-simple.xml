@@ -295,47 +295,43 @@ return arr.join("")
      </params>            
      <script_code>    
          <value><![CDATA[
-var rest = object.quantity;
-var params = new M();
+java.log.info("need OPGs with quantity " + object.quantity + " for " + object.code + " sale " );
+
 var sel = db.most.opg.SELECT("discount_mode.code = 'R' AND (valid_from IS NULL OR valid_from <= :OFCD) AND (valid_to IS NULL OR valid_to >= :OFCD) AND entries.article.id = :PRID ORDER BY COALESCE(valid_to,valid_from),id DESC");
 sel["OFCD"]=object.official_date.date;
 sel["PRID"]=object.article.id;
 var arr=[];
 var ok=false;
-for (var e : sel.VALUE) 
-{
-	if (e == object.opg)
+
+/*
+ iterate over possible Rabat OPGs 
+ valid in the selected timespan 
+*/
+
+for (var sopg : sel.VALUE) {
+
+	if (sopg == object.opg) {
+        java.log.error("skip the curently chosen OPG:" + sopg.code );
 		continue;
-	for (var a : e.entries) 
-	{
-		if (a.article == object.article) 
-		{
-			if (a.max_quantity == null) 
-			{
-				arr.push(e);
+    }
+
+	for (var sent : sopg.entries) {
+		if (sent.article == object.article) {
+            java.log.info("check OPG entry: " + sent.code + " | rest quantity : " + sent.rest_quantity);
+
+			if (sent.max_quantity == null) 	{
+                java.log.info("include OPG: " + sopg.code + " (unlimited)");
+				arr.push(sopg);
 				break;
-			} else {
-				var q = a.max_quantity;
-			 	var params = new M();
-			 	params["ID"]=e.id;
-			 	var sl = db.most.protocol_sale.VSQL_QUERY_SUM("SELECT quantity AS VAL WHERE opg = :ID",params);
-				var used = 0;
-				if (sl.next()) {
-			        used=sl.getInt("RES");
-			        if (used == null)
-			        	used=0;
-			    }
-			    q-=used;
-			    if (q < 0) {
-					java.log.error("Inconsistent quantity state2 : "+a.toString());					    
-			    } else if (rest <= q) {
-					arr.push(e);
-					break;
-				} 	
-			}
+			} else if ( object.quantity < sent.rest_quantity ) {
+                java.log.info("include OPG: " + sopg.code + " (quantity available)");                
+                arr.push(sopg);      
+                break;              
+            }
 		}
 	}
 }
+
 return arr;
          ]]></value>
      </script_code>
